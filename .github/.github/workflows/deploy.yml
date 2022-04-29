@@ -1,0 +1,49 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      BRANCH: "deploy"
+      REPO: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+
+    steps:
+      - name: echo variables
+        run: |
+          echo "repository url: $REPO"
+          echo "deployment branch: $BRANCH"
+
+      - name: setup node
+        uses: actions/setup-node@v2
+
+      - name: clone repository
+        run: git clone $REPO .
+
+      - name: delete .git folder
+        run: rm -rf ./.git/
+
+      - name: build
+        run: |
+          npm install
+          npm run build
+
+      - name: add deployment repository
+        working-directory: ./public
+        run: |
+          git init
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git remote add origin $REPO
+
+      - name: push
+        working-directory: ./public
+        run: |
+          git checkout -b $BRANCH
+          git add .
+          git commit -m Deploy
+          git push --force origin $BRANCH
