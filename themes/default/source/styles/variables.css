@@ -1,12 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap");
+/* source sans pro in bold looks better using the browser than the dedicated font */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&family=Source+Serif+Pro&display=swap");
 
 body {
   --spacing: 2rem;
 
-  --serif: "Roboto Mono", Inconsolata, "Overpass Mono", "JetBrains Mono",
-    "Fira Code", "Fira Mono", "IBM Plex Mono", "Source Code Pro",
-    "Droid Sans Mono", "Cascadia Mono", Menlo, Monaco, "Segoe UI Mono",
-    "Oxygen Mono", "Ubuntu Monospace", Consolas, "Courier New", monospace;
+  --text: "Source Serif Pro", Cambria, Cochin, Georgia, Times, "Times New Roman",
+    serif;
+  --heading: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   /* atom one colors */
   --light: #fafafa;

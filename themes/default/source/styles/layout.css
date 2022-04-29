@@ -7,6 +7,7 @@ body {
 
 /* push right */
 header,
+#logo,
 nav {
   display: flex;
   flex-direction: column;
@@ -14,8 +15,9 @@ nav {
 }
 
 header {
-  font-size: 2rem;
-  font-family: var(--serif);
+  font-family: var(--heading);
+  font-size: 2.2rem;
+  font-weight: bold;
   margin-right: var(--spacing);
   justify-content: center;
   text-transform: lowercase;
@@ -31,7 +33,7 @@ nav > a {
   text-decoration: none;
 }
 
-main {
+#main-container {
   padding-top: var(--spacing);
   padding-bottom: var(--spacing);
   /* scroll if needed */
@@ -40,13 +42,13 @@ main {
   flex: 1;
 }
 
-#content {
+main {
   width: 45%;
   max-width: 900px;
 }
 
 @media (max-width: 1024px) {
-  #content {
+  main {
     /* bit wider */
     width: 80%;
   }
@@ -68,12 +70,13 @@ main {
   }
 
   header,
+  #logo,
   nav {
     /* push left */
     align-items: flex-start;
   }
 
-  #content {
+  main {
     width: auto;
   }
 }

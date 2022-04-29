@@ -24,8 +24,8 @@
 }
 
 body {
-  font-family: var(--serif);
-  font-size: 1.2rem;
+  font-family: var(--text);
+  font-size: 1.3rem;
   line-height: 1.25;
   color: var(--dark);
   background-color: var(--light);
@@ -66,17 +66,17 @@ h2 {
 }
 
 h3 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--serif);
-  font-weight: 500;
+  font-family: var(--heading);
+  font-weight: bold;
 }
 
-#content > :is(h1, h2, h3) {
+.content > :is(h1, h2, h3) {
   margin-bottom: 0.5rem;
 }
 
@@ -84,6 +84,6 @@ p {
   line-height: 1.5;
 }
 
-#content > p {
+.content > p {
   margin-bottom: 1.5rem;
 }
