@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap");
+
+body {
+  --spacing: 2rem;
+
+  --serif: "Roboto Mono", Inconsolata, "Overpass Mono", "JetBrains Mono",
+    "Fira Code", "Fira Mono", "IBM Plex Mono", "Source Code Pro",
+    "Droid Sans Mono", "Cascadia Mono", Menlo, Monaco, "Segoe UI Mono",
+    "Oxygen Mono", "Ubuntu Monospace", Consolas, "Courier New", monospace;
+
+  /* atom one colors */
+  --light: #fafafa;
+  /* default hsl(228, 8%, 24%) */
+  --dark: hsl(228, 8%, 15%);
+  --red: #e45649;
+  --blue: #4078f2;
+  --purple: #a626a4;
+  --selection: #e5e5e6;
+  --pop: var(--red);
+}
+
+body.dark {
+  --light: #282c34;
+  /* default hsl(219, 14%, 71%) */
+  --dark: hsl(219, 14%, 78%);
+  --red: #e06c75;
+  --blue: #61afef;
+  --purple: #c678dd;
+  --selection: #3e4451;
+}

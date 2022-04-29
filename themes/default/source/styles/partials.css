@@ -1,0 +1,11 @@
+@import url("./variables.css");
+
+.post {
+  border-top: 0.1rem solid currentColor;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* .post + .post {
+  margin-top: var(--spacing);
+} */

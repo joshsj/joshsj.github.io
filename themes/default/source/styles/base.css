@@ -1,0 +1,89 @@
+@import url("./variables.css");
+@import url("./utilities.css");
+
+* {
+  /* reset */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* inheritance */
+  font: inherit;
+  color: inherit;
+
+  /* pretty */
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  outline-color: var(--blue);
+}
+
+*::selection {
+  /* pretty */
+  background-color: var(--selection);
+}
+
+body {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--dark);
+  background-color: var(--light);
+}
+
+button {
+  cursor: pointer;
+}
+
+button.link {
+  background-color: inherit;
+  border: inherit;
+}
+
+a,
+button.link {
+  color: var(--pop);
+  transition: all 100ms ease-in-out;
+  transition-property: color, background-color;
+}
+
+:is(a, button.link).suppress {
+  color: inherit;
+  text-decoration: none;
+}
+
+:is(a, button.link):not(.suppress):hover {
+  color: var(--light);
+  background-color: var(--pop);
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 1.7rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+}
+
+#content > :is(h1, h2, h3) {
+  margin-bottom: 0.5rem;
+}
+
+p {
+  line-height: 1.5;
+}
+
+#content > p {
+  margin-bottom: 1.5rem;
+}

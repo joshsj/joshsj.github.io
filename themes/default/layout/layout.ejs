@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%- page.title %> - <%- config.title %></title>
+
+    <link href="/styles/base.css" rel="stylesheet" />
+    <link href="/styles/layout.css" rel="stylesheet" />
+    <link href="/styles/partials.css" rel="stylesheet" />
+
+    <script src="/scripts/theme.js"></script>
+  </head>
+  <body>
+    <header>
+      <a id="logo" class="suppress" href="/">
+        Joshua<br />
+        Sexton<br />
+        <span class="pop">-</span>Jones
+      </a>
+
+      <nav>
+        <% site.pages.forEach(({title, path}) => { %>
+        <a href="<%- url_for(path) %>"><%- title %></a>
+        <% }) %>
+      </nav>
+
+      <button id="theme-toggle" class="link"></button>
+    </header>
+
+    <main>
+      <div id="content"><%- body %></div>
+    </main>
+  </body>
+</html>
