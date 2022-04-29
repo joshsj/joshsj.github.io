@@ -20,6 +20,7 @@
 
 *::selection {
   /* pretty */
+  color: var(--dark);
   background-color: var(--selection);
 }
 
@@ -62,7 +63,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.2rem;
+  font-size: 2.1rem;
 }
 
 h3 {
@@ -73,7 +74,7 @@ h1,
 h2,
 h3 {
   font-family: var(--heading);
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .content > :is(h1, h2, h3) {
@@ -84,6 +85,15 @@ p {
   line-height: 1.5;
 }
 
-.content > p {
+.content > :is(p, hr, blockquote) {
   margin-bottom: 1.5rem;
+}
+
+.content > blockquote {
+  font-style: italic;
+}
+
+.content > blockquote > p:before,
+.content > blockquote > p:after {
+  content: "'";
 }
