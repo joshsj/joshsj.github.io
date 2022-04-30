@@ -1,9 +1,9 @@
-<% site.posts.forEach(post => { %>
-
+<% site.posts.sort("date", -1).forEach(post => { %>
 <section class="post">
   <h2>
     <a class="suppress" href="<%- url_for(post.path) %>"><%- post.title %></a>
   </h2>
+
 
   <div class="separate">
     <span><%- partial("partials/post-dates", {post}) %></span>
@@ -12,5 +12,5 @@
     </span>
   </div>
 </section>
-
-%> <% }) %>
+%>
+<% }) %>

@@ -21,8 +21,11 @@
       </a>
 
       <nav>
-        <% site.pages.forEach(({title, path}) => { %>
-        <a href="<%- url_for(path) %>"><%- title %></a>
+        <% site.pages
+          .filter(p => p.nav !== false)
+          .sort("title")
+          .forEach(({title, path}) => { %>
+          <a href="<%- url_for(path) %>"><%- title %></a>
         <% }) %>
       </nav>
 
