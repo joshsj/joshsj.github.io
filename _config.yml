@@ -101,6 +101,7 @@ theme: joshsj
 marked:
   breaks: false
   gfm: true
+  smartypants: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
