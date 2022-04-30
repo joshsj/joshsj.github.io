@@ -4,6 +4,7 @@
 body {
   --spacing: 2rem;
   --half-spacing: calc(var(--spacing) * 0.5);
+  --quarter-spacing: calc(var(--spacing) * 0.25);
 
   /* bullet point */
   --separator: "\2022";

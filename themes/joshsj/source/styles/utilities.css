@@ -12,8 +12,8 @@
   margin-bottom: var(--spacing);
 }
 
-.mth {
-  margin-top: var(--half-spacing);
+.mtq {
+  margin-top: calc(var(--spacing) * 0.25);
 }
 
 .separate > :not(:last-child)::after {
