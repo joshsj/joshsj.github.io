@@ -1,7 +1,9 @@
 @import url("./variables.css");
 @import url("./utilities.css");
 
-* {
+*,
+*::before,
+*::after {
   /* reset */
   margin: 0;
   padding: 0;
