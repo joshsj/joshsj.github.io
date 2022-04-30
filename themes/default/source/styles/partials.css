@@ -1,7 +1,0 @@
-@import url("./variables.css");
-
-.post:not(.post:last-child) {
-  padding-bottom: 1.5rem;
-  border-bottom: 0.1rem solid currentColor;
-  margin-bottom: 1.5rem;
-}

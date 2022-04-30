@@ -3,6 +3,12 @@
 
 body {
   --spacing: 2rem;
+  --half-spacing: calc(var(--spacing) * 0.5);
+
+  /* bullet point */
+  --separator: "\2022";
+
+  --min-font-size: 0.5rem;
 
   --text: "Lora", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   --heading: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",

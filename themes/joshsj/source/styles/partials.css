@@ -1,0 +1,5 @@
+@import url("./variables.css");
+
+.post + .post {
+  margin-top: var(--spacing);
+}
