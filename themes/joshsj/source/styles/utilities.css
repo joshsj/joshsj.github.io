@@ -12,6 +12,10 @@
   margin-bottom: var(--spacing);
 }
 
+.mth {
+  margin-top: var(--half-spacing);
+}
+
 .separate > :not(:last-child)::after {
   content: var(--separator);
   font-size: max(var(--min-font-size), 0.65em);

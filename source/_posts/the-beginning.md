@@ -5,3 +5,5 @@ updated: 2022/04/29
 ---
 
 In the beginning, there was nothing --- 'cause I haven't written anything yet.
+
+<!-- more -->

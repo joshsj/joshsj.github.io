@@ -4,13 +4,7 @@
     <a class="suppress" href="<%- url_for(post.path) %>"><%- post.title %></a>
   </h2>
 
-
-  <div class="separate">
-    <span><%- partial("partials/post-dates", {post}) %></span>
-    <span>
-      <a href="<%- url_for(post.path) %>">View</a>
-    </span>
-  </div>
+  <div class="mth"><%- partial("partials/post-dates", {post}) %></div>
+  <div class="mth excerpt"><%- post.excerpt %></div>
 </section>
-%>
 <% }) %>

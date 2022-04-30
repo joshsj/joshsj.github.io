@@ -3,3 +3,7 @@
 .post + .post {
   margin-top: var(--spacing);
 }
+
+.excerpt {
+  font-size: 0.8em;
+}
