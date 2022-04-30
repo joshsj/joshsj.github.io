@@ -87,7 +87,7 @@ h6 {
 }
 
 .content > :is(h1, h2, h3) {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 p {
@@ -102,7 +102,7 @@ p {
   font-style: italic;
 }
 
-.content > blockquote > p:before,
-.content > blockquote > p:after {
+.content > blockquote > p::before,
+.content > blockquote > p::after {
   content: "'";
 }
