@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%- page.title %> - <%- config.title %></title>
 
+    <link href="/styles/variables.css" rel="stylesheet" />
+    <link href="/styles/utilities.css" rel="stylesheet" />
     <link href="/styles/base.css" rel="stylesheet" />
     <link href="/styles/layout.css" rel="stylesheet" />
     <link href="/styles/partials.css" rel="stylesheet" />
@@ -25,7 +27,9 @@
           .filter(p => p.nav !== false)
           .sort("title")
           .forEach(({title, path}) => { %>
-          <a href="<%- url_for(path) %>"><%- title %></a>
+          <a href="<%- url_for(path) %>">
+            <%- title %>
+          </a>
         <% }) %>
       </nav>
 
@@ -33,7 +37,9 @@
     </header>
 
     <div id="main-container">
-      <main class="content"><%- body %></main>
+      <main class="content <%- is_post() ? "post" : is_page() ? "page" : undefined %>">
+        <%- body %>
+      </main>
     </div>
   </body>
 </html>

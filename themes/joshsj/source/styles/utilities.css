@@ -1,25 +1,24 @@
-@import url("./variables.css");
-
-.pop {
-  color: var(--pop);
-}
-
-.rainbow {
-  animation: rainbow 3s infinite alternate;
-}
-
-.mb {
-  margin-bottom: var(--spacing);
-}
-
-.mtq {
-  margin-top: calc(var(--spacing) * 0.25);
+.small {
+  font-size: 0.85em;
 }
 
 .separate > :not(:last-child)::after {
   content: var(--separator);
   font-size: max(var(--min-font-size), 0.65em);
   vertical-align: middle;
+}
+
+.separate > :not(:last-child)::after {
+  content: var(--separator);
+  font-size: max(var(--min-font-size), 0.65em);
+  vertical-align: middle;
+}
+.pop {
+  color: var(--pop);
+}
+
+.rainbow {
+  animation: rainbow 3s infinite alternate;
 }
 
 @keyframes rainbow {

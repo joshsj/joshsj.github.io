@@ -1,11 +1,10 @@
-@import url("./variables.css");
-
-.post + .post {
-  margin-top: var(--spacing);
-  border-top: 0.1rem solid currentColor;
-  padding-top: var(--spacing);
+.page > .post + .post {
+  margin-top: var(--space-4);
+  border-top: 0.1rem solid var(--grey);
+  padding-top: var(--space-1);
 }
 
-.excerpt {
-  font-size: 0.85em;
+.page > .post > blockquote > p::after {
+  /* add ellipsis  */
+  content: "..";
 }

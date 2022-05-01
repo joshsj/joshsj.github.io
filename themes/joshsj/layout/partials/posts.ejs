@@ -1,11 +1,11 @@
 <% site.posts.sort("date", -1).forEach(post => { %>
 <section class="post">
-  <div><%- partial("partials/post-dates", {post}) %></div>
-
-  <h2 class="mtq">
+  <h2>
     <a class="suppress" href="<%- url_for(post.path) %>"><%- post.title %></a>
   </h2>
 
-  <div class="mtq excerpt"><%- post.excerpt %></div>
+  <p><%- partial("partials/post-dates", {post}) %></p>
+  
+  <blockquote class="small"><%- post.excerpt %></blockquote>
 </section>
 <% }) %>

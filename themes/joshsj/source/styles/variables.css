@@ -2,9 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&family=Source+Serif+Pro:ital@0;1&display=swap");
 
 body {
-  --spacing: 2rem;
-  --half-spacing: calc(var(--spacing) * 0.5);
-  --quarter-spacing: calc(var(--spacing) * 0.25);
+  --space-4: 2rem;
+  --space-3: calc(var(--space-4) * 0.75);
+  --space-2: calc(var(--space-4) * 0.5);
+  --space-1: calc(var(--space-4) * 0.25);
 
   /* bullet point */
   --separator: "\2022";
@@ -17,22 +18,24 @@ body {
   --heading: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  --pop: var(--red);
-
   /* atom one colors */
   /* default: hsl(0, 0%, 98%) */
   --light: hsl(0, 0%, 96%);
   /* default hsl(228, 8%, 24%) */
   --dark: hsl(228, 8%, 15%);
+  --grey: hsl(228, 8%, 70%);
   --red: #e45649;
   --blue: #4078f2;
   --selection: #e5e5e6;
+
+  --pop: var(--red);
 }
 
 body.dark {
   --light: #282c34;
   /* default hsl(219, 14%, 71%) */
   --dark: hsl(219, 10%, 82%);
+  --grey: hsl(219, 10%, 60%);
   --red: #e06c75;
   --blue: #61afef;
   --purple: #c678dd;

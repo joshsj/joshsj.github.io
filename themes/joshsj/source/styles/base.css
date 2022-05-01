@@ -1,6 +1,3 @@
-@import url("./variables.css");
-@import url("./utilities.css");
-
 *,
 *::before,
 *::after {
@@ -18,6 +15,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   outline-color: var(--blue);
+
+  /* theme transition */
+  transition: none 50ms linear;
+  transition-property: color, background-color;
 }
 
 *::selection {
@@ -46,7 +47,6 @@ button.link {
 a,
 button.link {
   color: var(--pop);
-  transition: all 100ms ease-in-out;
   transition-property: color, background-color;
 }
 
@@ -61,11 +61,11 @@ button.link {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 3.2rem;
 }
 
 h2 {
-  font-size: 2.2rem;
+  font-size: 2.3rem;
 }
 
 h3 {
@@ -86,23 +86,18 @@ h6 {
   display: none;
 }
 
-.content > :is(h1, h2, h3) {
-  margin-bottom: 0.5rem;
-}
-
 p {
   line-height: 1.5;
 }
 
-.content > :is(p, hr, blockquote) {
-  margin-bottom: 1.5rem;
-}
-
-.content > blockquote {
+blockquote {
   font-style: italic;
 }
 
-.content > blockquote > p::before,
-.content > blockquote > p::after {
-  content: "'";
+.content > :is(h1, h2, h3) {
+  margin-bottom: var(--space-1);
+}
+
+.content > :is(p, hr, blockquote) {
+  margin-bottom: var(--space-3);
 }

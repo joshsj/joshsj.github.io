@@ -18,7 +18,7 @@ header {
   font-family: var(--heading);
   font-size: 2.2rem;
   font-weight: bold;
-  margin-right: var(--spacing);
+  margin-right: var(--space-4);
   justify-content: center;
   text-transform: lowercase;
   width: 30%;
@@ -26,7 +26,7 @@ header {
 
 /* space out header elements */
 header > :is(nav, #theme-toggle) {
-  margin-top: var(--spacing);
+  margin-top: var(--space-4);
 }
 
 nav > a {
@@ -34,8 +34,8 @@ nav > a {
 }
 
 #main-container {
-  padding-top: var(--spacing);
-  padding-bottom: var(--spacing);
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
   /* scroll if needed */
   overflow-y: auto;
   /* fill space horizontally for scrollbar */
@@ -49,8 +49,8 @@ main {
 
 @media (max-width: 1024px) {
   main {
-    /* bit wider */
-    width: 80%;
+    /* wider */
+    width: 95%;
   }
 }
 
@@ -59,9 +59,8 @@ main {
   body {
     height: auto;
     flex-direction: column;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin: var(--space-1);
+    margin-bottom: 0;
   }
 
   header {
