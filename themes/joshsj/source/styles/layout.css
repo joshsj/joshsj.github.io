@@ -16,8 +16,9 @@ nav {
 
 header {
   font-family: var(--heading);
-  font-size: 2.2rem;
-  font-weight: bold;
+  font-size: 2.3rem;
+  font-weight: 500;
+
   margin-right: var(--space-4);
   justify-content: center;
   text-transform: lowercase;

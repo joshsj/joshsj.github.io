@@ -1,7 +1,7 @@
 .page > .post + .post {
   margin-top: var(--space-4);
   border-top: 0.1rem solid var(--grey);
-  padding-top: var(--space-1);
+  padding-top: var(--space-4);
 }
 
 .page > .post > blockquote > p::after {

@@ -26,11 +26,14 @@
         <% site.pages
           .filter(p => p.nav !== false)
           .sort("title")
-          .forEach(({title, path}) => { %>
+          .forEach(({title, path}) => {
+            if (title !== page.title) { %>
           <a href="<%- url_for(path) %>">
             <%- title %>
           </a>
-        <% }) %>
+        <% } else { %>
+          <%- title %>
+        <% }}) %>
       </nav>
 
       <button id="theme-toggle" class="link"></button>

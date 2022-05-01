@@ -17,7 +17,7 @@
   outline-color: var(--blue);
 
   /* theme transition */
-  transition: none 50ms linear;
+  transition: none 25ms linear;
   transition-property: color, background-color;
 }
 
@@ -29,8 +29,11 @@
 
 body {
   font-family: var(--text);
-  font-size: 1.5rem;
-  line-height: 1.25;
+  font-size: 1.4rem;
+  /* not a good look with monospace fonts */
+  font-variant-ligatures: no-common-ligatures;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   color: var(--dark);
   background-color: var(--light);
 }
@@ -47,7 +50,6 @@ button.link {
 a,
 button.link {
   color: var(--pop);
-  transition-property: color, background-color;
 }
 
 :is(a, button.link).suppress {
@@ -69,14 +71,14 @@ h2 {
 }
 
 h3 {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
 h1,
 h2,
 h3 {
   font-family: var(--heading);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 /* sizing not implemented */
@@ -90,7 +92,12 @@ p {
   line-height: 1.5;
 }
 
-blockquote {
+strong {
+  font-weight: 500;
+}
+
+blockquote,
+em {
   font-style: italic;
 }
 
