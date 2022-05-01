@@ -33,7 +33,7 @@ body {
   /* not a good look with monospace fonts */
   font-variant-ligatures: no-common-ligatures;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+s  letter-spacing: -0.025em;
   color: var(--dark);
   background-color: var(--light);
 }
