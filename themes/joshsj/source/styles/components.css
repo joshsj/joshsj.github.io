@@ -1,18 +1,14 @@
-.content > :is(h1, h2, h3) {
-  margin-bottom: var(--space-1);
-}
-
 .content > :is(p, hr, blockquote) {
   margin-bottom: var(--space-3);
 }
 
-.page > .post + .post {
+.card {
   margin-top: var(--space-4);
-  border-top: 0.1rem solid var(--grey);
+  border-top: 0.15rem dashed var(--grey);
   padding-top: var(--space-4);
 }
 
-.page > .post > blockquote > p::after {
-  /* add ellipsis  */
+.excerpt > p::after {
+  /* add ellipses */
   content: "..";
 }
