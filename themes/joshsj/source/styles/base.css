@@ -9,6 +9,7 @@
   /* inheritance */
   font: inherit;
   color: inherit;
+  letter-spacing: inherit;
 
   /* pretty */
   text-rendering: optimizeLegibility;
@@ -33,7 +34,7 @@ body {
   /* not a good look with monospace fonts */
   font-variant-ligatures: no-common-ligatures;
   line-height: 1.2;
-s  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: var(--dark);
   background-color: var(--light);
 }
@@ -79,6 +80,7 @@ h2,
 h3 {
   font-family: var(--heading);
   font-weight: 500;
+  letter-spacing: -0.06em;
 }
 
 /* sizing not implemented */
