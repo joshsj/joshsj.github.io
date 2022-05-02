@@ -15,10 +15,11 @@ nav {
 }
 
 header {
+  /* copy headings */
   font-family: var(--heading);
   font-size: 2.3rem;
   font-weight: 500;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.02em;
 
   margin-right: var(--space-4);
   justify-content: center;

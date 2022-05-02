@@ -1,3 +1,11 @@
+.content > :is(h1, h2, h3) {
+  margin-bottom: var(--space-1);
+}
+
+.content > :is(p, hr, blockquote) {
+  margin-bottom: var(--space-3);
+}
+
 .page > .post + .post {
   margin-top: var(--space-4);
   border-top: 0.1rem solid var(--grey);

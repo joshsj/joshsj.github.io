@@ -1,18 +1,19 @@
 .small {
-  font-size: 0.8em;
+  font-size: 0.85em;
+}
+
+.separate {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .separate > :not(:last-child)::after {
   content: var(--separator);
+  padding: 0 1ch;
   font-size: max(var(--min-font-size), 0.65em);
   vertical-align: middle;
 }
 
-.separate > :not(:last-child)::after {
-  content: var(--separator);
-  font-size: max(var(--min-font-size), 0.65em);
-  vertical-align: middle;
-}
 .pop {
   color: var(--pop);
 }

@@ -2,13 +2,16 @@
 
 <% site.posts.sort("date", -1).forEach(post => { %>
   <section class="post">
+    <p class="small separate">
+      <%- partial("components/post/dates", {post}) %>
+      <%- partial("components/post/tags", {post}) %>
+    </p>
+
     <h2>
       <a class="suppress" href="<%- url_for(post.path) %>"><%- post.title %></a>
     </h2>
-  
-    <p><%- partial("partials/post-dates", {post}) %></p>
     
-    <blockquote class="small"><%- post.excerpt %></blockquote>
+    <%- post.excerpt %>
   </section>
 <% }) %>
   

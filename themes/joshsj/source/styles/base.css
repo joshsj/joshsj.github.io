@@ -33,8 +33,8 @@ body {
   font-size: 1.4rem;
   /* not a good look with monospace fonts */
   font-variant-ligatures: no-common-ligatures;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.25;
+
   color: var(--dark);
   background-color: var(--light);
 }
@@ -64,11 +64,11 @@ button.link {
 }
 
 h1 {
-  font-size: 3.2rem;
+  font-size: 3.3rem;
 }
 
 h2 {
-  font-size: 2.3rem;
+  font-size: 2.4rem;
 }
 
 h3 {
@@ -80,7 +80,7 @@ h2,
 h3 {
   font-family: var(--heading);
   font-weight: 500;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.02em;
 }
 
 /* sizing not implemented */
@@ -101,12 +101,4 @@ strong {
 blockquote,
 em {
   font-style: italic;
-}
-
-.content > :is(h1, h2, h3) {
-  margin-bottom: var(--space-1);
-}
-
-.content > :is(p, hr, blockquote) {
-  margin-bottom: var(--space-3);
 }

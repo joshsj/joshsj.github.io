@@ -1,5 +1,0 @@
-<% if (post.published) { %>
-  <%- date(post.date) %> <%- post.date.isSame(post.updated) ? '' : `(updated ${date(post.updated)})` %>
-<% } else { %>
-  Draft
-<% } %>
