@@ -1,6 +1,6 @@
 ---
 title: Posts
-show: ["posts"]
+layout: page/posts
 ---
 
 # Posts
