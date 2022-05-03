@@ -23,6 +23,13 @@
 .card > .extra {
   font-size: 0.85em;
   margin-bottom: var(--space-1);
+  display: flex;
+}
+
+.card > .extra > .right {
+  /* push right */
+  margin-left: auto;
+  order: 9999;
 }
 
 .excerpt > p::after {
