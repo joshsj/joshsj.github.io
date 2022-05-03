@@ -1,5 +1,5 @@
 .separate {
-  display: flex-inline;
+  display: flex;
   flex-wrap: wrap;
 }
 
