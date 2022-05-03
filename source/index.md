@@ -10,7 +10,7 @@ favourite.
 
 I'm close to completing my degree in Software Engineering at Sheffield Hallam,
 during which I undertook a 14-month placement at
-[3Squared](https://3squared.com) and took a French elective.
+[3Squared](https://3squared.com) and took a French elective module.
 <em title="With Duolingo, I'm getting better every day.">Avec Duolingo, je
 m'améliore tous les jours.</em>
 
