@@ -2,7 +2,7 @@
 
 <% site.posts.sort("date", -1).forEach(post => { %>
 <section class="card">
-  <p class="small separate">
+  <p class="extra separate">
     <%- partial("components/post/dates", {post}) %>
     <%- partial("components/post/tags", {post}) %>
   </p>

@@ -8,15 +8,17 @@ I'm a spirited software developer from Manchester seeking a job in full stack
 web development. Any tech stack is a good tech stack, but .NET, Vue & SQL is my
 favourite.
 
-I'm close to completing my degree in Software Engineering at Sheffield Hallam. I
-also have a GCSE and A Level in Computer Science. On top of my GCSE and an
-elective module, my French is coming along as well.
+I'm close to completing my degree in Software Engineering at Sheffield Hallam,
+during which I undertook a 14-month placement at
+[3Squared](https://3squared.com) and took a French elective.
+<em title="With Duolingo, I'm getting better every day.">Avec Duolingo, je
+m'améliore tous les jours.</em>
 
-When I'm not coding, I tinker with my bike and mechanical keyboards. Most
+When I'm not coding, I fiddle with my bike and mechanical keyboards. Most
 evenings involve cooking and music, and I've followed Formula 1 and the
 professional CS:GO scene for years.
 
-Check out my [projects](/projects), blog [posts](/posts),
+Check out my blog [posts](/posts), [projects](/projects),
 [Github](https://github.com/joshsj), and
 [LinkedIn](https://uk.linkedin.com/in/joshsjuk). If you like what you see,
 please get in touch at {% my_email %}.

@@ -9,7 +9,9 @@ body {
   /* bullet point */
   --separator: "\2022";
 
-  --min-font-size: 0.5rem;
+  --font-size-min: 0.5rem;
+  --font-size-h2: 2.3rem;
+  --font-text-normal: 1.35rem;
 
   --heading: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -39,6 +41,4 @@ body.dark {
   --blue: #61afef;
   --purple: #c678dd;
   --selection: #3e4451;
-
-  --pop: var(--purple);
 }

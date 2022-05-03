@@ -30,7 +30,7 @@
 
 body {
   font-family: var(--text);
-  font-size: 1.35rem;
+  font-size: var(--font-text-normal);
   line-height: 1.5;
   color: var(--dark);
   background-color: var(--light);
@@ -65,7 +65,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.3rem;
+  font-size: var(--font-size-h2);
 }
 
 h3 {
@@ -78,6 +78,7 @@ h3 {
   font-family: var(--heading);
   font-weight: 600;
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 /* sizing not implemented */
@@ -91,7 +92,12 @@ strong {
   font-weight: 600;
 }
 
+q,
 blockquote,
 em {
   font-style: italic;
+}
+
+ul {
+  margin-left: 2em;
 }

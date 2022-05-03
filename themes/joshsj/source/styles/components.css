@@ -1,11 +1,28 @@
+.separate {
+  display: flex-inline;
+  flex-wrap: wrap;
+}
+
+.separate > :not(:last-child)::after {
+  content: var(--separator);
+  padding: 0 1ch;
+  font-size: max(var(--font-size-min), 0.65em);
+  vertical-align: middle;
+}
+
 .content > :is(p, hr, blockquote) {
   margin-bottom: var(--space-3);
 }
 
 .card {
   margin-top: var(--space-4);
-  border-top: 0.15rem dashed var(--grey);
-  padding-top: var(--space-4);
+  border-top: 0.1rem solid var(--grey);
+  padding-top: var(--space-1);
+}
+
+.card > .extra {
+  font-size: 0.85em;
+  margin-bottom: var(--space-1);
 }
 
 .excerpt > p::after {
