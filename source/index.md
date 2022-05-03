@@ -23,4 +23,4 @@ Check out my blog [posts](/posts), [projects](/projects),
 [LinkedIn](https://uk.linkedin.com/in/joshsjuk). If you like what you see,
 please get in touch at {% my_email %}.
 
-P.S: Font suggestions for this site are also welcome 🙂
+P.S: UI suggestions for this site are also welcome 🙂
