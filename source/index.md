@@ -21,6 +21,6 @@ professional CS:GO scene for years.
 Check out my blog [posts](/posts), [projects](/projects),
 [Github](https://github.com/joshsj), and
 [LinkedIn](https://uk.linkedin.com/in/joshsjuk). If you like what you see,
-please get in touch at {% my_email %}.
+please get in touch at {% my_email %} 🙂
 
-P.S: UI suggestions for this site are also welcome 🙂
+(UI suggestions for this site are also welcome)
