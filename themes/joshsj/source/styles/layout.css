@@ -25,7 +25,8 @@ header {
   margin-right: var(--space-4);
   justify-content: center;
   text-transform: lowercase;
-  width: 30%;
+  /* respect font size */
+  width: calc(45% - 12rem);
 }
 
 /* space out header elements */
