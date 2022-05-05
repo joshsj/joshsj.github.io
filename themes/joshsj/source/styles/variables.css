@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Work+Sans:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@600&display=swap");
 
 body {
   --space-4: 2rem;
@@ -20,25 +20,33 @@ body {
 
   /* atom one colors */
   /* default: hsl(0, 0%, 98%) */
-  --light: hsl(0, 0%, 96%);
+  --white: hsl(0, 0%, 96%);
   /* default hsl(228, 8%, 24%) */
-  --dark: hsl(228, 8%, 15%);
+  --black: hsl(228, 8%, 15%);
   --grey: hsl(228, 8%, 40%);
   --red: #e45649;
   --blue: #4078f2;
   --purple: #a626a4;
+  --yellow: #f5d802;
   --selection: #e5e5e6;
 
+  /* theme */
+  --light: var(--white);
+  --dark: var(--black);
   --pop: var(--purple);
 }
 
 body.dark {
-  --light: #282c34;
   /* default hsl(219, 14%, 71%) */
-  --dark: hsl(219, 10%, 82%);
+  --white: hsl(219, 10%, 84%);
+  --black: #282c34;
   --grey: hsl(219, 10%, 65%);
   --red: #e06c75;
   --blue: #61afef;
   --purple: #c678dd;
   --selection: #3e4451;
+
+  /* theme */
+  --light: var(--black);
+  --dark: var(--white);
 }

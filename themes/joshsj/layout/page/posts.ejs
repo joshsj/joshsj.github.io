@@ -1,5 +1,17 @@
 <%- page.content %>
 
+<div>
+  <label for="tag-filter">Tag</label>
+ 
+  <select name="Tag Filter" id="tag-filter">
+    <option>All</option>
+  
+    <% site.tags.forEach(({name}) => { %>
+      <option><%- name %></option>
+    <% }) %>
+  </select>
+</div>
+
 <% site.posts.sort("date", -1).forEach(post => { %>
 <section class="card">
   <p class="extra separate">
@@ -14,6 +26,8 @@
   <div class="excerpt">
     <%- post.excerpt %>
   </div>
+
+  <p><a href="<%- url_for(post.path) %>">View</a></p>
 </section>
 <% }) %>
   

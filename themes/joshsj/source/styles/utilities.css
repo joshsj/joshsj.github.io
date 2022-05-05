@@ -6,6 +6,11 @@
   animation: rainbow 3s infinite alternate;
 }
 
+.highlight {
+  color: var(--black);
+  background-color: var(--yellow);
+}
+
 @keyframes rainbow {
   0% {
     color: red;

@@ -88,7 +88,8 @@ h6 {
   display: none;
 }
 
-strong {
+strong,
+label {
   font-weight: 600;
 }
 
@@ -100,4 +101,14 @@ em {
 
 ul {
   margin-left: 2em;
+}
+
+select {
+  border-radius: 0.2em;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+label + select {
+  margin-left: 0.5rem;
 }
