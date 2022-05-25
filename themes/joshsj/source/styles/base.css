@@ -74,7 +74,8 @@ h3 {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--heading);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -82,7 +83,7 @@ h3 {
 }
 
 /* sizing not implemented */
-h4,
+
 h5,
 h6 {
   display: none;
@@ -100,7 +101,7 @@ em {
 }
 
 ul {
-  margin-left: 2em;
+  margin-left: 1.5em;
 }
 
 select {

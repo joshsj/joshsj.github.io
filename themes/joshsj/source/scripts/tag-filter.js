@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("main");
   const select = document.getElementById("tag-filter");
 
+  if (!select) {
+    return;
+  }
+
   select.addEventListener("change", () => {
     if (!select.value) {
       return;
