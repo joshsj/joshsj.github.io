@@ -17,7 +17,7 @@ nav {
 header {
   /* copy heading tags */
   font-family: var(--heading);
-  font-size: var(--font-size-h2);
+  font-size: var(--fs-h2);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.2;

@@ -6,12 +6,16 @@
 .separate > :not(:last-child)::after {
   content: var(--separator);
   padding: 0 1ch;
-  font-size: max(var(--font-size-min), 0.65em);
+  font-size: max(var(--fs-min), 0.65em);
   vertical-align: middle;
 }
 
-.content > :is(p, hr, blockquote, ul, ol) {
+.content > :is(p, hr, blockquote, ul, ol, img) {
   margin-bottom: var(--space-3);
+}
+
+.content > img {
+  max-width: 85%;
 }
 
 .card {

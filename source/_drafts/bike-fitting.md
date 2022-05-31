@@ -22,9 +22,9 @@ a pragmatic approach is better, and how he gets people comfortable on a bike.
 
 Thanks James.
 
-## Goals
+<!-- TODO rename -->
 
-## Overall Positioning
+## Introduction
 
 People interact with a bike in three places:
 
@@ -32,9 +32,28 @@ People interact with a bike in three places:
 - _Saddle_ (or seat)
 - _Pedals_
 
-<!--  premise of engine and controls  -->
+The saddle takes the majority of the rider's weight and the pedals receive all
+the rider's power. Getting these right provides the foundation of the fit, and
+the physiological needs of the rider then dictate the placement of the controls.
 
-<!-- acts of sacrifice -->
+As the sport has evolved, bicycle design has changed to reflect (and drive) the
+needs of riders. A traditional 56cm frame would measure 56cm on the top tube and
+seat tube with little handlebar drop. Modern race-oriented frames are more
+aggressive; a longer top tube places more weight towards the front of the bike
+and long 'n' low stems typically beef up the handlebar drop. Drivetrain
+advancements, such as press-fit bottom brackets, have also narrowed bikes.
+
+<!-- TODO work out captioning -->
+
+{% img "/images/adam hansen bike.jpg" %}
+
+This has lead to a common problem in bike fitting: many everyday people struggle
+to get comfortable on their expensive bikes. Maintaining an aggressive position
+requires flexibility, strength, and little upper body mass, which does not
+describe the average office worker.
+
+As a result, riders commonly feel stretched out or folded in half, necessitating
+_acts of sacrifice_ like leaning off to the dominant side of the saddle.
 
 ## Stance
 
@@ -42,8 +61,6 @@ The horizontal distance between your feet on the pedals.
 
 It is not the same as _q-factor_, which instead measures the horizontal distance
 between the crank arms.
-
-<!-- changes in standard width over time -->
 
 ### Adjustment
 

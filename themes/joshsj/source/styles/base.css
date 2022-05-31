@@ -30,8 +30,8 @@
 
 body {
   font-family: var(--text);
-  font-size: var(--font-text-normal);
-  line-height: 1.5;
+  font-size: var(--fs-normal);
+  line-height: 1.55;
   color: var(--dark);
   background-color: var(--light);
 }
@@ -61,15 +61,15 @@ button.link {
 }
 
 h1 {
-  font-size: 3.1rem;
+  font-size: 3rem;
 }
 
 h2 {
-  font-size: var(--font-size-h2);
+  font-size: var(--fs-h2);
 }
 
 h3 {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
 }
 
 h1,
