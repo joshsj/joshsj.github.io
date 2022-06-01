@@ -1,3 +1,5 @@
+// works in combination with theme scripts
+
 const email = "am9zaHNqdWtAZ21haWwuY29t";
 
 document.addEventListener("DOMContentLoaded", () =>

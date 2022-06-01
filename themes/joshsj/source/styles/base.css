@@ -19,7 +19,8 @@
 
   /* theme transition */
   transition: none 25ms linear;
-  transition-property: color, background-color;
+  /* not vibing */
+  /* transition-property: color, background-color; */
 }
 
 *::selection {
@@ -34,6 +35,7 @@ body {
   line-height: 1.55;
   color: var(--dark);
   background-color: var(--light);
+  scroll-behavior: smooth;
 }
 
 button {
@@ -79,7 +81,7 @@ h4 {
   font-family: var(--heading);
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 /* sizing not implemented */
@@ -112,4 +114,12 @@ select {
 
 label + select {
   margin-left: 0.5rem;
+}
+
+figcaption {
+  font-style: italic;
+}
+
+img {
+  max-width: 100%;
 }

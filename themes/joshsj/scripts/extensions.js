@@ -1,3 +1,5 @@
+// works in combination with client-side scripts
+
 hexo.extend.tag.register(
   "my_email",
   () => `<span class="my-email">(Javascript required)</span>`
@@ -5,6 +7,20 @@ hexo.extend.tag.register(
 
 hexo.extend.tag.register(
   "repo",
-  (args) =>
-    `<a href="https://github.com/joshsj/${args[0]}">${args[1] || "Source"}</a>`
+  ([name, text]) =>
+    `<a href="https://github.com/joshsj/${name}">${text || "Source"}</a>`
+);
+
+// alt isn't required when captioned
+hexo.extend.tag.register(
+  "caption",
+  ([src, caption, source]) =>
+    `
+  <figure>
+    <img src="${src}" alt=""> 
+    <figcaption>
+      ${caption}
+      ${source ? `<a href="${source}">Source</a>` : ""}
+    </figcaption>
+  </figure>`
 );

@@ -19,12 +19,21 @@ conclude how an individual should interact with their bicycle.
 
 This series, plus supporting vlogs, demonstrate why this is a poor approach, why
 a pragmatic approach is better, and how he gets people comfortable on a bike.
-
 Thanks James.
+
+## To Do
+
+- Saddle Height
+- Saddle Setback
+- Saddle Tilt
+- Handlebar Reach
+- Handlebar Drop
+- Handlebar Width
+- Shoes
 
 <!-- TODO rename -->
 
-## Introduction
+## An Outline
 
 People interact with a bike in three places:
 
@@ -36,6 +45,8 @@ The saddle takes the majority of the rider's weight and the pedals receive all
 the rider's power. Getting these right provides the foundation of the fit, and
 the physiological needs of the rider then dictate the placement of the controls.
 
+### Effects of bicycle design
+
 As the sport has evolved, bicycle design has changed to reflect (and drive) the
 needs of riders. A traditional 56cm frame would measure 56cm on the top tube and
 seat tube with little handlebar drop. Modern race-oriented frames are more
@@ -45,30 +56,46 @@ advancements, such as press-fit bottom brackets, have also narrowed bikes.
 
 <!-- TODO work out captioning -->
 
-{% img "/images/adam hansen bike.jpg" %}
+{%
+  caption
+  "/images/adam hansen bike.jpg"
+  "Adam Hansen’s Ridley Helium SL."
+  "https://www.bikeradar.com/features/pro-bike/pro-bike-adam-hansens-ridley-helium-sl"
+%}
 
 This has lead to a common problem in bike fitting: many everyday people struggle
 to get comfortable on their expensive bikes. Maintaining an aggressive position
-requires flexibility, strength, and little upper body mass, which does not
-describe the average office worker.
+requires flexibility, strength, and little upper body mass (a pro). The average
+desk worker is top heavy and lacks flexibility. Hitting the gym can help the
+situation, but more muscle means more weight to support, especially when
+skipping leg day.
 
-As a result, riders commonly feel stretched out or folded in half, necessitating
-_acts of sacrifice_ like leaning off to the dominant side of the saddle.
+### Adapting to a poor position
+
+The human body can adapt to unergonomic positions very well, so noticeable
+discomfort means the setup is really wrong in some way. Feeling stretched out?
+The reach is too long. Feeling folded in half? Too much handlebar drop.
+
+Bad positions may necessitate _acts of sacrifice_: unconscious adjustments made
+by body to achieve a stable & sustainable position. An very typical case is seen
+with excess saddle height, where riders sit off to their dominant side of the
+saddle. This causes an asymmetric interaction with the bike, often leading to
+one-sided issues (e.g., a saddle sore) and an imbalance of power output.
 
 ## Stance
 
-The horizontal distance between your feet on the pedals.
+The horizontal distance between your feet on the pedals.It is not the same as
+_q-factor_, which instead measures the horizontal distance between the crank
+arms.
 
-It is not the same as _q-factor_, which instead measures the horizontal distance
-between the crank arms.
-
-### Adjustment
+### Adjustments
 
 The easiest and free-est starting point is the cleat placement in the shoe: move
 them inwards to increase stance, move them outwards to decrease stance.
 
-Next come pedal washers, up to ~2mm, pedal spindle extenders, or long-axle
-pedals.
+Next come pedal washers, up to ~2mm. Any longer and you start running out of
+pedal threads. Pedal spindle extenders and long-axle pedals get around this
+issue.
 
 Lastly, q-factor can also change stance, however needing new cranks to eek out
 your stance to the extreme suggests a proper bike fit is in order.

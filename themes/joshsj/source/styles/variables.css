@@ -10,7 +10,7 @@ body {
   --separator: "\2022";
 
   --fs-min: 0.5rem;
-  --fs-h2: 2.2rem;
+  --fs-h2: 2.4rem;
   --fs-normal: 1.2rem;
 
   --heading: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -22,7 +22,7 @@ body {
   /* default: hsl(0, 0%, 98%) */
   --white: hsl(0, 0%, 96%);
   /* default hsl(228, 8%, 24%) */
-  --black: hsl(228, 8%, 15%);
+  --black: hsl(228, 8%, 18%);
   --grey: hsl(228, 8%, 40%);
   --red: #e45649;
   --blue: #4078f2;
