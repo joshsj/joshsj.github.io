@@ -34,7 +34,7 @@ Imagine it's new years day and you're going away for 10 days:
 The 180-day window is calculated from the date of entry to the Schengen area, so
 the start date minus 180 days, including the start date itself:
 
-- **Start of 180 Day Window:** 06/07/21
+- **Start of 180-Day Window:** 06/07/21
 - **Previously in Schengen:**
   - **0** days total, with **90** days remaining
 
@@ -53,7 +53,7 @@ Jump ahead to April for an easter getaway:
 As before, we calculate the 180-day period from the start of the visit but we
 need to include visit one in the allowance period:
 
-- **Start of 180 Day Window:** 20/10/21
+- **Start of 180-Day Window:** 20/10/21
 - **Previously in Schengen:**
   - 10 days (visit 1)
   - **10** days total, with **80** days remaining
@@ -68,7 +68,7 @@ You fancy a cheeky long-weekend:
 
 This time, you spent even more time in the Schengen area:
 
-- **Start of 180 Day Window:** 29/11/21
+- **Start of 180-Day Window:** 29/11/21
 - **Previously in Schengen:**
   - 10 days (visit 1)
   - 7 days (visit 2)
@@ -85,7 +85,7 @@ It's the school holidays and you're taking the kids somewhere warmer:
 Now that the window starts at the end of January, visit 1 falls outside the 180
 day window:
 
-- **Start of 180 Day Window:** 30/01/22
+- **Start of 180-Day Window:** 30/01/22
 - **Previously in Schengen:**
   - ~10 days (visit 1)~
   - 7 days (visit 2)
