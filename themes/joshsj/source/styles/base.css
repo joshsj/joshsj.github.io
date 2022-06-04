@@ -30,7 +30,7 @@
 }
 
 body {
-  font-family: var(--text);
+  font-family: var(--ff-normal);
   font-size: var(--fs-normal);
   line-height: 1.55;
   color: var(--dark);
@@ -71,15 +71,15 @@ h2 {
 }
 
 h3 {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--heading);
-  font-weight: 600;
+  font-family: var(--ff-heading);
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
@@ -93,7 +93,7 @@ h6 {
 
 strong,
 label {
-  font-weight: 600;
+  font-weight: var(--fw-bold);
 }
 
 q,
@@ -122,4 +122,18 @@ figcaption {
 
 img {
   max-width: 100%;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: var(--space-2) 0;
+  /* remove horizontal margin from border-spacing */
+  margin-left: calc(var(--space-2) * -1);
+  margin-right: calc(var(--space-2) * -1);
+}
+
+th {
+  font-family: var(--ff-heading);
+  font-weight: var(--fw-bold);
+  text-align: left;
 }

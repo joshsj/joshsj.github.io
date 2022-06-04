@@ -10,7 +10,7 @@
   vertical-align: middle;
 }
 
-.content > :is(p, hr, blockquote, ul, ol, figure) {
+.content > :is(p, hr, blockquote, ul, ol, figure, table) {
   margin-bottom: var(--space-3);
 }
 

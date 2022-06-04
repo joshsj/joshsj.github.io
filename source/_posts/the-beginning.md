@@ -1,6 +1,6 @@
 ---
 title: The Beginning
-date: 2022/04/29
+date: 2022-04-29
 tags:
   - Fluff
 ---
