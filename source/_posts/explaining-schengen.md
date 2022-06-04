@@ -63,7 +63,7 @@ need to include visit one in the allowance period:
 You fancy a cheeky long-weekend:
 
 - **Start Date:** 27/05/22
-- **End Date:** 30/04/22
+- **End Date:** 30/05/22
 - **Duration:** 4 days
 
 This time, you spent even more time in the Schengen area:
