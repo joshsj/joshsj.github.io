@@ -81,7 +81,7 @@ h4 {
   font-family: var(--ff-heading);
   font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  line-height: var(--lh-heading);
 }
 
 /* sizing not implemented */

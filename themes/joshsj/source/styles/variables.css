@@ -19,6 +19,8 @@ body {
 
   --ff-normal: "Lora", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 
+  --lh-heading: 1.1;
+
   /* atom one colors */
   /* default: hsl(0, 0%, 98%) */
   --white: hsl(0, 0%, 96%);
