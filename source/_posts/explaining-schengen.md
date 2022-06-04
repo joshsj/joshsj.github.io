@@ -1,6 +1,6 @@
 ---
 title: Explaining the 90/180 Rule in the Schengen Area
-date: 2022-06-01 00:00:00
+date: 2022-06-01
 tags:
   - Fluff
 ---
@@ -78,15 +78,15 @@ This time, you spent even more time in the Schengen area:
 
 It's the school holidays and you're taking the kids somewhere warmer:
 
-- **Start Date** 28/07/22
-- **End Date** 10/08/22
-- **Duration** 14 days
+- **Start Date:** 28/07/22
+- **End Date:** 10/08/22
+- **Duration:** 14 days
 
 Now that the window starts at the end of January, visit 1 falls outside the 180
 day window:
 
-- **Start of 180 Day Window** 30/01/22
-- **Previously in Schengen**
+- **Start of 180 Day Window:** 30/01/22
+- **Previously in Schengen:**
   - ~10 days (visit 1)~
   - 7 days (visit 2)
   - 4 days (visit 3)
