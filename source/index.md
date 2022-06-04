@@ -5,8 +5,8 @@ title: Home
 # Hello
 
 I'm a spirited software developer from Manchester seeking a job in full stack
-web development. Any tech stack is a good tech stack, but .NET, Vue & SQL is my
-favourite.
+web development. Any tech stack is a good tech stack, but .NET, Vue and SQL is
+my jam.
 
 I'm close to completing my degree in Software Engineering at Sheffield Hallam,
 during which I undertook a 14-month placement at
