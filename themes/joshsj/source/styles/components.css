@@ -5,7 +5,7 @@
 
 .separate > :not(:last-child)::after {
   content: var(--separator);
-  padding: 0 1ch;
+  padding: 0 0.5em;
   font-size: max(var(--fs-min), 0.65em);
   vertical-align: middle;
 }
@@ -39,4 +39,10 @@
 .excerpt > p::after {
   /* add ellipses */
   content: "..";
+}
+
+@media (max-width: 768px) {
+  .content > figure {
+    margin-right: 0;
+  }
 }
