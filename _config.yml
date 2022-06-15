@@ -4,12 +4,12 @@
 
 # Site
 title: joshsj
-subtitle: ""
-description: ""
-keywords:
+description: "I'm a spirited software developer from Manchester
+  seeking a job in full stack web development.
+  Any tech stack is a good tech stack, but .NET, Vue and SQL is my jam."
 author: Joshua Sexton-Jones
 language: en
-timezone: GB
+timezone: Europe/London
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'

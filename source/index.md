@@ -8,8 +8,8 @@ I'm a spirited software developer from Manchester seeking a job in full stack
 web development. Any tech stack is a good tech stack, but .NET, Vue and SQL is
 my jam.
 
-I have a 1st from Sheffield Hallam in Software Engineering, 14 months experience
-developing full-stack web applications from a placement at
+I have a First in Software Engineering from Sheffield Hallam, 14 months
+experience developing full-stack web applications from a placement at
 [3Squared](https://3squared.com), and a slowly improving grasp of French.
 <em title="With Duolingo, I'm getting better every day.">Avec Duolingo, je
 m'améliore tous les jours.</em>

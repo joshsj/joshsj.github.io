@@ -137,3 +137,7 @@ th {
   font-weight: var(--fw-bold);
   text-align: left;
 }
+
+sup {
+  font-size: max(0.85em, var(--fs-min));
+}
