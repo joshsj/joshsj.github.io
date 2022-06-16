@@ -26,7 +26,7 @@ header {
   justify-content: center;
   text-transform: lowercase;
   /* respect font size */
-  width: calc(45% - 12rem);
+  width: calc(45% - 10rem);
 }
 
 /* space out header elements */
