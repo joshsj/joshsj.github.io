@@ -94,7 +94,7 @@ them inwards to increase stance, move them outwards to decrease stance.
 
 Next come pedal washers, up to ~2mm. Any longer and you start running out of
 pedal threads. Pedal spindle extenders and long-axle pedals get around this
-issue.
+issue for a little more money.
 
 Lastly, q-factor can also change stance, however needing new cranks to eek out
 your stance to the extreme suggests a proper bike fit is in order.

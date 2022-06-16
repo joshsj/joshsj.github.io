@@ -1,8 +1,7 @@
 ---
 title: Home
+display_title: Hello
 ---
-
-# Hello
 
 I'm a spirited software developer from Manchester seeking a job in full stack
 web development. Any tech stack is a good tech stack, but .NET, Vue and SQL is

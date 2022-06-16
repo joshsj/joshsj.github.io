@@ -1,8 +1,3 @@
-.separate {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .separate > :not(:last-child)::after {
   content: var(--separator);
   padding: 0 0.5em;
@@ -10,7 +5,12 @@
   vertical-align: middle;
 }
 
-.content > :is(p, hr, blockquote, ul, ol, figure, table) {
+/* h1 doesn't need margin, line-height is enough */
+.content > :where(h2, h3) {
+  margin-bottom: 0.25rem;
+}
+
+.content > :where(p, hr, blockquote, ul, ol, figure, table) {
   margin-bottom: var(--space-3);
 }
 

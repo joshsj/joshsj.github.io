@@ -40,5 +40,5 @@ marked:
   smartypants: true
 
 sitemap:
-  tags: false
+  tags: true
   categories: false

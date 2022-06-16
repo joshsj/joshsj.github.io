@@ -36,14 +36,12 @@
       </a>
 
       <nav>
-        <% site.pages
-          .filter(p => p.nav !== false)
-          .sort("title")
+        <%
+        ["Home", "Posts", "Projects"]
+          .map((title) => site.pages.findOne({title}))
           .forEach(({title, path}) => {
             if (title !== page.title) { %>
-          <a href="<%- url_for(path) %>">
-            <%- title %>
-          </a>
+              <a href="<%- url_for(path) %>"><%- title %></a>
         <% } else { %>
           <%- title %>
         <% }}) %>
@@ -54,6 +52,7 @@
 
     <div id="main-container">
       <main class="content">
+        <h1><%- page.display_title || page.title %></h1>
         <%- body %>
       </main>
     </div>
