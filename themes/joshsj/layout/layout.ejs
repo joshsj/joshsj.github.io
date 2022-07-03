@@ -46,14 +46,12 @@
         <% }}) %>
       </nav>
 
-      <button id="theme-toggle" class="link"></button>
+      <button id="theme-toggle" class="link" aria-hidden></button>
     </header>
 
-    <div id="main-container">
-      <main class="content">
-        <h1><%- page.display_title || page.title %></h1>
-        <%- body %>
-      </main>
-    </div>
+    <main class="content">
+      <h1><%- page.display_title || page.title %></h1>
+      <%- body %>
+    </main>
   </body>
 </html>

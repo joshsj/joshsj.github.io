@@ -52,12 +52,12 @@ button.link {
   color: var(--pop);
 }
 
-:is(a, button.link).suppress {
+:where(a, button.link).suppress {
   color: inherit;
   text-decoration: none;
 }
 
-:is(a, button.link):not(.suppress):hover {
+:where(a, button.link):not(.suppress):hover {
   color: var(--light);
   background-color: var(--pop);
 }
