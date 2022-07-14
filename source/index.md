@@ -13,7 +13,7 @@ experience developing full-stack web applications from a placement at
 <em title="With Duolingo, I'm getting better every day.">Avec Duolingo, je
 m'améliore tous les jours.</em>
 
-When I'm not coding, I fiddle with my bike and mechanical keyboards. Most
+When I'm not coding, I'm tinkering with my bike and mechanical keyboards. Most
 evenings involve cooking and music, and I've followed Formula 1 and the
 professional CS:GO scene for years.
 
