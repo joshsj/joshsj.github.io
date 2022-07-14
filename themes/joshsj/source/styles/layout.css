@@ -20,8 +20,6 @@ header {
   line-height: var(--lh-heading);
   text-transform: lowercase;
 
-  justify-content: center;
-  height: 100%;
   position: fixed;
   right: calc(50% + 15rem);
 }

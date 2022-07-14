@@ -44,7 +44,7 @@ button {
 
 button.link {
   background-color: inherit;
-  border: inherit;
+  border: initial;
 }
 
 a,
