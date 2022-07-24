@@ -92,40 +92,29 @@ imbalance of power output.
 
 ## Stance
 
-The horizontal distance between your feet on the pedals.It is not the same as
+The horizontal distance between your feet on the pedals. It is not the same as
 _q-factor_, which instead measures the horizontal distance between the crank
 arms.
 
-<<<<<<< Updated upstream
-
-### Adjustments
-
-=======
-
 ### Measurement
 
-TODO
+<!-- TODO -->
 
 ### Adjustment
-
-> > > > > > > Stashed changes
 
 The easiest and free-est starting point is the cleat placement in the shoe: move
 them inwards to increase stance, move them outwards to decrease stance.
 
-<<<<<<< Updated upstream Next come pedal washers, up to ~2mm. Any longer and you
-start running out of pedal threads. Pedal spindle extenders and long-axle pedals
-get around this issue for a little more money. ======= Next come pedal washers
-(up to ~2mm), pedal spindle extenders, or long-axle pedals.
-
-> > > > > > > Stashed changes
+Next come pedal washers, up to ~2mm. Any longer and you start running out of
+pedal threads. Pedal spindle extenders and long-axle pedals get around this
+issue for a little more money.
 
 Lastly, q-factor can also change stance, however needing new cranks to eek out
 your stance to the extreme suggests a proper bike fit is in order.
 
 ### Impact
 
-TODO
+<!-- TODO -->
 
 ## Handlebar Width
 
@@ -140,7 +129,7 @@ handlebars are flared, meaning they're wider at the bottom than on the tops.
 Another important note is that not all manufacturers measure center-to-center,
 meaning the middle of the tube. Some manufacturers measure outside-to-outside,
 so make sure to check how the manufacturer measures to avoid buying the wrong
-thing.
+thing. The most common approach is c-t-c.
 
 <!-- TODO example for these manufacturers -->
 
