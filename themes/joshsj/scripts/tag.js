@@ -24,16 +24,3 @@ hexo.extend.tag.register(
     </figcaption>
   </figure>`
 );
-
-// default isn't working
-hexo.extend.helper.register("is_home", function () {
-  return this.page.title === "Home";
-});
-
-hexo.extend.generator.register("tag_pages", function (site) {
-  return site.tags.map((tag) => ({
-    path: `tags/${tag.name}.html`,
-    layout: "pages/posts",
-    data: { title: tag.name, tag },
-  }));
-});
