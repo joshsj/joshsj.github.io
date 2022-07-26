@@ -1,0 +1,20 @@
+<% posts.forEach(post => { %>
+<section class="card">
+  <p class="extra separate">
+    <%- partial("partials/post/dates", {post}) %>
+    <%- partial("partials/post/tags", {post}) %>
+  </p>
+
+  <h2>
+    <a class="suppress" href="<%- url_for(post.path) %>">
+      <%- post.title %>
+    </a>
+  </h2>
+  
+  <div class="excerpt">
+    <%- post.excerpt %>
+  </div>
+
+  <p><a href="<%- url_for(post.path) %>">Read</a></p>
+</section>
+<% }) %>

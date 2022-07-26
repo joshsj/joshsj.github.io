@@ -15,7 +15,7 @@
   margin-bottom: 0.25rem;
 }
 
-.content > :where(p, hr, blockquote, ul, ol, figure, table) {
+.content > :where(p, hr, blockquote, ul, ol, figure, table):not(.squish) {
   margin-bottom: var(--space-3);
 }
 
@@ -25,7 +25,7 @@
 
 .card {
   margin-top: var(--space-4);
-  border-top: 0.1rem solid var(--grey);
+  border-top: 0.1rem dashed var(--dark);
   padding-top: var(--space-1);
 }
 

@@ -1,0 +1,13 @@
+<%- page.content %>
+
+<% site.tags.sort("name").forEach(({ name, posts }) => { %>
+<section class="card">
+  <h2><%- name %></h2>
+
+  <ul>
+    <% posts.sort("name").forEach(post => { %>
+      <%- partial("partials/post/li", {post}) %>
+    <% }) %>
+  </ul>
+</section>  
+<% }) %>

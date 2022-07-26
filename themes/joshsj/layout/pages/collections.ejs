@@ -1,0 +1,18 @@
+<%- page.content %>
+
+<% site.data.collections.forEach(({ title, description }) => { %>
+<section class="card content">
+  <h2><%- title %></h2>
+    
+  <p><%- description %></p>
+
+  <ul>
+    <% site.posts
+      .filter(p => p.collection === title)
+      .sort("date")
+      .forEach(post => { %>
+      <%- partial("partials/post/li", {post}) %>
+    <% }) %>
+  </ul>
+</section>
+<% }) %>
