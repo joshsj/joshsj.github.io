@@ -6,6 +6,10 @@ body {
   --space-2: calc(var(--space-4) * 0.5);
   --space-1: calc(var(--space-4) * 0.25);
 
+  --content-left: 50%;
+  --content-right: calc(100% - var(--content-left));
+  --content-width: 35rem;
+
   /* bullet point */
   --separator: "\2022";
 
@@ -20,7 +24,7 @@ body {
   --lh-heading: 1.1;
 
   /* atom one colors */
-  --white: hsl(0, 0%, 98%);
+  --white: white;
   /* default hsl(228, 8%, 24%) */
   --black: hsl(228, 8%, 18%);
   --grey: hsl(228, 8%, 40%);
@@ -39,7 +43,7 @@ body {
 body.dark {
   /* default hsl(219, 14%, 71%) */
   --white: hsl(219, 10%, 82%);
-  --black: #282c34;
+  --black: hsl(220, 13%, 18%);
   --grey: hsl(219, 10%, 65%);
   --red: #e06c75;
   --blue: #61afef;

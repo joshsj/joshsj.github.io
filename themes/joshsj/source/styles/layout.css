@@ -1,7 +1,3 @@
-body {
-  padding: var(--space-4);
-}
-
 /* push right */
 header,
 #logo,
@@ -9,6 +5,11 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+header,
+main {
+  padding: var(--space-4) 0;
 }
 
 header {
@@ -21,7 +22,9 @@ header {
   text-transform: lowercase;
 
   position: fixed;
-  right: calc(50% + 15rem);
+  right: calc(
+    var(--content-right) + (var(--content-width) / 2) + var(--space-4)
+  );
 }
 
 /* space out header elements */
@@ -35,14 +38,24 @@ nav > a {
 
 main {
   position: absolute;
-  left: calc(50% - 15rem + var(--space-4));
-  max-width: 600px;
+  max-width: var(--content-width);
+  left: calc(var(--content-left) - (var(--content-width) / 2));
+}
+
+@media (max-width: 1024px) {
+  body {
+    --content-left: 60%;
+  }
 }
 
 /* revert to column vertical layout */
 @media (max-width: 768px) {
   body {
     padding: var(--space-1);
+  }
+
+  header {
+    padding: 0;
   }
 
   header,
@@ -54,9 +67,5 @@ main {
   #logo,
   nav {
     align-items: flex-start;
-  }
-
-  main {
-    margin-top: var(--space-4);
   }
 }

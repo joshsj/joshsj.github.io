@@ -25,13 +25,14 @@
 
 .card {
   margin-top: var(--space-4);
-  border-top: 0.1rem dashed var(--dark);
-  padding-top: var(--space-1);
+}
+
+.card > :where(h2, h3, .extra) {
+  margin-bottom: var(--space-1);
 }
 
 .card > .extra {
   font-size: 0.85em;
-  margin-bottom: var(--space-1);
   display: flex;
 }
 
