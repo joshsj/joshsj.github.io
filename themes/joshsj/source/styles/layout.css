@@ -58,6 +58,10 @@ main {
     padding: 0;
   }
 
+  main {
+    padding-bottom: 0;
+  }
+
   header,
   main {
     position: static;

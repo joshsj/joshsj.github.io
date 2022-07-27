@@ -4,9 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU" />
-    
-    <title><%- is_home() ? `${config.title} · Software Developer` : `${page.title} · ${config.title}` %></title>
+    <meta
+      name="google-site-verification"
+      content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU"
+    />
+
+    <title>
+      <%- is_home() ? `${config.title} · Software Developer` : `${page.title} ·
+      ${config.title}` %>
+    </title>
 
     <link href="/styles/variables.css" rel="stylesheet" />
     <link href="/styles/utilities.css" rel="stylesheet" />
@@ -16,37 +22,52 @@
 
     <script src="/scripts/theme.js" defer></script>
     <script src="/scripts/tag.js" defer></script>
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="manifest" href="/icons/site.webmanifest">
-    <link rel="shortcut icon" href="/icons/favicon.ico">
-    <meta name="msapplication-TileColor" content="#603cba">
-    <meta name="msapplication-config" content="/icons/browserconfig.xml">
-    <meta name="theme-color" content="#f5f5f5">
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/icons/site.webmanifest" />
+    <link rel="shortcut icon" href="/icons/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#603cba" />
+    <meta name="msapplication-config" content="/icons/browserconfig.xml" />
+    <meta name="theme-color" content="#f5f5f5" />
   </head>
   <body>
     <header>
-      <a id="logo" class="suppress" href="/">
+      <a id="logo" class="mask" href="/">
         <span>Joshua</span>
         <span>Sexton</span>
         <span><span class="pop">-</span>Jones</span>
       </a>
 
       <nav>
-        <%
-        ["Home", "Posts", "Projects"]
-          .map((title) => site.pages.findOne({title}))
-          .forEach(({title, path}) => {
-            if (title !== page.title) { %>
-              <a href="<%- url_for(path) %>"><%- title %></a>
-        <% } else { %>
-          <%- title %>
-        <% }}) %>
+        <% ["Home", "Posts", "Series", "Projects"] .map((title) =>
+        site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
+        page.title) { %>
+        <a href="<%- url_for(path) %>"><%- title %></a>
+        <% } else { %> <%- title %> <% }}) %>
       </nav>
 
-      <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
+      <button
+        id="theme-toggle"
+        class="link"
+        aria-hidden
+        aria-role="Toggle for light/dark theme"
+      ></button>
     </header>
 
     <main class="content">

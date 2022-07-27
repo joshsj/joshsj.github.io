@@ -14,10 +14,10 @@ hexo.extend.filter.register("after_post_render", function (data) {
   }
 });
 
-// supplement collections data
+// supplement series data
 hexo.extend.filter.register("template_locals", async (locals) => {
   await Promise.allSettled(
-    locals.site.data.collections.map(async (s) => {
+    locals.site.data.series.map(async (s) => {
       s.description = (
         await hexo.render.render({
           text: s.description,

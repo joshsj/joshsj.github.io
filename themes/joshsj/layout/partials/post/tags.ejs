@@ -1,1 +1,6 @@
-<% post.tags.forEach(tag => { %><span class="tag"><%- tag.name %></span><% }) %>
+<% tags.sort("name").forEach(({ name }) => { %>
+<span
+  ><% if (link) { %><a href="/tag/<%- format_url(name) %>"
+    ><% } %><%- name %><% if (link) { %></a
+  ><% }%></span
+><% }) %>

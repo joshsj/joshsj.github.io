@@ -24,6 +24,7 @@ body {
   --lh-heading: 1.1;
 
   /* atom one colors */
+  /* default hsl(0, 0%, 98%); */
   --white: white;
   /* default hsl(228, 8%, 24%) */
   --black: hsl(228, 8%, 18%);

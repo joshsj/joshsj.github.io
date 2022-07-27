@@ -1,3 +1,8 @@
 <%- page.content %>
 
-<%- partial("partials/posts", { posts: site.posts.sort("date", -1) }) %>
+<h2>Tags</h2>
+<p class="separate">
+  <%- partial("partials/post/tags", { tags: site.tags, link: true })%>
+</p>
+
+<%- partial("partials/posts", { posts: site.posts }) %>

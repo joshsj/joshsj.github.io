@@ -1,19 +1,15 @@
-<% posts.forEach(post => { %>
+<% posts.sort("date", -1).forEach(post => { %>
 <section class="card">
   <p class="extra separate">
-    <%- partial("partials/post/dates", {post}) %>
-    <%- partial("partials/post/tags", {post}) %>
+    <%- partial("partials/post/dates", { post }) %><%-
+    partial("partials/post/tags", { tags: post.tags, link: false }) %>
   </p>
 
   <h2>
-    <a class="suppress" href="<%- url_for(post.path) %>">
-      <%- post.title %>
-    </a>
+    <a class="mask" href="<%- url_for(post.path) %>"><%- post.title %></a>
   </h2>
-  
-  <div class="excerpt">
-    <%- post.excerpt %>
-  </div>
+
+  <p class="excerpt"><%- post.excerpt %></p>
 
   <p><a href="<%- url_for(post.path) %>">Read</a></p>
 </section>

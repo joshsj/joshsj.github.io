@@ -1,0 +1,9 @@
+<%- page.content %> <% site.data.series.forEach(({ title, description }) => { %>
+<section class="card">
+  <h2><%- title %></h2>
+
+  <p><%- description %></p>
+
+  <p><a href="/series/<%- format_url(title) %>">View</a></p>
+</section>
+<% }) %>

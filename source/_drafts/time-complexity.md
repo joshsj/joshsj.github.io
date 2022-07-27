@@ -4,7 +4,7 @@ date: 2022-07-24
 tags:
   - Notes
   - Computer Science
-collection: (Re)Learning CS
+series: (Re)Learning CS
 ---
 
 The most obvious approach to determine the performance of a program is with a
