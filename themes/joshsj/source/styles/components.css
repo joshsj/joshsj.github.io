@@ -32,10 +32,6 @@
   margin-top: var(--space-4);
 }
 
-.card > :where(h2, h3, .extra) {
-  margin-bottom: var(--space-1);
-}
-
 .card > .extra {
   font-size: 0.85em;
   display: flex;
