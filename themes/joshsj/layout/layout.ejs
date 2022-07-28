@@ -23,23 +23,9 @@
     <script src="/scripts/theme.js" defer></script>
     <script src="/scripts/tag.js" defer></script>
 
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/icons/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/icons/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/icons/favicon-16x16.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
     <link rel="manifest" href="/icons/site.webmanifest" />
     <link rel="shortcut icon" href="/icons/favicon.ico" />
     <meta name="msapplication-TileColor" content="#603cba" />
@@ -48,7 +34,7 @@
   </head>
   <body>
     <header>
-      <a id="logo" class="mask" href="/">
+      <a id="logo" class="hide" href="/">
         <span>Joshua</span>
         <span>Sexton</span>
         <span><span class="pop">-</span>Jones</span>
@@ -62,12 +48,7 @@
         <% } else { %> <%- title %> <% }}) %>
       </nav>
 
-      <button
-        id="theme-toggle"
-        class="link"
-        aria-hidden
-        aria-role="Toggle for light/dark theme"
-      ></button>
+      <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
     </header>
 
     <main class="content">

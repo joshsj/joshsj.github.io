@@ -5,6 +5,12 @@
       "options": {
         "proseWrap": "always"
       }
+    },
+    {
+      "files": ["*.ejs"],
+      "options": {
+        "printWidth": 120
+      }
     }
   ]
 }

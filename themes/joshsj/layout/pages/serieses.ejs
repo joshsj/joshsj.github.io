@@ -1,9 +1,9 @@
-<%- page.content %> <% site.data.series.forEach(({ title, description }) => { %>
+<%- page.content %> <% site.data.series.forEach(({ title, description, path }) => { %>
 <section class="card">
-  <h2><%- title %></h2>
+  <h2><a href="<%- url_for(path) %>" class="mask"><%- title %></a></h2>
 
   <p><%- description %></p>
 
-  <p><a href="/series/<%- format_url(title) %>">View</a></p>
+  <p><a href="<%- url_for(path) %>">View</a></p>
 </section>
 <% }) %>

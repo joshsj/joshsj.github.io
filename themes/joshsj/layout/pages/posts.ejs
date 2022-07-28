@@ -1,8 +1,8 @@
 <%- page.content %>
 
-<h2>Tags</h2>
 <p class="separate">
-  <%- partial("partials/post/tags", { tags: site.tags, link: true })%>
+  <span class="skip" role="heading" aria-level="2">Tags:</span>
+  <%- partial("partials/post/tags", { tags: site.tags, mask: false })%>
 </p>
 
 <%- partial("partials/posts", { posts: site.posts }) %>

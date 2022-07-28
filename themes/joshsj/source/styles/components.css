@@ -4,9 +4,14 @@
 }
 
 .separate > :not(:last-child)::after {
-  content: var(--separator);
-  padding: 0 0.5em;
+  padding-right: 1ch;
+  content: "";
   font-size: max(0.65em, var(--fs-min));
+}
+
+.separate > :not(:last-child, .skip)::after {
+  padding-left: 1ch;
+  content: var(--separator);
   vertical-align: middle;
 }
 
@@ -36,7 +41,7 @@
   display: flex;
 }
 
-.card > .extra > .right {
+.card > .extra > .corner {
   /* push right */
   margin-left: auto;
   order: 9999;

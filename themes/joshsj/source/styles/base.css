@@ -31,8 +31,8 @@
 
 body {
   font-family: var(--ff-normal);
-  font-size: 1.2rem;
-  line-height: 1.55;
+  font-size: 1.25rem;
+  line-height: 1.6;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -52,14 +52,18 @@ button.link {
   color: var(--pop);
 }
 
-:where(a, button.link).mask {
+:where(a, button.link):not(.mask, .hide):hover {
+  color: var(--light);
+  background-color: var(--pop);
+}
+
+:where(a, button.link):is(.mask, .hide) {
   color: inherit;
   text-decoration: none;
 }
 
-:where(a, button.link):not(.mask):hover {
-  color: var(--light);
-  background-color: var(--pop);
+:where(a, button.link):not(.hide).mask:hover {
+  text-decoration: underline;
 }
 
 h1 {
@@ -71,17 +75,21 @@ h2 {
 }
 
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+[role="heading"] {
+  font-weight: var(--fw-bold);
 }
 
 h1,
 h2,
 h3,
 h4 {
+  line-height: var(--lh-heading);
   font-family: var(--ff-heading);
   font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
-  line-height: var(--lh-heading);
 }
 
 /* sizing not implemented */
