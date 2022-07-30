@@ -35,7 +35,7 @@
   <meta name="theme-color" content="#ffffff" />
 </head>
 
-<body <%- env.debug && "data-dev" %>>
+<body <%- env.debug ? "data-dev" : "" %>>
   <header>
     <a id="logo" class="hide" href="/">
       <span>Joshua</span>
