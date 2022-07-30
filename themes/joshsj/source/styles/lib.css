@@ -1,3 +1,7 @@
+.katex {
+  font-size: 1em;
+}
+
 /* TODO fix katex styles in debug */
 
 body[data-dev] .katex-html {
