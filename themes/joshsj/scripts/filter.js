@@ -1,4 +1,9 @@
-const ExcerptRegex = /<!-- excerpt -->(?<excerpt>(.|\n)+)<!-- excerpt -->/u;
+const ExcerptRegex = (() => {
+  const marker = "<!--\\s*excerpt\\s*-->";
+  const capture = "(?<excerpt>(.|\\n)+)";
+
+  return new RegExp(marker + capture + marker, "u");
+})();
 
 hexo.extend.filter.register("after_post_render", function (data) {
   const capitalize = hexo.extend.helper.get("capitalize");

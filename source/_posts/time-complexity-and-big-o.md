@@ -18,9 +18,11 @@ machine, programming language, code quality, etc., we use something better.
 ## Time Complexity
 
 _Time complexity_ expresses the execution time of an algorithm as a function of
-its input size by measuring its number of operations. This
-offers<!-- excerpt --> a purely conceptual understanding of an algorithm's speed
-at any scale.<!-- excerpt -->
+its input size by measuring its number of operations, providing <!--excerpt-->a
+purely conceptual understanding of an algorithm's speed at any
+scale.<!--excerpt-->. When implementing an algorithm, its time complexity can
+
+be used in benchmarks for comparison to ensure it scales as intended.
 
 ## Notation
 
