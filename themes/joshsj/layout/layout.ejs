@@ -18,6 +18,10 @@
   <link href="/styles/components.css" rel="stylesheet" />
   <link href="/styles/lib.css" rel="stylesheet" />
 
+  <% if (!env.debug) { %>
+    <link href="/styles/lib/katex/katex.min.css" rel="stylesheet" />
+  <% } %>
+
   <script src="/scripts/theme.js" defer></script>
   <script src="/scripts/tag.js" defer></script>
 

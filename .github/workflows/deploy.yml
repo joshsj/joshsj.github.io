@@ -37,7 +37,7 @@ jobs:
       - name: copy katex css
         run: |
           mkdir public/styles/lib
-          cp -r node_modules/katex/dist/{katex.min.css,fonts/} public/styles/lib/
+          cp -r node_modules/katex/dist/{katex.min.css,fonts/} public/styles/lib/katex/
 
       - name: add deployment repository
         working-directory: ./public
