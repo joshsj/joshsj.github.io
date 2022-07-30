@@ -11,16 +11,16 @@
     <%- is_home() ? `${config.title} · Software Developer` : `${page.title} · ${config.title}` %>
   </title>
 
+  <% if (!env.debug) { %>
+    <link href="/styles/lib/katex/katex.min.css" rel="stylesheet" />
+  <% } %>
+
   <link href="/styles/variables.css" rel="stylesheet" />
   <link href="/styles/utilities.css" rel="stylesheet" />
   <link href="/styles/base.css" rel="stylesheet" />
   <link href="/styles/layout.css" rel="stylesheet" />
   <link href="/styles/components.css" rel="stylesheet" />
   <link href="/styles/lib.css" rel="stylesheet" />
-
-  <% if (!env.debug) { %>
-    <link href="/styles/lib/katex/katex.min.css" rel="stylesheet" />
-  <% } %>
 
   <script src="/scripts/theme.js" defer></script>
   <script src="/scripts/tag.js" defer></script>
