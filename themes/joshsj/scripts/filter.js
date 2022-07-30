@@ -1,6 +1,8 @@
 const ExcerptRegex = /<!-- excerpt -->(?<excerpt>(.|\n)+)<!-- excerpt -->/u;
 
 hexo.extend.filter.register("after_post_render", function (data) {
+  const capitalize = hexo.extend.helper.get("capitalize");
+
   const match = ExcerptRegex.exec(data.content);
 
   if (!match) {
@@ -10,7 +12,7 @@ hexo.extend.filter.register("after_post_render", function (data) {
   const excerpt = match.groups.excerpt.replace(/\n/g, " ").trim();
 
   if (excerpt) {
-    data.excerpt = excerpt;
+    data.excerpt = capitalize(excerpt);
   }
 });
 

@@ -110,17 +110,21 @@ em {
   font-style: italic;
 }
 
-ul {
-  margin-left: 1.5em;
+ul,
+ol {
+  margin-left: 1.25em;
 }
 
-ul.inline {
-  list-style: none;
-  margin-left: 0;
+ol {
+  counter-reset: li;
 }
 
-ul.inline > li {
-  display: inline;
+ol > li {
+  counter-increment: li;
+}
+
+ol > li::marker {
+  content: counter(li) ") ";
 }
 
 select {
@@ -131,6 +135,10 @@ select {
 
 label + select {
   margin-left: 0.5rem;
+}
+
+figure > img {
+  border-radius: 0.25rem;
 }
 
 figcaption {
@@ -160,9 +168,12 @@ sup {
 }
 
 code {
-  background-color: var(--light-grey);
   font-family: var(--ff-mono);
   font-size: 0.95em;
+}
+
+code:not(.hljs) {
+  background-color: var(--light-grey);
   padding: 0 0.25ch;
   border-radius: 0.15em;
 }

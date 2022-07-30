@@ -1,0 +1,6 @@
+{
+  "Math Tag Helper": {
+    "prefix": ["math", "maths"],
+    "body": ["{% math $0 %}"]
+  }
+}

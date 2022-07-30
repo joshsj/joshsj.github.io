@@ -45,5 +45,8 @@ sitemap:
   tags: true
   categories: false
 
-# lib assets
-lib_asset_root: /../node_modules
+# syntax highlighting
+highlight:
+  line_number: false
+  wrap: false
+  hljs: true

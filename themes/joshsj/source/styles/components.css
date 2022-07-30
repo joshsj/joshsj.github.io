@@ -20,7 +20,7 @@
   margin-bottom: 0.25rem;
 }
 
-.content > :where(p, hr, blockquote, ul, ol, figure, table):not(.squish) {
+.content > :where(p, hr, blockquote, ul, ol, figure, table, pre):not(.squish) {
   margin-bottom: var(--space-3);
 }
 
@@ -41,6 +41,11 @@
   /* push right */
   margin-left: auto;
   order: 9999;
+}
+
+.split {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* 

@@ -24,6 +24,17 @@ body {
 
   --lh-heading: 1.1;
 
+  --code-property: #e45649;
+  --code-params: #986801;
+  --code-title: #4078f2;
+  --code-built-in: #0184bc;
+  --code-keyword: #a626a4;
+  --code-string: #50a14f;
+  --code-comment: #a0a1a7;
+
+  --blue: var(--code-title);
+  --purple: var(--code-keyword);
+
   /* atom one colors */
   /* default hsl(0, 0%, 98%); */
   --white: white;
@@ -33,11 +44,6 @@ body {
   --dark-grey: #5e616e;
   --light-grey: #e5e5e6;
 
-  --red: #e45649;
-  --blue: #4078f2;
-  --purple: #a626a4;
-  --yellow: #f5d802;
-
   /* theme */
   --light: var(--white);
   --dark: var(--black);
@@ -45,16 +51,20 @@ body {
 }
 
 body.dark {
+  --code-property: #e06c75;
+  --code-params: #d19a66;
+  --code-title: #61afef;
+  --code-built-in: #56b6c2;
+  --code-keyword: #c678dd;
+  --code-string: #98c379;
+  --code-comment: #5c6370;
+
   /* default hsl(219, 14%, 71%) */
   --white: hsl(219, 10%, 82%);
   --black: hsl(220, 13%, 18%);
 
   --dark-grey: #9da3af;
   --light-grey: #3e4451;
-
-  --red: #e06c75;
-  --blue: #61afef;
-  --purple: #c678dd;
 
   /* theme */
   --light: var(--black);

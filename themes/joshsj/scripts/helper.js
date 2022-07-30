@@ -19,3 +19,9 @@ hexo.extend.helper.register(
       : s;
   }
 );
+
+hexo.extend.helper.register("capitalize", (s) => {
+  s = String(s);
+
+  return s[0].toUpperCase() + s.slice(1);
+});

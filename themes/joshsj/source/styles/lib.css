@@ -11,3 +11,30 @@ body[data-dev] .katex-html {
 body[data-dev] .katex {
   font-family: "Times New Roman";
 }
+
+/* highlight.js */
+
+.hljs-keyword {
+  color: var(--purple);
+}
+
+.hljs-built_in {
+  color: var(--code-built-in);
+}
+
+.hljs-title {
+  color: var(--code-title);
+}
+
+.hljs-string {
+  color: var(--code-string);
+}
+
+.hljs-params {
+  color: var(--code-params);
+}
+
+.hljs-comment {
+  color: var(--code-comment);
+  font-style: italic;
+}
