@@ -13,13 +13,14 @@ body {
   /* bullet point */
   --separator: "\2022";
 
-  --fs-min: 0.5rem;
-  --fw-bold: 600;
-
   --ff-heading: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-
   --ff-normal: "Lora", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  --ff-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  --fs-min: 0.5rem;
+  --fw-bold: 600;
 
   --lh-heading: 1.1;
 
@@ -28,12 +29,14 @@ body {
   --white: white;
   /* default hsl(228, 8%, 24%) */
   --black: hsl(228, 8%, 18%);
-  --grey: hsl(228, 8%, 40%);
+
+  --dark-grey: #5e616e;
+  --light-grey: #e5e5e6;
+
   --red: #e45649;
   --blue: #4078f2;
   --purple: #a626a4;
   --yellow: #f5d802;
-  --selection: #e5e5e6;
 
   /* theme */
   --light: var(--white);
@@ -45,11 +48,13 @@ body.dark {
   /* default hsl(219, 14%, 71%) */
   --white: hsl(219, 10%, 82%);
   --black: hsl(220, 13%, 18%);
-  --grey: hsl(219, 10%, 65%);
+
+  --dark-grey: #9da3af;
+  --light-grey: #3e4451;
+
   --red: #e06c75;
   --blue: #61afef;
   --purple: #c678dd;
-  --selection: #3e4451;
 
   /* theme */
   --light: var(--black);

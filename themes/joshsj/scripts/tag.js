@@ -1,5 +1,7 @@
 // works in combination with client-side scripts
 
+const katex = require("katex");
+
 hexo.extend.tag.register(
   "my_email",
   () => `<span class="my-email">(Javascript required)</span>`
@@ -20,7 +22,11 @@ hexo.extend.tag.register(
     <img src="${src}" alt=""> 
     <figcaption>
       ${caption}
-      ${source ? `<a href="${source}">Source</a>` : ""}
+      ${source ? `<a href="./${source}">Source</a>` : ""}
     </figcaption>
   </figure>`
+);
+
+hexo.extend.tag.register("math", (args) =>
+  katex.renderToString(args.join(" "))
 );

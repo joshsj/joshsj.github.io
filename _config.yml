@@ -4,9 +4,10 @@
 
 # Site
 title: joshsj
-description: "I'm a spirited software developer from Manchester
-  seeking a job in full stack web development.
-  Any tech stack is a good tech stack, but .NET, Vue and SQL is my jam."
+description:
+  "I'm a spirited software developer from Manchester seeking a job in full stack
+  web development. Any tech stack is a good tech stack, but .NET, Vue and SQL is
+  my jam."
 author: Joshua Sexton-Jones
 language: en
 timezone: Europe/London
@@ -19,6 +20,7 @@ pretty_urls:
   trailing_index: false
   trailing_html: false
 
+post_asset_folder: true
 default_category: uncategorized
 category_map:
 tag_map:
@@ -42,3 +44,6 @@ marked:
 sitemap:
   tags: true
   categories: false
+
+# lib assets
+lib_asset_root: /../node_modules

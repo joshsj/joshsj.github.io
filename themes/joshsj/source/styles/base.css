@@ -23,10 +23,10 @@
   /* transition-property: color, background-color; */
 }
 
-*::selection {
+::selection {
   /* pretty */
-  color: var(--dark);
-  background-color: var(--selection);
+  color: var(--light);
+  background-color: var(--blue);
 }
 
 body {
@@ -157,4 +157,12 @@ th {
 
 sup {
   font-size: max(0.85em, var(--fs-min));
+}
+
+code {
+  background-color: var(--light-grey);
+  font-family: var(--ff-mono);
+  font-size: 0.95em;
+  padding: 0 0.25ch;
+  border-radius: 0.15em;
 }

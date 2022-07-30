@@ -1,0 +1,9 @@
+/* TODO fix katex styles in debug */
+
+body[data-dev] .katex-html {
+  display: none;
+}
+
+body[data-dev] .katex {
+  font-family: "Times New Roman";
+}

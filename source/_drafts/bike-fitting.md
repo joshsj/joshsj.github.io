@@ -60,11 +60,9 @@ more aggressive; a longer top tube places more weight towards the front of the
 bike and long 'n' low stems typically add reach and handlebar drop. Drivetrain
 advancements, such as press-fit bottom brackets, have also narrowed bikes.
 
-<!-- TODO work out captioning -->
-
 {%
   caption
-  "/images/adam hansen bike.jpg"
+  "bike.jpg"
   "Adam Hansen’s Ridley Helium SL."
   "https://www.bikeradar.com/features/pro-bike/pro-bike-adam-hansens-ridley-helium-sl"
 %}

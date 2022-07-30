@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="google-site-verification"
-      content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU"
-    />
 
-    <title>
-      <%- is_home() ? `${config.title} · Software Developer` : `${page.title} ·
-      ${config.title}` %>
-    </title>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU" />
 
-    <link href="/styles/variables.css" rel="stylesheet" />
-    <link href="/styles/utilities.css" rel="stylesheet" />
-    <link href="/styles/base.css" rel="stylesheet" />
-    <link href="/styles/layout.css" rel="stylesheet" />
-    <link href="/styles/components.css" rel="stylesheet" />
+  <title>
+    <%- is_home() ? `${config.title} · Software Developer` : `${page.title} · ${config.title}` %>
+  </title>
 
-    <script src="/scripts/theme.js" defer></script>
-    <script src="/scripts/tag.js" defer></script>
+  <link href="/styles/variables.css" rel="stylesheet" />
+  <link href="/styles/utilities.css" rel="stylesheet" />
+  <link href="/styles/base.css" rel="stylesheet" />
+  <link href="/styles/layout.css" rel="stylesheet" />
+  <link href="/styles/components.css" rel="stylesheet" />
+  <link href="/styles/lib.css" rel="stylesheet" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
-    <link rel="manifest" href="/icons/site.webmanifest" />
-    <link rel="shortcut icon" href="/icons/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#603cba" />
-    <meta name="msapplication-config" content="/icons/browserconfig.xml" />
-    <meta name="theme-color" content="#f5f5f5" />
-  </head>
-  <body>
-    <header>
-      <a id="logo" class="hide" href="/">
-        <span>Joshua</span>
-        <span>Sexton</span>
-        <span><span class="pop">-</span>Jones</span>
-      </a>
+  <script src="/scripts/theme.js" defer></script>
+  <script src="/scripts/tag.js" defer></script>
 
-      <nav>
-        <% ["Home", "Posts", "Series", "Projects"] .map((title) =>
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+  <link rel="manifest" href="/icons/site.webmanifest" />
+  <link rel="shortcut icon" href="/icons/favicon.ico" />
+  <meta name="msapplication-TileColor" content="#603cba" />
+  <meta name="msapplication-config" content="/icons/browserconfig.xml" />
+  <meta name="theme-color" content="#ffffff" />
+</head>
+
+<body <%- env.debug && "data-dev" %>>
+  <header>
+    <a id="logo" class="hide" href="/">
+      <span>Joshua</span>
+      <span>Sexton</span>
+      <span><span class="pop">-</span>Jones</span>
+    </a>
+
+    <nav>
+      <% ["Home", "Posts" , "Series" , "Projects" ] .map((title)=>
         site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
         page.title) { %>
-        <a href="<%- url_for(path) %>"><%- title %></a>
-        <% } else { %> <%- title %> <% }}) %>
-      </nav>
+        <a href="<%- url_for(path) %>">
+          <%- title %>
+        </a>
+        <% } else { %>
+          <%- title %>
+            <% }}) %>
+    </nav>
 
-      <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
-    </header>
+    <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
+  </header>
 
-    <main class="content">
-      <h1><%- page.display_title || page.title %></h1>
-      <%- body %>
-    </main>
-  </body>
+  <main class="content">
+    <h1>
+      <%- page.display_title || page.title %>
+    </h1>
+    <%- body %>
+  </main>
+</body>
+
 </html>
