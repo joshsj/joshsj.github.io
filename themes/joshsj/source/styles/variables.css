@@ -8,7 +8,7 @@ body {
 
   --content-left: 50%;
   --content-right: calc(100% - var(--content-left));
-  --content-width: 35rem;
+  --content-width: 37.5rem;
 
   /* bullet point */
   --separator: "\2022";
@@ -16,8 +16,9 @@ body {
   --ff-heading: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   --ff-normal: "Lora", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  --ff-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  --ff-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --fs-min: 0.5rem;
   --fw-bold: 600;

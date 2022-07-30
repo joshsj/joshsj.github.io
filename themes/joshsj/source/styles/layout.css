@@ -45,6 +45,7 @@ main {
 @media (max-width: 1024px) {
   body {
     --content-left: 60%;
+    --content-width: 35rem;
   }
 }
 
@@ -54,17 +55,13 @@ main {
     padding: var(--space-1);
   }
 
-  header {
-    padding: 0;
-  }
-
-  main {
-    padding-bottom: 0;
-  }
-
   header,
   main {
+    padding: 0;
     position: static;
+  }
+  header {
+    margin-bottom: var(--space-4);
   }
 
   header,

@@ -35,14 +35,15 @@ Generally, we only care about Big-O 'cause the fastest case of algorithm can be
 taken for granted. When measuring Big-O, some rules apply:
 
 1. Constant factors of {% math n %} are removed so {% math 3n+2%} becomes {%
-   math n %}
+   math n %}.
 
-   - Mathematical reasons apply which I can't quite follow but practically,
-     constant time doesn't matter as {% math n\to\infty %}
+   Mathematical reasons apply which I can't quite follow but practically,
+   constant time doesn't matter as {% math n\to\infty %}.
 
 2. Only the largest term of {% math n %} is considered, so {% math n^2+3n+1 %}
-   becomes {% math n^2 %}
-   - Again, as {% math n\to\infty %}, all but the greatest exponent becomes
-     insignificant
+   becomes {% math n^2 %}.
+
+   Again, as {% math n\to\infty %}, all but the greatest exponent becomes
+   insignificant.
 
 {% caption graph.png "Graph of time complexities against input size." %}
