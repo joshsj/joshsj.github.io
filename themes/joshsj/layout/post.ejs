@@ -1,14 +1,15 @@
-<p class="separate <%- page.series && "squish" %>">
-  <%-
-    partial("partials/post/dates", {post: page})
-  %><%-
-    partial("partials/post/tags", { tags: page.tags, mask: true })
-  %>
+<% if (page.series) { %>
+  <p class="squish">In the <a href="/series/<%- format_url(page.series) %>">
+      <%- page.series %>
+    </a> series.</p>
+<% } %>
+
+<p class="squish">
+  <%- partial("partials/post/dates", { post: page }) %>
 </p>
 
-<% if (page.series) { %>
-  <p>In the <a href="/series/<%- format_url(page.series) %>"><%- page.series %></a>
-    series.</p>
-<% } %>
+<p class="separate">
+  <%- partial("partials/post/tags", { tags: page.tags, mask: true }) %>
+</p>
 
 <%- page.content %>
