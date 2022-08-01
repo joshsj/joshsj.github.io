@@ -1,5 +1,9 @@
-<p><%- plural(`${page.posts.length} article`, page.posts.length !== 1) %></p>
+<p>
+  <%- plural(`${page.posts.length} article`, page.posts.length !==1) %>
+</p>
 
-<p><%- page.series.description %></p>
+<p>
+  <%- page.series.description %>
+</p>
 
-<%- partial("partials/posts", { posts: page.posts }) %>
+<%- partial("partials/posts", { posts: page.posts.sort("date", -1) }) %>

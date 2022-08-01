@@ -17,7 +17,8 @@ hexo.extend.generator.register("series_pages", function (site) {
     data: {
       title: series.title,
       series,
-      posts: site.posts.filter((s) => s.series === series.title),
+      // TODO make sure warehouse can't sort by nested properties
+      posts: site.posts.filter((p) => p.series === series.title),
     },
   }));
 });

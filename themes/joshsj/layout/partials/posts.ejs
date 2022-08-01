@@ -1,4 +1,4 @@
-<% posts.sort("date", -1).forEach(post => { %>
+<% posts.forEach(post => { %>
 <section class="card">
   <p class="extra separate">
     <%- partial("partials/post/dates", { post }) %><%- partial("partials/post/tags", { tags: post.tags, mask: true }) %>

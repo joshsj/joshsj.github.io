@@ -2,16 +2,6 @@
   font-size: 1em;
 }
 
-/* TODO fix katex styles in debug */
-
-body[data-dev] .katex-html {
-  display: none;
-}
-
-body[data-dev] .katex {
-  font-family: "Times New Roman";
-}
-
 /* highlight.js */
 
 .hljs-keyword {

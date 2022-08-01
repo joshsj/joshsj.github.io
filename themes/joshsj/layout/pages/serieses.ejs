@@ -1,5 +1,5 @@
 <%- page.content %> <% site.data.series.forEach(({ title, description, path }) => { %>
-<section class="card">
+<section class="card">  
   <h2><a href="<%- url_for(path) %>" class="mask"><%- title %></a></h2>
 
   <p><%- description %></p>

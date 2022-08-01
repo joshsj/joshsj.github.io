@@ -38,15 +38,6 @@
   order: 9999;
 }
 
-/* 
-TODO work out how to add programatically,
-     doesn't work with ?
-     
-.excerpt > p::after {
-  content: "..";
-}
-*/
-
 @media (max-width: 768px) {
   .content > figure {
     margin-right: 0;
