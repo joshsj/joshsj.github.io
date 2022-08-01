@@ -19,14 +19,18 @@ hexo.extend.tag.register(
   ([src, caption, source]) =>
     `
   <figure>
-    <img src="${src}" alt=""> 
+    <a href="${src}" class="hide"><img src="${src}" alt=""></a>
     <figcaption>
+      ${source ? `<a href="./${source}" class="source">Source</a>` : ""}
       ${caption}
-      ${source ? `<a href="./${source}">Source</a>` : ""}
     </figcaption>
   </figure>`
 );
 
 hexo.extend.tag.register("math", (args) =>
   katex.renderToString(args.join(" "))
+);
+
+hexo.extend.tag.register("bigo", (args) =>
+  katex.renderToString(`\\mathcal{O}(${args.join(" ")})`)
 );

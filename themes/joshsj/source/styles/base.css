@@ -137,12 +137,16 @@ label + select {
   margin-left: 0.5rem;
 }
 
-figure > img {
+figure img {
   border-radius: 0.25rem;
 }
 
 figcaption {
   font-style: italic;
+}
+
+figcaption > .source {
+  float: right;
 }
 
 img {

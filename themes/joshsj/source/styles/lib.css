@@ -20,7 +20,8 @@
   color: var(--code-string);
 }
 
-.hljs-params {
+.hljs-params,
+.hljs-number {
   color: var(--code-params);
 }
 

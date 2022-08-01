@@ -1,6 +1,10 @@
 {
   "Math Tag Helper": {
-    "prefix": ["math", "maths"],
+    "prefix": ["math"],
     "body": ["{% math $0 %}"]
+  },
+  "Big-O Tag Helper": {
+    "prefix": ["bigo"],
+    "body": ["{% bigo $0 %}"]
   }
 }
