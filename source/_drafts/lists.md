@@ -10,14 +10,15 @@ ordered collection of values of the same data type.<!--excerpt-->
 
 - _Index_ --- a number representing the position of an element
 - _Random access_ --- a property of a list, where all elements can be accessed
-  in constant time ()
+  in constant time ({% bigo 1 %})
+- _Node_ --- a container for a list element
 
 ## Arrays
 
 An array stores its values in adjacent memory locations ang (generally) has a
 fixed length. For cases where the program doesn't know the data size in advance,
 languages also use dynamic arrays (e.g., `vector<T>` in C++) which resize on the
-fly (see []())
+fly (see [adding & removing](#Adding-amp-Removing))
 
 ### Indexing
 
@@ -59,24 +60,51 @@ thus the time complexity.
 
 ```python
 def binary_search(arr: List[int], el: int):
-    leftIndex = 0
-    rightIndex = len(array) - 1
+    left = 0
+    right = len(array) - 1
 
     while True:
-        # Indexes have passed each other
+        # es have passed each other
         # Call off the search
-        if leftIndex > rightIndex:
+        if left > right:
             return False
 
-        middleIndex = (leftIndex + rightIndex) // 2
+        middle = (left + right) // 2
 
-        if element == arr[middleIndex]:
+        if element == arr[middle]:
             return True
 
-        elif element < arr[middleIndex]:
+        elif element < arr[middle]:
             # Reduce search to lower half
-            rightIndex = middleIndex - 1
+            right = middle - 1
         else:
             # Reduce search to upper half
-            leftIndex = middleIndex + 1
+            left = middle + 1
 ```
+
+## Linked Lists
+
+A linked list is composed of nodes which store a pointer to the next node in a
+_singly-linked_ list, and an additional pointer to the previous node in a
+_doubly-linked_ list.
+
+A global _head pointer_ is kept to directly access the start of the chain, and a
+_tail pointer_ is also typically kept to access the end.
+
+### Indexing
+
+Accessing nodes in a linked list is {% bigo n %}, as the nodes must be traversed
+until the index is reached. To lessen the blow, we can store the length of the
+list {% math L %} to determine if an index {% math I %} is closer to the head
+({% math 0 %}) or tail ({% math L-1 %}).
+
+### Adding & Removing
+
+Again, it's {% bigo n %}.
+
+To insert a new element {% math E %} at index {% math I %}, the current node at
+index {% math I %} is updated to point to {% math E %} and {% math E %} is
+updated to point at node {% math I+1 %}. For a double-linked list, the previous
+pointer is also updated.
+
+Removal is the same idea but the current value is forgotten about.

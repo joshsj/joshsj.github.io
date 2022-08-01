@@ -22,8 +22,9 @@ body {
 
   --fs-min: 0.5rem;
   --fw-bold: 600;
-
   --lh-heading: 1.1;
+
+  --border-radius: 0.2rem;
 
   --code-property: #e45649;
   --code-params: #986801;

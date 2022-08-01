@@ -21,7 +21,8 @@
 }
 
 .hljs-params,
-.hljs-number {
+.hljs-number,
+.hljs-literal {
   color: var(--code-params);
 }
 
