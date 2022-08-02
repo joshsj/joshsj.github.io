@@ -4,9 +4,8 @@ tags:
   - Notes
   - Computer Science
 series: (Re)Learning CS
-date: 2022-08-02 17:25:16
+date: 2022-08-02
 ---
-
 
 In computing, a _list_ is a data collection which stores <!--excerpt-->a linear,
 ordered collection of values of the same data type.<!--excerpt-->
