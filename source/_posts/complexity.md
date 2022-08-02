@@ -8,7 +8,7 @@ tags:
 series: (Re)Learning CS
 ---
 
-Looking at the theoretical complexity of computations problems and solution.
+Looking at the theoretical complexity of computational problems and solutions.
 
 <!-- more -->
 

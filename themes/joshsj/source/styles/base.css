@@ -138,9 +138,9 @@ label + select {
 }
 
 figure {
-  border: 0.1rem solid var(--dark);
-  padding: var(--space-1);
+  border: var(--border);
   border-radius: var(--border-radius);
+  padding: var(--space-1);
 }
 
 figure img {
