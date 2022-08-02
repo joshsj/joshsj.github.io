@@ -15,10 +15,10 @@ ordered collection of values of the same data type.<!--excerpt-->
 
 ## Arrays
 
-An array stores its values in adjacent memory locations ang (generally) has a
-fixed length. For cases where the program doesn't know the data size in advance,
-languages also use dynamic arrays (e.g., `vector<T>` in C++) which resize on the
-fly (see [adding & removing](#Adding-amp-Removing))
+An array stores its values in adjacent memory locations and (generally) has a
+fixed length like `int[]`. For cases where the program doesn't know the data
+size in advance, languages also use dynamic arrays, like `vector<T>`, which
+resize on the fly (see [adding & removing](#Adding-amp-Removing))
 
 ### Indexing
 
@@ -27,7 +27,7 @@ for indexing. For any array of type {% math T %}, where {% math B %} is the size
 of {% math T %} in bytes and {% math X %} is its starting memory address, an
 item at index {% math I %} is at address {% math X+BI %}.
 
-{% caption array.png "Pointer Arithmetic" https://stepik.org/lesson/28868/step/1 %}
+{% img_caption array.png "Pointer Arithmetic" https://stepik.org/lesson/28868/step/1 %}
 
 This means they have random access with {% bigo 1 %}.
 
@@ -58,13 +58,15 @@ to determine whether the search value is in the lower or upper half; this is
 performed iteratively/recursively, reducing the array's length for each run and
 thus the time complexity.
 
+{% caption "Binary Search implementation in Python" %}
+
 ```python
 def binary_search(arr: List[int], el: int):
     left = 0
     right = len(array) - 1
 
     while True:
-        # es have passed each other
+        # Indexes have passed each other
         # Call off the search
         if left > right:
             return False
@@ -81,6 +83,8 @@ def binary_search(arr: List[int], el: int):
             # Reduce search to upper half
             left = middle + 1
 ```
+
+{% endcaption %}
 
 ## Linked Lists
 

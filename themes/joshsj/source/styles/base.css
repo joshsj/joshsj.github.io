@@ -176,11 +176,6 @@ pre {
   border-radius: var(--border-radius);
 }
 
-pre,
-code {
-  background-color: var(--light-grey);
-}
-
 code {
   font-family: var(--ff-mono);
 }

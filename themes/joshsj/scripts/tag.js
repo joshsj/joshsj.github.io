@@ -16,6 +16,18 @@ hexo.extend.tag.register(
 // alt isn't required when captioned
 hexo.extend.tag.register(
   "caption",
+  ([caption], content) =>
+    `
+  <figure>
+    ${content}
+    <figcaption>${caption}</figcaption>
+  </figure>`,
+  { ends: true }
+);
+
+// alt isn't required when captioned
+hexo.extend.tag.register(
+  "img_caption",
   ([src, caption, source]) =>
     `
   <figure>
