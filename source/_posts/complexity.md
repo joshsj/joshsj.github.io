@@ -8,6 +8,10 @@ tags:
 series: (Re)Learning CS
 ---
 
+Looking at the theoretical complexity of computations problems and solution.
+
+<!-- more -->
+
 ## Time Complexity
 
 The most obvious approach to determine the performance of a program is with a
