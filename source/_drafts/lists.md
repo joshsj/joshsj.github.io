@@ -27,7 +27,7 @@ for indexing. For any array of type {% math T %}, where {% math B %} is the size
 of {% math T %} in bytes and {% math X %} is its starting memory address, an
 item at index {% math I %} is at address {% math X+BI %}.
 
-{% img_caption array.png "Pointer Arithmetic" https://stepik.org/lesson/28868/step/1 %}
+{% caption_img array.png "Pointer Arithmetic" https://stepik.org/lesson/28868/step/1 %}
 
 This means they have random access with {% bigo 1 %}.
 
@@ -62,26 +62,25 @@ thus the time complexity.
 
 ```python
 def binary_search(arr: List[int], el: int):
-    left = 0
-    right = len(array) - 1
+  left = 0
+  right = len(array) - 1
 
-    while True:
-        # Indexes have passed each other
-        # Call off the search
-        if left > right:
-            return False
+  while True:
+    # Indexes have passed each other
+    # Call off the search
+    if left > right:
+      return False
 
-        middle = (left + right) // 2
+    middle = (left + right) // 2
 
-        if element == arr[middle]:
-            return True
-
-        elif element < arr[middle]:
-            # Reduce search to lower half
-            right = middle - 1
-        else:
-            # Reduce search to upper half
-            left = middle + 1
+    if element == arr[middle]:
+      return True
+    elif element < arr[middle]:
+      # Reduce search to lower half
+      right = middle - 1
+    else:
+      # Reduce search to upper half
+      left = middle + 1
 ```
 
 {% endcaption %}

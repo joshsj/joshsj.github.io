@@ -137,6 +137,12 @@ label + select {
   margin-left: 0.5rem;
 }
 
+figure {
+  border: 0.1rem solid var(--dark);
+  padding: var(--space-1);
+  border-radius: var(--border-radius);
+}
+
 figure img {
   border-radius: var(--border-radius);
 }
@@ -171,17 +177,17 @@ sup {
   font-size: max(0.85em, var(--fs-min));
 }
 
-pre {
-  padding: var(--space-1);
-  border-radius: var(--border-radius);
-}
-
 code {
   font-family: var(--ff-mono);
 }
 
+pre {
+  overflow-y: auto;
+  font-size: 0.9em;
+}
+
 code:not(.hljs) {
-  font-size: 0.95em;
+  font-size: 0.9em;
   padding: 0 0.25ch;
   border-radius: var(--border-radius);
 }

@@ -27,7 +27,7 @@ hexo.extend.tag.register(
 
 // alt isn't required when captioned
 hexo.extend.tag.register(
-  "img_caption",
+  "caption_img",
   ([src, caption, source]) =>
     `
   <figure>

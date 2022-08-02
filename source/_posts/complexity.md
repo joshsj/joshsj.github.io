@@ -46,7 +46,7 @@ taken for granted. When measuring Big-O, some rules apply:
    Again, as {% math n\to\infty %}, all but the greatest exponent becomes
    insignificant.
 
-{% img_caption graph.png "Graph of time complexities against input size." %}
+{% caption_img graph.png "Graph of time complexities against input size." %}
 
 ## (Classes of) Computational Complexity
 
