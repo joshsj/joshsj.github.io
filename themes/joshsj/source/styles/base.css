@@ -78,22 +78,24 @@ h3 {
   font-size: 1.5rem;
 }
 
+h1,
+h2,
+h3,
+th,
 [role="heading"] {
+  font-family: var(--ff-heading);
   font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-heading);
 }
 
 h1,
 h2,
-h3,
-h4 {
+h3 {
   line-height: var(--lh-heading);
-  font-family: var(--ff-heading);
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.02em;
 }
 
 /* sizing not implemented */
-
+h4,
 h5,
 h6 {
   display: none;
@@ -165,6 +167,10 @@ table {
   /* remove horizontal margin from border-spacing */
   margin-left: calc(var(--space-2) * -1);
   margin-right: calc(var(--space-2) * -1);
+}
+
+tr {
+  vertical-align: top;
 }
 
 th {

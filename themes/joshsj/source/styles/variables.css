@@ -23,6 +23,7 @@ body {
   --fs-min: 0.5rem;
   --fw-bold: 600;
   --lh-heading: 1.1;
+  --ls-heading: -0.04em;
 
   --border-radius: 0.2rem;
   --border: 0.1rem solid var(--dark-grey);

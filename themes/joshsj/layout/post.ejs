@@ -1,15 +1,35 @@
-<% if (page.series) { %>
-  <p class="squish">In the <a href="/series/<%- format_url(page.series) %>">
-      <%- page.series %>
-    </a> series.</p>
-<% } %>
+<table>
+  <tbody>
+    <tr>
+      <th>Posted</th>
+      <td><%- date(page.date) %></td>
+    </tr>
 
-<p class="squish">
-  <%- partial("partials/post/dates", { post: page }) %>
-</p>
+    <% if (!page.date.isSame(page.updated)) { %>
+      <tr>
+        <th>Updated</th>
+        <td><%- date(page.updated) %></td>
+      </tr>
+    <% } %>
 
-<p class="separate">
-  <%- partial("partials/post/tags", { tags: page.tags, mask: true }) %>
-</p>
+    <% if (page.series) { %>
+      <tr>
+        <th>Series</th>
+        <td>
+          <a href="/series/<%- format_url(page.series) %>">
+            <%- page.series %>
+          </a>
+        </td>
+      </tr>
+      <% } %>
+
+    <tr>
+      <th>Tags</th>
+      <td class="separate">
+        <%- partial("partials/post/tags", { tags: page.tags, mask: false }) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <%- page.content %>
