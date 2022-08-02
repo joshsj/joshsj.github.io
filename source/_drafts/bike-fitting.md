@@ -61,9 +61,9 @@ bike and long 'n' low stems typically add reach and handlebar drop. Drivetrain
 advancements, such as press-fit bottom brackets, have also narrowed bikes.
 
 {%
-  caption
+  caption_img
   "bike.jpg"
-  "Adam Hansen’s Ridley Helium SL."
+  "Adam Hansen's Ridley Helium SL."
   "https://www.bikeradar.com/features/pro-bike/pro-bike-adam-hansens-ridley-helium-sl"
 %}
 
