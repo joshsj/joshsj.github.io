@@ -5,6 +5,7 @@ tags:
   - Computer Science
 series: (Re)Learning CS
 date: 2022-08-02
+updated: 2022-08-03
 ---
 
 In computing, a _list_ is a data collection which stores <!--excerpt-->a linear,
@@ -17,7 +18,7 @@ ordered collection of values of the same data type.<!--excerpt-->
   in constant time ({% bigo 1 %})
 - _Node_ --- a container for a list element
 
-## Arrays
+## Array
 
 An array stores its values in adjacent memory locations and (generally) has a
 fixed length like `int[]`. For cases where the program doesn't know the data
@@ -89,7 +90,7 @@ def binary_search(arr: List[int], el: int):
 
 {% endcaption %}
 
-## Linked Lists
+## Linked List
 
 A linked list is composed of nodes which store a pointer to the next node in a
 _singly-linked_ list, and an additional pointer to the previous node in a
@@ -115,3 +116,37 @@ updated to point at node {% math I+1 %}. For a double-linked list, the previous
 pointer is also updated.
 
 Removal is the same idea but the current value is forgotten about.
+
+### Searching
+
+Nothing clever can be done in a linked list, so it's {% bigo n %} once more.
+
+## Circular Array
+
+Arrays are good for random access; linked lists are good for start/end
+insertions. _Circular arrays_ bridge the two.
+
+A large backing array stores the array values, and its start & end memory
+addresses are managed with a _head_ & _tail_ pointer.
+
+{% caption_img "circular array.png" "Circular Array with Head and Tail pointers"
+https://stepik.org/lesson/28869/step/6 %}
+
+### Indexing
+
+We can still use pointer arithmetic to achieve {% bigo 1 %}, as long as we
+respect the head pointer.
+
+For any array of type {% math T %} with length {% math L %}, where {% math B %}
+is the size of {% math T %} in bytes, and {% math H %} is the head pointer
+address, an item at index {% math I %} is at address {% math (H+BI)\mod{L} %}.
+
+### Adding & Removing
+
+To add values from the start/end of a circular array, the appropriate pointer is
+incremented and the value is stored in memory. To remove, the logic is reversed
+resulting in {% bigo 1 %} as long as the backing array isn't full.
+
+### Searching
+
+Same as [arrays](#Searching) --- {% bigo \log n %}.

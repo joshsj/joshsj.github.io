@@ -32,7 +32,7 @@
 body {
   font-family: var(--ff-normal);
   font-size: 1.25rem;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -82,6 +82,7 @@ h1,
 h2,
 h3,
 th,
+dt,
 [role="heading"] {
   font-family: var(--ff-heading);
   font-weight: var(--fw-bold);
@@ -108,7 +109,9 @@ label {
 
 q,
 blockquote,
-em {
+em,
+figcaption,
+[role="term"] {
   font-style: italic;
 }
 

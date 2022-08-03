@@ -15,7 +15,8 @@
   vertical-align: middle;
 }
 
-.content > :where(p, hr, blockquote, ul, ol, figure, table, pre):not(.squish) {
+.content > :where(p, hr, blockquote, ul, ol, figure, table, pre):not(.squish),
+.content > dl > dd {
   margin-bottom: var(--space-3);
 }
 

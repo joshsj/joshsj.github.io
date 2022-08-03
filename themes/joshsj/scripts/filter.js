@@ -28,10 +28,10 @@ hexo.extend.filter.register("after_post_render", function (data) {
 
 // supplement series data
 hexo.extend.filter.register("template_locals", async (locals) => {
+  const f = hexo.extend.helper.get("format_url");
+
   await Promise.allSettled(
     locals.site.data.series.map(async (s) => {
-      const f = hexo.extend.helper.get("format_url");
-
       s.description = (
         await hexo.render.render({
           text: s.description,

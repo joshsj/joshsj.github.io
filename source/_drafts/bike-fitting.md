@@ -62,9 +62,9 @@ advancements, such as press-fit bottom brackets, have also narrowed bikes.
 
 {%
   caption_img
-  "bike.jpg"
+  bike.jpg
   "Adam Hansen's Ridley Helium SL."
-  "https://www.bikeradar.com/features/pro-bike/pro-bike-adam-hansens-ridley-helium-sl"
+  https://www.bikeradar.com/features/pro-bike/pro-bike-adam-hansens-ridley-helium-sl
 %}
 
 ### Adapting to a poor position

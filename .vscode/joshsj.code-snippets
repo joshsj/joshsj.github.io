@@ -6,5 +6,9 @@
   "Big-O Tag Helper": {
     "prefix": ["bigo"],
     "body": ["{% bigo $0 %}"]
+  },
+  "Captioned Image": {
+    "prefix": ["img", "caption_img"],
+    "body": "{% caption_img \"$0\" \"$1\" $2 %}"
   }
 }
