@@ -1,6 +1,16 @@
-<p>
-  <%- plural(`${page.posts.length} article`, page.posts.length !==1) %>
-</p>
+<table>
+  <tbody>
+    <tr>
+      <th>Status</th>
+      <td><%- page.series.status %></td>
+    </tr>
+    
+    <tr>
+      <th>Articles</th>
+      <td><%- page.posts.length %></td>
+    </tr> 
+  </tbody>
+</table>
 
 <p>
   <%- page.series.description %>
