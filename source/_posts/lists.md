@@ -25,7 +25,7 @@ for indexing. For any array of type {% math T %}, where {% math B %} is the size
 of {% math T %} in bytes and {% math X %} is its starting memory address, an
 item at index {% math I %} is at address {% math X+BI %}.
 
-{% caption_img array.png "Pointer Arithmetic" https://stepik.org/lesson/28868/step/1 %}
+{% caption_img array.png "Example of pointer arithmetic." https://stepik.org/lesson/28868/step/1 %}
 
 This means they have _random access_ --- all elements can be accessed in
 constant time ({% bigo 1 %}).
@@ -57,7 +57,7 @@ to determine whether the search value is in the lower or upper half; this is
 performed iteratively/recursively, reducing the array's length for each run and
 thus the time complexity.
 
-{% caption "Binary Search implementation in Python" %}
+{% caption "Binary Search implementation in Python." %}
 
 ```python
 def binary_search(arr: List[int], el: int):
@@ -123,7 +123,7 @@ insertions. _Circular arrays_ bridge the two.
 A large backing array stores the array values, and its start & end memory
 addresses are managed with a _head_ & _tail_ pointer.
 
-{% caption_img "circular array.png" "Circular Array with Head and Tail pointers"
+{% caption_img "circular array.png" "Circular Array with Head and Tail pointers."
 https://stepik.org/lesson/28869/step/6 %}
 
 ### Indexing

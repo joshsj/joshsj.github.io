@@ -32,9 +32,10 @@ hexo.extend.tag.register(
     `
   <figure>
     <a href="${src}" class="hide"><img src="${src}" alt=""></a>
+    
     <figcaption>
-      ${source ? `<a href="${source}" class="source">Source</a>` : ""}
       ${caption}
+      ${source ? `<a href="${source}" class="source">Source</a>` : ""}
     </figcaption>
   </figure>`
 );

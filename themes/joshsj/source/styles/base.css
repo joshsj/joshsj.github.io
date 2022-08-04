@@ -143,20 +143,25 @@ label + select {
 }
 
 figure {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ignore code examples */
+figure > :not(pre) {
+  align-self: center;
+}
+
+figure > pre + figcaption {
+  margin-top: var(--space-1);
+}
+
+figcaption > .source {
+  margin-left: var(--space-1);
 }
 
 figure img {
   border-radius: var(--border-radius);
-}
-
-figcaption {
-  text-align: left;
-}
-
-figcaption > .source {
-  float: right;
-  margin-left: var(--space-1);
 }
 
 img {

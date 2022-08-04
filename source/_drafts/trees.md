@@ -46,7 +46,7 @@ node_.
 {%
   caption_img
   "rooted tree.svg"
-  "A rooted tree"
+  "A rooted tree."
   https://stepik.org/lesson/28726/step/4
 %}
 
@@ -62,7 +62,7 @@ many neighbours is an _internal node_.
 {%
   caption_img
   "unrooted tree.svg"
-  "An unrooted tree"
+  "An unrooted tree."
   https://stepik.org/lesson/28726/step/4
 %}
 
@@ -84,7 +84,7 @@ the structure changes.
 {%
   caption_img
   "binary tree.svg"
-  "A binary tree"
+  "A binary tree."
   https://stepik.org/lesson/28726/step/8
 %}
 
@@ -117,6 +117,6 @@ means higher priority. A **max-heap** is the opposite.
 {%
   caption_img
   "min max heap.svg"
-  "A min and max-heap"
+  "A min and max-heap."
   https://stepik.org/lesson/28863/step/4
 %}
