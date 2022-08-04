@@ -1,11 +1,11 @@
 ---
 title: Lists
+date: 2022-08-02
+updated: 2022-08-03
+series: (Re)Learning CS
 tags:
   - Notes
   - Computer Science
-series: (Re)Learning CS
-date: 2022-08-02
-updated: 2022-08-03
 ---
 
 In computing, a _list_ is a data collection which stores <!--excerpt-->a linear,
@@ -68,7 +68,7 @@ thus the time complexity.
 ```python
 def binary_search(arr: List[int], el: int):
   left = 0
-  right = len(array) - 1
+  right = len(arr) - 1
 
   while True:
     # Indexes have passed each other
@@ -78,9 +78,9 @@ def binary_search(arr: List[int], el: int):
 
     middle = (left + right) // 2
 
-    if element == arr[middle]:
+    if el == arr[middle]:
       return True
-    elif element < arr[middle]:
+    elif el < arr[middle]:
       # Reduce search to lower half
       right = middle - 1
     else:

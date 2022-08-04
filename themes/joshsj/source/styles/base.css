@@ -142,18 +142,8 @@ label + select {
   margin-left: 0.5rem;
 }
 
-figure {
-  border: var(--border);
-  border-radius: var(--border-radius);
-  padding: var(--space-1);
-}
-
 figure img {
   border-radius: var(--border-radius);
-}
-
-figcaption {
-  font-style: italic;
 }
 
 figcaption > .source {
