@@ -54,7 +54,7 @@ the front, making it _first in, first out (FIFO)_.
 
 A _queue_ is a generally defined with:
 
-| Queue        | Using Deque     |
+| Function     | Using Deque     |
 | ------------ | --------------- |
 | `enqueue(x)` | `addBack(x)`    |
 | `peek()`     | `peekFront()`   |
@@ -67,8 +67,26 @@ removed to the front, making it _last in, first out (LIFO)_.
 
 A _stack_ is generally defined with:
 
-| Queue     | Using Deque     |
+| Function  | Using Deque     |
 | --------- | --------------- |
 | `push(x)` | `addFront(x)`   |
 | `peek()`  | `peekFront()`   |
 | `pop()`   | `removeFront()` |
+
+## Priority Queue
+
+Think of the queue in A&E. It's still FIFO but the elements are reordered by
+their priority, making it _highest priority in, first out (HPIFO)_.
+
+A _priority queue_ is generally defined with:
+
+- `insert(x)`
+- `peek()`
+- `pop()`
+
+Implementing a priority queue with a list structure realises an issue: a sorted
+linked list would result in {% bigo 1 %} to peek and remove, but {% bigo n %} to
+insert into a sorted position. An unsorted linked list swaps the time
+complexities and array implementations suffer the same pain.
+
+Instead we can use a <a href="{% post_path trees %}#Heap">Heap</a>.

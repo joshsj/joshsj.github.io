@@ -11,13 +11,6 @@ tags:
 In computing, a _list_ is a data collection which stores <!--excerpt-->a linear,
 ordered collection of values of the same data type.<!--excerpt-->
 
-## Terminology
-
-- _Index_ --- a number representing the position of an element
-- _Random access_ --- a property of a list, where all elements can be accessed
-  in constant time ({% bigo 1 %})
-- _Node_ --- a container for a list element
-
 ## Array
 
 An array stores its values in adjacent memory locations and (generally) has a
@@ -34,7 +27,8 @@ item at index {% math I %} is at address {% math X+BI %}.
 
 {% caption_img array.png "Pointer Arithmetic" https://stepik.org/lesson/28868/step/1 %}
 
-This means they have random access with {% bigo 1 %}.
+This means they have _random access_ --- all elements can be accessed in
+constant time ({% bigo 1 %}).
 
 ### Adding & Removing
 

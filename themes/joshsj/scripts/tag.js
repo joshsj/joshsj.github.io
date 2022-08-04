@@ -39,6 +39,12 @@ hexo.extend.tag.register(
   </figure>`
 );
 
+hexo.extend.tag.register(
+  "spotify",
+  ([link]) =>
+    ` <iframe class="spotify space" src="https://open.spotify.com/embed/${link}"></iframe>`
+);
+
 hexo.extend.tag.register("math", (args) =>
   katex.renderToString(args.join(" "))
 );

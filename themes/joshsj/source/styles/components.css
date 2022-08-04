@@ -16,12 +16,9 @@
 }
 
 .content > :where(p, hr, blockquote, ul, ol, figure, table, pre):not(.squish),
+.content > .space,
 .content > dl > dd {
   margin-bottom: var(--space-3);
-}
-
-.content > figure {
-  margin-right: var(--space-2);
 }
 
 .card {
@@ -37,6 +34,14 @@
   /* push right */
   margin-left: auto;
   order: 9999;
+}
+
+/* <iframe class="spotify" style="border-radius:12px" src="https://open.spotify.com/embed/track/4iVTSRiJAA18d3QglhyJ6Q?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe> */
+
+.spotify {
+  border-radius: 12px;
+  width: 100%;
+  height: 80px;
 }
 
 @media (max-width: 768px) {
