@@ -148,16 +148,18 @@ figure {
 }
 
 /* ignore code examples */
-figure > :not(pre) {
+figure > :not(pre, figcaption) {
   align-self: center;
 }
 
+/* code examples need some space */
 figure > pre + figcaption {
   margin-top: var(--space-1);
 }
 
 figcaption > .source {
   margin-left: var(--space-1);
+  float: right;
 }
 
 figure img {

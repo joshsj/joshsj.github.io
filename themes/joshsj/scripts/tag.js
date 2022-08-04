@@ -34,8 +34,8 @@ hexo.extend.tag.register(
     <a href="${src}" class="hide"><img src="${src}" alt=""></a>
     
     <figcaption>
-      ${caption}
       ${source ? `<a href="${source}" class="source">Source</a>` : ""}
+      ${caption}
     </figcaption>
   </figure>`
 );
