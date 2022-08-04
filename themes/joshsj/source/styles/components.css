@@ -43,9 +43,3 @@
   width: 100%;
   height: 80px;
 }
-
-@media (max-width: 768px) {
-  .content > figure {
-    margin-right: 0;
-  }
-}
