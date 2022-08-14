@@ -47,7 +47,7 @@
     </a>
 
     <nav>
-      <% ["Home", "Posts" , "Series" , "Projects" ] .map((title)=>
+      <% ["Home", "Posts" , "Series" , "Portfolio" ] .map((title)=>
         site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
         page.title) { %>
         <a href="<%- url_for(path) %>">
@@ -55,7 +55,7 @@
         </a>
         <% } else { %>
           <%- title %>
-            <% }}) %>
+        <% }}) %>
     </nav>
 
     <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
