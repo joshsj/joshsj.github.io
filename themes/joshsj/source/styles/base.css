@@ -89,6 +89,11 @@ dt,
   letter-spacing: var(--ls-heading);
 }
 
+/* inline headings */
+[role="heading"]::after {
+  content: ":";
+}
+
 h1,
 h2,
 h3 {

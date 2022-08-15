@@ -21,6 +21,11 @@
   margin-bottom: var(--space-3);
 }
 
+/* line spacing on h1 is enough */
+.content > :where(h2, h3) {
+  margin-bottom: var(--space-1);
+}
+
 .card {
   margin-top: var(--space-4);
 }
