@@ -193,7 +193,7 @@ th {
 }
 
 sup {
-  font-size: max(0.85em, var(--fs-min));
+  font-size: var(--fs-small);
 }
 
 code {
