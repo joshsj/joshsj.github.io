@@ -39,6 +39,8 @@
 </head>
 
 <body <%- env.debug ? "data-dev" : "" %>>
+  <% if (page.hmm) { %><div class="hmm" aria-hidden></div><% } %>
+  
   <header>
     <a id="logo" class="hide" href="/">
       <span>Joshua</span>
