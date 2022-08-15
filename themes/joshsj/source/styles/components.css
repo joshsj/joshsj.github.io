@@ -30,11 +30,6 @@
   margin-top: var(--space-1);
 }
 
-/* no margin after page title */
-.content > h1:first-of-type + * {
-  margin-top: 0;
-}
-
 .card {
   margin-top: var(--space-4);
 }
