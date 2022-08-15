@@ -32,7 +32,7 @@
 body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -80,16 +80,18 @@ h3 {
 
 h1,
 h2,
-h3,
-th,
-dt,
-[role="heading"] {
+h3 {
   font-family: var(--ff-heading);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-heading);
 }
 
+th,
 /* inline headings */
+[role="heading"] {
+  font-weight: var(--fw-bold);
+}
+
 [role="heading"]::after {
   content: ":";
 }
@@ -206,7 +208,7 @@ pre {
 }
 
 code:not(.hljs) {
-  font-size: 0.9em;
+  font-size: 0.95em;
   padding: 0 0.25ch;
   border-radius: var(--border-radius);
 }

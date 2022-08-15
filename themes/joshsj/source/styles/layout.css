@@ -37,7 +37,7 @@ nav > a {
 
 main {
   position: absolute;
-  max-width: var(--content-width);
+  width: var(--content-width);
   left: calc(var(--content-left) - (var(--content-width) / 2));
 }
 
@@ -59,8 +59,13 @@ main {
     padding: 0;
     position: static;
   }
+
   header {
     margin-bottom: var(--space-4);
+  }
+
+  main {
+    width: auto;
   }
 
   header,

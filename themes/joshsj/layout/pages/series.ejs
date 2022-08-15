@@ -1,19 +1,5 @@
-<table>
-  <tbody>
-    <tr>
-      <th>Status</th>
-      <td><%- page.series.status %></td>
-    </tr>
-    
-    <tr>
-      <th>Articles</th>
-      <td><%- page.posts.length %></td>
-    </tr> 
-  </tbody>
-</table>
+<p><%- page.posts.length %> articles</p>
 
-<p>
-  <%- page.series.description %>
-</p>
+<p><%- page.series.description %></p>
 
 <%- partial("partials/posts", { posts: page.posts.sort("date", -1) }) %>

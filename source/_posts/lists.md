@@ -93,7 +93,7 @@ _doubly-linked_ list.
 A global _head pointer_ is kept to directly access the start of the chain, and a
 _tail pointer_ is also typically kept to access the end.
 
-### Indexing
+# Indexing
 
 Accessing nodes in a linked list is {% bigo n %}, as the nodes must be traversed
 until the index is reached. To lessen the blow, we can store the length of the
