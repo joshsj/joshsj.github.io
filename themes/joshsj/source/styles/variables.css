@@ -13,17 +13,23 @@ body {
   /* bullet point */
   --separator: "\2022";
 
+  --fw-bold: 600;
+
+  --fs-normal: 1.3rem;
+  --fs-small: calc(var(--fs-normal) * 0.85);
+  --fs-h3: calc(var(--fs-normal) * 1.3);
+  --fs-h2: calc(var(--fs-normal) * 1.7);
+  --fs-h1: calc(var(--fs-normal) * 2.2);
+  --ff-normal: "Lora", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+  --lh-heading: 1.1;
+  --ls-heading: -0.04em;
   --ff-heading: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  --ff-normal: "Lora", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
   --ff-mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, "Cascadia Mono",
     "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-
-  --fs-min: 0.5rem;
-  --fw-bold: 600;
-  --lh-heading: 1.1;
-  --ls-heading: -0.04em;
 
   --border-radius: 0.2rem;
   --border: 0.1rem solid var(--dark-grey);

@@ -6,7 +6,7 @@
 .separate > :not(:last-child)::after {
   padding-right: 1ch;
   content: "";
-  font-size: max(0.65em, var(--fs-min));
+  font-size: 0.7em;
 }
 
 .separate > :not(:last-child, .skip)::after {
@@ -31,7 +31,7 @@
 }
 
 .card > .extra {
-  font-size: 0.85em;
+  font-size: var(--fs-small);
   display: flex;
 }
 

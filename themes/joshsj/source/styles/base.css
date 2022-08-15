@@ -31,7 +31,7 @@
 
 body {
   font-family: var(--ff-normal);
-  font-size: 1.25rem;
+  font-size: var(--fs-normal);
   line-height: 1.5;
   color: var(--dark);
   background-color: var(--light);
@@ -67,15 +67,15 @@ button.link {
 }
 
 h1 {
-  font-size: 2.7rem;
+  font-size: var(--fs-h1);
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: var(--fs-h2);
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: var(--fs-h3);
 }
 
 h1,
@@ -189,8 +189,6 @@ tr {
 }
 
 th {
-  font-family: var(--ff-heading);
-  font-weight: var(--fw-bold);
   text-align: left;
 }
 

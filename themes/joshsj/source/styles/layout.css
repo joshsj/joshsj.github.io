@@ -13,7 +13,7 @@ main {
 }
 
 header {
-  font-size: 2.2rem;
+  font-size: var(--fs-h2);
   font-family: var(--ff-heading);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-heading);
