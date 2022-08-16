@@ -17,6 +17,8 @@
   -webkit-font-smoothing: antialiased;
   outline-color: var(--blue);
 
+  scroll-margin-top: 4rem;
+
   /* theme transition */
   transition: none 25ms linear;
   /* not vibing */
@@ -82,14 +84,14 @@ h1,
 h2,
 h3 {
   font-family: var(--ff-heading);
-  font-weight: var(--fw-bold);
+  font-weight: bold;
   letter-spacing: var(--ls-heading);
 }
 
 th,
 /* inline headings */
 [role="heading"] {
-  font-weight: var(--fw-bold);
+  font-weight: bold;
 }
 
 [role="heading"]::after {
@@ -111,7 +113,7 @@ h6 {
 
 strong,
 label {
-  font-weight: var(--fw-bold);
+  font-weight: bold;
 }
 
 q,
@@ -209,7 +211,6 @@ pre {
 
 code:not(.hljs) {
   font-size: 0.95em;
-  padding: 0 0.25ch;
   border-radius: var(--border-radius);
 }
 

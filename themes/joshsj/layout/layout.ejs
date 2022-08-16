@@ -38,35 +38,33 @@
   <meta name="theme-color" content="#ffffff" />
 </head>
 
-<body <%- env.debug ? "data-dev" : "" %>>
-  <% if (page.hmm) { %><div class="hmm" aria-hidden></div><% } %>
-  
+<body 
+  class="<%- page.hmm ? 'hmm' : ''  %>"
+  <%- env.debug ? "data-dev" : "" %>>  
+
   <header>
-    <span>
       <a id="logo" class="hide" href="/">
         Joshua Sexton<span class="pop">-</span>Jones
       </a>
 
      <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
-    </span>
-    
-    <nav>
-      <% ["Home", "Posts" , "Series" , "Portfolio" ] .map((title)=>
-        site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
-        page.title) { %>
-        <a href="<%- url_for(path) %>">
-          <%- title %>
-        </a>
-        <% } else { %>
-          <%- title %>
-        <% }}) %>
-    </nav>
   </header>
 
+  <nav>
+    <% ["Home", "Posts" , "Series" , "Work" ] .map((title)=>
+      site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
+      page.title) { %>
+      <a href="<%- url_for(path) %>">
+        <%- title %>
+      </a>
+      <% } else { %>
+        <%- title %>
+      <% }}) %>
+  </nav>
+
   <main class="content">
-    <h1>
-      <%- page.display_title || page.title %>
-    </h1>
+    <h1><%- page.display_title || page.title %></h1>
+    
     <%- body %>
   </main>
 </body>
