@@ -5,7 +5,7 @@ const el = document.getElementById("theme-toggle");
 
 const update = (dark) => {
   body.classList[dark ? "add" : "remove"]("dark");
-  el.textContent = ["light", "dark"][+dark];
+  el.textContent = ["Light", "Dark"][+dark];
   localStorage.setItem(key, dark);
 };
 

@@ -33,7 +33,6 @@ body:not(.hmm) > nav {
 nav {
   position: sticky;
   top: 0;
-  padding: var(--space-1) 0;
   z-index: 1;
 }
 
@@ -41,8 +40,12 @@ nav > a {
   text-decoration: none;
 }
 
+main {
+  margin-bottom: var(--space-4);
+}
+
 @media (max-width: 768px) {
   header {
-    margin-top: var(--space-2);
+    margin-top: var(--space-1);
   }
 }

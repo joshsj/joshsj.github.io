@@ -41,7 +41,16 @@ body {
 }
 
 button {
+  /* why do browsers fuck with buttons so much */
+  all: unset;
   cursor: pointer;
+}
+
+button:not(.link) {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 0 0.2em;
+  background-color: var(--light-grey);
 }
 
 button.link {
