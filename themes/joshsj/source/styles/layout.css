@@ -1,25 +1,27 @@
-body > * {
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header,
+nav,
+main {
   width: var(--content-width);
-  margin: 0 auto;
 }
 
 header,
 nav {
-  font-size: var(--fs-h3);
-  font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-heading);
   text-transform: lowercase;
 
-  width: var(--content-width);
-
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  column-gap: var(--space-2);
 }
 
-header {
+header,
+main {
   margin-top: var(--space-4);
 }
 
@@ -37,11 +39,6 @@ nav {
 
 nav > a {
   text-decoration: none;
-}
-
-main {
-  margin-top: var(--space-3);
-  margin-bottom: var(--space-4);
 }
 
 @media (max-width: 768px) {
