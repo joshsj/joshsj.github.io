@@ -42,12 +42,14 @@
   <% if (page.hmm) { %><div class="hmm" aria-hidden></div><% } %>
   
   <header>
-    <a id="logo" class="hide" href="/">
-      <span>Joshua</span>
-      <span>Sexton</span>
-      <span><span class="pop">-</span>Jones</span>
-    </a>
+    <span>
+      <a id="logo" class="hide" href="/">
+        Joshua Sexton<span class="pop">-</span>Jones
+      </a>
 
+     <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
+    </span>
+    
     <nav>
       <% ["Home", "Posts" , "Series" , "Portfolio" ] .map((title)=>
         site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
@@ -59,8 +61,6 @@
           <%- title %>
         <% }}) %>
     </nav>
-
-    <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
   </header>
 
   <main class="content">

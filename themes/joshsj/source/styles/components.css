@@ -1,33 +1,27 @@
-.separate {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .separate > :not(:last-child)::after {
-  padding-right: 1ch;
+  padding-right: 0.5ch;
   content: "";
-  font-size: 0.7em;
 }
 
 .separate > :not(:last-child, .skip)::after {
-  padding-left: 1ch;
+  padding-left: 0.5ch;
   content: var(--separator);
   vertical-align: middle;
 }
 
 /* normal margin */
-.content > :not(h1, h2, h3) + :not(.squish, ol, ul) {
+.content > * + :not(.squish, ol, ul) {
   margin-top: var(--space-4);
 }
 
 /* reduced list margin */
-.content > :not(h1, h2, h3) + :where(ol, ul) {
+.content > * + :where(ol, ul) {
   margin-top: var(--space-1);
 }
 
-/* reduced margin after headings */
-.content > :where(h1, h2, h3) + :not(.squish) {
-  margin-top: var(--space-1);
+/* no margin below page title */
+.content > h1:first-of-type + * {
+  margin-top: 0;
 }
 
 .card {

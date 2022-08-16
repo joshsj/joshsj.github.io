@@ -1,76 +1,30 @@
-/* push right */
-header,
-#logo,
-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-header,
-main {
-  padding: var(--space-4) 0;
+body > * {
+  width: var(--content-width);
+  margin: 0 auto;
+  margin-bottom: var(--space-4);
 }
 
 header {
-  font-size: var(--fs-h2);
+  font-size: var(--fs-h3);
   font-family: var(--ff-heading);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-heading);
   line-height: var(--lh-heading);
   text-transform: lowercase;
-
-  position: fixed;
-  right: calc(
-    var(--content-right) + (var(--content-width) / 2) + var(--space-4)
-  );
+  margin-top: var(--space-3);
 }
 
-/* space out header elements */
-header > :where(nav, #theme-toggle) {
-  margin-top: var(--space-4);
+header > :where(span, nav) {
+  width: var(--content-width);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+nav {
+  margin-top: var(--space-1);
 }
 
 nav > a {
   text-decoration: none;
-}
-
-main {
-  position: absolute;
-  width: var(--content-width);
-  left: calc(var(--content-left) - (var(--content-width) / 2));
-}
-
-@media (max-width: 1024px) {
-  body {
-    --content-left: 60%;
-    --content-width: 35rem;
-  }
-}
-
-/* revert to column vertical layout */
-@media (max-width: 768px) {
-  body {
-    padding: var(--space-1);
-  }
-
-  header,
-  main {
-    padding: 0;
-    position: static;
-  }
-
-  header {
-    margin-bottom: var(--space-4);
-  }
-
-  main {
-    width: auto;
-  }
-
-  header,
-  #logo,
-  nav {
-    align-items: flex-start;
-  }
 }
