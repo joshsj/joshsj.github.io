@@ -40,6 +40,10 @@ nav > a {
   text-decoration: none;
 }
 
+main {
+  margin-bottom: var(--space-4);
+}
+
 @media (max-width: 768px) {
   header {
     margin-top: var(--space-2);
