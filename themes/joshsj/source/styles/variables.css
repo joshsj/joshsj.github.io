@@ -10,7 +10,7 @@ body {
 
   --separator: "·";
 
-  --fs-small: calc(var(--fs-normal) * 0.85);
+  --fs-small: calc(var(--fs-normal) * 0.8);
   --fs-normal: 1.3rem;
   --fs-h3: 1.7rem;
   --fs-h2: calc(var(--fs-h3) * 1.3);

@@ -9,6 +9,11 @@
   vertical-align: middle;
 }
 
+.separate.trim {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* normal margin */
 .content > * + :not(.squish, ol, ul) {
   margin-top: var(--space-4);

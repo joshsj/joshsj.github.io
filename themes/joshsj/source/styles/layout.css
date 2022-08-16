@@ -32,7 +32,6 @@ nav {
   position: sticky;
   top: 0;
   padding: var(--space-1) 0;
-  margin-bottom: var(--space-3);
   z-index: 1;
 }
 
@@ -41,6 +40,7 @@ nav > a {
 }
 
 main {
+  margin-top: var(--space-3);
   margin-bottom: var(--space-4);
 }
 
