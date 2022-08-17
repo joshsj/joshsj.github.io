@@ -5,29 +5,27 @@ body {
   --space-2: calc(var(--space-1) * 2);
   --space-3: calc(var(--space-1) * 3);
   --space-4: calc(var(--space-1) * 4);
-
+  --separator: "•";
   --content-width: min(40rem, calc(100vw - var(--space-2)));
 
-  --separator: "•";
+  --border-radius: 0.2rem;
+  --border: 0.1rem solid var(--dark-grey);
 
   --fs-small: calc(var(--fs-normal) * 0.8);
   --fs-normal: 1.3rem;
   --fs-h3: 1.5rem;
   --fs-h2: calc(var(--fs-h3) * 1.3);
   --fs-h1: calc(var(--fs-h3) * 1.7);
-  --ff-normal: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 
   --lh-heading: 1.1;
   --ls-heading: -0.04em;
-  --ff-heading: "Poppins", var(--ff-normal);
 
+  --ff-heading: "Poppins", var(--ff-normal);
+  --ff-normal: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   --ff-mono: "Inconsolata", ui-monospace, "Roboto Mono", Menlo, Monaco,
     "Cascadia Mono", "Segoe UI Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-
-  --border-radius: 0.2rem;
-  --border: 0.1rem solid var(--dark-grey);
 
   --code-property: #e45649;
   --code-params: #986801;
@@ -45,7 +43,6 @@ body {
   --white: white;
   /* default hsl(228, 8%, 24%) */
   --black: hsl(228, 8%, 18%);
-
   --dark-grey: #5e616e;
   --light-grey: #fafafa;
 
