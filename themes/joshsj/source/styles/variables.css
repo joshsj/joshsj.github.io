@@ -8,7 +8,7 @@ body {
 
   --content-width: min(40rem, calc(100vw - var(--space-2)));
 
-  --separator: "·";
+  --separator: "•";
 
   --fs-small: calc(var(--fs-normal) * 0.8);
   --fs-normal: 1.3rem;

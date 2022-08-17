@@ -1,12 +1,13 @@
 .separate > :not(:last-child)::after {
-  padding-right: 0.5ch;
+  padding-right: 1ch;
   content: "";
+  font-size: 0.65em;
+  vertical-align: middle;
 }
 
 .separate > :not(:last-child, .skip)::after {
-  padding-left: 0.5ch;
+  padding-left: 1ch;
   content: var(--separator);
-  vertical-align: middle;
 }
 
 .separate.trim {
