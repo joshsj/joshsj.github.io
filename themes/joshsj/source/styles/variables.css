@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;600&family=JetBrains+Mono:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;600&family=Inconsolata:ital@0;1&display=swap");
 
 body {
   --space-1: 0.5rem;
@@ -22,8 +22,8 @@ body {
   --ls-heading: -0.04em;
   --ff-heading: "Poppins", var(--ff-normal);
 
-  --ff-mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, "Cascadia Mono",
-    "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+  --ff-mono: "Inconsolata", ui-monospace, "Roboto Mono", Menlo, Monaco,
+    "Cascadia Mono", "Segoe UI Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --border-radius: 0.2rem;

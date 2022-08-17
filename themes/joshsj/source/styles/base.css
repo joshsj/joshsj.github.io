@@ -150,6 +150,10 @@ ol > li::marker {
   content: counter(li) ") ";
 }
 
+ul > li::marker {
+  color: var(--pop);
+}
+
 select {
   border-radius: var(--border-radius);
   color: var(--black);
@@ -215,11 +219,9 @@ code {
 
 pre {
   overflow-y: auto;
-  font-size: 0.9em;
 }
 
 code:not(.hljs) {
-  font-size: 0.95em;
   border-radius: var(--border-radius);
 }
 
