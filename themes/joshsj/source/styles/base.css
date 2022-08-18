@@ -220,6 +220,6 @@ iframe {
 }
 
 /* bit hard to read without space */
-s::after {
-  margin-right: 0.25ch;
+s {
+  margin-right: 0.1ch;
 }
