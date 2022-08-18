@@ -7,7 +7,7 @@ body {
 header,
 nav,
 main {
-  width: var(--content-width);
+  width: min(40rem, calc(100vw - var(--space-2)));
 }
 
 header,

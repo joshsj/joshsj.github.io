@@ -18,11 +18,6 @@
   outline-color: var(--blue);
 
   scroll-margin-top: 4rem;
-
-  /* theme transition */
-  transition: none 25ms linear;
-  /* not vibing */
-  /* transition-property: color, background-color; */
 }
 
 ::selection {
@@ -94,7 +89,8 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: var(--ls-heading);
+  letter-spacing: -0.05em;
+  line-height: 1.1;
 }
 
 th,
@@ -107,13 +103,7 @@ th,
   content: ":";
 }
 
-h1,
-h2,
-h3 {
-  line-height: var(--lh-heading);
-}
-
-/* sizing not implemented */
+/* not used */
 h4,
 h5,
 h6 {
