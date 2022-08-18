@@ -218,3 +218,8 @@ code:not(.hljs) {
 iframe {
   border: none;
 }
+
+/* bit hard to read without space */
+s::after {
+  margin-right: 0.25ch;
+}
