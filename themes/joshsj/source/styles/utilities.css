@@ -1,3 +1,27 @@
+.sep {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sep > ::after {
+  font-size: 0.65em;
+  vertical-align: middle;
+  color: var(--dark);
+}
+
+.sep.sep-pop > ::after {
+  color: var(--pop);
+}
+
+.sep > :not(:last-child)::after {
+  /* nbsp */
+  content: "\A0";
+}
+
+.sep > :not(:last-child, .skip)::after {
+  content: "\A0"var(--separator) "\A0";
+}
+
 .pop {
   color: var(--pop);
 }

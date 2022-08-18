@@ -1,9 +1,10 @@
 <%- page.content %>
 
-<p class="separate">
+<p class="sep">
   <span class="skip">
     <span role="heading" aria-level="2">Tags</span>
-  </span><%- partial("partials/post/tags", { tags: site.tags, mask: false })%>
+  </span>
+  <%- partial("partials/post/tags", { tags: site.tags, mask: false })%>
 </p>
 
 <%- partial("partials/posts", { posts: site.posts.sort("date", -1) }) %>

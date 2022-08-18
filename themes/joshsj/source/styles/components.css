@@ -1,20 +1,3 @@
-.separate > :not(:last-child)::after {
-  padding-right: 1ch;
-  content: "";
-  font-size: 0.65em;
-  vertical-align: middle;
-}
-
-.separate > :not(:last-child, .skip)::after {
-  padding-left: 1ch;
-  content: var(--separator);
-}
-
-.separate.trim {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 /* normal margin */
 .content > * + :not(.squish, ol, ul) {
   margin-top: var(--space-4);

@@ -1,6 +1,6 @@
 <% posts.forEach(post=> { %>
   <section class="card">
-    <p class="extra separate">
+    <p class="extra sep sep-pop">
       <span><%- date(post.date) %></span>
       <%- partial("partials/post/tags", { tags: post.tags, mask: true }) %>
     </p>

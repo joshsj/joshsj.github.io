@@ -11,8 +11,10 @@
 <% } %>
 
 <% if (page.tags.length) { %>
-  <p class="squish">
-    Talks about <span class="separate"><%- partial("partials/post/tags", { tags: page.tags, mask: false }) %></span></p>
+  <p class="squish sep">
+    <span class="skip">Talks about</span>
+    <%- partial("partials/post/tags", { tags: page.tags, mask: false }) %>
+  </p>
 <% } %>
 
 <%- page.content %>
