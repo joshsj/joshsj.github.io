@@ -128,6 +128,39 @@ means higher priority. A **max-heap** is the opposite.
 It is also valid for duplicate node values in a heap --- two things can have the
 same priority.
 
+## Binary Search Tree
+
+A _Binary Search Tree (BST)_ allows arbitrary values to be found fairly quickly.
+It's structured as a rooted binary tree, where every node is greater than all
+nodes to its left and less than all to its right. Inherently, only comparable
+types can be stored in a BST.
+
+{%
+  caption_img
+  "bst.svg"
+  "A binary search tree."
+  https://stepik.org/lesson/28727/step/1
+%}
+
+The _height_ of a BST is the longest distance from the root of the tree to a
+leaf; a tree with no nodes has a height of -1, only a root has a height of 0,
+and a node+leaf has a height of 1, etc.
+
+We can also consider the balance of a BST. When balanced, most leaves are
+equidistant from the root and most internal nodes have two children. When
+**perfectly** balanced, it's all of em. Unbalanced trees are also a thing.
+
+{%
+  caption_img
+  "perfectly balanced bst.svg"
+  "A perfectly balanced BST."
+  https://stepik.org/lesson/28727/step/9
+%}
+
+The average-case time complexity to find an element {% math N %} is {% bigo
+\log N %}; there is a proof, but it's [fucking mental](https://stepik.org/lesson/28730/step/4)
+and I can't understand math so complex any more.
+
 ## Implementations
 
 <!-- TODO add link to implementations -->
@@ -139,7 +172,7 @@ properties for binary trees.
 {%
   caption_img
   "heap array.png"
-  "Heap Array."
+  "A heap structured with an array."
   https://stepik.org/lesson/28863/step/11
 %}
 
