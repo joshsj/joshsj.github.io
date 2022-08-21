@@ -92,6 +92,10 @@ We can further consider a binary tree as _full_, meaning every node has two
 children, excluding the leaves; or _complete_, meaning every level, but possibly
 the last, is completely filled and all nodes are to leftmost.
 
+To make the diagram above complete, 8 would become the right child of 3 and 9
+would become the left child of 4. To make it full, 5 and 6 would need two
+children (or 7, 8, and 9 would need removing).
+
 ### Traversal
 
 We have four algorithms to remember! All of which are {% bigo n %} 'cause every
@@ -111,7 +115,7 @@ priority. A binary heap must also satisfy the binary tree constraints and be
 _complete_.
 
 Within the world of heaps, we firstly have **min-heaps**, in which a parent node
-have a lesser-or-equal value to any/all of its children. That is, a small value
+has a lesser-or-equal value to all of its children. That is, a smaller value
 means higher priority. A **max-heap** is the opposite.
 
 {%
@@ -120,3 +124,30 @@ means higher priority. A **max-heap** is the opposite.
   "A min and max-heap."
   https://stepik.org/lesson/28863/step/4
 %}
+
+It is also valid for duplicate node values in a heap --- two things can have the
+same priority.
+
+## Implementations
+
+<!-- TODO add link to implementations -->
+
+Generally, implementing a tree structure involves a `Node` object containing a a
+value and child pointers --- an array for normal trees, `left` and `right`
+properties for binary trees.
+
+{%
+  caption_img
+  "heap array.png"
+  "Heap Array."
+  https://stepik.org/lesson/28863/step/11
+%}
+
+Alternatively, we can utilise pointer arithmetic to store binary trees in
+<a href="{% post_path lists %}#Array">arrays</a>. The start of the array
+represents the tree root and the following formulae can access nodes relative to
+an index {% math I %}:
+
+- Parent: {% math \lfloor\frac{I-1}{2}\rfloor %}
+- Left Child: {% math 2i+1 %}
+- Right Child: {% math 2i+2 %}

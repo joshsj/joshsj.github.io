@@ -17,7 +17,7 @@
   -webkit-font-smoothing: antialiased;
   outline-color: var(--blue);
 
-  scroll-margin-top: 4rem;
+  scroll-margin-top: 3rem;
 }
 
 ::selection {
@@ -58,7 +58,7 @@ button.link {
   color: var(--pop);
 }
 
-:where(a, button.link):not(.mask, .hide):hover {
+:where(a, button.link):not(.mask, .hide, .headerlink):hover {
   color: var(--light);
   background-color: var(--pop);
 }
@@ -89,7 +89,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   line-height: 1.1;
 }
 

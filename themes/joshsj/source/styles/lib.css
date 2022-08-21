@@ -1,5 +1,14 @@
+/* marked.js header */
+.headerlink::before {
+  content: "#";
+  position: absolute;
+  transform: translateX(calc(-100% - var(--space-1)));
+}
+
+/* katex */
+
 .katex {
-  font-size: 1em;
+  font-size: 1.1em;
 }
 
 /* highlight.js */
@@ -29,4 +38,10 @@
 .hljs-comment {
   color: var(--code-comment);
   font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .headerlink::before {
+    content: "";
+  }
 }

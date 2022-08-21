@@ -89,4 +89,5 @@ linked list would result in {% bigo 1 %} to peek and remove, but {% bigo n %} to
 insert into a sorted position. An unsorted linked list swaps the time
 complexities and array implementations suffer the same pain.
 
-Instead we can use a <a href="{% post_path trees %}#Heap">Heap</a>.
+Instead we can use a <a href="{% post_path trees %}#Heap">Heap</a>, giving us {%
+bigo 1 %} to peek and {% bigo \log n %} to insert/remove.

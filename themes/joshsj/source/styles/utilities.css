@@ -27,7 +27,7 @@
 }
 
 .rainbow {
-  animation: rainbow 3s infinite alternate;
+  animation: rainbow 2.5s infinite alternate;
 }
 
 @keyframes rainbow {
