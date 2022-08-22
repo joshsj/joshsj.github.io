@@ -1,8 +1,13 @@
-/* marked.js header */
+/* marked.js */
+.headerlink {
+  text-decoration: none;
+}
+
 .headerlink::before {
+  --margin: var(--space-1);
   content: "#";
   position: absolute;
-  transform: translateX(calc(-100% - var(--space-1)));
+  transform: translateX(calc(-100% - var(--margin)));
 }
 
 /* katex */
@@ -46,6 +51,7 @@
 
 @media (max-width: 768px) {
   .headerlink::before {
-    content: "";
+    position: static;
+    margin-right: var(--margin);
   }
 }

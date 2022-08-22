@@ -1,12 +1,15 @@
 ---
 title: Logging
-date: 2021-10-24
+date: 2022-08-22
 tags:
   - C#
   - .NET
 ---
 
-Logging comes out of the box with ASP using `ILogger<>`.
+Logging comes out of the box with ASP using `ILogger<>` from the
+`Microsoft.Extensions.Logging` package.
+
+<!-- more -->
 
 The generic parameter specifies a _category_ (the source of the log). Its
 arbitrary but the enclosing class is the convention. The log _level_ (how bad it

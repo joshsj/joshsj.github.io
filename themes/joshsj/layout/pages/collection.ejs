@@ -1,4 +1,4 @@
-<p><%- page.posts.length %> posts</p>
+<p><%- page.posts.length %> <%- plural("post", page.posts.length !== 1) %></p>
 
 <p><%- page.collection.description %></p>
 
