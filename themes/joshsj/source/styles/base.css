@@ -205,10 +205,7 @@ sup {
 
 code {
   font-family: var(--ff-mono);
-}
-
-pre {
-  overflow-y: auto;
+  overflow-wrap: break-word;
 }
 
 code:not(.hljs) {

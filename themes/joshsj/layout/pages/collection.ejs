@@ -1,0 +1,5 @@
+<p><%- page.posts.length %> posts</p>
+
+<p><%- page.collection.description %></p>
+
+<%- partial("partials/posts", { posts: page.posts.sort("date", -1) }) %>

@@ -1,9 +1,8 @@
 ---
 title: Trees
 date: 2022-08-04
-series: (Re)Learning CS
+collection: (Re)Learning CS
 tags:
-  - Notes
   - Computer Science
 ---
 

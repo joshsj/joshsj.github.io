@@ -2,7 +2,6 @@
 title: Bike Fitting
 date: 2022-05-25
 tags:
-  - Notes
   - Cycling
 ---
 

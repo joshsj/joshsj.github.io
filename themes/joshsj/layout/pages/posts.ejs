@@ -7,4 +7,6 @@
   <%- partial("partials/post/tags", { tags: site.tags, mask: false })%>
 </p>
 
-<%- partial("partials/posts", { posts: site.posts.sort("date", -1) }) %>
+<%- partial("partials/posts", { 
+  posts: site.posts.filter(p => !in_collection(p)).sort("date", -1) 
+}) %>

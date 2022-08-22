@@ -10,7 +10,7 @@ body {
   --border-radius: 0.2rem;
   --border: 0.1rem solid var(--dark-grey);
 
-  --fs-small: calc(var(--fs-normal) * 0.8);
+  --fs-small: calc(var(--fs-normal) * 0.85);
   --fs-normal: 1.3rem;
   --fs-h3: 1.5rem;
   --fs-h2: calc(var(--fs-h3) * 1.3);

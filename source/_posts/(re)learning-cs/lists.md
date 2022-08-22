@@ -2,9 +2,7 @@
 title: Lists
 date: 2022-08-02
 updated: 2022-08-03
-series: (Re)Learning CS
 tags:
-  - Notes
   - Computer Science
 ---
 

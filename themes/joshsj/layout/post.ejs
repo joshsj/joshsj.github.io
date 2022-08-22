@@ -4,9 +4,9 @@
   <p class="squish">Updated on <%- date(page.updated) %></p>
 <% }%>
 
-<% if (page.series) { %>
+<% if (page.collection) { %>
   <p class="squish">Part of
-    <a href="/series/<%- format_url(page.series) %>"><%- page.series %></a>
+    <a href="/collections/<%- format_url(page.collection) %>"><%- page.collection %></a>
   </p>
 <% } %>
 

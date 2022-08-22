@@ -26,12 +26,12 @@ hexo.extend.filter.register("after_post_render", function (data) {
   }
 });
 
-// supplement series data
+// supplement collections
 hexo.extend.filter.register("template_locals", async (locals) => {
   const f = hexo.extend.helper.get("format_url");
 
   await Promise.allSettled(
-    locals.site.data.series.map(async (s) => {
+    locals.site.data.collections.map(async (s) => {
       s.description = (
         await hexo.render.render({
           text: s.description,
@@ -39,7 +39,7 @@ hexo.extend.filter.register("template_locals", async (locals) => {
         })
       ).slice(3, -5); // remove p tags and \n
 
-      s.path = `series/${f(s.title)}`;
+      s.path = `collections/${f(s.title)}`;
     })
   );
 });

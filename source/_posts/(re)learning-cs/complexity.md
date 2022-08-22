@@ -2,9 +2,7 @@
 title: Complexity
 date: 2022-07-30
 updated: 2022-08-01
-series: (Re)Learning CS
 tags:
-  - Notes
   - Computer Science
 ---
 

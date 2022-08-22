@@ -16,26 +16,27 @@ hexo.extend.tag.register(
 // alt isn't required when captioned
 hexo.extend.tag.register(
   "caption",
-  ([caption], content) =>
+  async ([caption], content) =>
     `
   <figure>
     ${content}
-    <figcaption>${caption}</figcaption>
+    <figcaption>
+      ${await hexo.render.render({ text: caption, engine: "md" })}
+    </figcaption>
   </figure>`,
-  { ends: true }
+  { ends: true, async: true }
 );
 
-// alt isn't required when captioned
 hexo.extend.tag.register(
   "caption_img",
-  ([src, caption, source]) =>
+  async ([src, caption, source]) =>
     `
   <figure>
     <a href="${src}" class="hide"><img src="${src}" alt="${caption}"></a>
     
     <figcaption>
       ${source ? `<a href="${source}" class="source">Source</a>` : ""}
-      ${caption}
+      ${await hexo.render.render({ text: caption, engine: "md" })}
     </figcaption>
   </figure>`
 );

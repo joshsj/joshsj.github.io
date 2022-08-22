@@ -49,7 +49,7 @@
   </header>
 
   <nav>
-    <% ["Home", "Posts" , "Series" , "Portfolio" ] .map((title)=>
+    <% ["Home", "Collections", "Posts", "Portfolio" ] .map((title)=>
       site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
       page.title) { %>
       <a href="<%- url_for(path) %>">

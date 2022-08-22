@@ -11,6 +11,10 @@
   font-size: 1.1em;
 }
 
+.hljs {
+  font-size: var(--fs-small);
+}
+
 /* highlight.js */
 
 .hljs-keyword {

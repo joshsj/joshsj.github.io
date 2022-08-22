@@ -49,4 +49,8 @@ main {
   header {
     margin-top: var(--space-1);
   }
+
+  pre {
+    overflow-y: auto;
+  }
 }
