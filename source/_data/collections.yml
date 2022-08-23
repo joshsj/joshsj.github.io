@@ -1,5 +1,4 @@
 - title: (Re)Learning CS
-  status: Implementing this stuff so I remember it 😕
   description:
     After finishing my degree, I took the summer off to recover both emotionally
     and intellectually. To keep my mind ticking over, I decided to (re)learn
@@ -13,3 +12,9 @@
     Before I was let loose on real-world projects during placement, I got
     acquainted with the tech stack following the .NET Core path on
     [Pluralsight](https://www.pluralsight.com/paths/aspnet-core).
+
+- title: Notes On Project Management
+  order_by: date
+  description:
+    Taken from the my Management of IT Projects module at [Sheffield
+    Hallam](https://www.shu.ac.uk/courses/computing/beng-honours-software-engineering/full-time).

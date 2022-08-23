@@ -8,7 +8,8 @@
 const collection = get_collection(page);
 
 if (collection) { %>
-  <p class="squish">Part of
+  <p class="squish">
+    Part of
     <a href="<%- collection_url_for(collection.title) %>"><%- collection.title %></a>
   </p>
 <% } %>

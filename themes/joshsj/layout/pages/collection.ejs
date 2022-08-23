@@ -4,4 +4,6 @@
   <%- markdown_trim(page.collection.description) %>
 </p>
 
-<%- partial("partials/posts", { posts: page.posts.sort("date", -1) }) %>
+<%- partial("partials/posts", { 
+  posts: page.posts.sort(page.collection.order_by || "title") 
+}) %>

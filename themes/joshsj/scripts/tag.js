@@ -47,8 +47,16 @@ hexo.extend.tag.register(
     ` <iframe class="spotify space" src="https://open.spotify.com/embed/${link}"></iframe>`
 );
 
-const math = (args, format = "args") =>
-  katex.renderToString(format.replace("args", args.join(" ")));
+const math = (args, format, opts = {}) => {
+  hexo.log.debug(args.join(" "));
 
-hexo.extend.tag.register("math", (args) => math(args));
+  return katex.renderToString(format.replace("args", args.join(" ")), opts);
+};
+
+hexo.extend.tag.register("math", (args) => math(args, "args"));
+
+hexo.extend.tag.register("display_math", (args) =>
+  math(args, "args", { displayMode: true })
+);
+
 hexo.extend.tag.register("bigo", (args) => math(args, "\\mathcal{O}(args)"));

@@ -9,6 +9,6 @@
   },
   "Captioned Image": {
     "prefix": ["img", "caption_img"],
-    "body": "{% caption_img \"$0\" \"$1\" $2 %}"
+    "body": "{% caption_img \"${0:src}\" \"${1:caption}\" ${2:source} %}"
   }
 }

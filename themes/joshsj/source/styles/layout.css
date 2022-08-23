@@ -30,13 +30,6 @@ body:not(.hmm) > nav {
   background-color: var(--light);
 }
 
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  opacity: 95%;
-}
-
 nav > a {
   text-decoration: none;
 }
@@ -48,9 +41,5 @@ main {
 @media (max-width: 768px) {
   header {
     margin-top: var(--space-1);
-  }
-
-  pre {
-    overflow-y: auto;
   }
 }

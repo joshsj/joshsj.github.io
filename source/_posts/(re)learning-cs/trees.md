@@ -1,6 +1,7 @@
 ---
 title: Trees
 date: 2022-08-04
+updated: 2022-08-23
 collection: (Re)Learning CS
 tags:
   - Computer Science

@@ -16,6 +16,10 @@
   font-size: 1.1em;
 }
 
+.katex-display {
+  margin: 0;
+}
+
 .hljs {
   font-size: var(--fs-small);
 }

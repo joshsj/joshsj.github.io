@@ -17,7 +17,7 @@
   -webkit-font-smoothing: antialiased;
   outline-color: var(--blue);
 
-  scroll-margin-top: 3rem;
+  scroll-margin-top: var(--space-2);
 }
 
 ::selection {
@@ -157,8 +157,11 @@ figure > :not(pre, figcaption) {
   align-self: center;
 }
 
-/* code examples need some space */
-figure > pre + figcaption {
+figure > .katex-display + .katex-display {
+  margin-top: var(--space-4);
+}
+
+figure > :where(pre, .katex-display) + figcaption {
   margin-top: var(--space-1);
 }
 
@@ -223,4 +226,10 @@ s {
 
 summary {
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  pre {
+    overflow-y: auto;
+  }
 }
