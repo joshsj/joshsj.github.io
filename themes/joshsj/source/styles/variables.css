@@ -7,7 +7,7 @@ body {
   --space-4: calc(var(--space-1) * 4);
   --separator: "•";
 
-  --border-radius: 0.2rem;
+  --border-radius: 0.3rem;
   --border: 0.1rem solid var(--dark-grey);
 
   --fs-small: calc(var(--fs-normal) * 0.85);
@@ -33,6 +33,8 @@ body {
 
   --blue: var(--code-title);
   --purple: var(--code-keyword);
+  --green: var(--code-string);
+  --red: var(--code-property);
 
   /* atom one colors */
   /* default hsl(0, 0%, 98%); */

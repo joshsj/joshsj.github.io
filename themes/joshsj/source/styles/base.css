@@ -124,9 +124,12 @@ figcaption,
   font-style: italic;
 }
 
-blockquote > p::before,
-blockquote > p::after {
-  content: '"';
+blockquote > p:first-of-type:before {
+  content: "“";
+}
+
+blockquote > p:last-of-type:after {
+  content: "”";
 }
 
 ul,
@@ -158,7 +161,7 @@ figure {
 }
 
 /* ignore code examples */
-figure > :not(pre, figcaption) {
+figure > img {
   align-self: center;
 }
 
@@ -229,6 +232,14 @@ s {
   margin-right: 0.1ch;
 }
 
+figure,
+details {
+  padding-top: var(--space-1);
+  padding-bottom: var(--space-1);
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
+
 summary {
   cursor: pointer;
 }
@@ -237,4 +248,17 @@ summary {
   pre {
     overflow-y: auto;
   }
+}
+
+ins,
+del {
+  text-decoration: none;
+}
+
+ins {
+  color: var(--green);
+}
+
+del {
+  color: var(--red);
 }

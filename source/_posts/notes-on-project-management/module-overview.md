@@ -26,7 +26,7 @@ this.
 
 ## Assessment
 
-<span role=heading>Practical</span> _Development of project management digital
+<span role="heading">Practical</span> _Development of project management digital
 artefacts based on a case study_ (80%)
 
 - Groups of 3 to 4 (hard limit)
@@ -38,7 +38,7 @@ artefacts based on a case study_ (80%)
   - Project management strategy
 - Solution grows organically with weekly seminars
 
-<span role=heading>Theoretical</span> _Project Management Reflective account_
+<span role="heading">Theoretical</span> _Project Management Reflective account_
 (20%)
 
 - How the individual (me) contributed to the practical solution

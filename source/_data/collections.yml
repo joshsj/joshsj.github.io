@@ -7,14 +7,20 @@
     roughly follow the [Data Structures course](https://stepik.org/course/579)
     on Stepik.
 
-- title: Notes On .NET
+- title: "Notes on .NET"
   description:
     Before I was let loose on real-world projects during placement, I got
     acquainted with the tech stack following the .NET Core path on
     [Pluralsight](https://www.pluralsight.com/paths/aspnet-core).
 
-- title: Notes On Project Management
+- title: "Notes on Project Management"
   order_by: date
   description:
-    Taken from the my Management of IT Projects module at [Sheffield
-    Hallam](https://www.shu.ac.uk/courses/computing/beng-honours-software-engineering/full-time).
+    Taken from the my Management of IT Projects module at
+    [university](https://www.shu.ac.uk/courses/computing/beng-honours-software-engineering/full-time).
+
+- title: "Notes on Software Design"
+  order_by: date
+  description:
+    Taken from the my Case Studies in Software Design module at
+    [university](https://www.shu.ac.uk/courses/computing/beng-honours-software-engineering/full-time).
