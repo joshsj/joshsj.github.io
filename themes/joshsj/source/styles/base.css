@@ -124,6 +124,11 @@ figcaption,
   font-style: italic;
 }
 
+blockquote > p::before,
+blockquote > p::after {
+  content: '"';
+}
+
 ul,
 ol {
   margin-left: 1.25em;

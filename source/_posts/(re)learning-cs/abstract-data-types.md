@@ -38,10 +38,11 @@ generally defined with:
 - `removeBack()`
 - `size()`
 
-Both a <a href="{% post_path lists %}#Circular-Array">circular array</a> or a
-<a href="{% post_path lists %}#Linked-List">linked list</a> can implement a
-deque. Neither is perfect, as they are both {% bigo n %} when inserting and
-indexing/searching respectively.
+Both a <a href="{% post_path (re)learning-cs/lists %}#Circular-Array">circular
+array</a> or a
+<a href="{% post_path (re)learning-cs/lists %}#Linked-List">linked list</a> can
+implement a deque. Neither is perfect, as they are both {% bigo n %} when
+inserting and indexing/searching respectively.
 
 The following structures can also use a deque as a backing structure.
 
@@ -87,5 +88,6 @@ linked list would result in {% bigo 1 %} to peek and remove, but {% bigo n %} to
 insert into a sorted position. An unsorted linked list swaps the time
 complexities and array implementations suffer the same pain.
 
-Instead we can use a <a href="{% post_path trees %}#Heap">Heap</a>, giving us {%
+Instead we can use a
+<a href="{% post_path (re)learning-cs/trees %}#Heap">Heap</a>, giving us {%
 bigo 1 %} to peek and {% bigo \log n %} to insert/remove.

@@ -24,7 +24,7 @@ traversed; i.e., which way can you drive down the street.
 A _cycle_ is a path starting and ending at the same node.
 
 A _graph_ is <!--excerpt-->a collection of nodes and edges<!--excerpt-->, like a
-<a href="{% post_path lists %}#Linked-List">linked list</a>.
+<a href="{% post_path(re)learning-cs/ lists %}#Linked-List">linked list</a>.
 
 A _tree_ is a graph with these constraints:
 
@@ -177,9 +177,9 @@ properties for binary trees.
 %}
 
 Alternatively, we can utilise pointer arithmetic to store binary trees in
-<a href="{% post_path lists %}#Array">arrays</a>. The start of the array
-represents the tree root and the following formulae can access nodes relative to
-an index {% math I %}:
+<a href="{% post_path (re)learning-cs/lists %}#Array">arrays</a>. The start of
+the array represents the tree root and the following formulae can access nodes
+relative to an index {% math I %}:
 
 - Parent: {% math \lfloor\frac{I-1}{2}\rfloor %}
 - Left Child: {% math 2i+1 %}
