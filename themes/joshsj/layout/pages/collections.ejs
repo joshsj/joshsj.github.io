@@ -1,10 +1,12 @@
-<%- page.content %> <% site.data.collections.forEach(({ title, description, path }) => { %>
-<section class="card">
-  <h2><a href="<%- url_for(path) %>" class="mask"><%- title %></a></h2>
+<%- page.content %>
 
-  <p><%- description %></p>
+<% site.data.collections.forEach(({ title, description }) => { %>
+  <section class="card">
+    <h2><a href="<%- collection_url_for(title) %>" class="mask"><%- title %></a></h2>
 
-  <p><a href="<%- url_for(path) %>">View</a></p>
-</section>
+    <p><%- markdown_trim(description) %></p>
+
+    <p><a href="<%- collection_url_for(title) %>">View</a></p>
+  </section>
 <% }) %>
 

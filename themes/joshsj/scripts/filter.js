@@ -25,21 +25,3 @@ hexo.extend.filter.register("after_post_render", function (data) {
     );
   }
 });
-
-// supplement collections
-hexo.extend.filter.register("template_locals", async (locals) => {
-  const f = hexo.extend.helper.get("format_url");
-
-  await Promise.allSettled(
-    locals.site.data.collections.map(async (s) => {
-      s.description = (
-        await hexo.render.render({
-          text: s.description,
-          engine: "md",
-        })
-      ).slice(3, -5); // remove p tags and \n
-
-      s.path = `collections/${f(s.title)}`;
-    })
-  );
-});

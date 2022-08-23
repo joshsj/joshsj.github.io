@@ -1,5 +1,7 @@
 <p><%- page.posts.length %> <%- plural("post", page.posts.length !== 1) %></p>
 
-<p><%- page.collection.description %></p>
+<p class="squish">
+  <%- markdown_trim(page.collection.description) %>
+</p>
 
 <%- partial("partials/posts", { posts: page.posts.sort("date", -1) }) %>
