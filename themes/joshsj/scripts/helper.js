@@ -71,3 +71,10 @@ hexo.extend.helper.register(
 hexo.extend.helper.register("collection_url_for", function (title) {
   return this.url_for(`collections/${this.format_url(title)}`);
 });
+
+hexo.extend.helper.register("utoc", (...args) =>
+  hexo.extend.helper
+    .get("toc")(...args)
+    .replace(/<ol/g, "<ul")
+    .replace(/<\/ol/g, "</ul")
+);

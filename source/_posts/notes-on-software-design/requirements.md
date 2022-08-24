@@ -3,14 +3,15 @@ title: Defining Requirements
 date: 2021-11-06
 ---
 
-## Considerations
+The requirements for a software application are affected by its purpose, focus,
+and stakeholders.
 
-For a software application, its requirements are affected by purpose of a
-software application, i.e., to (help) solve a business, scientific, or technical
-problem.
+<!-- more -->
 
-From its purpose, the type (or 'focus') of the overall application can be
-considered:
+Starting with purpose, think very generally: are we (helping to) solve a
+business, scientific, or technical problem?
+
+From its purpose, the focus of the overall application can be considered:
 
 - Data
   - Traditional database-oriented systems
@@ -25,7 +26,7 @@ considered:
     analysis of data
   - Gathered from data- and engagement-focused systems
 
-With the type of the application, the required roles within the team can also be
+From its focus, the role required within its creation team can also be
 considered:
 
 - Technical
@@ -41,9 +42,9 @@ considered:
   - Programme managers
   - Team leaders
 
-Another factor which could affect requirements is the stakeholders. For example,
-an application for which the maintenance team is outsourced, those aspects may
-need to be developed to their requirements.
+Lastly, its stakeholders can further influence its requirements; an application
+with an outsourced maintenance team needs to be securely & safely maintainable
+by an outsider by design.
 
 ## Sources
 

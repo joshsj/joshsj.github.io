@@ -3,6 +3,11 @@ title: Analysis
 date: 2021-10-14
 ---
 
+Analysing a problem involves identifying the overriding problem to establish its
+causes and effects, plus the goals of its solution.
+
+<!-- more -->
+
 To analyse the goals of a system, we can first look at _usability_ --- the
 functional impact of a system:
 
@@ -13,7 +18,8 @@ functional impact of a system:
 - Easy to learn
 - Easy to remember how to use
 
-We can also look at _User Experience (UX)_ --- effect of a system on the user:
+We can also look at _User Experience (UX)_ --- the effect of a system on the
+user:
 
 - Satisfying
 - Enjoyable
@@ -27,7 +33,7 @@ We can also look at _User Experience (UX)_ --- effect of a system on the user:
 
 ## User Profiles
 
-A _User profile_ are a set of characteristics taken from a typical user of a
+A _user profile_ are a set of characteristics taken from a typical user of a
 system. A product can have any number of user profiles, depending on the scope
 of the system's demographic. Attributes should be all/only be relevant to the
 system; for example:

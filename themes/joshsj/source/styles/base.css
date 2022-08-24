@@ -169,7 +169,7 @@ figure > .katex-display + .katex-display {
   margin-top: var(--space-4);
 }
 
-figure > :where(pre, .katex-display) + figcaption {
+figcaption {
   margin-top: var(--space-1);
 }
 

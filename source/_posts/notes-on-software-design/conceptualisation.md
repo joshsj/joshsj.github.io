@@ -4,7 +4,8 @@ date: 2021-10-21
 ---
 
 Moving from analysis progresses the contextual information gathered into a
-_conceptualisation_. The design phase is always addressed in an iterative
+_conceptualisation_. <!--excerpt-->Basically, we're starting to make something
+tangible.<!--excerpt--> The design phase is always addressed in an iterative
 approach.
 
 There are two main areas of conceptualisation: conceptual, trying to capture

@@ -48,10 +48,10 @@ the development of agile. These methods primarily enable the development team to
 focus on the software itself, rather than on its design and documentation. By
 nature, they suit applications where the requirements change frequently.
 
-## Looking at agile
+## Looking at Agile
 
 Reading from
-[Agilism versus Traditional Approaches](/.assets/agilism%20versus%20traditional%20approaches.pdf),
+[Agilism versus Traditional Approaches](agilism%20versus%20traditional%20approaches.pdf),
 the appropriate methodologies for a project can be determined by the clarity and
 understanding of the its goal and solution.
 
