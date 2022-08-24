@@ -1,19 +1,25 @@
 // this/site/locals cannot be consistently bound to helpers 🙁
 // so they're stored here
+
 const UrlReplacements = Object.freeze(
   [
-    ["C#", "CSharp"],
     [" ", "-"],
-    [":", ""],
+    [":", ""], // file paths can't contain :
+    ["C#", "CSharp"],
+    [".NET", "DotNet"], // url segment can't start with .
   ].map(([old, _new]) => [RegExp(old, "g"), _new])
 );
 
-hexo.extend.helper.register("format_url", (obj) =>
-  UrlReplacements.reduce(
+hexo.extend.helper.register("format_url", (obj) => {
+  const hmm = UrlReplacements.reduce(
     (url, [exp, repl]) => url.replace(exp, repl),
     String(obj)
-  ).toLowerCase()
-);
+  ).toLowerCase();
+
+  hexo.log.debug(hmm);
+
+  return hmm;
+});
 
 // default isn't working
 hexo.extend.helper.register("is_home", function () {

@@ -1,3 +1,5 @@
-<% tags.sort("name").forEach(({ name }) => { %><span><a 
+<% tags.sort("name").forEach(({ name }) => { %>
+<span><a 
   href="/tag/<%- format_url(name) %>" 
-  <%- mask ? 'class="mask"' : ''%>><%- name %></a></span><% }) %>
+  <%- mask ? 'class="mask"' : ''%>
+><%- name %></a></span><% }) %>
