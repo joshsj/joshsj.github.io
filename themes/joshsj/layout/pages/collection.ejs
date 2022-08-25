@@ -1,16 +1,16 @@
 <% const order_by = page.collection.order_by || "title"; %>
 
 <p>
+  Has
   <%- page.posts.length %>
-  <%- plural("post", page.posts.length !== 1) %>
-  in
-  <%- order_by %>
-  order.
+  <%- plural("post", page.posts.length !== 1) %>.
 </p>
 
 <p class="squish">
-  <%- markdown_trim(page.collection.description) %>
+  Ordered by <%- order_by %>.
 </p>
+
+<%- markdown(page.collection.description) %>
 
 <%- partial("partials/posts", { 
   posts: page.posts.sort(order_by) 

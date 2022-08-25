@@ -158,14 +158,15 @@ label + select {
 figure {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
-/* ignore code examples */
-figure > img {
+figure > :not(table, pre, figcaption) {
   align-self: center;
 }
 
-figure > .katex-display + .katex-display {
+figure > :not(figcaption, :first-child) {
   margin-top: var(--space-4);
 }
 
@@ -201,6 +202,11 @@ tr {
 
 th {
   text-align: left;
+}
+
+th,
+td {
+  white-space: nowrap;
 }
 
 sup {
@@ -244,12 +250,6 @@ summary {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  pre {
-    overflow-y: auto;
-  }
-}
-
 ins,
 del {
   text-decoration: none;
@@ -261,4 +261,10 @@ ins {
 
 del {
   color: var(--red);
+}
+
+@media (max-width: 768px) {
+  figure {
+    overflow-y: auto;
+  }
 }

@@ -25,9 +25,14 @@ if (collection) { %>
   <p class="squish rainbow">Draft</p>
 <% } %>
 
+<% 
+const toc = utoc(page.content,  {list_number: false});
+if (toc) {
+%>
 <details open>
   <summary>Contents</summary>
-  <%- utoc(page.content,  {list_number: false}) %>
+  <%- toc %>
 </details>
+<% } %>
 
 <%- page.content %>

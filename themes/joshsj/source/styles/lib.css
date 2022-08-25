@@ -1,3 +1,8 @@
+/* hexo */
+#more {
+  display: none;
+}
+
 /* marked.js */
 .headerlink {
   text-decoration: none;

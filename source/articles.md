@@ -1,5 +1,5 @@
 ---
-title: Posts
+title: Articles
 layout: pages/posts
 ---
 

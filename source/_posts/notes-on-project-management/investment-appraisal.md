@@ -54,18 +54,22 @@ For example, 10% interest turns $1 into $1.10 across one year:
 Payback is the most simple method, as it assumes the time-value of money remains
 the same.
 
-| Item                                        | Year 1 | Year 2      | Year 3      | Year 4     | Year 5    |
-| ------------------------------------------- | ------ | ----------- | ----------- | ---------- | --------- |
-| Hardware Purchase                           | 500    |
-| Hardware Maintenance                        | 50     | 50          | 50          | 50         | 50        |
-| Software Purchase                           | 180    |
-| Software Support                            | 20     | 20          | 20          | 20         | 20        |
-| **Cumulative Costs**                        | 750    | 820         | 890         | 960        | 1,030     |
-|                                             |
-| Staff savings (per year)                    | 220    | 220         | 220         | 220        | 220       |
-| **Cumulative Savings**                      | 220    | 440         | 660         | 880        | 1,100     |
-|                                             |
-| **Cumulative Net Return** <br> (Difference) | -530   | -380 (+150) | -230 (+150) | -80 (+150) | 70 (+150) |
+{% caption "Example of Payback calculations" %}
+
+| Item                                   | Year 1 | Year 2      | Year 3      | Year 4     | Year 5    |
+| -------------------------------------- | ------ | ----------- | ----------- | ---------- | --------- |
+| Hardware Purchase                      | 500    | 0           | 0           | 0          | 0         |
+| Hardware Maintenance                   | 50     | 50          | 50          | 50         | 50        |
+| Software Purchase                      | 180    |
+| Software Support                       | 20     | 20          | 20          | 20         | 20        |
+| **Cumulative Costs**                   | 750    | 820         | 890         | 960        | 1,030     |
+|                                        |
+| Staff savings (per year)               | 220    | 220         | 220         | 220        | 220       |
+| **Cumulative Savings**                 | 220    | 440         | 660         | 880        | 1,100     |
+|                                        |
+| **Cumulative Net Return** (Difference) | -530   | -380 (+150) | -230 (+150) | -80 (+150) | 70 (+150) |
+
+{% endcaption %}
 
 ### Net Present Value
 
@@ -80,14 +84,18 @@ By applying a discount rate of 0.2 (20%), the value of the project can be
 calculated relative to the present value; more importantly, the profits become
 relative to the initial costs:
 
-| Year | Net Profit <br> (FV) | Rate                                | Net Profit (PV) |
-| ---- | -------------------- | ----------------------------------- | --------------- |
-| 1    | -530                 | {% math 1\div{}(1.2)^0  = 1      %} | -530            |
-| 2    | +150                 | {% math 1\div{}(1.2)^1  = 0.833  %} | 125             |
-| 3    | +150                 | {% math 1\div{}(1.2)^2  = 0.694  %} | 104             |
-| 4    | +150                 | {% math 1\div{}(1.2)^3  = 0.579  %} | 87              |
-| 5    | +150                 | {% math 1\div{}(1.2)^4  = 0.482  %} | 72              |
-|      |                      |                                     | -141 👎         |
+{% caption "Example of NPV calculations" %}
+
+| Year | Net Profit (FV) | Rate                                | Net Profit (PV) |
+| ---- | --------------- | ----------------------------------- | --------------- |
+| 1    | -530            | {% math 1\div{}(1.2)^0  = 1      %} | -530            |
+| 2    | +150            | {% math 1\div{}(1.2)^1  = 0.833  %} | 125             |
+| 3    | +150            | {% math 1\div{}(1.2)^2  = 0.694  %} | 104             |
+| 4    | +150            | {% math 1\div{}(1.2)^3  = 0.579  %} | 87              |
+| 5    | +150            | {% math 1\div{}(1.2)^4  = 0.482  %} | 72              |
+|      |                 |                                     | -141 👎         |
+
+{% endcaption %}
 
 ### Internal Rate of Return
 

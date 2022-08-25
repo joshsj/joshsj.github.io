@@ -2,7 +2,7 @@ hexo.extend.generator.register("tag_pages", function (site) {
   const f = hexo.extend.helper.get("format_url");
 
   return site.tags.map((tag) => ({
-    path: `tag/${f(tag.name)}.html`,
+    path: `tags/${f(tag.name)}.html`,
     layout: "pages/tag",
     data: { tag, title: tag.name },
   }));

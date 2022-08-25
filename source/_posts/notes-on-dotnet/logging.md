@@ -15,8 +15,6 @@ The generic parameter specifies a _category_ (the source of the log). Its
 arbitrary but the enclosing class is the convention. The log _level_ (how bad it
 is) is specified with the `LogLevel` enum or dedicated methods.
 
-{% caption "Logging Category and Levels Example." %}
-
 ```c#
 public class SomeService
 {
@@ -29,8 +27,6 @@ public class SomeService
   }
 }
 ```
-
-{% endcaption %}
 
 We can specify the minimum severity of logs per-assembly using _filters_.
 

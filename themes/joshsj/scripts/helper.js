@@ -10,16 +10,12 @@ const UrlReplacements = Object.freeze(
   ].map(([old, _new]) => [RegExp(old, "g"), _new])
 );
 
-hexo.extend.helper.register("format_url", (obj) => {
-  const hmm = UrlReplacements.reduce(
+hexo.extend.helper.register("format_url", (obj) =>
+  UrlReplacements.reduce(
     (url, [exp, repl]) => url.replace(exp, repl),
     String(obj)
-  ).toLowerCase();
-
-  hexo.log.debug(hmm);
-
-  return hmm;
-});
+  ).toLowerCase()
+);
 
 // default isn't working
 hexo.extend.helper.register("is_home", function () {

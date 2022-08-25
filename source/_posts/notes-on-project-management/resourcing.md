@@ -23,7 +23,9 @@ task(s) or project.
   - Additional team members (pad em out)
 
 When deducing a resource, consider a 'full-time employee' whose actual work
-corresponds to ~170 working days per year (or 3.27 days per week):
+corresponds to ~170 working days per year (or 3.27 days per week).
+
+{% caption "Proof of a full-time employee's days worked" %}
 
 | Consideration                         | Difference | Total (days) |
 | ------------------------------------- | ---------- | ------------ |
@@ -32,3 +34,5 @@ corresponds to ~170 working days per year (or 3.27 days per week):
 | Holiday (typical in UK)               | -25        | 227          |
 | Non-working time (training, sickness) | -15        | 212          |
 | Margins (meetings, loo breaks, etc.)  | ×0.8       | **~170**     |
+
+{% endcaption %}

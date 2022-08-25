@@ -87,6 +87,8 @@ activity in a capacity:
 - **C**onsultable - provides information
 - **I**nformed - must be kept informed about progress
 
+{% caption "Linear Responsibility Chart" %}
+
 |                        | Project<br>Supervisor | Project<br>Manager | Analysis<br>Team Leader | Chief<br>Designer | Development<br>Manager | Team<br>Manager | Super<br>User |
 | ---------------------- | --------------------- | ------------------ | ----------------------- | ----------------- | ---------------------- | --------------- | ------------- |
 | Interview notes        | I                     | A                  | R                       | I                 |                        |                 | C             |
@@ -96,3 +98,5 @@ activity in a capacity:
 | Report text            | I                     | A                  | R                       | I                 |                        |                 | I             |
 | Report illustrations   | I                     | A                  | R                       | I                 |                        |                 | I             |
 | Report appendices      | I                     | A                  | R                       | I                 |                        |                 | I             |
+
+{% endcaption %}
