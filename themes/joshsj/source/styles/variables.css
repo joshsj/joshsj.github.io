@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:ital@0;1&display=swap");
 
 body {
+  /* safari is fucking garbage so we're not using calc */
+  /* doesn't work with gap */
   --space-1: 0.5rem;
-  --space-2: calc(var(--space-1) * 2);
-  --space-3: calc(var(--space-1) * 3);
-  --space-4: calc(var(--space-1) * 4);
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
   --separator: "•";
 
   --border-radius: 0.3rem;

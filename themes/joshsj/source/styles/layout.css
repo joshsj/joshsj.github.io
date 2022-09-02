@@ -25,6 +25,10 @@ main {
   margin-top: var(--space-4);
 }
 
+main {
+  margin-bottom: var(--space-4);
+}
+
 /* allow the hmm */
 body:not(.hmm) > nav {
   background-color: var(--light);
@@ -32,10 +36,6 @@ body:not(.hmm) > nav {
 
 nav > a {
   text-decoration: none;
-}
-
-main {
-  margin-bottom: var(--space-4);
 }
 
 @media (max-width: 768px) {
