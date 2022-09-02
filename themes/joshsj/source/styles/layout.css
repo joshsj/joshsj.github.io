@@ -7,7 +7,7 @@ body {
 header,
 nav,
 main {
-  width: min(42.5rem, calc(100vw - var(--space-2)));
+  width: min(42.5rem, calc(100vw - var(--space-3)));
 }
 
 header,
@@ -40,6 +40,6 @@ main {
 
 @media (max-width: 768px) {
   header {
-    margin-top: var(--space-1);
+    margin-top: var(--space-2);
   }
 }
