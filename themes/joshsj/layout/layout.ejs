@@ -49,15 +49,10 @@
   </header>
 
   <nav>
-    <% ["Home", "Articles", "Collections", "Portfolio"] .map((title)=>
-      site.pages.findOne({title})) .forEach(({title, path}) => { if (title !==
-      page.title) { %>
-      <a href="<%- url_for(path) %>">
-        <%- title %>
-      </a>
-      <% } else { %>
-        <span><%- title %></span>
-      <% }}) %>
+    <%- nav_link("Home") %>
+    <%- nav_link("Articles") %>
+    <%- nav_link("Collections") %>
+    <%- nav_link("Portfolio") %>
   </nav>
 
   <main class="content">

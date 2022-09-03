@@ -80,3 +80,11 @@ hexo.extend.helper.register("utoc", (...args) =>
     .replace(/<ol/g, "<ul")
     .replace(/<\/ol/g, "</ul")
 );
+
+hexo.extend.helper.register("nav_link", function (title) {
+  const { path } = this.site.pages.findOne({ title });
+
+  return title === this.page.title
+    ? `<span>${title}</span>`
+    : `<a href="${this.url_for(path)}">${title}</a>`;
+});

@@ -14,10 +14,10 @@ header,
 nav {
   font-weight: bold;
   text-transform: lowercase;
+}
 
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: var(--space-2);
+:where(header, nav) > :not(:last-child) {
+  margin-right: var(--space-1);
 }
 
 header,
@@ -34,7 +34,7 @@ body:not(.hmm) > nav {
   background-color: var(--light);
 }
 
-nav > a {
+nav a {
   text-decoration: none;
 }
 
