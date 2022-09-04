@@ -1,13 +1,6 @@
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-header,
-nav,
-main {
-  width: min(42.5rem, calc(100vw - var(--space-3)));
+  width: min(55ch, calc(100vw - var(--space-3)));
+  margin: var(--space-4) auto;
 }
 
 header,
@@ -20,13 +13,8 @@ nav {
   margin-right: var(--space-1);
 }
 
-header,
 main {
   margin-top: var(--space-4);
-}
-
-main {
-  margin-bottom: var(--space-4);
 }
 
 /* allow the hmm */
@@ -34,12 +22,12 @@ body:not(.hmm) > nav {
   background-color: var(--light);
 }
 
-nav a {
+nav > a {
   text-decoration: none;
 }
 
 @media (max-width: 768px) {
-  header {
+  body {
     margin-top: var(--space-2);
   }
 }

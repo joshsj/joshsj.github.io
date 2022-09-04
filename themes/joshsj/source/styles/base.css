@@ -30,6 +30,7 @@ body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
   line-height: 1.6;
+  letter-spacing: -0.03em;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -89,7 +90,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.055em;
   line-height: 1.2;
 }
 
@@ -155,18 +156,24 @@ label + select {
   margin-left: 0.5rem;
 }
 
-figure {
+figure > .inner {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+/* figure {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
 }
 
-figure > :not(table, pre, figcaption) {
+figure > .inner > :not(table, pre) {
   align-self: center;
-}
+} */
 
-figure > :not(figcaption, :first-child) {
+figure > .inner > :not(:first-child) {
   margin-top: var(--space-4);
 }
 
@@ -218,9 +225,10 @@ pre {
 }
 
 code {
-  font-size: 0.95em;
+  font-size: 0.9em;
   font-family: var(--ff-mono);
   overflow-wrap: break-word;
+  letter-spacing: 1;
 }
 
 :not(pre) > code {
@@ -261,10 +269,4 @@ ins {
 
 del {
   color: var(--red);
-}
-
-@media (max-width: 768px) {
-  figure {
-    overflow-y: auto;
-  }
 }

@@ -23,7 +23,13 @@ hexo.extend.helper.register("is_home", function () {
 });
 
 // very quick, not very robust long-term 🤷‍♂️
-const inCollection = (post) => post.path.split("/").length === 6;
+const inCollection = (post, urlTitle) => {
+  const inAny = post.path.split("/").length === 6;
+  const inSpecified = urlTitle ? post.path.includes(urlTitle) : true;
+
+  return inAny && inSpecified;
+};
+
 hexo.extend.helper.register("in_collection", inCollection);
 
 hexo.extend.helper.register("get_collection", function (post) {

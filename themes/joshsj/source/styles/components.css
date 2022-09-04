@@ -13,10 +13,6 @@
   margin-top: 0;
 }
 
-.card {
-  margin-top: var(--space-4);
-}
-
 .card > .extra {
   font-size: var(--fs-small);
   display: flex;
