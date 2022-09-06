@@ -26,6 +26,12 @@
   color: var(--pop);
 }
 
+.overflow {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
 .rainbow {
   animation: rainbow 2.5s infinite alternate;
 }

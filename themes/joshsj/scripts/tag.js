@@ -23,7 +23,7 @@ hexo.extend.tag.register(
 
     return `
       <figure>
-        <div class="inner">${content}</div>
+        <div class="overflow">${content}</div>
 
         <figcaption>
           ${source ? `<a href="${source}" class="source">Source</a>` : ""}

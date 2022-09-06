@@ -156,23 +156,6 @@ label + select {
   margin-left: 0.5rem;
 }
 
-figure > .inner {
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 100%;
-}
-
-/* figure {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
-figure > .inner > :not(table, pre) {
-  align-self: center;
-} */
-
 figure > .inner > :not(:first-child) {
   margin-top: var(--space-4);
 }

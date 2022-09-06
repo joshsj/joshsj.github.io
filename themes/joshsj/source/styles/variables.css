@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:ital@0;1&display=swap");
 
 body {
-  /* safari is fucking garbage so we're not using calc */
-  /* doesn't work with gap */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
