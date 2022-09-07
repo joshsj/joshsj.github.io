@@ -91,7 +91,7 @@ h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
   letter-spacing: -0.055em;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 summary,
@@ -156,6 +156,18 @@ label + select {
   margin-left: 0.5rem;
 }
 
+figure > .inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* 'center' class may be better */
+figure > .inner > a {
+  align-self: center;
+}
+
 figure > .inner > :not(:first-child) {
   margin-top: var(--space-4);
 }
@@ -169,12 +181,13 @@ figcaption > .source {
   float: right;
 }
 
-figure img {
-  border-radius: var(--border-radius);
+cite::before {
+  content: "~";
 }
 
 img {
   max-width: 100%;
+  border-radius: var(--border-radius);
 }
 
 table {

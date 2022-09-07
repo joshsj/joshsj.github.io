@@ -14,56 +14,42 @@ hexo.extend.tag.register(
 );
 
 const md = (text) => hexo.render.render({ text, engine: "md" });
+const toCaption = (content, caption, source = "") => `
+<figure>
+  <div class="overflow inner">${content}</div>
+  <figcaption>
+    ${source ? `<a href="${source}" class="source">Source</a>` : ""}
+    ${caption}
+  </figcaption>
+</figure>`;
 
 hexo.extend.tag.register(
   "caption",
-  async ([caption, source], content) => {
-    content = await md(content);
-    caption = await md(caption);
-
-    return `
-      <figure>
-        <div class="overflow">${content}</div>
-
-        <figcaption>
-          ${source ? `<a href="${source}" class="source">Source</a>` : ""}
-          ${caption}
-        </figcaption>
-      </figure>`;
-  },
+  async ([caption, source], content) =>
+    toCaption(await md(content), await md(caption), source),
   { ends: true, async: true }
 );
 
 hexo.extend.tag.register(
   "caption_img",
-  async ([src, caption, source]) => `
-  <figure>
-    <a href="${src}" class="hide"><img src="${src}" alt="${caption}"></a>
-    
-    <figcaption>
-      ${source ? `<a href="${source}" class="source">Source</a>` : ""}
-      ${await md(caption)}
-    </figcaption>
-  </figure>`,
+  async ([src, caption, source]) =>
+    toCaption(
+      `<a href="${src}" class="hide"><img src="${src}" alt="${caption}"></a>`,
+      await md(caption),
+      source
+    ),
   { async: true }
 );
 
 hexo.extend.tag.unregister("quote");
 hexo.extend.tag.register(
   "quote",
-  async ([citation, source], quote) => {
-    quote = await md(quote.trim());
-
-    return `
-      <figure>
-        <blockquote>${quote}</blockquote>
-
-        <figcaption>
-          ${source ? `<a href="${source}" class="source">Source</a>` : ""}
-          <cite>${citation}</cite>
-        </figcaption>
-      </figure>`;
-  },
+  async ([citation, source], quote) =>
+    toCaption(
+      `<blockquote>${await md(quote.trim())}</blockquote>`,
+      `<cite>${citation}</cite>`,
+      source
+    ),
   { ends: true, async: true }
 );
 

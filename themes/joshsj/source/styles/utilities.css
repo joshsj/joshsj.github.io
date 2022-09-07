@@ -4,7 +4,8 @@
 }
 
 .sep > ::after {
-  font-size: 0.65em;
+  font-size: 0.85em;
+  line-height: 1;
   vertical-align: middle;
   color: var(--dark);
 }
@@ -29,7 +30,6 @@
 .overflow {
   overflow-x: auto;
   overflow-y: hidden;
-  width: 100%;
 }
 
 .rainbow {

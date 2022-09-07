@@ -68,9 +68,9 @@ user(s), designed can further tailor a product to its end-users.
 They specify a theoretical or an actual end-user requiring an age, personal
 background, personal needs, etc., and are formatted as a paragraph.
 
-{% quote "Example User Persona" %}
+{% caption "Example User Persona" %}
 
-Betty is 37 years old, she has been Warehouse Manager for five years and worked
+_Betty is 37 years old, she has been Warehouse Manager for five years and worked
 for Simpkins Brothers Engineering for twelve years. She didn't go to university,
 but has studied in her evenings for a business diploma. She has two children
 aged 15 and 7 and does not like to work late. She did part of an introductory
@@ -80,9 +80,9 @@ her right-hand movement is slightly restricted following an car accident three
 years ago. She is enthusiastic about her work and is happy to delegate
 responsibility and take suggestions from her staff. However, she does feel
 threatened by the introduction of yet another new computer system (the third in
-her time at SBE)
+her time at SBE)_
 
-{% endquote %}
+{% endcaption %}
 
 ## Task Analysis
 
