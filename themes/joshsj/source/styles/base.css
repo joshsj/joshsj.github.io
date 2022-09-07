@@ -160,11 +160,11 @@ figure > .inner {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 /* 'center' class may be better */
-figure > .inner > a {
+figure > .inner > img {
   align-self: center;
 }
 
