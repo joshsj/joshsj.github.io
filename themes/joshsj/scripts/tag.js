@@ -33,7 +33,11 @@ hexo.extend.tag.register(
 hexo.extend.tag.register(
   "caption_img",
   async ([src, caption, source]) =>
-    toCaption(`<img src="${src}" alt="${caption}">`, await md(caption), source),
+    toCaption(
+      `<img src="${src}" alt="${caption}" loading="lazy">`,
+      await md(caption),
+      source
+    ),
   { async: true }
 );
 
