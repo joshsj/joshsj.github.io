@@ -138,10 +138,6 @@ ol {
   margin-left: 1.25em;
 }
 
-ul > li::marker {
-  color: var(--pop);
-}
-
 li::marker {
   margin-right: 1em;
 }
@@ -182,7 +178,7 @@ figcaption > .source {
 }
 
 cite::before {
-  content: "~";
+  content: "— ";
 }
 
 img {
