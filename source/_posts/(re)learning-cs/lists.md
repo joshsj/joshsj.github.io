@@ -11,7 +11,7 @@ ordered collection of values of the same data type.<!--excerpt-->
 
 ## Array
 
-An array stores its values in adjacent memory locations and (generally) has a
+An array stores its values in adjacent memory locations (contiguous) and has a
 fixed length like `int[]`. For cases where the program doesn't know the data
 size in advance, languages also use dynamic arrays, like `vector<T>`, which
 resize on the fly (see [adding & removing](#Adding-amp-Removing))

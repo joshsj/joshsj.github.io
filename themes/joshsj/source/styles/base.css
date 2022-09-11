@@ -16,6 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   outline-color: var(--blue);
+  border-radius: var(--border-radius);
 
   scroll-margin-top: var(--space-2);
 }
@@ -44,7 +45,6 @@ button {
 
 button:not(.link) {
   border: var(--border);
-  border-radius: var(--border-radius);
   padding: 0 0.2em;
   background-color: var(--light-grey);
 }
@@ -143,7 +143,6 @@ li::marker {
 }
 
 select {
-  border-radius: var(--border-radius);
   color: var(--black);
   background-color: var(--white);
 }
@@ -183,7 +182,6 @@ cite::before {
 
 img {
   max-width: 100%;
-  border-radius: var(--border-radius);
 }
 
 table {
@@ -224,7 +222,6 @@ code {
 }
 
 :not(pre) > code {
-  border-radius: var(--border-radius);
   background-color: var(--light-grey);
   padding: 0 0.25ch;
 }
@@ -244,6 +241,7 @@ details {
   padding-bottom: var(--space-1);
   border-top: var(--border);
   border-bottom: var(--border);
+  border-radius: 0;
 }
 
 summary {

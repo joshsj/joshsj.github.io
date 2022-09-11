@@ -1,38 +1,20 @@
 ---
 title: Trees
 date: 2022-08-04
-updated: 2022-08-23
+updated: 2022-09-10
 collection: (Re)Learning CS
 tags:
   - Computer Science
 ---
 
-The tree data structure is different to those in graph, but they overlap a a
-lot.
+Trees are a restricted subset of graphs.
+
+<!-- more -->
+
+To get to grips with the terminology, jump ahead to the basics of
+<a href="{% post_path (re)learning-cs/graphs %}">graphs</a>.
 
 {% spotify track/4iVTSRiJAA18d3QglhyJ6Q %}
-
-## The Basics
-
-A _node_, or _vertex_, is a value in the data structure (in this context).
-
-An _edge_, is a connection between nodes.
-
-_Directionality_ is a property of an edge, indicating how the edge can be
-traversed; i.e., which way can you drive down the street.
-
-A _cycle_ is a path starting and ending at the same node.
-
-A _graph_ is <!--excerpt-->a collection of nodes and edges<!--excerpt-->, like a
-<a href="{% post_path(re)learning-cs/ lists %}#Linked-List">linked list</a>.
-
-A _tree_ is a graph with these constraints:
-
-- No cycles
-- No unconnected nodes; everything needs an edge
-- No directionality
-
-The _null tree_, or _empty tree_, is a tree with zero nodes or edges.
 
 ## Rooted Tree
 
