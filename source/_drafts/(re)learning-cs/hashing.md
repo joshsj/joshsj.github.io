@@ -17,24 +17,55 @@ This is the basic idea: for a given key, we use a function to produce a unique
 value based on the key; we transform this value into an index where we can store
 some data.
 
-A _hash table_ stores the key itself at the index (a set) and a _hash map_
-stores a key-value pair for association (a
-<a href="{% post_path (re)learning-cs/abstract-data-types %}#Map">map</a>).
-
 Naturally, we need a backing structure to use the indexes --- an array, cos it's
 hella quick.
 
 ## Structures
 
-A _hash table_ stores the key itself at the index --- a set.
+How is hashing used to store data?
 
-A _hash map_ stores a key-value pair for association --- a
-<a href="{% post_path (re)learning-cs/abstract-data-types %}#Map">map</a>.
+### Hash Table
+
+A set, storing the key itself at the index.
+
+### Hash Map
+
+A <a href="{% post_path (re)learning-cs/abstract-data-types %}#Map">map</a>,
+storing a key-value pair for association.
+
+### Bloom Filter
+
+An alternate take on a hash map, useful only to check if a value exists in the
+structure.
+
+It stores boolean values only; for a given value {% tex V %}, we use {% tex K %}
+hash functions to calculate its indexes and set them to true.
+
+The structure is _probabilistic_; false negatives aren't possible but false
+positives are, so the precision of a hash map is sacrificed for memory
+efficiency. For example, for an array of length {% tex m %}, let:
+
+{% dtex H_1(K)=ascii(K)\mod{m} \\ H_2(K)=ascii(K)+4\mod{m} \\  H_3(K)=4\times{}ascii(K)\mod{m} %}
+
+Inserting B returns indexes 1, 3, and 4; inserting L also returns 1, 3, and 4.
+
+### Count-Min Sketches
+
+Extending on bloom filters, _count-min sketches_ store the frequency of values
+in an {% tex m\times{}k %} 2D array.
+
+They're still probabilistic meaning the frequencies provide an upper limit.
+Using the example above, inserting B and L would produce values of 2 at each
+index so the upper limit of B or L is 2.
+
+Keys with fewer collisions are more accurate but we can't know which those are
+🤔
 
 ## Hash Functions
 
-A _hash function_ {% math h(k) %} is any function which transforms data of an
-arbitrary size into a fixed size.
+A _hash function_ {% tex h(k) %} is any function which transforms data of an
+arbitrary size into a fixed size. They're used to compute the index of a key in
+hashing structures.
 
 All hash function obey the _equality_ property: given two keys of equal value,
 their hashes must also be equal.
@@ -56,16 +87,16 @@ Making things harder, lets accept string; applying the same principle, we can
 sum the ASCII values to produce an index. This has a glaring issue in that
 `hello` and `olleh` return the same value.
 
-This means good hash functions must have a time complexity of {% math K %},
-where {% math K %} is the length of the input, and must also perform
-non-commutative arithmetic.
+This means good hash functions must have a time complexity of {% tex K %}, where
+{% tex K %} is the length of the input, and must also perform non-commutative
+arithmetic.
 
 ### Producing An Index
 
-To store a object {% math o %} in an array of length {% math m %}:
+To store a object {% tex o %} in an array of length {% tex m %}:
 
-1. Create the hash value {% math hv=h(o) %}
-2. Transform the hash value into a valid index {% math i=hv\mod{m} %}
+1. Create the hash value {% tex hv=h(o) %}
+2. Transform the hash value into a valid index {% tex i=hv\mod{m} %}
 
 ## Collision Resolution
 
@@ -127,7 +158,7 @@ An issue with linear probing is _clumping_: groups of adjacent indexes. They're
 liked stats.
 
 You can use _double hashing_ to eliminate clumping which determines the _offset_
-using another hash function. A common choice is {% math
+using another hash function. A common choice is {% tex
 1+\frac{K}{M}\mod{(M-1)} %}.
 
 ### Random Hashing
@@ -171,11 +202,11 @@ can now store multiple values at a given index --- which is cool.
 For those not biologically-inclined (like me), the name comes from the habits of
 cuckoos.
 
-When a key {% math K_1 %} has been inserted and another key {% math K_2 %}
+When a key {% tex K_1 %} has been inserted and another key {% tex K_2 %}
 collides, the new key is inserted and the previous key is rehashed to a new
 location.
 
-_Cuckoo hashing_ uses multiple hash tables {% math T_1, T_2 %} with different
+_Cuckoo hashing_ uses multiple hash tables {% tex T_1, T_2 %} with different
 hash functions to reduce the probability of collisions. The algorithm for cuckoo
 hashing is limited to a maximum number of attempts, usually 10, to ensure we
 don't
@@ -183,11 +214,11 @@ don't
 The algorithm is as follows:
 
 1. A key collides in {%
-   math T_1 %}
-2. It moves to {% math T_2 %}
-3. If it collides again in {% math T_2 %}, the existing key is rehashed for {%
-   math T_1 %}
-4. If this key collides, the existing key if rehashed for {% math T_2 %} and so
+   tex T_1 %}
+2. It moves to {% tex T_2 %}
+3. If it collides again in {% tex T_2 %}, the existing key is rehashed for {%
+   tex T_1 %}
+4. If this key collides, the existing key if rehashed for {% tex T_2 %} and so
    on and so on...
 
 See this
@@ -195,4 +226,4 @@ See this
 if that isn't so clear.
 
 Cuckoo hashing is {% bigo 1 %} for find & delete operations --- if the key isn't
-at {% math H_1(K) %} or {% math H_2(K) %} then it isn't in the table.
+at {% tex H_1(K) %} or {% tex H_2(K) %} then it isn't in the table.

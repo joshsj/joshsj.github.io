@@ -36,16 +36,16 @@ The three main notations to describe time complexity are:
 Generally, we only care about Big-O 'cause the fastest case of algorithm can be
 taken for granted. When measuring Big-O, some rules apply:
 
-1. Constant factors of {% math n %} are removed so {% math 3n+2%} becomes {%
-   math n %}.
+1. Constant factors of {% tex n %} are removed so {% tex 3n+2%} becomes {%
+   tex n %}.
 
    Mathematical reasons apply which I can't quite follow but practically,
-   constant time doesn't matter as {% math n\to\infty %}.
+   constant time doesn't matter as {% tex n\to\infty %}.
 
-2. Only the largest term of {% math n %} is considered, so {% math n^2+3n+1 %}
-   becomes {% math n^2 %}.
+2. Only the largest term of {% tex n %} is considered, so {% tex n^2+3n+1 %}
+   becomes {% tex n^2 %}.
 
-   Again, as {% math n\to\infty %}, all but the greatest exponent becomes
+   Again, as {% tex n\to\infty %}, all but the greatest exponent becomes
    insignificant.
 
 {% caption_img graph.png "Graph of time complexities against input size." %}
@@ -67,7 +67,7 @@ There are four common classes of computational complexity:
 - **N**ondeterministic **P**olynomial --- verifiable in polynomial time
 
   - An algorithm exists which can verify that an answer to the problem is valid
-  - This means {% math \text{P} \subseteq \text{NP} %}, as solving the problem
+  - This means {% tex \text{P} \subseteq \text{NP} %}, as solving the problem
     can verify an answer implicitly
   - There may be an algorithm to solve the problem but with a worse time
     complexity
@@ -76,11 +76,11 @@ There are four common classes of computational complexity:
 
 - **NP-Complete** --- the hardest problems in NP
   - Or, the problems in NP-Hard which can be verified in polynomial time
-  - {% math \text{NP} \cap \text{NP-Hard} %}
+  - {% tex \text{NP} \cap \text{NP-Hard} %}
 
 When tackling a computational problem in the real world, it's ideal for the
-solution to exist within {% math P %}, or to be simplifiable into {% math P %}.
-If not, two options are available:
+solution to exist within {% tex P %}, or to be simplifiable into {% tex P %}. If
+not, two options are available:
 
 - For small input sizes, a non-polynomial-time solution may work
 - For larger inputs, heuristics may allow for a 'good enough' solution

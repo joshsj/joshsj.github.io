@@ -1,7 +1,7 @@
 {
   "Math Tag Helper": {
     "prefix": ["math"],
-    "body": ["{% math $0 %}"]
+    "body": ["{% tex $0 %}"]
   },
   "Big-O Tag Helper": {
     "prefix": ["bigo"],

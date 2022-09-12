@@ -33,26 +33,26 @@ undirected edges between them --- we aren't talking about these 🤫
 _Directionality_ is a property of an edge, indicating how the edge can be
 traversed (which way can you drive down the street).
 
-In an _directed_ graph, defining an edge {% math e = (v, w) %} means we can only
-traverse from {% math v %} to {% math w %}. In an _undirected_ graph, we can go
+In an _directed_ graph, defining an edge {% tex e = (v, w) %} means we can only
+traverse from {% tex v %} to {% tex w %}. In an _undirected_ graph, we can go
 both ways.
 
-To convert from an undirected graph, for each {% math (v, w) %} in {% math E
-%}, we add {% math (w, v) %} to allow traversal in both directions.
+To convert from an undirected graph, for each {% tex (v, w) %} in {% tex E
+%}, we add {% tex (w, v) %} to allow traversal in both directions.
 
 ### Weight
 
 Another property of edges is _weight_ (or _cost_); on a map, the cost between
 two places could be distance or elevation change.
 
-We define an edge with weight as {% math e = (v, w, 2) %}, where {% math 2 %}
+We define an edge with weight as {% tex e = (v, w, 2) %}, where {% tex 2 %}
 represents the cost.
 
 ### Density
 
 What's the most edges a graph can have? Excluding multigraphs, defining a edge
 from each vertex to every other vertex, plus itself, gives an upper-bound of {%
-math |E| = |V| \times |V| = |V|^2 %};
+tex |E| = |V| \times |V| = |V|^2 %};
 
 Therefore we consider a graph to be _dense_ or _sparse_ when its amount of edges
 is near or far to the upper-bound respectively.
@@ -61,15 +61,15 @@ is near or far to the upper-bound respectively.
 
 Graphs can be proper big so we can't always traverse a pretty picture.
 
-We represent graph {% math G = (V, E) %}, where {% math V %} is the set of
-vertices in {% math G %} and {% math E %} is the set of edges in {% math G %}.
+We represent graph {% tex G = (V, E) %}, where {% tex V %} is the set of
+vertices in {% tex G %} and {% tex E %} is the set of edges in {% tex G %}.
 
-An edge {% math E %} is represented as a pair {% math (v, w) %} such that {%
-math v %} and {% math w %} are vertices.
+An edge {% tex E %} is represented as a pair {% tex (v, w) %} such that {%
+tex v %} and {% tex w %} are vertices.
 
-When considering the [size](#size) of a graph, {% math |V| %} (or {% math n %})
-is the total number of vertices and {% math |E| %} (or {% math m %}) is the
-total number of edges.
+When considering the [size](#size) of a graph, {% tex |V| %} (or {% tex n %}) is
+the total number of vertices and {% tex |E| %} (or {% tex m %}) is the total
+number of edges.
 
 For a full list, see
 [this document](https://www3.nd.edu/~dgalvin1/60610/60610_S09/60610graphnotation.pdf).

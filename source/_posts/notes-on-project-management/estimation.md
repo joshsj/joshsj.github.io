@@ -143,11 +143,11 @@ Assessing the complexity of a function uses several factors:
 
 ### Basic Cost Model
 
-The _Basic Cost Model_ uses the formula {% math E =
+The _Basic Cost Model_ uses the formula {% tex E =
 A\cdot{}M\cdot{}X\cdot{}S^B %} where:
 
-- {% math A %} applies an organisation-wide constant factor to cost models
-- {% math S %} is software 'size'
+- {% tex A %} applies an organisation-wide constant factor to cost models
+- {% tex S %} is software 'size'
 
   - LOC is the most common metric; varies wildly by languages & patterns
   - Difficult to assess in early phases with external integrations:
@@ -156,11 +156,11 @@ A\cdot{}M\cdot{}X\cdot{}S^B %} where:
     - Modified internal/open source solution
     - Bought from a 3rd party
 
-- {% math B %} does something, usually between `1` to `1.5`. I'm guessing it
+- {% tex B %} does something, usually between `1` to `1.5`. I'm guessing it
   accounts for complexity, as the complexity of a solution will grow
-  polynomially relative to size, and it's applied as a power of {% math S %}.
+  polynomially relative to size, and it's applied as a power of {% tex S %}.
 
-- {% math M %} is a linear adjustment multiplier, which could also account for
+- {% tex M %} is a linear adjustment multiplier, which could also account for
   complexity
 
-- {% math X %} is vector of cost factors
+- {% tex X %} is vector of cost factors

@@ -58,11 +58,11 @@ print("hello world")
 
 ### `math`
 
-{% math 1+2=3 %}
+{% tex 1+2=3 %}
 
-### `display_math`
+### `dtex`
 
-{% display_math 1+2=3 %}
+{% dtex 1+2=3 %}
 
 ### `bigo`
 

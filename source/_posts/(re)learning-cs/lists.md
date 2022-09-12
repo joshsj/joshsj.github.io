@@ -19,9 +19,9 @@ resize on the fly (see [adding & removing](#Adding-amp-Removing))
 ### Indexing
 
 Because array elements are stored together, they can use _pointer arithmetic_
-for indexing. For any array of type {% math T %}, where {% math B %} is the size
-of {% math T %} in bytes and {% math X %} is its starting memory address, an
-item at index {% math I %} is at address {% math X+BI %}.
+for indexing. For any array of type {% tex T %}, where {% tex B %} is the size
+of {% tex T %} in bytes and {% tex X %} is its starting memory address, an item
+at index {% tex I %} is at address {% tex X+BI %}.
 
 {% caption_img array.png "Example of pointer arithmetic." https://stepik.org/lesson/28868/step/1 %}
 
@@ -95,17 +95,17 @@ _tail pointer_ is also typically kept to access the end.
 
 Accessing nodes in a linked list is {% bigo n %}, as the nodes must be traversed
 until the index is reached. To lessen the blow, we can store the length of the
-list {% math L %} to determine if an index {% math I %} is closer to the head
-({% math 0 %}) or tail ({% math L-1 %}).
+list {% tex L %} to determine if an index {% tex I %} is closer to the head
+({% tex 0 %}) or tail ({% tex L-1 %}).
 
 ### Adding & Removing
 
 Again, it's {% bigo n %}.
 
-To insert a new element {% math E %} at index {% math I %}, the current node at
-index {% math I %} is updated to point to {% math E %} and {% math E %} is
-updated to point at node {% math I+1 %}. For a double-linked list, the previous
-pointer is also updated.
+To insert a new element {% tex E %} at index {% tex I %}, the current node at
+index {% tex I %} is updated to point to {% tex E %} and {% tex E %} is updated
+to point at node {% tex I+1 %}. For a double-linked list, the previous pointer
+is also updated.
 
 Removal is the same idea but the current value is forgotten about.
 
@@ -129,9 +129,9 @@ https://stepik.org/lesson/28869/step/6 %}
 We can still use pointer arithmetic to achieve {% bigo 1 %}, as long as we
 respect the head pointer.
 
-For any array of type {% math T %} with length {% math L %}, where {% math B %}
-is the size of {% math T %} in bytes, and {% math H %} is the head pointer
-address, an item at index {% math I %} is at address {% math (H+BI)\mod{L} %}.
+For any array of type {% tex T %} with length {% tex L %}, where {% tex B %} is
+the size of {% tex T %} in bytes, and {% tex H %} is the head pointer address,
+an item at index {% tex I %} is at address {% tex (H+BI)\mod{L} %}.
 
 ### Adding & Removing
 

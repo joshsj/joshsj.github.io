@@ -25,6 +25,10 @@
   background-color: var(--light-grey);
 }
 
+.katex-html > .newline {
+  margin-bottom: 0.5em;
+}
+
 .katex-display {
   margin: 0;
 }

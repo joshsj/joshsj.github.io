@@ -139,7 +139,7 @@ equidistant from the root and most internal nodes have two children. When
   https://stepik.org/lesson/28727/step/9
 %}
 
-The average-case time complexity to find an element {% math N %} is {% bigo
+The average-case time complexity to find an element {% tex N %} is {% bigo
 \log N %}; there is a proof, but it's [fucking mental](https://stepik.org/lesson/28730/step/4)
 and I can't understand math so complex any more.
 
@@ -161,8 +161,8 @@ properties for binary trees.
 Alternatively, we can utilise pointer arithmetic to store binary trees in
 <a href="{% post_path (re)learning-cs/lists %}#Array">arrays</a>. The start of
 the array represents the tree root and the following formulae can access nodes
-relative to an index {% math I %}:
+relative to an index {% tex I %}:
 
-- Parent: {% math \lfloor\frac{I-1}{2}\rfloor %}
-- Left Child: {% math 2i+1 %}
-- Right Child: {% math 2i+2 %}
+- Parent: {% tex \lfloor\frac{I-1}{2}\rfloor %}
+- Left Child: {% tex 2i+1 %}
+- Right Child: {% tex 2i+2 %}

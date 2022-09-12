@@ -59,13 +59,13 @@ hexo.extend.tag.register(
     ` <iframe class="spotify space" src="https://open.spotify.com/embed/${link}"></iframe>`
 );
 
-const math = (args, format, opts = {}) =>
+const tex = (args, format, opts = {}) =>
   katex.renderToString(format.replace("args", args.join(" ")), opts);
 
-hexo.extend.tag.register("math", (args) => math(args, "args"));
+hexo.extend.tag.register("tex", (args) => tex(args, "args"));
 
-hexo.extend.tag.register("display_math", (args) =>
-  math(args, "args", { displayMode: true })
+hexo.extend.tag.register("dtex", (args) =>
+  tex(args, "args", { displayMode: true })
 );
 
-hexo.extend.tag.register("bigo", (args) => math(args, "\\mathcal{O}(args)"));
+hexo.extend.tag.register("bigo", (args) => tex(args, "\\mathcal{O}(args)"));

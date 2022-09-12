@@ -24,28 +24,28 @@ investment_, i.e., breaking even one year later is ultimately a loss.
 
 ### Calculations
 
-_Present value_ {% math PV %} is an amount of money at-present.
+_Present value_ {% tex PV %} is an amount of money at-present.
 
-_Future value_ {% math FV %} is an amount of money in the future, corresponding
+_Future value_ {% tex FV %} is an amount of money in the future, corresponding
 to some prevent value.
 
-_Interest_ is the annual rate {% math R %} at which the present value changes;
+_Interest_ is the annual rate {% tex R %} at which the present value changes;
 _discount_ applies to future value retrospectively.
 
-Lastly, the rates are applied across a number of annual periods {% math N %}.
+Lastly, the rates are applied across a number of annual periods {% tex N %}.
 Since the rate for a given year is derived from the year previous, they are
 applied cumulatively.
 
 {% caption "Present & Future Value Formulae" %}
 
-{% display_math FV = PV(1 + R)^{N}  %}
+{% dtex FV = PV(1 + R)^{N}  %}
 
-{% display_math "PV = \\frac{PV}{(1 + R)^{N}}"  %}
+{% dtex "PV = \\frac{PV}{(1 + R)^{N}}"  %}
 
 {% endcaption %}
 
 For example, 10% interest turns $1 into $1.10 across one year:
-{% math "1(1 + 0.1)^1 =  \\$1.10" %}.
+{% tex "1(1 + 0.1)^1 =  \\$1.10" %}.
 
 ## Methods of Appraisal
 
@@ -86,14 +86,14 @@ relative to the initial costs:
 
 {% caption "Example of NPV calculations" %}
 
-| Year | Net Profit (FV) | Rate                                | Net Profit (PV) |
-| ---- | --------------- | ----------------------------------- | --------------- |
-| 1    | -530            | {% math 1\div{}(1.2)^0  = 1      %} | -530            |
-| 2    | +150            | {% math 1\div{}(1.2)^1  = 0.833  %} | 125             |
-| 3    | +150            | {% math 1\div{}(1.2)^2  = 0.694  %} | 104             |
-| 4    | +150            | {% math 1\div{}(1.2)^3  = 0.579  %} | 87              |
-| 5    | +150            | {% math 1\div{}(1.2)^4  = 0.482  %} | 72              |
-|      |                 |                                     | -141 👎         |
+| Year | Net Profit (FV) | Rate                               | Net Profit (PV) |
+| ---- | --------------- | ---------------------------------- | --------------- |
+| 1    | -530            | {% tex 1\div{}(1.2)^0  = 1      %} | -530            |
+| 2    | +150            | {% tex 1\div{}(1.2)^1  = 0.833  %} | 125             |
+| 3    | +150            | {% tex 1\div{}(1.2)^2  = 0.694  %} | 104             |
+| 4    | +150            | {% tex 1\div{}(1.2)^3  = 0.579  %} | 87              |
+| 5    | +150            | {% tex 1\div{}(1.2)^4  = 0.482  %} | 72              |
+|      |                 |                                    | -141 👎         |
 
 {% endcaption %}
 

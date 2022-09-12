@@ -94,7 +94,7 @@ bigo 1 %} to peek and {% bigo \log n %} to insert/remove.
 
 ## Map
 
-There's lots of associate data: a students name and their grade, a customer's
+There's lots of associated data: a students name and their grade, a customer's
 account number and their balance, etc.
 
 A _map_ uses a _key_ to identify data and a _value_ to store the data. They are
