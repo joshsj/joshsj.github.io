@@ -201,8 +201,8 @@ th {
   text-align: left;
 }
 
-th,
-td {
+th
+/* TODOD is this good ? td */ {
   white-space: nowrap;
 }
 

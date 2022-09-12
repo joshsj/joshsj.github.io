@@ -13,6 +13,6 @@
   },
   "Inline Header": {
     "prefix": ["ih", "hi", "inline_header"],
-    "body": "<span role=\"heading\">$0</span>"
+    "body": "<span role=\"heading\" aria-level=\"${1:4}\">$0</span>"
   }
 }
