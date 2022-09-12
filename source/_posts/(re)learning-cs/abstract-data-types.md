@@ -89,5 +89,30 @@ insert into a sorted position. An unsorted linked list swaps the time
 complexities and array implementations suffer the same pain.
 
 Instead we can use a
-<a href="{% post_path (re)learning-cs/trees %}#Heap">Heap</a>, giving us {%
+<a href="{% post_path (re)learning-cs/trees %}#Heap">heap</a>, giving us {%
 bigo 1 %} to peek and {% bigo \log n %} to insert/remove.
+
+## Map
+
+There's lots of associate data: a students name and their grade, a customer's
+account number and their balance, etc.
+
+A _map_ uses a _key_ to identify data and a _value_ to store the data. They are
+generally defined with
+
+- `put(key, value)`
+- `get(key)`
+- `remove(key)`
+- `size()`
+- `has(key)`
+
+When inserting a duplicate key, the value is generally overwritten but C++
+deviates from this with its `unordered_map`.
+
+We can implement maps with many data structures but random lookup is often
+prioritised by using
+<a href="{% post_path (re)learning-cs/hashing %}#Hash-Map">hash maps</a>. That
+said, a
+<a href="{% post_path (re)learning-cs/trees %}#Binary-Search-Tree">binary search
+tree</a> could keep the keys ordered while sacrificed that sweet sweet constant
+lookup time complexity of a hash map.

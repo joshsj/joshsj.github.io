@@ -8,21 +8,28 @@ tags:
 With data structures like a sorted
 <a href="{% post_path (re)learning-cs/lists %}#Array">array</a> or a balanced
 <a href="{% post_path (re)learning-cs/trees %}#Binary-Search-Tree">binary search
-tree</a>, we achieve {% bigo \log{n} %} to find a random value. With _hash
-tables_, we make that {% bigo 1 %} 🎉
+tree</a>, we achieve {% bigo \log{n} %} to find a random value. With hashing, we
+make that {% bigo 1 %} 🎉
 
 <!-- more -->
 
 This is the basic idea: for a given key, we use a function to produce a unique
 value based on the key; we transform this value into an index where we can store
-to the key.
+some data.
+
+A _hash table_ stores the key itself at the index (a set) and a _hash map_
+stores a key-value pair for association (a
+<a href="{% post_path (re)learning-cs/abstract-data-types %}#Map">map</a>).
 
 Naturally, we need a backing structure to use the indexes --- an array, cos it's
 hella quick.
 
-Note: As well as hash tables, there are many more uses in cryptography, version
-control diffs, password storage etc. Common implementations include MD5, SHA-1,
-and CRC.
+## Structures
+
+A _hash table_ stores the key itself at the index --- a set.
+
+A _hash map_ stores a key-value pair for association --- a
+<a href="{% post_path (re)learning-cs/abstract-data-types %}#Map">map</a>.
 
 ## Hash Functions
 
@@ -35,6 +42,10 @@ their hashes must also be equal.
 A _perfect_ hash function also obeys the _inequality_ property: given two keys
 of inequal value, their hashes must be unequal. In the real world, this is
 difficult to achieve so a 'good' hash function minimises _collisions_.
+
+Note: As well as hash tables/maps, there are many more uses of hashing including
+cryptography, version control diffs, password storage etc. Common
+implementations include MD5, SHA-1, and CRC.
 
 ### Make It Gud
 
@@ -63,10 +74,10 @@ the backing array and the hash function itself.
 
 There are four categories of collision resolution mechanisms:
 
-|            | Closed                                               | Open                                                                       |
-| ---------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
-| Addressing | Indexes are determined entirely by the hash function | Indexes are determined beyond by the hash function                         |
-| Hashing    | Keys are stored at their index                       | Addresses to another structure (containing the keys) are stored at indexes |
+|            | Closed                                               | Open                                                                   |
+| ---------- | ---------------------------------------------------- | ---------------------------------------------------------------------- |
+| Addressing | Indexes are directly determined by the hash function | Indexes are determined algorithmically to account for colliding keys   |
+| Hashing    | At at key's index, the key is stored                 | At a key's index, a [separate](#Separate-Chaining) structure is stored |
 
 ### Linear Probe
 
@@ -146,10 +157,42 @@ insertion but it previously held a value.
 
 (Closed addressing, open hashing)
 
-Where previous methods store the key at their index, _separate chaining_ stores
-addresses to other data structures which contain keys.
+Where previous methods store the key at their index, _separate chaining_ uses a
+separate data structure (such as a linked list) to store all keys with the same
+hash.
 
-Duplicates are resolved when inserting or deleting and we can now store multiple
-values at a given index --- which is cool.
+Implicitly, clumps are now irrelevant as the structure itself is a clump and we
+can now store multiple values at a given index --- which is cool.
 
-### Cuckoo Hashing
+### Cuckoo Hashing 🐦
+
+(Open addressing, closed hashing (?))
+
+For those not biologically-inclined (like me), the name comes from the habits of
+cuckoos.
+
+When a key {% math K_1 %} has been inserted and another key {% math K_2 %}
+collides, the new key is inserted and the previous key is rehashed to a new
+location.
+
+_Cuckoo hashing_ uses multiple hash tables {% math T_1, T_2 %} with different
+hash functions to reduce the probability of collisions. The algorithm for cuckoo
+hashing is limited to a maximum number of attempts, usually 10, to ensure we
+don't
+[try forever](https://docs.google.com/presentation/d/1uNYS51BNM66GJmM0vDIWnac-Y9VUQxOpYikpJoKXJyo/embed)
+The algorithm is as follows:
+
+1. A key collides in {%
+   math T_1 %}
+2. It moves to {% math T_2 %}
+3. If it collides again in {% math T_2 %}, the existing key is rehashed for {%
+   math T_1 %}
+4. If this key collides, the existing key if rehashed for {% math T_2 %} and so
+   on and so on...
+
+See this
+[visualisation](https://docs.google.com/presentation/d/1enss8FYHLN5VfPXA1ODzV0rxnr62lFrUrlURqKnkaj8/embed?start=true&loop=true&delayms=1000)
+if that isn't so clear.
+
+Cuckoo hashing is {% bigo 1 %} for find & delete operations --- if the key isn't
+at {% math H_1(K) %} or {% math H_2(K) %} then it isn't in the table.
