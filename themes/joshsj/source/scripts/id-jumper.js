@@ -1,15 +1,10 @@
 (() => {
-  const els = document.querySelectorAll("h1, .headerlink");
+  const els = document.querySelectorAll(":where(h1,h2,h3)[id]");
   let current = undefined;
 
   const handlers = {
-    ArrowUp: () => {
-      current > 0 && --current;
-    },
-
-    ArrowDown: () => {
-      current < els.length - 1 && ++current;
-    },
+    ArrowUp: () => (current > 0 ? current - 1 : els.length - 1),
+    ArrowDown: () => (current < els.length - 1 ? current + 1 : 0),
   };
 
   if (!els.length) {
@@ -27,13 +22,8 @@
       return;
     }
 
-    if (typeof current !== "undefined") {
-      handler();
-    } else {
-      // initial value
-      current = 0;
-    }
+    current = typeof current !== "undefined" ? handler() : 0;
 
-    els[current].scrollIntoView({ behavior: "smooth" });
+    location.hash = els[current].id;
   });
 })();
