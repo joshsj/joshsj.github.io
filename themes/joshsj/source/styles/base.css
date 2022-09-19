@@ -16,7 +16,6 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   outline-color: var(--blue);
-  border-radius: var(--border-radius);
 
   scroll-margin-top: var(--space-2);
 }
@@ -47,6 +46,7 @@ button:not(.link) {
   border: var(--border);
   padding: 0 0.2em;
   background-color: var(--light-grey);
+  border-radius: var(--border-radius);
 }
 
 button.link {
@@ -145,6 +145,7 @@ li::marker {
 select {
   color: var(--black);
   background-color: var(--white);
+  border-radius: var(--border-radius);
 }
 
 label + select {
@@ -181,6 +182,7 @@ cite::before {
 }
 
 img {
+  border-radius: var(--border-radius);
   max-width: 100%;
 }
 
@@ -202,7 +204,7 @@ th {
 }
 
 th
-/* TODOD is this good ? td */ {
+/* TODO is this good ? td */ {
   white-space: nowrap;
 }
 
@@ -224,6 +226,7 @@ code {
 :not(pre) > code {
   background-color: var(--light-grey);
   padding: 0 0.25ch;
+  border-radius: var(--border-radius);
 }
 
 iframe {
@@ -241,7 +244,6 @@ details {
   padding-bottom: var(--space-1);
   border-top: var(--border);
   border-bottom: var(--border);
-  border-radius: 0;
 }
 
 summary {
