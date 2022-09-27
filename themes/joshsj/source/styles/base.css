@@ -36,10 +36,24 @@ body {
   scroll-behavior: smooth;
 }
 
+a,
 button {
-  /* why do browsers fuck with buttons so much */
   all: unset;
   cursor: pointer;
+  text-decoration-thickness: 0.15rem;
+  text-decoration-color: currentColor;
+}
+
+:is(a, button.link) {
+  color: var(--pop);
+}
+
+:is(a, button.link):hover {
+  text-decoration-line: underline;
+}
+
+:is(a, button.link).mask {
+  color: currentColor;
 }
 
 button:not(.link) {
@@ -47,30 +61,6 @@ button:not(.link) {
   padding: 0 0.2em;
   background-color: var(--light-grey);
   border-radius: var(--border-radius);
-}
-
-button.link {
-  background-color: inherit;
-  border: initial;
-}
-
-a,
-button.link {
-  color: var(--pop);
-}
-
-:where(a, button.link):not(.mask, .hide, .headerlink):hover {
-  color: var(--light);
-  background-color: var(--pop);
-}
-
-:where(a, button.link):is(.mask, .hide) {
-  color: inherit;
-  text-decoration: none;
-}
-
-:where(a, button.link):not(.hide).mask:hover {
-  text-decoration: underline;
 }
 
 h1 {
@@ -90,7 +80,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.07em;
   line-height: 1.1;
 }
 

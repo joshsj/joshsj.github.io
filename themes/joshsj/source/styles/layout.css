@@ -22,10 +22,6 @@ body:not(.hmm) > nav {
   background-color: var(--light);
 }
 
-nav > a {
-  text-decoration: none;
-}
-
 @media (max-width: 768px) {
   body {
     margin-top: var(--space-2);
