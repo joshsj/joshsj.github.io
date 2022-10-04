@@ -52,10 +52,6 @@ print("hello world")
 
 {% my_email %}
 
-### `repo`
-
-{% repo joshsj.github.io "Look at this" %}
-
 ### `math`
 
 {% tex 1+2=3 %}

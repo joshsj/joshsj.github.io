@@ -6,13 +6,13 @@
       </a>
     </h2>
     
-    <p class="extra sep sep-pop">
+    <p class="extra squish sep sep-pop">
       <span><%- date(post.date) %></span>
       <%- partial("partials/post/tags", { tags: post.tags, mask: true }) %>
     </p>
 
-    <p class="excerpt"><%- post.excerpt %></p>
+    <%-  post.excerpt %>
 
-    <a href="<%- url_for(post.path) %>">Read</a>
+    <p><a href="<%- url_for(post.path) %>">Read</a></p>
   </section>
   <% }) %>

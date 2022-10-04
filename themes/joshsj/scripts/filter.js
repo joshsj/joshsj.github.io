@@ -18,10 +18,11 @@ hexo.extend.filter.register("after_post_render", function (data) {
 
   const excerpt = match.groups.excerpt.replace(/\n/g, " ").trim();
 
-  if (excerpt) {
-    data.excerpt = capitalize(
-      excerpt +
-        (ValidEndPunctuation.some((p) => excerpt.endsWith(p)) ? "" : ".")
-    );
+  if (!excerpt) {
+    return;
   }
+
+  data.excerpt = `<p>${capitalize(
+    excerpt + (ValidEndPunctuation.some((p) => excerpt.endsWith(p)) ? "" : ".")
+  )}</p>`;
 });

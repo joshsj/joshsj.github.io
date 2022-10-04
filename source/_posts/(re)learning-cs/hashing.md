@@ -8,8 +8,8 @@ tags:
 With data structures like a sorted
 <a href="{% post_path (re)learning-cs/lists %}#Array">array</a> or a balanced
 <a href="{% post_path (re)learning-cs/trees %}#Binary-Search-Tree">binary search
-tree</a>, we achieve {% bigo \log{n} %} to find a random value. With hashing, we
-make that {% bigo 1 %} 🎉
+tree</a>, we can find random values in logarithmic time. With hashing, we make
+it constant.
 
 <!-- more -->
 

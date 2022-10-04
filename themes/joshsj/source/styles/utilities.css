@@ -4,7 +4,7 @@
 }
 
 .sep > ::after {
-  font-size: 0.85em;
+  font-size: 0.7em;
   line-height: 1;
   vertical-align: middle;
   color: var(--dark);

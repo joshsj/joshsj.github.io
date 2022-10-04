@@ -13,6 +13,10 @@
   margin-top: 0;
 }
 
+.card > :not(:first-child, .squish) {
+  margin-top: var(--space-1);
+}
+
 .card > .extra {
   font-size: var(--fs-small);
   display: flex;

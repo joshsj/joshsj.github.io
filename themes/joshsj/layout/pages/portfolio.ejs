@@ -1,0 +1,23 @@
+<%- page.content %>
+
+<% 
+site.data.portfolios.forEach(({ title, description, tags, links }) => {
+%>
+<section class="card">
+  <h2><%- title %></h2>
+
+  <div class="extra squish">
+    <p class="sep sep-pop">
+      <%- tags.map(t => `<span>${t}</span>`).join("") %>
+    </p>
+  </div>
+
+  <%- markdown(description) %>
+
+  <p class="sep">
+    <%- links ? links.map(markdown) : '' %>
+  </p>
+</section>
+<% }) %>
+
+

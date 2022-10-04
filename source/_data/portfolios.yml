@@ -1,0 +1,64 @@
+- title: This Website
+  tags:
+    - Personal
+    - HTML
+    - CSS
+    - JS
+    - EJS
+    - Markdown
+  description:
+    A server-side rendered site built with Hexo, deployed to Github Pages with
+    Github Actions.
+
+  links:
+    - "[Source](https://github.com/joshsj/joshsj.github.io)"
+
+- title: RailSmart Incident Management
+  tags:
+    - Professional
+    - SQL
+    - MongoDB
+    - RabbitMQ
+    - .NET
+    - Vue
+    - Typescript
+
+  description: My main project on placement.
+
+    A .NET API serving Web Forms and Vue featuring a complex domain, live
+    notifications, user tagging, and reporting.
+
+  links:
+    - "[Product
+      Page](https://3squared.com/railsmart/incident-management-software)"
+
+- title: Vue UI Framework
+  tags:
+    - Vue
+    - Professional
+
+  description: My other assignment on placement.
+
+    The internal UI framework used across the RailSmart suite at 3Squared,
+    wrapping Bootstrap, Flatpickr, Chart.js, etc. with new functionality and
+    styles.
+
+- title: ReadBooksOnline
+  tags:
+    - University
+    - Typescript
+    - MongoDB
+    - ExpressJS
+    - Vue
+    - CQRS
+    - NPM Workspaces
+
+  description:
+    CRUD application to manage purchase requests and employees featuring ticket
+    status tracking, email notifications, and real-time chat. Organised like
+    Jason Taylor's [Clean
+    Architecture](https://github.com/jasontaylordev/CleanArchitecture) using a
+    custom CQRS implementation.
+
+  links:
+    - "[Source](https://github.com/joshsj/read-books-online)"
