@@ -29,8 +29,7 @@
 body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
-  line-height: 1.6;
-  /* letter-spacing: -0.03em; */
+  line-height: 1.5;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
