@@ -1,11 +1,11 @@
 <%- page.content %>
 
-<p class="sep">
+<!-- <p class="sep">
   <span class="skip">
     <span role="heading" aria-level="2">Tags</span>
   </span>
   <%- partial("partials/post/tags", { tags: site.tags, mask: false })%>
-</p>
+</p> -->
 
 <%- partial("partials/posts", { 
   posts: site.posts.filter(p => !in_collection(p)).sort("date", -1) 

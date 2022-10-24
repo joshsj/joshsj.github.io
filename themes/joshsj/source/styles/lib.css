@@ -33,10 +33,6 @@
   margin: 0;
 }
 
-.hljs {
-  font-size: var(--fs-small);
-}
-
 /* highlight.js */
 
 .hljs-keyword {

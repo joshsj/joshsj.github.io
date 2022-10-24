@@ -1,20 +1,30 @@
 body {
-  width: min(37rem, calc(100vw - var(--space-3)));
-  margin: var(--space-4) auto;
+  width: min(35rem, calc(100vw - var(--space-3)));
+  margin: var(--space-2) auto;
 }
 
 header,
-nav {
-  font-weight: bold;
+footer {
   text-transform: lowercase;
+  font-weight: bold;
 }
 
-:where(header, nav) > :not(:last-child) {
-  margin-right: var(--space-1);
+footer {
+  justify-content: center;
 }
 
-main {
+main,
+footer {
   margin-top: var(--space-4);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav > :not(:last-child) {
+  margin-right: var(--space-1);
 }
 
 /* allow the hmm */
@@ -22,8 +32,6 @@ body:not(.hmm) > nav {
   background-color: var(--light);
 }
 
-@media (max-width: 768px) {
-  body {
-    margin-top: var(--space-2);
-  }
+#theme-toggle {
+  text-align: right;
 }

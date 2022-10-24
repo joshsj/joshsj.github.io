@@ -29,10 +29,8 @@ if (collection) { %>
 const toc = utoc(page.content,  {list_number: false});
 if (toc) {
 %>
-<details>
-  <summary>Contents</summary>
-  <%- toc %>
-</details>
+<h2 id="contents">Contents</h2>
+<%- toc %>
 <% } %>
 
 <%- page.content %>

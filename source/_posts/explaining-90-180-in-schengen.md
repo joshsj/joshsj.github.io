@@ -87,7 +87,7 @@ day window:
 
 - **Start of 180-Day Window:** 30/01/22
 - **Previously in Schengen:**
-  - ~10 days (visit 1)~
+  - ~~10 days (visit 1)~~
   - 7 days (visit 2)
   - 4 days (visit 3)
   - **11** days total, with **79** days remaining

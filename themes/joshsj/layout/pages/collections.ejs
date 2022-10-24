@@ -6,7 +6,7 @@ site.data.collections.forEach(({ title, description }) => {
 <section class="card">
   <h2><a href="<%- collection_url_for(title) %>" class="mask"><%- title %></a></h2>
 
-  <%- markdown(description) %>
+  <p class="squish"><%- markdown_trim(description) %></p>
 
   <p><a href="<%- collection_url_for(title) %>">View</a></p>
 </section>

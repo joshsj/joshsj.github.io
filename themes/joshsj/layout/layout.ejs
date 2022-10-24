@@ -44,17 +44,15 @@
   <%- env.debug ? "data-dev" : "" %>>  
   
   <header>
-    <span>Joshua Sexton<span class="pop">-</span>Jones</span> 
+    <nav>
+      <%- nav_link("Home") %>
+      <%- nav_link("Articles") %>
+      <%- nav_link("Collections") %>
+      <%- nav_link("Portfolio") %>
+    </nav>
 
-     <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
+    <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
   </header>
-
-  <nav>
-    <%- nav_link("Home") %>
-    <%- nav_link("Articles") %>
-    <%- nav_link("Collections") %>
-    <%- nav_link("Portfolio") %>
-  </nav>
 
   <main class="content">
     <!-- id required for jumper -->
@@ -62,6 +60,11 @@
     
     <%- body %>
   </main>
+
+  <footer class="sep sep-pop">
+    <span>Joshua Sexton<span class="pop">-</span>Jones</span>
+    <span><%- moment().format("YYYY") %></span>
+  </footer>
 </body>
 
 </html>

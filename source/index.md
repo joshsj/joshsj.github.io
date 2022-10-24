@@ -20,4 +20,4 @@ professional CS:GO scene for years.
 Check out my blog [posts](/articles), [portfolio](/portfolio),
 [Github](https://github.com/joshsj), and
 [LinkedIn](https://uk.linkedin.com/in/joshsjuk). If you like what you see,
-please get in touch at {% my_email %} 🙂
+please get in touch at {% my_email %} or message me on LinkedIn.
