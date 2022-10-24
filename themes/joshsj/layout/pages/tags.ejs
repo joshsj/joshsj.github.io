@@ -1,0 +1,7 @@
+<%- page.content %>
+
+<div class="sep">
+<% site.tags.sort("name").forEach(({ name }) => { %>
+  <h2><a href="tags/<%- format_url(name) %>"><%- name %></a></h2>
+<% }) %>
+</div>
