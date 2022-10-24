@@ -21,17 +21,19 @@ footer {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
-nav > :not(:last-child) {
+nav > a:not(:last-child) {
   margin-right: var(--space-1);
+}
+
+#theme-toggle {
+  text-align: right;
+  margin-left: var(--space-1);
 }
 
 /* allow the hmm */
 body:not(.hmm) > nav {
   background-color: var(--light);
-}
-
-#theme-toggle {
-  text-align: right;
 }
