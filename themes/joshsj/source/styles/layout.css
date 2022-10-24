@@ -1,5 +1,5 @@
 body {
-  width: min(35rem, calc(100vw - var(--space-3)));
+  width: min(37rem, calc(100vw - var(--space-3)));
   margin: var(--space-2) auto;
 }
 
