@@ -79,7 +79,7 @@ h1,
 h2,
 h3 {
   font-family: var(--ff-heading);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
