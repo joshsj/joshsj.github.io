@@ -1,5 +1,5 @@
 body {
-  width: min(37rem, calc(100vw - var(--space-3)));
+  width: min(35rem, calc(100vw - var(--space-3)));
   margin: 0 auto;
 }
 
@@ -12,12 +12,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin: var(--space-1) 0 var(--space-2);
+  margin: var(--space-2) 0;
 }
 
 footer {
   justify-content: center;
-  margin: var(--space-2) 0;
+  margin: var(--space-4) 0 var(--space-2);
 }
 
 nav > :not(:last-child) {

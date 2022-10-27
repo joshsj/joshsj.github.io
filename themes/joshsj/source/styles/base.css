@@ -79,7 +79,7 @@ h1,
 h2,
 h3 {
   font-family: var(--ff-heading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
   line-height: 1.2;
 }
 
@@ -123,7 +123,7 @@ blockquote > p:last-of-type:after {
 
 ul,
 ol {
-  margin-left: 1.25em;
+  margin-left: 1em;
 }
 
 :is(ul, ol).space > li + li {
