@@ -16,7 +16,7 @@ hexo.extend.tag.register(
 const md = (text) => hexo.render.render({ text, engine: "md" });
 const toCaption = (content, caption, source = "") => `
 <figure>
-  <div class="overflow inner">${content}</div>
+  <div class="inner">${content}</div>
   <figcaption>
     ${source ? `<a href="${source}" class="source">Source</a>` : ""}
     ${caption}

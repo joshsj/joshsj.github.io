@@ -149,6 +149,8 @@ figure > .inner {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+
+  overflow: auto hidden;
 }
 
 /* 'center' class may be better */
@@ -206,6 +208,8 @@ sup {
 
 pre {
   line-height: 1.3;
+  width: 100%;
+  overflow: auto hidden;
 }
 
 code {
