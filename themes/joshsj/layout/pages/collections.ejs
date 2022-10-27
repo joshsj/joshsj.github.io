@@ -1,14 +1,14 @@
 <%- page.content %>
 
-<% 
-site.data.collections.forEach(({ title, description }) => { 
-%>
-<section class="card">
-  <h2><a href="<%- collection_url_for(title) %>" class="mask"><%- title %></a></h2>
+<ul class="space">
 
-  <p class="squish"><%- markdown_trim(description) %></p>
-
-  <p><a href="<%- collection_url_for(title) %>">View</a></p>
+<% site.data.collections.forEach(({ title, description }) => { %>
+<li>
+  <a href="<%- collection_url_for(title) %>"><%- title %></a>
+  
+  <%- markdown(description) %>
 </section>
 <% }) %>
+
+</ul>
 

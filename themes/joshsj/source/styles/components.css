@@ -17,6 +17,10 @@
   margin-top: var(--space-1);
 }
 
+.card > :is(h1, h2, h3).title {
+  font-size: var(--fs-h3);
+}
+
 .card > .extra {
   font-size: var(--fs-small);
   display: flex;

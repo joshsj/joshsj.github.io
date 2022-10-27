@@ -1,18 +1,9 @@
+<ul class="space">
 <% posts.forEach(post=> { %>
-  <section class="card">
-    <h2>
-      <a class="mask" href="<%- url_for(post.path) %>">
-        <%- post.title %>
-      </a>
-    </h2>
-    
-    <p class="squish sep sep-pop">
-      <span><%- date(post.date) %></span>
-      <%- partial("partials/post/tags", { tags: post.tags, mask: true }) %>
-    </p>
+  <li>
+    <a href="<%- url_for(post.path) %>"><%- post.title %></a>
 
-    <%-  post.excerpt %>
-
-    <p><a href="<%- url_for(post.path) %>">Read</a></p>
-  </section>
+    (<%- date(post.date) %>)
+  </li>
   <% }) %>
+</ul>

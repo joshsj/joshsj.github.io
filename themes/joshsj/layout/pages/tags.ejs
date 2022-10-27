@@ -1,7 +1,11 @@
 <%- page.content %>
 
-<div class="sep">
-<% site.tags.sort("name").forEach(({ name }) => { %>
-  <h2><a href="tags/<%- format_url(name) %>"><%- name %></a></h2>
+<ul class="space">
+<% site.tags.sort("name").forEach(({ name, posts }) => { %>
+<li>
+  <a href="tags/<%- format_url(name) %>"><%- name %></a>
+
+  (<%- posts.length  %> <%- plural("post", posts.length !== 1) %>)
+</li>
 <% }) %>
-</div>
+</ul>

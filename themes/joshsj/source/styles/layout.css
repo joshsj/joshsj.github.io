@@ -3,25 +3,21 @@ body {
   margin: 0 auto;
 }
 
-body > * {
-  margin-top: var(--space-2);
-}
-
 header,
 footer {
   text-transform: lowercase;
-  font-weight: bold;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin: var(--space-1) 0 var(--space-2);
 }
 
 footer {
   justify-content: center;
-  margin-bottom: var(--space-2);
+  margin: var(--space-2) 0;
 }
 
 nav > :not(:last-child) {

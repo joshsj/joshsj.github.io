@@ -30,7 +30,7 @@ body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -124,6 +124,10 @@ blockquote > p:last-of-type:after {
 ul,
 ol {
   margin-left: 1.25em;
+}
+
+:is(ul, ol).space > li + li {
+  margin-top: var(--space-1);
 }
 
 li::marker {
