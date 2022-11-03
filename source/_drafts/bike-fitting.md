@@ -66,7 +66,7 @@ advancements, such as press-fit bottom brackets, have also narrowed bikes.
   https://www.bikeradar.com/features/pro-bike/pro-bike-adam-hansens-ridley-helium-sl
 %}
 
-### Adapting to a poor position
+## Adapting to a poor position
 
 This has lead to a common problem in bike fitting: many everyday people struggle
 to get comfortable on their expensive bikes. Maintaining an aggressive position

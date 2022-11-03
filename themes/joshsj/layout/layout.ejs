@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<body lang="en-GB">
 
 <head>
   <meta charset="UTF-8" />
@@ -28,6 +28,7 @@
   <script src="/scripts/theme.js" defer async></script>
   <script src="/scripts/tag.js" defer async></script>
   <script src="/scripts/id-jumper.js" defer async></script>
+  <script src="/scripts/konami.js" defer async></script>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
@@ -43,28 +44,21 @@
   class="<%- page.hmm ? 'hmm' : ''  %>"
   <%- env.debug ? "data-dev" : "" %>>  
   
-  <header>
-    <nav>
+  <nav>
       <%- nav_link("Home") %>
       <%- nav_link("Articles") %>
       <%- nav_link("Collections") %>
       <%- nav_link("Tags") %>
       <%- nav_link("Portfolio") %>
-    </nav>
 
     <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
-  </header>
+  </nav>
 
   <main class="content">
     <h1><%- page.display_title || page.title %></h1>
     
     <%- body %>
   </main>
-
-  <footer class="sep sep-pop">
-    <span>Joshua Sexton<span class="pop">-</span>Jones</span>
-    <span><%- new Date().getFullYear() %></span>
-  </footer>
 </body>
 
 </html>

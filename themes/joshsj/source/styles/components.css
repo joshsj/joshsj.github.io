@@ -8,17 +8,8 @@
   margin-top: var(--space-1);
 }
 
-/* no margin below page title */
-.content > h1:first-of-type + p {
-  margin-top: 0;
-}
-
 .card > :not(:first-child, .squish) {
   margin-top: var(--space-1);
-}
-
-.card > :is(h1, h2, h3).title {
-  font-size: var(--fs-h3);
 }
 
 .card > .extra {
