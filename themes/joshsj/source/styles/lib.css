@@ -21,10 +21,6 @@
   font-size: 1em;
 }
 
-:not(.katex-display) > .katex {
-  background-color: var(--light-grey);
-}
-
 .katex-html > .newline {
   margin-bottom: 0.5em;
 }

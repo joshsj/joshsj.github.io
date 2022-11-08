@@ -36,9 +36,13 @@ _Italics_
 | ------ | ------ |
 | Cell   | Cell   |
 
+`Inline code`
+
 ```python
 print("hello world")
 ```
+
+<button>Click me</button>
 
 ## My HTML
 

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500&family=Space+Mono:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500&family=JetBrains+Mono:ital@0;1&display=swap");
 
 body {
   --space-1: 0.5rem;
@@ -18,7 +18,7 @@ body {
 
   --ff-normal: Karla, sans-serif;
   --ff-heading: "Space Grotesk", sans-serif;
-  --ff-mono: "Space Mono", ui-monospace, monospace;
+  --ff-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --code-property: #e45649;
   --code-params: #986801;
@@ -35,11 +35,11 @@ body {
 
   /* atom one colors */
   /* default hsl(0, 0%, 98%); */
-  --white: white;
+  --white: hsl(0, 0%, 99%);
   /* default hsl(228, 8%, 24%) */
   --black: hsl(228, 8%, 18%);
   --dark-grey: #5e616e;
-  --light-grey: #fafafa;
+  --light-grey: #eaeaeb;
 
   /* theme */
   --light: var(--white);
