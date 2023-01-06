@@ -32,7 +32,7 @@
 body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
-  line-height: 1.45;
+  line-height: 1.5;
   letter-spacing: -0.02em;
   color: var(--dark);
   background-color: var(--light);
@@ -88,10 +88,13 @@ h3 {
 }
 
 summary,
-th,
+th {
+  font-family: var(--ff-heading);
+}
+
 /* inline headings */
 [role="heading"] {
-  font-family: var(--ff-heading);
+  font-weight: bold;
 }
 
 [role="heading"]::after {
