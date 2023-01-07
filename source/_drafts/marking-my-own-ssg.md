@@ -1,6 +1,7 @@
 ---
 title: Making my own SSG
 date: 2023-01-06
+updated: 2023-01-07
 tags:
   - Software Development
   - Projects
