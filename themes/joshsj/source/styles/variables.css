@@ -12,9 +12,9 @@ body {
 
   --fs-small: calc(var(--fs-normal) * 0.85);
   --fs-normal: 1.1rem;
-  --fs-h3: 1.4rem;
-  --fs-h2: 1.8rem;
-  --fs-h1: 2.8rem;
+  --fs-h3: 1.3rem;
+  --fs-h2: 1.7rem;
+  --fs-h1: 2.6rem;
 
   --ff-normal: Karla, sans-serif;
   --ff-heading: "Space Grotesk", sans-serif;
