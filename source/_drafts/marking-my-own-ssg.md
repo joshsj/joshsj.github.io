@@ -24,7 +24,7 @@ I'm aiming to do more writing on here so creating my own static site generator
 achievable, and I'll have full creative control over any kind of content I want
 to post in the future.
 
-## The current situation
+## Current Situation
 
 The blog is hosted on Github Pages and deployed automatically with Github
 Actions. I have little to no interest in DevOps and this works flawlessly --- no
@@ -83,8 +83,8 @@ I live in the UK but the site builds on a server wherever Github fancies.
 Although Hexo has configuration for date localisation, I just can't get it to
 work so all my posts are dated wrong 🤷‍♂️
 
-## The Plan
+## System Architecture and Feature Decomposition
 
-There isn't one.
+Just kidding.
 
-I'm taking the simplest path and I can refactor as necessary.
+I'm making whatever seems best and refactoring as I go.
