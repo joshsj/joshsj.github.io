@@ -142,7 +142,7 @@ Overflow, async generators make this a doddle:
 {% caption "Walking directories with fs" %}
 
 ```typescript
-async function* _walk(
+async function* walk(
   root: string,
   options: Options,
   walked = ""
@@ -153,7 +153,7 @@ async function* _walk(
     const entryPath = path.join(walked, entry.name);
 
     if (entry.isDirectory()) {
-      yield* _walk(path.join(root, entry.name), options, entryPath);
+      yield* walk(path.join(root, entry.name), options, entryPath);
     } else {
       yield entryPath;
     }
