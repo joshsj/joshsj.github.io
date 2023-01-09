@@ -91,17 +91,6 @@ Just kidding.
 
 I'm making whatever seems best and refactoring as I go.
 
-## Staring anew
-
-I'm keeping my the README, prettier configuration, and custom
-[CSpell](https://cspell.org/) words.
-
-`git checkout --orphan new` --- seems descriptive enough.
-
-`npm init` --- Node works fine.
-
-`npm i typescript` --- it's awesome, fight me.
-
 ## Getting something to build
 
 The goal is a HTML file, compiled from a template language, based on file paths
