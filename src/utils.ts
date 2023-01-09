@@ -11,7 +11,7 @@ async function* walk(root: string, options: Options) {
 async function* _walk(
   root: string,
   options: Options,
-  walked: string = ""
+  walked = ""
 ): AsyncGenerator<string> {
   const entries = await readdir(root, options);
 
