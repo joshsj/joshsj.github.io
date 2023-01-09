@@ -63,7 +63,7 @@ Markdown in the first place?
 I could configure/create another file processor in Hexo to use different markup
 but I'd rather spend my time on this project.
 
-### Templating languages aren't cutting it either
+### Template languages aren't cutting it either
 
 Out of the box, Hexo offers EJS and Nunjucks which are bad and worse
 respectively. I don't care to elaborate; they just aren't satisfying to use.
@@ -79,7 +79,7 @@ create the most additional folders.
 
 ### Dates are wrong
 
-To my discontent, I'm based in the UK and my post dates should reflect that.
+To my discontent, I'm based in the UK so my post dates should reflect that.
 
 Although Hexo offers date/time localisation, all of my efforts to use it have
 failed so (as far as I can tell) posts are currently dated in the time zone of
@@ -113,18 +113,56 @@ and easy to write. It's also a classic, so any issues I have should already have
 solutions; and it can be used as the template language in Javascript frameworks,
 so I could easily migrate to React/Vue/whatever down the line.
 
-`npm i pug @types/pug`
-
 ### Adding configuration
 
-`npm i dotenv` --- I don't expect to need JSON or YAML.
+This project has practically no additional scope but hardcoding paths is for the
+weak.
 
-The [preload](https://github.com/motdotla/dotenv#preload) option is so handy so
-that goes in the npm scripts too.
+dotenv should be more than adequate, and I like the
+[preload](https://github.com/motdotla/dotenv#preload) option so that goes in the
+npm scripts too.
 
-We need only two variables
+We need only two settings for now:
 
-- `CONTENT_DIR`: where the content is
-- `BUILD_DIR`: where to put the content once compiled
+- `SOURCE_DIR` --- where the content is
+- `BUILD_DIR` --- where to put the content once compiled
 
-Both will be resolved relative to the current working directory.
+### A blog is born
+
+With everything set up, it's a simple process:
+
+1. Scan the source directory
+2. Read the files in and compile them to HTML
+3. Write the files to the build directory, preserving the relative path
+
+The only hiccup is the fs module in Node doesn't have a method to read
+directories recursively. With some inspiration from the nice folks on Stack
+Overflow, async generators make this a doddle:
+
+{% caption "Walking directories with fs" %}
+
+```typescript
+async function* _walk(
+  root: string,
+  options: Options,
+  walked = ""
+): AsyncGenerator<string> {
+  const entries = await readdir(root, options);
+
+  for (const entry of entries) {
+    const entryPath = path.join(walked, entry.name);
+
+    if (entry.isDirectory()) {
+      yield* _walk(path.join(root, entry.name), options, entryPath);
+    } else {
+      yield entryPath;
+    }
+  }
+}
+```
+
+{% endcaption %}
+
+With everything else in place we have a foundation:
+
+{% caption_img "wow.gif" "A basic website"  %}
