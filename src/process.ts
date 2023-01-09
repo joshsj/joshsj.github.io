@@ -1,33 +1,36 @@
 import { Config } from "./config";
-import { readFile, writeFile, readdir, mkdir } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import { fromGenerator, walk } from "./utils";
+
 // TODO look for async version
 import { render } from "pug";
 
 const processFiles = async (config: Config) => {
-  const paths = await readdir(config.contentDir);
-
-  try {
-    await mkdir(config.buildDir, {});
-  } catch (e) {
-    // Doesn't matter if it exists
-  }
-
-  await Promise.allSettled(
-    paths.map((p) => processFile(path.join(config.contentDir, p), config))
+  const paths = await fromGenerator(
+    walk(config.sourceDir, { withFileTypes: true })
   );
+
+  await Promise.allSettled(paths.map((p) => processFile(p, config)));
 };
 
-const processFile = async (sourcePath: string, config: Config) => {
-  const destPath = path.join(
-    config.buildDir,
-    path.parse(sourcePath).name + ".html"
-  );
+const processFile = async (p: string, config: Config) => {
+  const { parsed, source, dest } = getPaths(p, config);
 
-  const contents = await readFile(sourcePath, "utf-8");
+  await mkdir(path.join(config.buildDir, parsed.dir), { recursive: true });
+
+  const contents = await readFile(source, "utf-8");
   const rendered = render(contents);
 
-  return await writeFile(destPath, rendered);
+  return await writeFile(dest, rendered);
+};
+
+const getPaths = (p: string, config: Config) => {
+  const parsed = path.parse(p);
+  const source = path.join(config.sourceDir, p);
+  const dest = path.join(config.buildDir, parsed.dir, parsed.name + ".html");
+
+  return { parsed, source, dest };
 };
 
 export { processFiles };

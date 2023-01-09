@@ -1,12 +1,12 @@
 import path from "path";
 
 type Env = Partial<{
-  CONTENT_DIR: string;
+  SOURCE_DIR: string;
   BUILD_DIR: string;
 }>;
 
 type Config = {
-  contentDir: string;
+  sourceDir: string;
   buildDir: string;
 };
 
@@ -14,10 +14,12 @@ const getConfig = (): Config => {
   const base = process.cwd();
   const env = process.env as Env;
 
-  return {
-    contentDir: path.resolve(base, env.CONTENT_DIR ?? ""),
+  const config: Config = {
+    sourceDir: path.resolve(base, env.SOURCE_DIR ?? ""),
     buildDir: path.resolve(base, env.BUILD_DIR ?? ""),
   };
+
+  return config;
 };
 
 export { getConfig, Config, Env };
