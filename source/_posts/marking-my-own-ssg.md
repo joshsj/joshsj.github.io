@@ -20,9 +20,9 @@ in. Now that I have some energy outside of work, I decided not to refocus my
 efforts and do some programming for myself.
 
 Despite the abundance of [abundance](https://jamstack.org/generators/) of great
-site generators, making my own seems like an ideal project; it should be fun,
-achievable, and I'll have full creative control over any kind of content I want
-to post in the future.
+site generators, I want to make my own. It _should_ be a fun and achievable
+project, plus I'll have full creative control over any kind of content I want to
+post in the future.
 
 ## Current Situation
 
@@ -93,14 +93,21 @@ I'm making whatever seems best and refactoring as I go.
 
 ## Staring anew
 
-`git checkout --orphan new` --- seems descriptive enough.
-
-`npm init` --- Node works fine and Typescript is awesome.
-
-I'll also copy across the README, prettier configuration, and custom
+I'm keeping my the README, prettier configuration, and custom
 [CSpell](https://cspell.org/) words.
 
-## Choosing a templating language
+`git checkout --orphan new` --- seems descriptive enough.
+
+`npm init` --- Node works fine.
+
+`npm i typescript` --- it's awesome, fight me.
+
+## Getting something to build
+
+The goal is a HTML file, compiled from a template language, based on file paths
+sourced from a config file.
+
+### Choosing a templating language
 
 I need one template language to rule them all, solving the current mishmash.
 
@@ -116,3 +123,19 @@ Of all the languages that fit the bill, [pug](https://pugjs.org/) looks capable
 and easy to write. It's also a classic, so any issues I have should already have
 solutions; and it can be used as the template language in Javascript frameworks,
 so I could easily migrate to React/Vue/whatever down the line.
+
+`npm i pug @types/pug`
+
+### Adding configuration
+
+`npm i dotenv` --- I don't expect to need JSON or YAML.
+
+The [preload](https://github.com/motdotla/dotenv#preload) option is so handy so
+that goes in the npm scripts too.
+
+We need only two variables
+
+- `CONTENT_DIR`: where the content is
+- `BUILD_DIR`: where to put the content once compiled
+
+Both will be resolved relative to the current working directory.
