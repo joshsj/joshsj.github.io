@@ -7,7 +7,11 @@ import { render } from "pug";
 const processFiles = async (config: Config) => {
   const paths = await readdir(config.contentDir);
 
-  await mkdir(config.buildDir);
+  try {
+    await mkdir(config.buildDir, {});
+  } catch (e) {
+    // Doesn't matter if it exists
+  }
 
   await Promise.allSettled(
     paths.map((p) => processFile(path.join(config.contentDir, p), config))
