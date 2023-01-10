@@ -1,0 +1,261 @@
+*,
+*::before,
+*::after {
+  /* reset */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* inheritance */
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+
+  /* pretty */
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  scroll-margin-top: var(--space-2);
+}
+
+::selection {
+  /* pretty */
+  color: var(--light);
+  background-color: var(--blue);
+}
+
+:focus-visible {
+  outline: 0.125rem dashed var(--dark-grey);
+}
+
+body {
+  font-family: var(--ff-normal);
+  font-size: var(--fs-normal);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  background-color: var(--light);
+  scroll-behavior: smooth;
+}
+
+a,
+button {
+  all: unset;
+  cursor: pointer;
+  text-decoration-thickness: 0.12rem;
+  text-decoration-color: currentColor;
+}
+
+:is(a, button.link) {
+  color: var(--pop);
+}
+
+:is(a, button.link):hover {
+  text-decoration-line: underline;
+}
+
+:is(a, button.link).mask {
+  color: currentColor;
+}
+
+button:not(.link) {
+  padding: 0 0.2em;
+  border: var(--border);
+  color: var(--black);
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--ff-heading);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+summary,
+th {
+  font-family: var(--ff-heading);
+}
+
+/* inline headings */
+[role="heading"] {
+  font-weight: bold;
+}
+
+[role="heading"]::after {
+  content: ":";
+}
+
+/* not used */
+h4,
+h5,
+h6 {
+  display: none;
+}
+
+strong,
+label {
+  font-weight: bold;
+}
+
+q,
+blockquote,
+em,
+[role="term"] {
+  font-style: italic;
+}
+
+blockquote > p:first-of-type:before {
+  content: "“";
+}
+
+blockquote > p:last-of-type:after {
+  content: "”";
+}
+
+ul,
+ol {
+  margin-left: 1em;
+}
+
+:is(ul, ol).space > li + li {
+  margin-top: var(--space-1);
+}
+
+li::marker {
+  margin-right: 1em;
+}
+
+select {
+  color: var(--black);
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+}
+
+label + select {
+  margin-left: 0.5rem;
+}
+
+figure > .inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  overflow: auto hidden;
+}
+
+/* 'center' class may be better */
+figure > .inner > img {
+  align-self: center;
+}
+
+figure > .inner > :not(:first-child) {
+  margin-top: var(--space-4);
+}
+
+figcaption {
+  margin-top: var(--space-1);
+}
+
+figcaption > .source {
+  margin-left: var(--space-1);
+  float: right;
+}
+
+cite::before {
+  content: "— ";
+}
+
+img {
+  border-radius: var(--border-radius);
+  max-width: 100%;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: var(--space-2) 0;
+  /* remove horizontal margin from border-spacing */
+  margin-left: calc(var(--space-2) * -1);
+  margin-right: calc(var(--space-2) * -1);
+  width: 100%;
+}
+
+tr {
+  vertical-align: top;
+}
+
+th {
+  text-align: left;
+}
+
+th
+/* TODO is this good ? td */ {
+  white-space: nowrap;
+}
+
+sup {
+  font-size: var(--fs-small);
+}
+
+pre {
+  line-height: 1.3;
+  width: 100%;
+  overflow: auto hidden;
+}
+
+code {
+  font-size: 0.9em;
+  font-family: var(--ff-mono);
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+}
+
+iframe {
+  border: none;
+}
+
+/* bit hard to read without space */
+s {
+  margin-right: 0.1ch;
+}
+
+figure,
+details {
+  padding-top: var(--space-1);
+  padding-bottom: var(--space-1);
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
+
+summary {
+  cursor: pointer;
+}
+
+ins,
+del {
+  text-decoration: none;
+}
+
+ins {
+  color: var(--green);
+}
+
+del {
+  color: var(--red);
+}
