@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node -r dotenv/config dist/index.js"
+    "generate": "node -r dotenv/config dist/index.js"
   },
   "dependencies": {
     "@types/node": "^18.11.18",
