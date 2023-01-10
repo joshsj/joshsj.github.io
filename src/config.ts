@@ -19,6 +19,9 @@ const getConfig = (): Config => {
     buildDir: path.resolve(base, env.BUILD_DIR ?? ""),
   };
 
+  console.log("Config");
+  console.log(config);
+
   return config;
 };
 
