@@ -4,13 +4,15 @@
   "scripts": {
     "build": "tsc",
     "generate": "node -r dotenv/config dist/index.js",
-    "both": "npm run build && npm run generate"
+    "both": "npm run build && npm run generate",
+    "clean": "rimraf dist build"
   },
   "dependencies": {
     "@types/node": "^18.11.18",
     "@types/pug": "^2.0.6",
     "dotenv": "^16.0.3",
     "pug": "^3.0.2",
+    "rimraf": "^3.0.2",
     "typescript": "^4.9.4"
   }
 }
