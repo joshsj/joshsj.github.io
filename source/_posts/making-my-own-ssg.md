@@ -129,15 +129,17 @@ We need only two settings for now:
 
 ### A blog is born
 
-With everything set up, it's a simple process:
+Producing an MVP is now a simple process away:
 
 1. Scan the source directory
-2. Read the files in and compile them to HTML
-3. Write the files to the build directory, preserving the relative path
+2. Read in each file and compile it
+3. Write it to build directory while preserving the relative path
 
-The only hiccup is the fs module in Node doesn't have a method to read
-directories recursively. With some inspiration from the nice folks on Stack
-Overflow, async generators make this a doddle:
+{% caption_img "wow.gif" "An MVP"  %}
+
+The only hiccup was with fs module in Node. It doesn't offer a method to
+recursively scan directories, but with some inspiration from the nice folks on
+Stack Overflow, async generators make this a doddle:
 
 {% caption "Walking directories with fs" %}
 
@@ -163,6 +165,51 @@ async function* walk(
 
 {% endcaption %}
 
-With everything else in place we have a foundation:
+## Static Assets
 
-{% caption_img "wow.gif" "A basic website"  %}
+Times New Roman has a certain charm but I want my hard-earned CSS back.
+
+Some of my CSS components need a rethink, so they can stay behind, as well as
+the lib-specific CSS. I can reintroduce those styles again later.
+
+Unlike the .pug files, static assets need not be compiled, only copied to the
+build folder; they also keep their file extension. I can copy the pug processing
+logic in to a new method, make these changes, and add a check to determine the
+right method for the file.
+
+With that, the site looks like mine again:
+
+{% caption_img "with css.png" "Looking good"  %}
+
+<!-- TODO caption -->
+
+## Introducing processors
+
+We need a refactor. Adding an `elif` for every filetype is completely
+inextensible and ignores SRP, plus it doesn't allow other mechanisms to
+determine how a file should be processed.
+
+A 'processor' should look something like this:
+
+```typescript
+interface IProcessor {
+  /** Indicates if the file can be processed based on its path */
+  processes(location: ILocation): boolean;
+
+  /** Processes the file returning the new content */
+  process(location: ILocation, source: string): Promise<IContent>;
+}
+```
+
+The config also needs some more values, so the processors know where they're
+reading from:
+
+- `ASSET_DIR` --- folder name for static assets
+- `PAGE_DIR` --- folder name for pages
+
+And that's it! The pipeline is orchestrated as follows:
+
+1. Scan the source directory
+2. Read in each file and resolve its processor
+3. Invoke the processor
+4. Use the result to write its content at its location
