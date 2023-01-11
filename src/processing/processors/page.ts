@@ -1,5 +1,5 @@
-import { IContent, ILocation, IProcessor } from "../types";
-import { IConfig } from "../../config";
+import { IFile, ILocation, IProcessor } from "../types";
+import { IConfig } from "../../configuration/types";
 import { render } from "pug";
 import { Location } from "../location";
 
@@ -10,7 +10,7 @@ class PageProcessor implements IProcessor {
     return extension === ".pug" && segments.at(0) === this.config.pageDir;
   }
 
-  async process(location: ILocation, source: string): Promise<IContent> {
+  async process(location: ILocation, source: string): Promise<IFile> {
     return {
       data: render(source),
       location: new Location([], location.name, ".html", location.sep),

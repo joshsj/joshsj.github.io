@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
-import { IConfig } from "../config";
+import { IConfig } from "../configuration/types";
+import { ILogger } from "../logging/types";
 import { fromGenerator, walk } from "../utils";
 import { Location } from "./location";
 import { ILocation, IProcessor, IProcessorPipeline } from "./types";
@@ -8,7 +9,8 @@ import { ILocation, IProcessor, IProcessorPipeline } from "./types";
 class ProcessorPipeline implements IProcessorPipeline {
   constructor(
     private readonly processors: IProcessor[],
-    private readonly config: IConfig
+    private readonly config: IConfig,
+    private readonly logger: ILogger
   ) {}
 
   async process(): Promise<void> {
@@ -24,12 +26,12 @@ class ProcessorPipeline implements IProcessorPipeline {
       location.base
     );
 
-    console.log(`Processing ${sourcePath}`);
+    this.logger.log(`Processing ${sourcePath}`);
 
     const processor = this.processors.find((p) => p.processes(location));
 
     if (!processor) {
-      console.log("No processor found");
+      this.logger.log("No processor found");
       return;
     }
 

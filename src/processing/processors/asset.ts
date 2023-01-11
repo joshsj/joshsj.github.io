@@ -1,6 +1,6 @@
-import { IConfig } from "../../config";
+import { IConfig } from "../../configuration/types";
 import { Location } from "../location";
-import { IContent, ILocation, IProcessor } from "../types";
+import { IFile, ILocation, IProcessor } from "../types";
 
 class AssetProcessor implements IProcessor {
   constructor(private readonly config: IConfig) {}
@@ -9,7 +9,7 @@ class AssetProcessor implements IProcessor {
     return segments.at(0) === this.config.assetDir;
   }
 
-  async process(location: ILocation, source: string): Promise<IContent> {
+  async process(location: ILocation, source: string): Promise<IFile> {
     return {
       data: source,
       // Remove asset folder

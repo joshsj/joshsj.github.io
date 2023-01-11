@@ -1,16 +1,9 @@
 import path from "path";
-
-type Map<T extends string> = {
-  [K in T]: string;
-};
-
-type Env = Partial<Map<"SOURCE_DIR" | "BUILD_DIR" | "ASSET_DIR" | "PAGE_DIR">>;
-
-type IConfig = Map<"sourceDir" | "buildDir" | "assetDir" | "pageDir">;
+import { IConfig, IEnv } from "./types";
 
 const loadConfig = (): IConfig => {
   const base = process.cwd();
-  const env = process.env as Env;
+  const env = process.env as IEnv;
 
   const config: IConfig = {
     sourceDir: path.resolve(base, env.SOURCE_DIR ?? ""),
@@ -25,4 +18,4 @@ const loadConfig = (): IConfig => {
   return config;
 };
 
-export { loadConfig, IConfig };
+export { loadConfig };
