@@ -1,0 +1,33 @@
+doctype html
+
+mixin css(name)
+  link(rel="stylesheet", href=`styles/${name}.css`)
+
+mixin js(name)
+  script(src=`scripts/${name}.js` async defer)
+
+html
+  head 
+    +css("variables")
+    +css("utilities")
+    +css("base")
+    +css("layout")
+
+  body 
+    main 
+      h1 Hello World
+
+      p Some #[strong bold text]
+
+      p Some #[em italic text]
+
+      q A quotation
+
+      ul 
+        li Some
+          ul 
+            li list
+              ul
+                li items
+
+      code public static void main() {}
