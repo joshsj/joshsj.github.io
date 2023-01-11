@@ -1,5 +1,4 @@
-import { PathLike } from "fs";
-import { readdir, mkdir } from "fs/promises";
+import { readdir } from "fs/promises";
 import path from "path";
 
 type Options = Parameters<typeof readdir>[1];

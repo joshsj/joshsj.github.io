@@ -1,22 +1,22 @@
 import path from "path";
 
-type Env = Partial<{
-  SOURCE_DIR: string;
-  BUILD_DIR: string;
-}>;
-
-type Config = {
-  sourceDir: string;
-  buildDir: string;
+type Map<T extends string> = {
+  [K in T]: string;
 };
 
-const getConfig = (): Config => {
+type Env = Partial<Map<"SOURCE_DIR" | "BUILD_DIR" | "ASSET_DIR" | "PAGE_DIR">>;
+
+type IConfig = Map<"sourceDir" | "buildDir" | "assetDir" | "pageDir">;
+
+const loadConfig = (): IConfig => {
   const base = process.cwd();
   const env = process.env as Env;
 
-  const config: Config = {
+  const config: IConfig = {
     sourceDir: path.resolve(base, env.SOURCE_DIR ?? ""),
     buildDir: path.resolve(base, env.BUILD_DIR ?? ""),
+    assetDir: env.ASSET_DIR ?? "public",
+    pageDir: env.PAGE_DIR ?? "pages",
   };
 
   console.log("Config");
@@ -25,4 +25,4 @@ const getConfig = (): Config => {
   return config;
 };
 
-export { getConfig, Config, Env };
+export { loadConfig, IConfig };
