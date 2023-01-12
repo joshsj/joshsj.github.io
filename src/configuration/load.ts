@@ -1,11 +1,11 @@
 import path from "path";
-import { IConfig, IEnv } from "./types";
+import { Config, Env } from "./types";
 
-const loadConfig = (): IConfig => {
+const loadConfig = (): Config => {
   const base = process.cwd();
-  const env = process.env as IEnv;
+  const env = process.env as Env;
 
-  const config: IConfig = {
+  const config: Config = {
     sourceDir: path.resolve(base, env.SOURCE_DIR ?? ""),
     buildDir: path.resolve(base, env.BUILD_DIR ?? ""),
     assetDir: env.ASSET_DIR ?? "public",

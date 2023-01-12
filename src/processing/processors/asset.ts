@@ -1,25 +1,16 @@
-import { IConfig } from "../../configuration/types";
-import { Location } from "../location";
-import { IFile, ILocation, IProcessor } from "../types";
+import { IProcessor } from "..";
+import { Config } from "../../configuration/types";
+import { File } from "../../io";
 
 class AssetProcessor implements IProcessor {
-  constructor(private readonly config: IConfig) {}
+  constructor(private readonly config: Config) {}
 
-  processes({ segments }: ILocation): boolean {
+  processes({ segments }: File): boolean {
     return segments.at(0) === this.config.assetDir;
   }
 
-  async process(location: ILocation, source: string): Promise<IFile> {
-    return {
-      data: source,
-      // Remove asset folder
-      location: new Location(
-        location.segments.slice(1),
-        location.name,
-        location.extension,
-        location.sep
-      ),
-    };
+  async process(file: File): Promise<File> {
+    return File.with(file, { segments: file.segments.slice(1) });
   }
 }
 

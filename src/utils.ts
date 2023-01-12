@@ -35,4 +35,8 @@ const fromGenerator = async <T>(generator: AsyncGenerator<T>) => {
   return values;
 };
 
-export { walk, fromGenerator };
+const isFulfilled = <T>(
+  result: PromiseSettledResult<T>
+): result is PromiseFulfilledResult<T> => result.status === "fulfilled";
+
+export { walk, fromGenerator, isFulfilled };

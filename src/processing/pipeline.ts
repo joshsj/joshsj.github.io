@@ -1,67 +1,48 @@
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
-import { IConfig } from "../configuration/types";
+import { Config } from "../configuration/types";
 import { ILogger } from "../logging/types";
-import { fromGenerator, walk } from "../utils";
-import { Location } from "./location";
-import { ILocation, IProcessor, IProcessorPipeline } from "./types";
+import { File } from "../io";
+import { IProcessor, IProcessorPipeline } from "./types";
+import { isFulfilled } from "../utils";
 
 class ProcessorPipeline implements IProcessorPipeline {
   constructor(
     private readonly processors: IProcessor[],
-    private readonly config: IConfig,
+    private readonly config: Config,
     private readonly logger: ILogger
   ) {}
 
-  async process(): Promise<void> {
-    const paths = await this.getLocations();
-
-    await Promise.allSettled(paths.map((p) => this.processFile(p)));
-  }
-
-  private async processFile(location: ILocation) {
-    const sourcePath = path.join(
-      this.config.sourceDir,
-      location.directory,
-      location.base
+  async process(files: File[]): Promise<File[]> {
+    const results = await Promise.allSettled(
+      files.map((p) => this.processFile(p))
     );
 
-    this.logger.log(`Processing ${sourcePath}`);
+    return results
+      .filter(
+        (r): r is PromiseFulfilledResult<File> =>
+          isFulfilled(r) && r.value instanceof File
+      )
+      .map((r) => r.value);
+  }
 
-    const processor = this.processors.find((p) => p.processes(location));
+  private async processFile(contentFile: File): Promise<File | undefined> {
+    if (!contentFile.contents) {
+      return;
+    }
+
+    this.logger.log(
+      `Processing ${path.join(this.config.sourceDir, contentFile.full)}`
+    );
+
+    const processor = this.processors.find((p) => p.processes(contentFile));
 
     if (!processor) {
       this.logger.log("No processor found");
       return;
     }
 
-    const source = await readFile(sourcePath, "utf-8");
-
-    const content = await processor.process(location, source);
-
-    if (!content.data) {
-      return;
-    }
-
-    const destDir = path.join(this.config.buildDir, content.location.directory);
-    const destPath = path.join(destDir, content.location.base);
-
-    // Ensure destination folder exists
-    await mkdir(destDir, { recursive: true });
-
-    await writeFile(destPath, content.data);
-  }
-
-  private async getLocations(): Promise<ILocation[]> {
-    const paths = await fromGenerator(
-      walk(this.config.sourceDir, { withFileTypes: true })
-    );
-
-    return paths.map((p) => {
-      const { dir, name, ext } = path.parse(p);
-
-      return new Location(dir.split(path.sep), name, ext, path.sep);
-    });
+    return await processor.process(contentFile);
   }
 }
 
