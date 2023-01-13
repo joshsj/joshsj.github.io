@@ -1,4 +1,3 @@
-import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import { Config } from "../configuration/types";
 import { ILogger } from "../logging/types";
@@ -20,8 +19,7 @@ class ProcessorPipeline implements IProcessorPipeline {
 
     return results
       .filter(
-        (r): r is PromiseFulfilledResult<File> =>
-          isFulfilled(r) && r.value instanceof File
+        (r): r is PromiseFulfilledResult<File> => isFulfilled(r) && !!r.value
       )
       .map((r) => r.value);
   }
