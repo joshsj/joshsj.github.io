@@ -13,8 +13,8 @@ class StepComposer<State extends {}> implements IStepComposer<State> {
     private state: any
   ) {}
 
-  static create<State extends {} = {}>(inital: State) {
-    return new StepComposer([], inital);
+  static create<State extends {} = {}>(initial: State) {
+    return new StepComposer([], initial);
   }
 
   add<Next extends {}>(step: IStep<Next, State>): StepComposer<State & Next> {
