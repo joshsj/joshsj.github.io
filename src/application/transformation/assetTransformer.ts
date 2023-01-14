@@ -1,13 +1,9 @@
-import { Config } from "@domain";
+import { Config, FileCategory } from "@domain";
 import { File } from "@domain/io";
 import { IFileTransformer } from "./types";
 
 class AssetTransformer implements IFileTransformer {
-  constructor(private readonly config: Config) {}
-
-  transforms({ segments }: File): boolean {
-    return segments.at(0) === this.config.assetDir;
-  }
+  transforms: FileCategory = "asset";
 
   async transform(file: File): Promise<File> {
     return File.with(file, { segments: file.segments.slice(1) });
