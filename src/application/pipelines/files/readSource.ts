@@ -1,14 +1,14 @@
 import { Config } from "@domain";
-import { File, IO } from "@domain/io";
+import { File, IIO } from "@domain/io";
 import { fromGenerator, walk } from "@domain/utils";
-import { Step } from "@lib/pipelineBuilder";
+import { IStep } from "@lib/pipelineBuilder";
 
 type ReadSourceResult = {
   sourceFiles: File[];
 };
 
-class ReadSourceStep implements Step<ReadSourceResult> {
-  constructor(private readonly io: IO, private readonly config: Config) {}
+class ReadSourceStep implements IStep<ReadSourceResult> {
+  constructor(private readonly io: IIO, private readonly config: Config) {}
 
   async execute(): Promise<ReadSourceResult> {
     const sourceFiles = await fromGenerator(this.readFiles());

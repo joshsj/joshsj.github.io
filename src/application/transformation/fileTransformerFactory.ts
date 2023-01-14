@@ -1,13 +1,10 @@
-import {
-  FileTransformer,
-  FileTransformerFactory as _FileTransformerFactory,
-} from ".";
+import { IFileTransformer, IFileTransformerFactory } from ".";
 import { File } from "@domain/io";
 
-class FileTransformerFactory implements _FileTransformerFactory {
-  constructor(private readonly transformers: FileTransformer[]) {}
+class FileTransformerFactory implements IFileTransformerFactory {
+  constructor(private readonly transformers: IFileTransformer[]) {}
 
-  for(file: File): FileTransformer | undefined {
+  for(file: File): IFileTransformer | undefined {
     return this.transformers.find((t) => t.transforms(file));
   }
 }

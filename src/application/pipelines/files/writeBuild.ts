@@ -1,14 +1,14 @@
 import { Config } from "@domain";
-import { IO } from "@domain/io";
+import { IIO } from "@domain/io";
 import { isRejected } from "@domain/utils";
-import { Step } from "@lib/pipelineBuilder";
+import { IStep } from "@lib/pipelineBuilder";
 import { TransformFilesResult } from "./transformFiles";
 
 // TODO more informative
 type WriteBuildResult = { failures: number };
 
-class WriteBuildStep implements Step<WriteBuildResult, TransformFilesResult> {
-  constructor(private readonly io: IO, private readonly config: Config) {}
+class WriteBuildStep implements IStep<WriteBuildResult, TransformFilesResult> {
+  constructor(private readonly io: IIO, private readonly config: Config) {}
 
   async execute({
     buildFiles,

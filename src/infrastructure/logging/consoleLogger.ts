@@ -1,6 +1,6 @@
-import { Logger } from "../../application/logging";
+import { ILogger } from "../../application/logging";
 
-class ConsoleLogger implements Logger {
+class ConsoleLogger implements ILogger {
   constructor(public context?: string) {}
 
   log(...data: any[]): void {

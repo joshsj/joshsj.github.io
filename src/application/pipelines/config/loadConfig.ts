@@ -1,13 +1,13 @@
 import path from "path";
 import { Env, Config } from "@domain";
-import { Step } from "@lib/pipelineBuilder";
-import { Logger } from "@application/logging";
+import { IStep } from "@lib/pipelineBuilder";
+import { ILogger } from "@application/logging";
 import { DefaultConfigResult } from "./defaultConfig";
 
 type LoadConfigResult = DefaultConfigResult;
 
-class LoadConfigStep implements Step<LoadConfigResult, DefaultConfigResult> {
-  constructor(private readonly logger: Logger) {}
+class LoadConfigStep implements IStep<LoadConfigResult, DefaultConfigResult> {
+  constructor(private readonly logger: ILogger) {}
 
   async execute({ config: _default }: DefaultConfigResult) {
     const base = process.cwd();

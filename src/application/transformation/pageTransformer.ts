@@ -1,9 +1,9 @@
 import { render } from "pug";
 import { Config } from "@domain";
 import { File } from "@domain/io";
-import { FileTransformer } from "./types";
+import { IFileTransformer } from "./types";
 
-class PageTransformer implements FileTransformer {
+class PageTransformer implements IFileTransformer {
   constructor(private readonly config: Config) {}
 
   transforms({ segments, extension }: File): boolean {

@@ -1,8 +1,8 @@
 import { Config } from "@domain";
 import { File } from "@domain/io";
-import { FileTransformer } from "./types";
+import { IFileTransformer } from "./types";
 
-class AssetTransformer implements FileTransformer {
+class AssetTransformer implements IFileTransformer {
   constructor(private readonly config: Config) {}
 
   transforms({ segments }: File): boolean {

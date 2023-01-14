@@ -1,12 +1,12 @@
 import { File } from "@domain/io";
 
-type FileTransformer = {
+interface IFileTransformer {
   transforms(file: File): boolean;
   transform(file: File): Promise<File>;
-};
+}
 
-type FileTransformerFactory = {
-  for(file: File): FileTransformer | undefined;
-};
+interface IFileTransformerFactory {
+  for(file: File): IFileTransformer | undefined;
+}
 
-export { FileTransformer, FileTransformerFactory };
+export { IFileTransformer, IFileTransformerFactory };

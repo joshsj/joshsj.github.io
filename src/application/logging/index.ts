@@ -1,5 +1,5 @@
-type Logger = {
+interface ILogger {
   log(...data: any[]): void;
-};
+}
 
-export { Logger };
+export { ILogger };

@@ -1,9 +1,9 @@
 import { Config } from "@domain";
-import { Step } from "@lib/pipelineBuilder";
+import { IStep } from "@lib/pipelineBuilder";
 
 type DefaultConfigResult = { config: Config };
 
-class DefaultConfigStep implements Step<DefaultConfigResult> {
+class DefaultConfigStep implements IStep<DefaultConfigResult> {
   async execute() {
     const config: Config = {
       sourceDir: "",

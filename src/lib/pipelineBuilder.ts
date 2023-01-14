@@ -1,14 +1,14 @@
-type ToCurr<T extends Step<any, any> | {}> = T extends Step<infer Curr, any>
+type ToCurr<T extends IStep<any, any> | {}> = T extends IStep<infer Curr, any>
   ? Curr
   : T;
 
-type Step<Next extends {}, Curr extends {} = {}> = {
+interface IStep<Next extends {}, Curr extends {} = {}> {
   execute(state: Curr): Promise<Next>;
-};
+}
 
 class PipelineBuilder<State extends {}> {
   private constructor(
-    private readonly steps: Step<any, any>[],
+    private readonly steps: IStep<any, any>[],
     private state: State
   ) {}
 
@@ -17,7 +17,7 @@ class PipelineBuilder<State extends {}> {
     return new PipelineBuilder([], initial ?? {});
   }
 
-  add<Next extends {}>(step: Step<Next, State>): PipelineBuilder<Next> {
+  add<Next extends {}>(step: IStep<Next, State>): PipelineBuilder<Next> {
     this.steps.push(step);
 
     return this as any;
@@ -36,4 +36,4 @@ class PipelineBuilder<State extends {}> {
   }
 }
 
-export { Step, PipelineBuilder };
+export { IStep, PipelineBuilder };

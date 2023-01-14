@@ -1,6 +1,6 @@
 import { readdir, mkdir, writeFile, readFile } from "fs/promises";
 import path from "path";
-import { File, IO } from "@domain/io";
+import { File, IIO } from "@domain/io";
 
 async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
   const entries = await readdir(root, { withFileTypes: true });
@@ -16,7 +16,7 @@ async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
   }
 }
 
-class IOWithPath implements IO {
+class IO implements IIO {
   async write(file: File, root = "") {
     const dir = path.join(root, file.directory);
 
@@ -35,4 +35,4 @@ class IOWithPath implements IO {
   }
 }
 
-export { IOWithPath };
+export { IO };

@@ -2,19 +2,19 @@ import path from "path";
 import { Config } from "@domain";
 import { File } from "@domain/io";
 import { isFulfilled } from "@domain/utils";
-import { Step } from "@lib/pipelineBuilder";
-import { Logger } from "@application/logging";
-import { FileTransformerFactory } from "@application/transformation";
+import { IStep } from "@lib/pipelineBuilder";
+import { ILogger } from "@application/logging";
+import { IFileTransformerFactory } from "@application/transformation";
 import { ReadSourceResult } from "./readSource";
 
 type TransformFilesResult = { buildFiles: File[] };
 
 class TransformFilesStep
-  implements Step<TransformFilesResult, ReadSourceResult>
+  implements IStep<TransformFilesResult, ReadSourceResult>
 {
   constructor(
-    private readonly fileTransformerFactory: FileTransformerFactory,
-    private readonly logger: Logger,
+    private readonly fileTransformerFactory: IFileTransformerFactory,
+    private readonly logger: ILogger,
     private readonly config: Config
   ) {}
 

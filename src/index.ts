@@ -1,19 +1,24 @@
-import { Logger } from "@application/logging";
+import { ILogger } from "@application/logging";
 import { DefaultConfigStep } from "@application/pipelines/config/defaultConfig";
 import { LoadConfigStep } from "@application/pipelines/config/loadConfig";
-import { ReadSourceStep } from "@application/pipelines/files/readSource";
-import { TransformFilesStep } from "@application/pipelines/files/transformFiles";
-import { WriteBuildStep } from "@application/pipelines/files/writeBuild";
-import { AssetTransformer, PageTransformer } from "@application/transformation";
-import { FileTransformerFactory } from "@application/transformation/fileTransformerFactory";
-import { IO } from "@domain/io";
-import { IOWithPath } from "@infrastructure/io/ioWithPath";
-import { ConsoleLogger } from "@infrastructure/logging/consoleLogger";
+import {
+  ReadSourceStep,
+  TransformFilesStep,
+  WriteBuildStep,
+} from "@application/pipelines/files";
+import {
+  AssetTransformer,
+  PageTransformer,
+  FileTransformerFactory,
+} from "@application/transformation";
+import { IIO } from "@domain/io";
+import { IO } from "@infrastructure/io";
+import { ConsoleLogger } from "@infrastructure/logging";
 import { PipelineBuilder } from "@lib/pipelineBuilder";
 
 const main = async () => {
-  const io: IO = new IOWithPath();
-  const logger: Logger = new ConsoleLogger();
+  const io: IIO = new IO();
+  const logger: ILogger = new ConsoleLogger();
 
   const configPipeline = PipelineBuilder.create()
     .add(new DefaultConfigStep())
