@@ -5,6 +5,12 @@
       "options": {
         "proseWrap": "always"
       }
+    },
+    {
+      "files": ["*.ts"],
+      "options": {
+        "printWidth": 120
+      }
     }
   ]
 }
