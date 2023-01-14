@@ -58,14 +58,9 @@
   font-style: italic;
 }
 
-@media (pointer: fine) and (min-width: 768px) {
+@media (pointer: fine) and (min-width: 769px) {
   :is(h2, h3):not(:hover) > .headerlink {
     display: none;
-  }
-
-  :is(h2, h3):hover > .headerlink {
-    padding: var(--space-1);
-    margin-top: calc(-1 * var(--space-1));
   }
 }
 
