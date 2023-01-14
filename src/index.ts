@@ -1,19 +1,15 @@
-import { Logger } from "./application/logging";
-import { DefaultConfigStep } from "./application/pipelines/config/defaultConfig";
-import { LoadConfigStep } from "./application/pipelines/config/loadConfig";
-import { ReadSourceStep } from "./application/pipelines/files/readSource";
-import { TransformFilesStep } from "./application/pipelines/files/transformFiles";
-import { WriteBuildStep } from "./application/pipelines/files/writeBuild";
-import {
-  AssetTransformer,
-  FileTransformer,
-  PageTransformer,
-} from "./application/transformation";
-import { FileTransformerFactory } from "./application/transformation/fileTransformerFactory";
-import { IO } from "./domain";
-import { IOWithPath } from "./infrastructure/io/ioWithPath";
-import { ConsoleLogger } from "./infrastructure/logging/consoleLogger";
-import { StepComposer } from "./lib";
+import { Logger } from "@application/logging";
+import { DefaultConfigStep } from "@application/pipelines/config/defaultConfig";
+import { LoadConfigStep } from "@application/pipelines/config/loadConfig";
+import { ReadSourceStep } from "@application/pipelines/files/readSource";
+import { TransformFilesStep } from "@application/pipelines/files/transformFiles";
+import { WriteBuildStep } from "@application/pipelines/files/writeBuild";
+import { AssetTransformer, PageTransformer } from "@application/transformation";
+import { FileTransformerFactory } from "@application/transformation/fileTransformerFactory";
+import { IO } from "@domain/io";
+import { IOWithPath } from "@infrastructure/io/ioWithPath";
+import { ConsoleLogger } from "@infrastructure/logging/consoleLogger";
+import { StepComposer } from "@lib/stepComposer";
 
 const main = async () => {
   const io: IO = new IOWithPath();

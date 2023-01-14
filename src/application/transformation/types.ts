@@ -1,4 +1,4 @@
-import { File } from "../../domain";
+import { File } from "@domain/io";
 
 type FileTransformer = {
   transforms(file: File): boolean;

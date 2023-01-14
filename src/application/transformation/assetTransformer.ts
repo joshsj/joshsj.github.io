@@ -1,4 +1,5 @@
-import { Config, File } from "../../domain";
+import { Config } from "@domain";
+import { File } from "@domain/io";
 import { FileTransformer } from "./types";
 
 class AssetTransformer implements FileTransformer {

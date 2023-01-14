@@ -1,7 +1,6 @@
 import { readdir, mkdir, writeFile, readFile } from "fs/promises";
 import path from "path";
-import { File } from "../../domain";
-import { IO } from "../../domain/io";
+import { File, IO } from "@domain/io";
 
 async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
   const entries = await readdir(root, { withFileTypes: true });

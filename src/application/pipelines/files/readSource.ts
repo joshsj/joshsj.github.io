@@ -1,6 +1,7 @@
-import { Config, File, IO } from "../../../domain";
-import { fromGenerator, walk } from "../../../domain/utils";
-import { Step } from "../../../lib";
+import { Config } from "@domain";
+import { File, IO } from "@domain/io";
+import { fromGenerator, walk } from "@domain/utils";
+import { Step } from "@lib/stepComposer";
 
 type ReadSourceResult = {
   sourceFiles: File[];

@@ -1,6 +1,5 @@
 import { readdir } from "fs/promises";
 import path from "path";
-import { resourceLimits } from "worker_threads";
 
 type Options = Parameters<typeof readdir>[1];
 

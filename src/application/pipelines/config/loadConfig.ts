@@ -1,7 +1,7 @@
 import path from "path";
-import { Env, Config } from "../../../domain";
-import { Step } from "../../../lib";
-import { Logger } from "../../logging";
+import { Env, Config } from "@domain";
+import { Step } from "@lib/stepComposer";
+import { Logger } from "@application/logging";
 import { DefaultConfigResult } from "./defaultConfig";
 
 type LoadConfigResult = DefaultConfigResult;

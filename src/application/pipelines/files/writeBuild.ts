@@ -1,6 +1,7 @@
-import { Config, IO } from "../../../domain";
-import { isRejected } from "../../../domain/utils";
-import { Step } from "../../../lib";
+import { Config } from "@domain";
+import { IO } from "@domain/io";
+import { isRejected } from "@domain/utils";
+import { Step } from "@lib/stepComposer";
 import { TransformFilesResult } from "./transformFiles";
 
 // TODO more informative

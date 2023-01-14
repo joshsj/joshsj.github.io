@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "generate": "node -r dotenv/config dist/index.js",
+    "generate": "node -r dotenv/config -r module-alias/register dist/index.js",
     "both": "npm run build && npm run generate",
     "clean": "rimraf dist build"
   },
@@ -11,8 +11,15 @@
     "@types/node": "^18.11.18",
     "@types/pug": "^2.0.6",
     "dotenv": "^16.0.3",
+    "module-alias": "^2.2.2",
     "pug": "^3.0.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.9.4"
+  },
+  "_moduleAliases": {
+    "@lib": "dist/lib",
+    "@domain": "dist/domain",
+    "@application": "dist/application",
+    "@infrastructure": "dist/infrastructure"
   }
 }

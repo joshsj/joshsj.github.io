@@ -7,6 +7,16 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@lib": ["./src/lib"],
+      "@lib/*": ["./src/lib/*"],
+      "@domain": ["./src/domain"],
+      "@domain/*": ["./src/domain/*"],
+      "@application": ["./src/application"],
+      "@application/*": ["./src/application/*"],
+      "@infrastructure": ["./src/infrastructure"],
+      "@infrastructure/*": ["./src/infrastructure/*"]
+    }
   }
 }

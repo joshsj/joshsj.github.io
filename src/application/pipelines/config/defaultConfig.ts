@@ -1,5 +1,5 @@
-import { Config } from "../../../domain";
-import { Step } from "../../../lib";
+import { Config } from "@domain";
+import { Step } from "@lib/stepComposer";
 
 type DefaultConfigResult = { config: Config };
 

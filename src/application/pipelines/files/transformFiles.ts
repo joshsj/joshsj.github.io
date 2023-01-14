@@ -1,9 +1,10 @@
 import path from "path";
-import { Config, File } from "../../../domain";
-import { isFulfilled } from "../../../domain/utils";
-import { Step } from "../../../lib";
-import { Logger } from "../../logging";
-import { FileTransformerFactory } from "../../transformation";
+import { Config } from "@domain";
+import { File } from "@domain/io";
+import { isFulfilled } from "@domain/utils";
+import { Step } from "@lib/stepComposer";
+import { Logger } from "@application/logging";
+import { FileTransformerFactory } from "@application/transformation";
 import { ReadSourceResult } from "./readSource";
 
 type TransformFilesResult = { buildFiles: File[] };

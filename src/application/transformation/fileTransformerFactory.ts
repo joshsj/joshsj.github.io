@@ -2,7 +2,7 @@ import {
   FileTransformer,
   FileTransformerFactory as _FileTransformerFactory,
 } from ".";
-import { File } from "../../domain";
+import { File } from "@domain/io";
 
 class FileTransformerFactory implements _FileTransformerFactory {
   constructor(private readonly transformers: FileTransformer[]) {}
