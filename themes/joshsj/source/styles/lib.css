@@ -9,10 +9,10 @@
 }
 
 .headerlink::before {
-  --margin: var(--space-1);
   content: "#";
   position: absolute;
-  transform: translateX(calc(-100% - var(--margin)));
+  transform: translateX(-100%);
+  padding-right: var(--space-1);
 }
 
 /* katex */
@@ -56,6 +56,12 @@
 .hljs-comment {
   color: var(--code-comment);
   font-style: italic;
+}
+
+@media (pointer: fine) and (min-width: 769px) {
+  :is(h2, h3):not(:hover) > .headerlink {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
