@@ -1,47 +1,39 @@
-import { loadConfig } from "./configuration/load";
-import { Config } from "./configuration/types";
-import { File, IIO } from "./io";
-import { IO } from "./io/io";
-import { ConsoleLogger } from "./logging/consoleLogger";
-import { ILogger } from "./logging/types";
-import { ProcessorPipeline } from "./processing";
-import { AssetProcessor, PageProcessor } from "./processing/processors";
-import { IProcessor, IProcessorPipeline } from "./processing/types";
-import { fromGenerator, walk } from "./utils";
+import { Logger } from "./application/logging";
+import { DefaultConfigStep } from "./application/pipelines/config/defaultConfig";
+import { LoadConfigStep } from "./application/pipelines/config/loadConfig";
+import { ReadSourceStep } from "./application/pipelines/files/readSource";
+import { TransformFilesStep } from "./application/pipelines/files/transformFiles";
+import { WriteBuildStep } from "./application/pipelines/files/writeBuild";
+import {
+  AssetTransformer,
+  FileTransformer,
+  PageTransformer,
+} from "./application/transformation";
+import { FileTransformerFactory } from "./application/transformation/fileTransformerFactory";
+import { IO } from "./domain";
+import { IOWithPath } from "./infrastructure/io/ioWithPath";
+import { ConsoleLogger } from "./infrastructure/logging/consoleLogger";
+import { StepComposer } from "./lib";
 
 const main = async () => {
-  const config: Config = loadConfig();
-  const logger: ILogger = new ConsoleLogger();
-  const io: IIO = new IO(config);
+  const io: IO = new IOWithPath();
+  const logger: Logger = new ConsoleLogger();
 
-  const processors: IProcessor[] = [
-    new AssetProcessor(config),
-    new PageProcessor(config),
-  ];
+  const { config } = await StepComposer.create()
+    .add(new DefaultConfigStep())
+    .add(new LoadConfigStep(logger))
+    .build()();
 
-  const pipeline: IProcessorPipeline = new ProcessorPipeline(
-    processors,
-    config,
-    logger
-  );
+  const fileTransformerFactory = new FileTransformerFactory([
+    new AssetTransformer(config),
+    new PageTransformer(config),
+  ]);
 
-  const contentFiles = await fromGenerator(getFiles(io, config));
-
-  const buildFiles = await pipeline.process(contentFiles);
-
-  await writeFiles(buildFiles, io);
+  await StepComposer.create()
+    .add(new ReadSourceStep(io, config))
+    .add(new TransformFilesStep(fileTransformerFactory, logger, config))
+    .add(new WriteBuildStep(io, config))
+    .build()();
 };
-
-async function* getFiles(io: IIO, config: Config) {
-  for await (const p of walk(config.sourceDir, { withFileTypes: true })) {
-    const file = File.from(p);
-    const contents = await io.read(file);
-    yield File.with(file, { contents });
-  }
-}
-
-async function writeFiles(files: File[], io: IIO) {
-  return await Promise.allSettled(files.map((f) => io.write(f)));
-}
 
 main();

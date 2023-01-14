@@ -1,16 +1,15 @@
-import { IProcessor } from "../types";
-import { Config } from "../../configuration/types";
 import { render } from "pug";
-import { File } from "../../io";
+import { Config, File } from "../../domain";
+import { FileTransformer } from "./types";
 
-class PageProcessor implements IProcessor {
+class PageTransformer implements FileTransformer {
   constructor(private readonly config: Config) {}
 
-  processes({ segments, extension }: File): boolean {
+  transforms({ segments, extension }: File): boolean {
     return extension === ".pug" && segments.at(0) === this.config.pageDir;
   }
 
-  async process(file: File): Promise<File> {
+  async transform(file: File): Promise<File> {
     return File.with(file, {
       // Place in root
       segments: [],
@@ -21,4 +20,4 @@ class PageProcessor implements IProcessor {
   }
 }
 
-export { PageProcessor };
+export { PageTransformer };

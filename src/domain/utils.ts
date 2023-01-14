@@ -1,5 +1,6 @@
 import { readdir } from "fs/promises";
 import path from "path";
+import { resourceLimits } from "worker_threads";
 
 type Options = Parameters<typeof readdir>[1];
 
@@ -39,4 +40,8 @@ const isFulfilled = <T>(
   result: PromiseSettledResult<T>
 ): result is PromiseFulfilledResult<T> => result.status === "fulfilled";
 
-export { walk, fromGenerator, isFulfilled };
+const isRejected = <T>(
+  result: PromiseSettledResult<T>
+): result is PromiseRejectedResult => !isFulfilled(result);
+
+export { walk, fromGenerator, isFulfilled, isRejected };

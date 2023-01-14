@@ -1,7 +1,7 @@
-import { mkdir, readdir, readFile, writeFile } from "fs/promises";
+import { readdir, mkdir, writeFile, readFile } from "fs/promises";
 import path from "path";
-import { File, IIO } from ".";
-import { Config } from "../configuration";
+import { File } from "../../domain";
+import { IO } from "../../domain/io";
 
 async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
   const entries = await readdir(root, { withFileTypes: true });
@@ -17,24 +17,18 @@ async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
   }
 }
 
-class IO implements IIO {
-  constructor(private readonly config: Config) {}
-
-  async write(file: File) {
-    if (!file.contents) {
-      return;
-    }
-
-    const dir = path.join(this.config.buildDir, file.directory);
+class IOWithPath implements IO {
+  async write(file: File, root = "") {
+    const dir = path.join(root, file.directory);
 
     // Ensure destination folder exists
     await mkdir(dir, { recursive: true });
 
-    await writeFile(path.join(dir, file.base), file.contents);
+    await writeFile(path.join(dir, file.base), file.contents ?? "");
   }
 
-  async read(file: File) {
-    return await readFile(path.join(this.config.sourceDir, file.full), "utf-8");
+  async read(file: File, root = "") {
+    return await readFile(path.join(root, file.full), "utf-8");
   }
 
   async *walk(root: string) {
@@ -42,4 +36,4 @@ class IO implements IIO {
   }
 }
 
-export { IO };
+export { IOWithPath };
