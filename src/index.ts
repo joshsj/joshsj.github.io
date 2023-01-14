@@ -9,27 +9,31 @@ import { FileTransformerFactory } from "@application/transformation/fileTransfor
 import { IO } from "@domain/io";
 import { IOWithPath } from "@infrastructure/io/ioWithPath";
 import { ConsoleLogger } from "@infrastructure/logging/consoleLogger";
-import { StepComposer } from "@lib/stepComposer";
+import { PipelineBuilder } from "@lib/pipelineBuilder";
 
 const main = async () => {
   const io: IO = new IOWithPath();
   const logger: Logger = new ConsoleLogger();
 
-  const { config } = await StepComposer.create()
+  const configPipeline = PipelineBuilder.create()
     .add(new DefaultConfigStep())
     .add(new LoadConfigStep(logger))
-    .build()();
+    .build();
+
+  const { config } = await configPipeline();
 
   const fileTransformerFactory = new FileTransformerFactory([
     new AssetTransformer(config),
     new PageTransformer(config),
   ]);
 
-  await StepComposer.create()
+  const buildPipeline = PipelineBuilder.create()
     .add(new ReadSourceStep(io, config))
     .add(new TransformFilesStep(fileTransformerFactory, logger, config))
     .add(new WriteBuildStep(io, config))
-    .build()();
+    .build();
+
+  await buildPipeline();
 };
 
 main();

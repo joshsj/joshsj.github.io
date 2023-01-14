@@ -2,7 +2,7 @@ import path from "path";
 import { Config } from "@domain";
 import { File } from "@domain/io";
 import { isFulfilled } from "@domain/utils";
-import { Step } from "@lib/stepComposer";
+import { Step } from "@lib/pipelineBuilder";
 import { Logger } from "@application/logging";
 import { FileTransformerFactory } from "@application/transformation";
 import { ReadSourceResult } from "./readSource";

@@ -6,18 +6,18 @@ type Step<Next extends {}, Curr extends {} = {}> = {
   execute(state: Curr): Promise<Next>;
 };
 
-class StepComposer<State extends {}> {
+class PipelineBuilder<State extends {}> {
   private constructor(
     private readonly steps: Step<any, any>[],
     private state: State
   ) {}
 
-  static create(): StepComposer<{}>;
+  static create(): PipelineBuilder<{}>;
   static create<State extends {}>(initial?: State) {
-    return new StepComposer([], initial ?? {});
+    return new PipelineBuilder([], initial ?? {});
   }
 
-  add<Next extends {}>(step: Step<Next, State>): StepComposer<Next> {
+  add<Next extends {}>(step: Step<Next, State>): PipelineBuilder<Next> {
     this.steps.push(step);
 
     return this as any;
@@ -36,4 +36,4 @@ class StepComposer<State extends {}> {
   }
 }
 
-export { Step, StepComposer };
+export { Step, PipelineBuilder };

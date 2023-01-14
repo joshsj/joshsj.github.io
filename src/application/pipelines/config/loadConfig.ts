@@ -1,6 +1,6 @@
 import path from "path";
 import { Env, Config } from "@domain";
-import { Step } from "@lib/stepComposer";
+import { Step } from "@lib/pipelineBuilder";
 import { Logger } from "@application/logging";
 import { DefaultConfigResult } from "./defaultConfig";
 

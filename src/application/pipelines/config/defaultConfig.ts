@@ -1,5 +1,5 @@
 import { Config } from "@domain";
-import { Step } from "@lib/stepComposer";
+import { Step } from "@lib/pipelineBuilder";
 
 type DefaultConfigResult = { config: Config };
 

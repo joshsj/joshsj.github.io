@@ -1,7 +1,7 @@
 import { Config } from "@domain";
 import { IO } from "@domain/io";
 import { isRejected } from "@domain/utils";
-import { Step } from "@lib/stepComposer";
+import { Step } from "@lib/pipelineBuilder";
 import { TransformFilesResult } from "./transformFiles";
 
 // TODO more informative

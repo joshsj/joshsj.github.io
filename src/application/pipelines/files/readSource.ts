@@ -1,7 +1,7 @@
 import { Config } from "@domain";
 import { File, IO } from "@domain/io";
 import { fromGenerator, walk } from "@domain/utils";
-import { Step } from "@lib/stepComposer";
+import { Step } from "@lib/pipelineBuilder";
 
 type ReadSourceResult = {
   sourceFiles: File[];
