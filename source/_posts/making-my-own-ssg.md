@@ -186,28 +186,30 @@ With that, the site looks like mine again:
 ## Introducing processors
 
 We need a refactor. Adding an `elif` for every filetype is completely
-inextensible and ignores SRP, plus it doesn't allow other mechanisms to
-determine how a file should be processed.
+inextensible and would become a mess --- we have design patterns for a reason.
 
-A 'processor' should look something like this:
+### The basis
+
+I think a processor should look something like this:
 
 ```typescript
 interface IProcessor {
-  /** Indicates if the file can be processed based on its path */
-  processes(location: ILocation): boolean;
+  /** Indicates if the file can be processed based on its source path */
+  processes(path: string): boolean;
 
-  /** Processes the file returning the new content */
-  process(location: ILocation, source: string): Promise<IContent>;
+  /** Processes the file returning the destination path and content */
+  process(path: string, source: string): Promise<[string, string]>;
 }
 ```
 
-The config also needs some more values, so the processors know where they're
-reading from:
+We can add more config values so the processors can identify where the file came
+from:
 
 - `ASSET_DIR` --- folder name for static assets
 - `PAGE_DIR` --- folder name for pages
 
-And that's it! The pipeline is orchestrated as follows:
+Adding new kinds of files (like posts) is now much simpler and will scale with
+complexity. The new approach is as follows:
 
 1. Scan the source directory
 2. Read in each file and resolve its processor
