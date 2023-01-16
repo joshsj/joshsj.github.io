@@ -1,5 +1,5 @@
 import { IO } from "@domain/io";
-import { Step } from "@lib/step";
+import { Step } from "@lib/pipeline";
 import { TransformFilesResult } from "./transformFiles";
 
 const makeWriteBuild =

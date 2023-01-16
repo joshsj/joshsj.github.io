@@ -1,16 +1,15 @@
 import { Config } from "@domain";
-import { Step } from "@lib/step";
+import { Step } from "@lib/pipeline";
 
 type SetDefaultConfigResult = { config: Config };
 
-const setDefaultConfig: Step<{}, SetDefaultConfigResult, void> = (next) => async () =>
-  await next({
-    config: {
-      sourceDir: "",
-      buildDir: "",
-      assetDir: "public",
-      pageDir: "pages",
-    },
-  });
+const setDefaultConfig: Step<void, SetDefaultConfigResult> = async () => ({
+  config: {
+    sourceDir: "",
+    buildDir: "",
+    assetDir: "public",
+    pageDir: "pages",
+  },
+});
 
 export { SetDefaultConfigResult, setDefaultConfig };

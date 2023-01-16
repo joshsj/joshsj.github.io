@@ -1,27 +1,25 @@
 import { Config, FileCategory } from "@domain";
 import { File } from "@domain/io";
-import { Step } from "@lib/step";
+import { Step } from "@lib/pipeline";
 import { ReadSourceResult } from "./readSource";
 
 type CategorisedFile = { file: File; category: FileCategory }; // TODO combine?
 
 type CategoriseFilesResult = { config: Config; files: CategorisedFile[] };
 
-const categoriseFiles: Step<ReadSourceResult, CategoriseFilesResult, void> =
-  (next) =>
-  async ({ sourceFiles, config }) => {
-    const files: CategorisedFile[] = [];
+const categoriseFiles: Step<ReadSourceResult, CategoriseFilesResult> = async ({ sourceFiles, config }) => {
+  const files: CategorisedFile[] = [];
 
-    for (const file of sourceFiles) {
-      const category = identify(file, config);
+  for (const file of sourceFiles) {
+    const category = identify(file, config);
 
-      if (category) {
-        files.push({ file, category });
-      }
+    if (category) {
+      files.push({ file, category });
     }
+  }
 
-    return await next({ config, files });
-  };
+  return { config, files };
+};
 
 type Identifiers = { [K in FileCategory]: (file: File, config: Config) => boolean };
 

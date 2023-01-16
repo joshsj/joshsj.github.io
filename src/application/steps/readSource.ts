@@ -1,19 +1,17 @@
 import { Config } from "@domain";
 import { File, fileFrom, IO } from "@domain/io";
 import { fromGenerator } from "@domain/utils";
-import { Step } from "@lib/step";
+import { Step } from "@lib/pipeline";
 import { LoadConfigResult } from "./loadConfig";
 
 type ReadSourceResult = LoadConfigResult & { sourceFiles: File[] };
 
 const makeReadSource =
-  (io: IO): Step<LoadConfigResult, ReadSourceResult, void> =>
-  (next) =>
-  async ({ config }) => {
-    const sourceFiles = await fromGenerator(readFiles(io, config));
-
-    return await next({ config, sourceFiles });
-  };
+  (io: IO): Step<LoadConfigResult, ReadSourceResult> =>
+  async ({ config }) => ({
+    config,
+    sourceFiles: await fromGenerator(readFiles(io, config)),
+  });
 
 async function* readFiles(io: IO, { sourceDir }: Config) {
   for await (const p of io.walk(sourceDir)) {
