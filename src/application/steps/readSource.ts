@@ -1,13 +1,13 @@
 import { Config } from "@domain";
-import { File, IIO } from "@domain/io";
-import { fromGenerator, walk } from "@domain/utils";
-import { Step } from "@lib/link";
+import { File, fileFrom, IO } from "@domain/io";
+import { fromGenerator } from "@domain/utils";
+import { Step } from "@lib/step";
 import { LoadConfigResult } from "./loadConfig";
 
 type ReadSourceResult = LoadConfigResult & { sourceFiles: File[] };
 
 const makeReadSource =
-  (io: IIO): Step<LoadConfigResult, ReadSourceResult, void> =>
+  (io: IO): Step<LoadConfigResult, ReadSourceResult, void> =>
   (next) =>
   async ({ config }) => {
     const sourceFiles = await fromGenerator(readFiles(io, config));
@@ -15,12 +15,12 @@ const makeReadSource =
     return await next({ config, sourceFiles });
   };
 
-async function* readFiles(io: IIO, { sourceDir }: Config) {
-  for await (const p of walk(sourceDir, { withFileTypes: true })) {
-    const file = File.from(p);
+async function* readFiles(io: IO, { sourceDir }: Config) {
+  for await (const p of io.walk(sourceDir)) {
+    const file = fileFrom(p);
     const contents = await io.read(file, sourceDir);
 
-    yield File.with(file, { contents });
+    yield file.with({ contents });
   }
 }
 

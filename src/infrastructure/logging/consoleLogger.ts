@@ -1,17 +1,15 @@
-import { ILogger } from "../../application/logging";
+import { Logger } from "@application/logging";
 
-class ConsoleLogger implements ILogger {
-  constructor(public context?: string) {}
-
-  log(...data: any[]): void {
-    if (this.context) {
-      console.log(this.context);
+const makeConsoleLogger =
+  (context?: string): Logger =>
+  (data) => {
+    if (context) {
+      console.log(context);
     }
 
     for (const d of data) {
       console.log(d);
     }
-  }
-}
+  };
 
-export { ConsoleLogger };
+export { makeConsoleLogger };

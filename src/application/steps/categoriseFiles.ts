@@ -1,6 +1,6 @@
 import { Config, FileCategory } from "@domain";
 import { File } from "@domain/io";
-import { Step } from "@lib/link";
+import { Step } from "@lib/step";
 import { ReadSourceResult } from "./readSource";
 
 type CategorisedFile = { file: File; category: FileCategory }; // TODO combine?

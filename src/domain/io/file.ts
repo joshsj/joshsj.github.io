@@ -1,42 +1,49 @@
-import { Directory } from "./directory";
-import { parse, sep } from "path";
+import { Directory, directory as _directory } from "./directory";
+import _path from "path";
 
-class File extends Directory {
-  constructor(
-    segments: string[],
-    sep: string,
-    public readonly name: string,
-    public readonly extension: string,
-    public readonly contents?: string
-  ) {
-    super(segments, sep);
-  }
+type File = Omit<Directory, "with"> &
+  Readonly<{
+    name: string;
+    extension: string;
+    contents?: string;
+    base: string;
+    with(patch: Partial<File>): File;
+  }>;
 
-  get base() {
-    return `${this.name}${this.extension}`;
-  }
+type Values = Pick<File, "segments" | "sep" | "name" | "extension" | "contents">;
 
-  get full() {
-    return [...this.segments, this.base].join(this.sep);
-  }
+const file = (values: Values): File => {
+  const { segments, sep } = values;
+  const { directory, full } = _directory(values);
 
-  static with(base: File, patch: Partial<File> = {}) {
-    const resolve = <T extends keyof File>(k: T) => patch[k] ?? base[k];
+  const base = `${values.name}${values.extension}`;
 
-    return new File(
-      resolve("segments"),
-      resolve("sep"),
-      resolve("name"),
-      resolve("extension"),
-      resolve("contents")
-    );
-  }
+  const f: File = {
+    segments,
+    sep,
+    directory,
+    base,
+    name: values.name,
+    extension: values.extension,
+    contents: values.contents,
+    full: [full, base].join(sep),
+    with(patch) {
+      return file({ ...f, ...patch });
+    },
+  };
 
-  static from(path: string) {
-    const { dir, name, ext } = parse(path);
+  return f;
+};
 
-    return new File(dir.split(sep), sep, name, ext);
-  }
-}
+const fileFrom = (path: string): File => {
+  const { dir, name, ext } = _path.parse(path);
 
-export { File };
+  return file({
+    segments: dir.split(_path.sep),
+    sep: _path.sep,
+    name,
+    extension: ext,
+  });
+};
+
+export { File, file, fileFrom };

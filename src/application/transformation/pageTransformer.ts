@@ -1,20 +1,19 @@
 import { render } from "pug";
-import { Config, FileCategory } from "@domain";
 import { File } from "@domain/io";
-import { IFileTransformer } from "./types";
+import { FileTransformer } from "./types";
 
-class PageTransformer implements IFileTransformer {
-  transforms: FileCategory = "page";
+const pageTransformer: FileTransformer = {
+  transforms: "page",
 
   async transform(file: File): Promise<File> {
-    return File.with(file, {
+    return file.with({
       // Place in root
       segments: [],
       // Render with pug
       contents: file.contents ? render(file.contents) : "",
       extension: ".html",
     });
-  }
-}
+  },
+};
 
-export { PageTransformer };
+export { pageTransformer };

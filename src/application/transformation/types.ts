@@ -1,9 +1,9 @@
 import { FileCategory } from "@domain";
 import { File } from "@domain/io";
 
-interface IFileTransformer {
+type FileTransformer = {
   transforms: FileCategory;
   transform(file: File): Promise<File>;
-}
+};
 
-export { IFileTransformer };
+export { FileTransformer };

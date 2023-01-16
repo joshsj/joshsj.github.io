@@ -1,31 +1,33 @@
-import { parse, sep } from "path";
+import _path from "path";
 
-class Directory {
-  constructor(
-    public readonly segments: string[],
-    public readonly sep: string
-  ) {}
+type Directory = Readonly<{
+  segments: string[];
+  sep: string;
+  directory: string;
+  full: string;
+  with(patch: Partial<Directory>): Directory;
+}>;
 
-  get directory() {
-    return this.segments.join(this.sep);
-  }
+type Values = Pick<Directory, "segments" | "sep">;
 
-  get full() {
-    return this.directory;
-  }
+const directory = ({ segments, sep }: Values): Directory => {
+  const d: Directory = {
+    segments,
+    sep,
+    directory: segments.join(sep),
+    full: segments.join(sep),
+    with(patch) {
+      return directory({ ...d, ...patch });
+    },
+  };
 
-  static with(
-    base: Directory,
-    { segments, sep }: Partial<Directory> = {}
-  ): Directory {
-    return new Directory(segments ?? base.segments, sep ?? base.sep);
-  }
+  return d;
+};
 
-  static from(path: string) {
-    const { dir } = parse(path);
+const directoryFrom = (path: string) => {
+  const { dir } = _path.parse(path);
 
-    return new Directory(dir.split(sep), sep);
-  }
-}
+  return directory({ segments: dir.split(_path.sep), sep: _path.sep });
+};
 
-export { Directory };
+export { Directory, directory, directoryFrom };

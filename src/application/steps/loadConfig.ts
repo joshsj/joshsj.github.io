@@ -1,7 +1,7 @@
 import path from "path";
 import { Env } from "@domain";
 import { SetDefaultConfigResult } from "./setDefaultConfig";
-import { Step } from "@lib/link";
+import { Step } from "@lib/step";
 
 type LoadConfigResult = SetDefaultConfigResult;
 

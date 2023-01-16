@@ -1,12 +1,10 @@
 import { makeTransformFiles, makeWriteBuild, setDefaultConfig, loadConfig, categoriseFiles } from "@application/steps";
 import { makeReadSource } from "@application/steps/readSource";
-import { AssetTransformer, PageTransformer } from "@application/transformation";
-import { IIO } from "@domain/io";
-import { IO } from "@infrastructure/io";
+import { assetTransformer, pageTransformer } from "@application/transformation";
+import { io } from "@infrastructure/io";
 
 const main = async () => {
-  const io: IIO = new IO();
-  const transformers = [new AssetTransformer(), new PageTransformer()];
+  const transformers = [assetTransformer, pageTransformer];
 
   const readSource = makeReadSource(io);
   const transformFiles = makeTransformFiles(transformers);

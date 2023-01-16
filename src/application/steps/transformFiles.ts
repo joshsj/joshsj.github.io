@@ -1,15 +1,15 @@
 import path from "path";
 import { File } from "@domain/io";
 import { isFulfilled } from "@domain/utils";
-import { IFileTransformer } from "@application/transformation";
-import { Step } from "@lib/link";
+import { FileTransformer } from "@application/transformation";
+import { Step } from "@lib/step";
 import { CategorisedFile, CategoriseFilesResult } from "./categoriseFiles";
 import { Config } from "@domain";
 
 type TransformFilesResult = { buildFiles: File[]; config: Config };
 
 const makeTransformFiles =
-  (transformers: IFileTransformer[]): Step<CategoriseFilesResult, TransformFilesResult, void> =>
+  (transformers: FileTransformer[]): Step<CategoriseFilesResult, TransformFilesResult, void> =>
   (next) =>
   async ({ files, config }) => {
     const transformFile = async ({ file, category }: CategorisedFile) => {

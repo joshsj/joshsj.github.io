@@ -1,5 +1,5 @@
 import { Config } from "@domain";
-import { Step } from "@lib/link";
+import { Step } from "@lib/step";
 
 type SetDefaultConfigResult = { config: Config };
 

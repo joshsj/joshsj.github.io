@@ -1,13 +1,12 @@
-import { Config, FileCategory } from "@domain";
 import { File } from "@domain/io";
-import { IFileTransformer } from "./types";
+import { FileTransformer } from "./types";
 
-class AssetTransformer implements IFileTransformer {
-  transforms: FileCategory = "asset";
+const assetTransformer: FileTransformer = {
+  transforms: "asset",
 
   async transform(file: File): Promise<File> {
-    return File.with(file, { segments: file.segments.slice(1) });
-  }
-}
+    return file.with({ segments: file.segments.slice(1) });
+  },
+};
 
-export { AssetTransformer };
+export { assetTransformer };
