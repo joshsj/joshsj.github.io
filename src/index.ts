@@ -11,7 +11,7 @@ const main = async () => {
   const writeBuild = makeWriteBuild(io);
 
   // TODO have a guess
-  const build = setDefaultConfig(loadConfig(readSource(categoriseFiles(transformFiles(writeBuild)))));
+  const build = setDefaultConfig(loadConfig(readSource(categoriseFiles(transformFiles(writeBuild())))));
 
   await build();
 };

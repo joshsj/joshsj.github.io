@@ -1,7 +1,9 @@
 type Handler<State, Result> = keyof State extends never ? () => Promise<Result> : (state: State) => Promise<Result>;
 
-type Step<State, Result = void, Dest = Result> = Result extends Dest
-  ? Handler<State, Dest>
-  : (next: Handler<Result, Dest>) => Handler<State, Dest>;
+type Step<State extends {}, Result extends {} | void = void> = (
+  next?: Handler<Result, unknown>
+) => Handler<State, Result>;
 
-export { Handler, Step };
+const terminate: Handler<any, void> = async () => {};
+
+export { Handler, Step, terminate };

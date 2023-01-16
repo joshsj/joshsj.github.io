@@ -7,12 +7,13 @@ import { LoadConfigResult } from "./loadConfig";
 type ReadSourceResult = LoadConfigResult & { sourceFiles: File[] };
 
 const makeReadSource =
-  (io: IO): Step<LoadConfigResult, ReadSourceResult, void> =>
+  (io: IO): Step<LoadConfigResult, ReadSourceResult> =>
   (next) =>
   async ({ config }) => {
-    const sourceFiles = await fromGenerator(readFiles(io, config));
+    const result = { config, sourceFiles: await fromGenerator(readFiles(io, config)) };
 
-    return await next({ config, sourceFiles });
+    await next?.(result);
+    return result;
   };
 
 async function* readFiles(io: IO, { sourceDir }: Config) {

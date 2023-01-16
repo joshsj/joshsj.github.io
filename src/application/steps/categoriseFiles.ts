@@ -7,10 +7,10 @@ type CategorisedFile = { file: File; category: FileCategory }; // TODO combine?
 
 type CategoriseFilesResult = { config: Config; files: CategorisedFile[] };
 
-const categoriseFiles: Step<ReadSourceResult, CategoriseFilesResult, void> =
+const categoriseFiles: Step<ReadSourceResult, CategoriseFilesResult> =
   (next) =>
   async ({ sourceFiles, config }) => {
-    const files: CategorisedFile[] = [];
+    const files = [];
 
     for (const file of sourceFiles) {
       const category = identify(file, config);
@@ -20,7 +20,11 @@ const categoriseFiles: Step<ReadSourceResult, CategoriseFilesResult, void> =
       }
     }
 
-    return await next({ config, files });
+    const result = { config, files };
+
+    await next?.(result);
+
+    return result;
   };
 
 type Identifiers = { [K in FileCategory]: (file: File, config: Config) => boolean };

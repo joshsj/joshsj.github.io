@@ -3,9 +3,12 @@ import { Step } from "@lib/step";
 import { TransformFilesResult } from "./transformFiles";
 
 const makeWriteBuild =
-  (io: IO): Step<TransformFilesResult, void> =>
+  (io: IO): Step<TransformFilesResult> =>
+  (next) =>
   async ({ buildFiles, config }) => {
     await Promise.allSettled(buildFiles.map((f) => io.write(f, config.buildDir)));
+
+    await next?.();
   };
 
 export { makeWriteBuild };

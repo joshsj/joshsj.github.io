@@ -9,7 +9,7 @@ import { Config } from "@domain";
 type TransformFilesResult = { buildFiles: File[]; config: Config };
 
 const makeTransformFiles =
-  (transformers: FileTransformer[]): Step<CategoriseFilesResult, TransformFilesResult, void> =>
+  (transformers: FileTransformer[]): Step<CategoriseFilesResult, TransformFilesResult> =>
   (next) =>
   async ({ files, config }) => {
     const transformFile = async ({ file, category }: CategorisedFile) => {
@@ -25,11 +25,15 @@ const makeTransformFiles =
 
     const results = await Promise.allSettled(files.map(transformFile));
 
-    const buildFiles = results
-      .filter((r): r is PromiseFulfilledResult<File> => isFulfilled(r) && !!r.value)
-      .map((r) => r.value);
+    const result = {
+      config,
+      buildFiles: results
+        .filter((r): r is PromiseFulfilledResult<File> => isFulfilled(r) && !!r.value)
+        .map((r) => r.value),
+    };
 
-    return await next({ buildFiles, config });
+    await next?.(result);
+    return result;
   };
 
 export { TransformFilesResult, makeTransformFiles };

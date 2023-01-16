@@ -5,7 +5,7 @@ import { Step } from "@lib/step";
 
 type LoadConfigResult = SetDefaultConfigResult;
 
-const loadConfig: Step<SetDefaultConfigResult, LoadConfigResult, void> =
+const loadConfig: Step<SetDefaultConfigResult, LoadConfigResult> =
   (next) =>
   async ({ config: _default }) => {
     const base = process.cwd();
@@ -20,7 +20,11 @@ const loadConfig: Step<SetDefaultConfigResult, LoadConfigResult, void> =
       pageDir: env.PAGE_DIR || _default.pageDir,
     });
 
-    return await next({ config });
+    const result = { config };
+
+    await next?.(result);
+
+    return result;
   };
 
 export { LoadConfigResult, loadConfig };
