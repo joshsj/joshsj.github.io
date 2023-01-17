@@ -169,9 +169,6 @@ async function* walk(
 
 Times New Roman has a certain charm but I want my hard-earned CSS back.
 
-Some of my CSS components need a rethink, so they can stay behind, as well as
-the lib-specific CSS. I can reintroduce those styles again later.
-
 Unlike the .pug files, static assets need not be compiled, only copied to the
 build folder; they also keep their file extension. I can copy the pug processing
 logic in to a new method, make these changes, and add a check to determine the
@@ -181,37 +178,141 @@ With that, the site looks like mine again:
 
 {% caption_img "with css.png" "Looking good"  %}
 
-<!-- TODO caption -->
+## Introducing transformers
 
-## Introducing processors
+Before the system grows, we need a refactor. Adding an `elif` for every file
+type is completely inextensible and would become a mess --- we have design
+patterns for a reason.
 
-We need a refactor. Adding an `elif` for every filetype is completely
-inextensible and would become a mess --- we have design patterns for a reason.
+Typescript allows us to take an object-oriented or functional approach. Of
+course, both will be used eventually but I want to lean on FP because I've never
+work on a sizeable application with it.
 
-### The basis
+With that in mind, I only know software design from an OOP perspective so expect
+no rules of FP to be followed.
 
-I think a processor should look something like this:
+The essential information of a file is its location and content:
 
 ```typescript
-interface IProcessor {
-  /** Indicates if the file can be processed based on its source path */
-  processes(path: string): boolean;
-
-  /** Processes the file returning the destination path and content */
-  process(path: string, source: string): Promise<[string, string]>;
-}
+type File = { path: string; content: string };
 ```
 
-We can add more config values so the processors can identify where the file came
-from:
+To transform a file from source to build, we return its new location and content
+which can continue to be stored inside the `File` type:
+
+```typescript
+type Transformer = (file: File) => Promise<File>;
+```
+
+The object-oriented designer in me is screaming
+[factory](https://refactoring.guru/design-patterns/factory-method) to allow a
+`Transformer` implementation to be provided based on the file's location.
+
+Defining a class would be shameful but I agree with the intention: the function
+which handles the transformations shouldn't also determine which transformer to
+use.
+
+```typescript
+type GetTransformer = (file: File) => Transformer;
+```
+
+To allow the system to identify where a file came from, we can add more config
+values:
 
 - `ASSET_DIR` --- folder name for static assets
 - `PAGE_DIR` --- folder name for pages
 
-Adding new kinds of files (like posts) is now much simpler and will scale with
-complexity. The new approach is as follows:
+And now the application can map the files from source to build:
 
-1. Scan the source directory
-2. Read in each file and resolve its processor
-3. Invoke the processor
-4. Use the result to write its content at its location
+```typescript
+const transformFiles =
+  (getTransformer: GetTransformer) => async (sourceFiles: File[]) => {
+    const transformations = sourceFiles.map((file) =>
+      getTransformer(file)(file)
+    );
+
+    const transformResults = await Promise.allSettled(transformations);
+
+    const buildFiles: File[] = transformResults
+      .filter((r) => isFulfilled(r) && !!r.value)
+      .map((r) => r.value);
+  };
+```
+
+Adding new kinds of files (like posts) is now much simpler, requiring only a
+transformer implementation and a new configuration value if necessary. The
+concept of 'transformation' is also formalized and domain is richer 👌
+
+## Creating a pipeline
+
+Even with limited development, it's easy to imagine how the codebase will grow
+to add the upcoming features: reading in preamble, building the dataset of
+posts, generating TOCs, etc. A few bits of architecture will go a long way to
+ensure the application scales with complexity.
+
+### Spitballing
+
+The behaviour to generate a site is a sequence of predetermined procedures where
+the output of one feeds into the next. I would call this a pipeline.
+
+Mathematicians and functional programmers can meet this demand with function
+composition, which composes a single function of many. However, it seems that FP
+nerds still haven't quite achieved this in Typescript, as shown by this thread
+on [Hacker News](https://news.ycombinator.com/item?id=32377646).
+
+Looking at object-oriented design, my understanding (see
+[GoF](https://martinfowler.com/bliki/GangOfFour.html) and
+[DDD](https://martinfowler.com/bliki/DomainDrivenDesign.html)) reveals none are
+quite right:
+
+- Mediator could construct a pipeline but:
+  - abstracting the communication between functions is the opposite of
+    composition and
+  - sending requests/notifications is a wasted mechanism for this system: the
+    only request is 'build'.
+- Chain of Responsibility exists to allow multiple handler to try and complete a
+  single request. It could be modified to create a pipeline, whereby the `next`
+  handler accepts the result of the current handler; however:
+  - Handlers invoking the next handler only makes sense with the pattern's
+    original intention, so it doesn't fit either.
+
+The bottom line is that, in Typescript world, there's no predefined solution
+that I know of.
+
+### Meeting in the middle
+
+Inspired by some creations the Hacker News thread from above, I'm using the
+Builder pattern to add some fluid semantics to function composition:
+
+```typescript
+// Take in a value, return a value wrapped in a Promise
+type Step<Current, Next> = (state: Current) => Promise<Next>;
+
+// Store an initial state to kick things off
+type PipelineBuilder<Initial, Current> = {
+  // Store a handler for the current state and move onto the next state
+  add: <Next>(f: Step<Current, Next>) => PipelineBuilder<Initial, Next>;
+  // Compose the added functions
+  build: () => Step<Initial, Current>;
+};
+
+type Pipeline = <Initial = void>() => PipelineBuilder<Initial, Initial>;
+```
+
+The implementation but simple: `add` stores the step `f` in an array; `build`
+reduces the array and composes the result. This requires some type assertions
+and `any` so you can't see the ugly.
+
+We can now decompose the current process into `Step`s and separate some
+behaviours into their own functions:
+
+```typescript
+const run = pipeline()
+  .add(setDefaultConfig) // In case .env is missing
+  .add(loadConfig) // Load from .env
+  .add(readSource) // Read in the source files
+  .add(categoriseFiles) // Asset or page?
+  .add(transformFiles) // If you know, you know
+  .add(writeBuild) // Write the build files
+  .build(); // Compose the added functions
+```
