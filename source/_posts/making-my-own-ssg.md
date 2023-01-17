@@ -260,10 +260,9 @@ composition, which composes a single function of many. However, it seems that FP
 nerds still haven't quite achieved this in Typescript, as shown by this thread
 on [Hacker News](https://news.ycombinator.com/item?id=32377646).
 
-Looking at object-oriented design, my understanding (see
+Looking at object-oriented design, the most common  patterns (see
 [GoF](https://martinfowler.com/bliki/GangOfFour.html) and
-[DDD](https://martinfowler.com/bliki/DomainDrivenDesign.html)) reveals none are
-quite right:
+[DDD](https://martinfowler.com/bliki/DomainDrivenDesign.html)) don't seem to work either:
 
 - Mediator could construct a pipeline but:
   - abstracting the communication between functions is the opposite of
@@ -281,8 +280,7 @@ that I know of.
 
 ### Meeting in the middle
 
-Inspired by some creations the Hacker News thread from above, I'm using the
-Builder pattern to add some fluid semantics to function composition:
+Inspired by some creations the Hacker News thread from above, I can use the Builder pattern to add some fluid semantics to function composition:
 
 ```typescript
 // Take in a value, return a value wrapped in a Promise
@@ -296,7 +294,7 @@ type PipelineBuilder<Initial, Current> = {
   build: () => Step<Initial, Current>;
 };
 
-type Pipeline = <Initial = void>() => PipelineBuilder<Initial, Initial>;
+type Pipeline = <Initial>() => PipelineBuilder<Initial, Initial>;
 ```
 
 The implementation is simple: `add` stores the step `f` in an array; `build`
@@ -307,7 +305,7 @@ We can now decompose the current process into `Step`s and separate some
 behaviours into their own functions:
 
 ```typescript
-const build = pipeline()
+const generate = pipeline()
   .add(setDefaultConfig) // In case .env is missing
   .add(loadConfig) // Load from .env
   .add(readSource) // Read in the source files
@@ -316,5 +314,5 @@ const build = pipeline()
   .add(writeBuild) // Write the build files
   .build(); // Compose the added functions
 
-await build(); 
+await generate(); 
 ```
