@@ -3,8 +3,6 @@ import { File } from "@domain/io";
 
 type Transformer = (file: File) => Promise<File>;
 
-type Transformers = {
-  [K in FileCategory]: Transformer;
-};
+type GetTransformer = (category: FileCategory) => Transformer;
 
-export { Transformer, Transformers };
+export { Transformer, GetTransformer };
