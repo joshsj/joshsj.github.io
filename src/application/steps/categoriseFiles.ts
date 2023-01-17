@@ -4,7 +4,7 @@ import { File } from "@domain/io";
 import { Step } from "@lib/pipeline";
 import { ReadSourceResult } from "./readSource";
 
-type CategorisedFile = File & { category: FileCategory }; // TODO combine?
+type CategorisedFile = File & { category: FileCategory };
 
 type CategoriseFilesResult = { config: Config; files: CategorisedFile[] };
 

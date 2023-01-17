@@ -5,10 +5,11 @@ type SetDefaultConfigResult = { config: Config };
 
 const setDefaultConfig: Step<void, SetDefaultConfigResult> = async () => ({
   config: {
-    sourceDir: "",
-    buildDir: "",
+    sourceDir: ".",
+    buildDir: ".",
     assetDir: "public",
     pageDir: "pages",
+    postDir: "posts",
   },
 });
 
