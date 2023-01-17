@@ -273,7 +273,7 @@ quite right:
 - Chain of Responsibility exists to allow multiple handler to try and complete a
   single request. It could be modified to create a pipeline, whereby the `next`
   handler accepts the result of the current handler; however:
-  - Handlers invoking the next handler only makes sense with the pattern's
+  - handlers invoking the next handler only makes sense with the pattern's
     original intention, so it doesn't fit either.
 
 The bottom line is that, in Typescript world, there's no predefined solution
