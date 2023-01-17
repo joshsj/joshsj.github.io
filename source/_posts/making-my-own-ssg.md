@@ -27,7 +27,7 @@ post in the future.
 ## Current Situation
 
 The blog is currently hosted on Github Pages and deployed automatically with
-Github Actions. I have little to no interest in DevOps and this works flawlessly
+Github Actions. I have little to no interest in DevOps and this just fine
 --- no changes here.
 
 Building the blog is handled by [Hexo](https://github.com/hexojs/hexo) which I
@@ -185,8 +185,8 @@ type is completely inextensible and would become a mess --- we have design
 patterns for a reason.
 
 Typescript allows us to take an object-oriented or functional approach. Of
-course, both will be used eventually but I want to lean on FP because I've never
-work on a sizeable application with it.
+course, both will be used eventually but I want to lean on FP because I've never 
+developed a useful application with it.
 
 With that in mind, I only know software design from an OOP perspective so expect
 no rules of FP to be followed.
@@ -299,7 +299,7 @@ type PipelineBuilder<Initial, Current> = {
 type Pipeline = <Initial = void>() => PipelineBuilder<Initial, Initial>;
 ```
 
-The implementation but simple: `add` stores the step `f` in an array; `build`
+The implementation is simple: `add` stores the step `f` in an array; `build`
 reduces the array and composes the result. This requires some type assertions
 and `any` so you can't see the ugly.
 
@@ -307,7 +307,7 @@ We can now decompose the current process into `Step`s and separate some
 behaviours into their own functions:
 
 ```typescript
-const run = pipeline()
+const build = pipeline()
   .add(setDefaultConfig) // In case .env is missing
   .add(loadConfig) // Load from .env
   .add(readSource) // Read in the source files
@@ -315,4 +315,6 @@ const run = pipeline()
   .add(transformFiles) // If you know, you know
   .add(writeBuild) // Write the build files
   .build(); // Compose the added functions
+
+await build(); 
 ```
