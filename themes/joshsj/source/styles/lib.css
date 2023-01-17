@@ -67,6 +67,5 @@
 @media (max-width: 768px) {
   .headerlink::before {
     position: static;
-    margin-right: var(--margin);
   }
 }
