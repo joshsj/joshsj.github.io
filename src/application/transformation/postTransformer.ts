@@ -1,12 +1,12 @@
-import { render } from "pug";
 import { Transformer } from "./types";
+import { pug } from "@application/transformation/utils";
 
-const postTransformer: Transformer<"post"> = async ({ file, data }) =>
-  file.with({
+const postTransformer: Transformer<"post"> = async (something) =>
+  something.file.with({
     // Place in posts folder
-    segments: ["posts", ...file.segments.slice(1)],
+    segments: [ "posts", ...something.file.segments.slice(1) ],
     // Render with pug
-    contents: file.contents ? render(file.contents, { filename: file.base, ...data }) : "",
+    contents: pug(something),
     extension: ".html",
   });
 

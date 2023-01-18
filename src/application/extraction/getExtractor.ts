@@ -1,13 +1,13 @@
 import { SomethingCategory } from "@domain";
 import { Extractor, GetExtractor } from "./types";
-import { postExtractor as post } from "./postExtractor";
+import { toExtractor } from "@application/extraction/toExtractor";
 
 type Extractors = { [K in SomethingCategory]: Extractor<K> };
 
 const extractors: Extractors = {
   asset: (file) => ({ category: "asset", file }),
-  page: (file) => ({ category: "page", file }),
-  post,
+  page: toExtractor("page"),
+  post: toExtractor("post")
 };
 
 const getExtractor: GetExtractor = (category) => extractors[category];

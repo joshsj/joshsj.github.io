@@ -5,7 +5,7 @@ type File = Omit<Directory, "with"> &
   Readonly<{
     name: string;
     extension: string;
-    contents?: string;
+    contents: string;
     base: string;
     with(patch?: Partial<File>): File;
   }>;
@@ -43,6 +43,7 @@ const fileFrom = (path: string): File => {
     sep: _path.sep,
     name,
     extension: ext,
+    contents: ""
   });
 };
 

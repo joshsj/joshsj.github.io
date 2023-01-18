@@ -5,11 +5,13 @@ import { File } from "./io";
 type Make<Category extends string, Data extends {} = {}> = {
   file: File;
   category: Category;
-} & (keyof Data extends never ? {} : { data: Data });
+} & ({} extends Data ? {} : { data: Data });
 
 type Asset = Make<"asset">;
 
-type Page = Make<"page">;
+type PageData = { title: string }
+
+type Page = Make<"page", PageData>;
 
 type PostData = {
   title: string;
@@ -24,4 +26,6 @@ type Something = Asset | Page | Post;
 
 type SomethingCategory = Something["category"];
 
-export { Asset, Page, PostData, Post, Something, SomethingCategory };
+type SomethingFor<T extends SomethingCategory> = Something & { category: T }
+
+export { Asset, PageData, Page, PostData, Post, Something, SomethingCategory, SomethingFor };
