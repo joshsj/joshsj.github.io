@@ -1,9 +1,5 @@
-import { Config, SomethingCategory } from "@domain";
-import { File } from "@domain/io";
-
-type GetCategory = (file: File, config: Config) => SomethingCategory;
-
-type Categorisers = { [K in SomethingCategory]: (file: File, config: Config) => boolean };
+import { SomethingCategory } from "@domain";
+import { Categorisers, GetCategory } from ".";
 
 const identifiers: Categorisers = {
   asset: ({ segments }, { assetDir }) => segments.at(0) === assetDir,
@@ -16,4 +12,4 @@ const getCategory: GetCategory = (file, config) =>
     .find(([_, f]) => f(file, config))!
     .at(0) as SomethingCategory;
 
-export { GetCategory, getCategory };
+export { getCategory };

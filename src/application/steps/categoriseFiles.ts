@@ -1,4 +1,4 @@
-import { GetCategory } from "@application/categorisation/getCategory";
+import { GetCategory } from "@application/categorisation";
 import { Config, SomethingCategory } from "@domain";
 import { File } from "@domain/io";
 import { Step } from "@lib/pipeline";

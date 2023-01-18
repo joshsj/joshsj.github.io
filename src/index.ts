@@ -1,15 +1,15 @@
-import { getCategory } from "@application/categorisation/getCategory";
-import { getExtractor } from "@application/extraction/getExtractor";
+import { getCategory } from "@application/categorisation";
+import { getExtractor } from "@application/extraction";
 import {
+  loadConfig,
+  makeCategoriseFiles,
+  makeExtractData,
+  makeReadSource,
   makeTransformFiles,
   makeWriteBuild,
   setDefaultConfig,
-  loadConfig,
-  makeCategoriseFiles,
 } from "@application/steps";
-import { makeExtractData } from "@application/steps/extractData";
-import { makeReadSource } from "@application/steps/readSource";
-import { getTransformer } from "@application/transformation/getTransformer";
+import { getTransformer } from "@application/transformation";
 import { io } from "@infrastructure/io";
 import { pipeline } from "@lib/pipeline";
 
