@@ -2,11 +2,14 @@ import { File } from "./io";
 
 // TODO work out name for object;
 
-type As<C extends string> = { category: C; file: File };
+type Make<Category extends string, Data extends {} = {}> = {
+  file: File;
+  category: Category;
+} & (keyof Data extends never ? {} : { data: Data });
 
-type Asset = As<"asset">;
+type Asset = Make<"asset">;
 
-type Page = As<"page">;
+type Page = Make<"page">;
 
 type PostData = {
   title: string;
@@ -14,7 +17,8 @@ type PostData = {
   updated?: Date;
   tags?: [];
 };
-type Post = PostData & As<"post">;
+
+type Post = Make<"post", PostData>;
 
 type Something = Asset | Page | Post;
 

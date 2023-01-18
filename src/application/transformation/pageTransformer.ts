@@ -1,7 +1,7 @@
 import { render } from "pug";
 import { Transformer } from "./types";
 
-const pageTransformer: Transformer = async ({ file }) =>
+const pageTransformer: Transformer<"page"> = async ({ file }) =>
   file.with({
     // Place in root
     segments: [],

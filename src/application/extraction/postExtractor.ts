@@ -4,7 +4,7 @@ import { Extractor } from "./types";
 
 const postExtractor: Extractor<"post"> = (file) => {
   if (!file.contents) {
-    return { category: "post", file, title: "", created: new Date(0) };
+    return { category: "post", file, data: { title: "", created: new Date(0) } };
   }
 
   // TODO validation
@@ -13,7 +13,7 @@ const postExtractor: Extractor<"post"> = (file) => {
   return {
     category: "post",
     file: file.with({ contents: content }),
-    ...(data as PostData),
+    data: data as PostData,
   };
 };
 
