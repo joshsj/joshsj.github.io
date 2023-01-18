@@ -8,7 +8,8 @@ tags:
 ---
 
 I recently rewatched The Social Network and I enjoyed the stream of
-conciousness-style of blogging. I'm gonna try it and see how it turns out 🤞
+conciousness-style of blogging; plus, keeping a work log sounds like a good
+thing. I'm gonna try it and see how it turns out 🤞
 
 <!-- TODO add spoilers component -->
 <!-- There won't any crude comparison websites for this project through. -->
@@ -27,8 +28,8 @@ post in the future.
 ## Current Situation
 
 The blog is currently hosted on Github Pages and deployed automatically with
-Github Actions. I have little to no interest in DevOps and this just fine
---- no changes here.
+Github Actions. I have little to no interest in DevOps and this just fine --- no
+changes here.
 
 Building the blog is handled by [Hexo](https://github.com/hexojs/hexo) which I
 initially chose it for three main reasons:
@@ -122,7 +123,7 @@ dotenv should be more than adequate, and I like the
 [preload](https://github.com/motdotla/dotenv#preload) option so that goes in the
 npm scripts too.
 
-We need only two settings for now:
+We need only two values for now:
 
 - `SOURCE_DIR` --- where the content is
 - `BUILD_DIR` --- where to put the content once compiled
@@ -185,7 +186,7 @@ type is completely inextensible and would become a mess --- we have design
 patterns for a reason.
 
 Typescript allows us to take an object-oriented or functional approach. Of
-course, both will be used eventually but I want to lean on FP because I've never 
+course, both will be used eventually but I want to lean on FP because I've never
 developed a useful application with it.
 
 With that in mind, I only know software design from an OOP perspective so expect
@@ -260,9 +261,10 @@ composition, which composes a single function of many. However, it seems that FP
 nerds still haven't quite achieved this in Typescript, as shown by this thread
 on [Hacker News](https://news.ycombinator.com/item?id=32377646).
 
-Looking at object-oriented design, the most common  patterns (see
+Looking at object-oriented design, the most common patterns (see
 [GoF](https://martinfowler.com/bliki/GangOfFour.html) and
-[DDD](https://martinfowler.com/bliki/DomainDrivenDesign.html)) don't seem to work either:
+[DDD](https://martinfowler.com/bliki/DomainDrivenDesign.html)) don't seem to
+work either:
 
 - Mediator could construct a pipeline but:
   - abstracting the communication between functions is the opposite of
@@ -280,7 +282,8 @@ that I know of.
 
 ### Meeting in the middle
 
-Inspired by some creations the Hacker News thread from above, I can use the Builder pattern to add some fluid semantics to function composition:
+Inspired by some creations the Hacker News thread from above, I can use the
+Builder pattern to add some fluid semantics to function composition:
 
 ```typescript
 // Take in a value, return a value wrapped in a Promise
@@ -310,9 +313,82 @@ const generate = pipeline()
   .add(loadConfig) // Load from .env
   .add(readSource) // Read in the source files
   .add(categoriseFiles) // Asset or page?
-  .add(transformFiles) // If you know, you know
+  .add(transformFiles) // See above
   .add(writeBuild) // Write the build files
   .build(); // Compose the added functions
 
-await generate(); 
+await generate();
 ```
+
+## Forming a context
+
+Some pages inform the site about themselves like the title/created date/tags of
+a post, whereas some pages are informed by the site to render a list of posts,
+for example.
+
+### Adding posts
+
+Before we can start pulling data out of posts to create the context, we need to
+define them as well as the other categories:
+
+```typescript
+type PostData = { title: string; created: Date; updated?: Date; tags?: [] };
+
+type Post = PostData & { file: File; category: "post" };
+type Asset = { file: File; category: "post" }; // No extra data
+type Page = { file: File; category: "post" }; // Also no extra data
+```
+
+The combination of mapped types and template literal types really shine here.
+With a type to represent the file categories, we can derive new types with a
+mapping with keys also derived from the type. Thus we can, for example, ensure
+the config stores a directory for each category:
+
+```typescript
+// "asset" | "page" | "post";
+type Category = (Post | Asset | Page)["category"];
+
+// Produces "assetDir" | "pageDir" | "postDir"
+type Key = `${Category}Dir`;
+
+// Ensure a directory is specified for all categories
+type Config = { [K in Key]: string };
+```
+
+This moves a typical runtime error (like missing dependencies) to compile time ,
+which is awesome, and makes me hope languages like C# embrace some type theory
+in future.
+
+Preach over, we need a `POST_DIR` config value and to implement a categoriser
+and transformer for posts. I'm opting out of the `/year/month/day` format for
+post URLs as another quick search shows that there isn't much point and I don't
+like it.
+
+Like assets, their relative path will be preserved but they live inside a
+`/posts` folder.
+
+### Front matter
+
+A feature I first used with Hexo, front matter stores stateful data at the start
+(or front) of a file, which works really well to unify a post's data and
+content.
+
+A quick search of NPM shows its most popular package for parsing front matter
+([gray-matter](https://www.npmjs.com/package/gray-matter)) is also the most
+configurable and has the cleanest interface --- who could have guessed?
+
+With the package installed, a new step to `extractData` goes in the pipeline in
+which gray-matter splits the front matter from the rest of the file and parses
+it as YAML (by default):
+
+```typescript
+const { data, content } = matter(file.contents, { excerpt: false });
+
+return {
+  file: file.with({ contents: content }), // Exclude front matter from contents
+  data: data as PostData, // Who needs validation
+};
+```
+
+When rendering pug, the context is used for the 'locals' object and now pages &
+posts can render site-wide data 🎉
