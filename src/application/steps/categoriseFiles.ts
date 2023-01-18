@@ -1,10 +1,10 @@
 import { GetCategory } from "@application/categorisation/getCategory";
-import { Config, FileCategory } from "@domain";
+import { Config, SomethingCategory } from "@domain";
 import { File } from "@domain/io";
 import { Step } from "@lib/pipeline";
 import { ReadSourceResult } from "./readSource";
 
-type CategorisedFile = File & { category: FileCategory };
+type CategorisedFile = File & { category: SomethingCategory };
 
 type CategoriseFilesResult = { config: Config; files: CategorisedFile[] };
 

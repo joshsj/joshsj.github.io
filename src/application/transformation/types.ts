@@ -1,8 +1,8 @@
-import { FileCategory } from "@domain";
+import { Something, SomethingCategory } from "@domain";
 import { File } from "@domain/io";
 
-type Transformer = (file: File) => Promise<File>;
+type Transformer = (something: Something) => Promise<File>;
 
-type GetTransformer = (category: FileCategory) => Transformer;
+type GetTransformer = (category: SomethingCategory) => Transformer;
 
 export { Transformer, GetTransformer };

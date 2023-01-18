@@ -7,7 +7,7 @@ type File = Omit<Directory, "with"> &
     extension: string;
     contents?: string;
     base: string;
-    with(patch: Partial<File>): File;
+    with(patch?: Partial<File>): File;
   }>;
 
 type Values = Pick<File, "segments" | "sep" | "name" | "extension" | "contents">;
@@ -28,7 +28,7 @@ const file = (values: Values): File => {
     contents: values.contents,
     full: [full, base].join(sep),
     with(patch) {
-      return file({ ...f, ...patch });
+      return file({ ...f, ...(patch ?? {}) });
     },
   };
 

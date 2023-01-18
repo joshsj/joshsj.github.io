@@ -11,6 +11,7 @@
     "@types/node": "^18.11.18",
     "@types/pug": "^2.0.6",
     "dotenv": "^16.0.3",
+    "gray-matter": "^4.0.3",
     "module-alias": "^2.2.2",
     "pug": "^3.0.2",
     "rimraf": "^3.0.2",
