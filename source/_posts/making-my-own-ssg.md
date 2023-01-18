@@ -142,8 +142,6 @@ The only hiccup was with fs module in Node. It doesn't offer a method to
 recursively scan directories, but with some inspiration from the nice folks on
 Stack Overflow, async generators make this a doddle:
 
-{% caption "Walking directories with fs" %}
-
 ```typescript
 async function* walk(
   root: string,
@@ -163,8 +161,6 @@ async function* walk(
   }
 }
 ```
-
-{% endcaption %}
 
 ## Static Assets
 
