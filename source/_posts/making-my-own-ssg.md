@@ -1,5 +1,5 @@
 ---
-title: Making my own SSG
+title: Making an SSG
 date: 2023-01-06
 updated: 2023-01-08
 tags:
@@ -7,29 +7,16 @@ tags:
   - Projects
 ---
 
-I recently rewatched The Social Network and I enjoyed the stream of
-conciousness-style of blogging; plus, keeping a work log sounds like a good
-thing. I'm gonna try it and see how it turns out 🤞
-
-<!-- TODO add spoilers component -->
-<!-- There won't any crude comparison websites for this project through. -->
-
----
-
-I've been in my current role for around two months and I'm pretty much settled
-in. Now that I have some energy outside of work, I decided not to refocus my
-efforts and do some programming for myself.
-
-Despite the abundance of [abundance](https://jamstack.org/generators/) of great
-site generators, I want to make my own. It _should_ be a fun and achievable
-project, plus I'll have full creative control over any kind of content I want to
-post in the future.
+Despite the abundance of **[abundance](https://jamstack.org/generators/)** of
+great site generators, I want to make my own. It _should_ be a fun and
+achievable project, plus I'll have full creative control over any kind of
+content I want to post in the future.
 
 ## Current Situation
 
 The blog is currently hosted on Github Pages and deployed automatically with
-Github Actions. I have little to no interest in DevOps and this just fine --- no
-changes here.
+Github Actions. I have little to no interest in DevOps and this works just fine
+--- no changes here.
 
 Building the blog is handled by [Hexo](https://github.com/hexojs/hexo) which I
 initially chose it for three main reasons:
@@ -140,7 +127,7 @@ Producing an MVP is now a simple process away:
 
 The only hiccup was with fs module in Node. It doesn't offer a method to
 recursively scan directories, but with some inspiration from the nice folks on
-Stack Overflow, async generators make this a doddle:
+Stack Overflow, async generators make this looks easy:
 
 ```typescript
 async function* walk(
@@ -178,7 +165,7 @@ With that, the site looks like mine again:
 ## Introducing transformers
 
 Before the system grows, we need a refactor. Adding an `elif` for every file
-type is completely inextensible and would become a mess --- we have design
+type is completely inextensible and would become a mess --- we invented design
 patterns for a reason.
 
 Typescript allows us to take an object-oriented or functional approach. Of
@@ -278,7 +265,7 @@ that I know of.
 
 ### Meeting in the middle
 
-Inspired by some creations the Hacker News thread from above, I can use the
+Inspired by some creations the Hacker News thread from above, I'm using the
 Builder pattern to add some fluid semantics to function composition:
 
 ```typescript
@@ -298,7 +285,7 @@ type Pipeline = <Initial>() => PipelineBuilder<Initial, Initial>;
 
 The implementation is simple: `add` stores the step `f` in an array; `build`
 reduces the array and composes the result. This requires some type assertions
-and `any` so you can't see the ugly.
+and `any` so you can't see the ugliness.
 
 We can now decompose the current process into `Step`s and separate some
 behaviours into their own functions:
@@ -337,23 +324,22 @@ type Page = { file: File; category: "post" }; // Also no extra data
 
 The combination of mapped types and template literal types really shine here.
 With a type to represent the file categories, we can derive new types with a
-mapping with keys also derived from the type. Thus we can, for example, ensure
-the config stores a directory for each category:
+mapping with keys also derived from the type. Thus we can, for example, ensure a
+'categoriser' implementation exists for all categories:
 
 ```typescript
 // "asset" | "page" | "post";
 type Category = (Post | Asset | Page)["category"];
 
 // Produces "assetDir" | "pageDir" | "postDir"
-type Key = `${Category}Dir`;
+type Key = `${Category}Categoriser`;
 
-// Ensure a directory is specified for all categories
-type Config = { [K in Key]: string };
+type Categorisers = { [K in Key]: (file: File) => Category };
 ```
 
-This moves a typical runtime error (like missing dependencies) to compile time ,
-which is awesome, and makes me hope languages like C# embrace some type theory
-in future.
+This moves a typical runtime error (like missing dependencies) to compile time,
+which is awesome and makes me hope languages like C# embrace some type theory in
+future.
 
 Preach over, we need a `POST_DIR` config value and to implement a categoriser
 and transformer for posts. I'm opting out of the `/year/month/day` format for
@@ -361,7 +347,7 @@ post URLs as another quick search shows that there isn't much point and I don't
 like it.
 
 Like assets, their relative path will be preserved but they live inside a
-`/posts` folder.
+`/blog` folder.
 
 ### Front matter
 
@@ -382,7 +368,7 @@ const { data, content } = matter(file.contents, { excerpt: false });
 
 return {
   file: file.with({ contents: content }), // Exclude front matter from contents
-  data: data as PostData, // Who needs validation
+  data: data as PostData, // Putting trust in myself
 };
 ```
 
