@@ -23,7 +23,7 @@ const io: IO = {
     // Ensure destination folder exists
     await mkdir(dir, { recursive: true });
 
-    await writeFile(path.join(dir, file.base), file.contents ?? "");
+    await writeFile(path.join(dir, file.base), file.content ?? "");
   },
 
   async read(file: File, root = "") {

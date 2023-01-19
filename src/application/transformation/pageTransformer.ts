@@ -5,7 +5,7 @@ const pageTransformer: Transformer<"page"> = async (something) =>
   something.file.with({
     // Place in root
     segments: [],
-    contents: pug(something),
+    content: pug(something),
     extension: ".html",
   });
 

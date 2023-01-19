@@ -1,15 +1,25 @@
 import { Logger } from "@application/logging";
 
-const makeConsoleLogger =
-  (context?: string): Logger =>
-  (data) => {
-    if (context) {
-      console.log(context);
-    }
+const consoleLogger =
+  (context: string): Logger =>
+  (message: string, ...data: any[]) => {
+    console.log(`${date()} [${context}] ${message}`);
 
     for (const d of data) {
       console.log(d);
     }
   };
 
-export { makeConsoleLogger };
+const date = () => {
+  const now = new Date();
+
+  // TODO might not perform so well
+  return [
+    now.getHours().toString().padStart(2, "0"),
+    now.getMinutes().toString().padStart(2, "0"),
+    now.getSeconds().toString().padStart(2, "0"),
+    now.getMilliseconds().toString().padStart(3, "0"),
+  ].join(":");
+};
+
+export { consoleLogger };

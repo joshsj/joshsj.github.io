@@ -1,7 +1,13 @@
-import { CategorisedFile } from "@application/steps/build";
-import { SomethingCategory, SomethingFor } from "@domain";
+import { CategorisedFile } from "@application/steps";
+import { SomethingCategory } from "@domain";
 
-type Extractor<T extends SomethingCategory> = (file: CategorisedFile & { category: T }) => SomethingFor<T>
+type Extracted = {
+  content: string;
+  // TODO consider something better than any
+  data: any;
+};
+
+type Extractor<T extends SomethingCategory> = (file: CategorisedFile & { category: T }) => Extracted;
 
 type GetExtractor = <T extends SomethingCategory>(category: T) => Extractor<T>;
 

@@ -1,3 +1,3 @@
-type Logger = (...data: any[]) => void;
+type Logger = (message: string, ...data: any[]) => void;
 
 export { Logger };

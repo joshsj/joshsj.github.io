@@ -9,7 +9,7 @@ const identifiers: Categorisers = {
 
 const getCategory: GetCategory = (file, config) =>
   Object.entries(identifiers)
-    .find(([_, f]) => f(file, config))!
-    .at(0) as SomethingCategory;
+    .find(([_, f]) => f(file, config))
+    ?.at(0) as SomethingCategory;
 
 export { getCategory };

@@ -5,12 +5,12 @@ type File = Omit<Directory, "with"> &
   Readonly<{
     name: string;
     extension: string;
-    contents: string;
+    content: string;
     base: string;
     with(patch?: Partial<File>): File;
   }>;
 
-type Values = Pick<File, "segments" | "sep" | "name" | "extension" | "contents">;
+type Values = Pick<File, "segments" | "sep" | "name" | "extension" | "content">;
 
 const file = (values: Values): File => {
   const { segments, sep } = values;
@@ -25,7 +25,7 @@ const file = (values: Values): File => {
     base,
     name: values.name,
     extension: values.extension,
-    contents: values.contents,
+    content: values.content,
     full: [full, base].join(sep),
     with(patch) {
       return file({ ...f, ...(patch ?? {}) });
@@ -43,7 +43,7 @@ const fileFrom = (path: string): File => {
     sep: _path.sep,
     name,
     extension: ext,
-    contents: ""
+    content: "",
   });
 };
 
