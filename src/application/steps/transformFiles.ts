@@ -1,12 +1,10 @@
-import { File } from "@domain/io";
-import { isFulfilled } from "@domain/utils";
+import { isFulfilled } from "@lib/utils";
 import { Step } from "@lib/pipeline";
 import { Config } from "@domain";
 import { GetTransformer } from "@application/transformation";
 import { ExtractDataResult } from "./extractData";
 import { Logger } from "@application/logging";
-
-type TransformFilesResult = { buildFiles: File[] };
+import { TransformFilesResult } from "./types";
 
 const transformFiles =
   (getTransformer: GetTransformer, log: Logger, config: Config): Step<ExtractDataResult, TransformFilesResult> =>

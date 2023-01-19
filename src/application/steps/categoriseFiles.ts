@@ -1,13 +1,9 @@
 import { GetCategory } from "@application/categorisation";
 import { Logger } from "@application/logging";
 import { Config, SomethingCategory } from "@domain";
-import { File } from "@domain/io";
 import { Step } from "@lib/pipeline";
+import { CategorisedFile, CategoriseFilesResult } from "./types";
 import { ReadSourceResult } from "./readSource";
-
-type CategorisedFile = File & { category: SomethingCategory };
-
-type CategoriseFilesResult = { files: CategorisedFile[] };
 
 type Counts = { [K in SomethingCategory]: number };
 

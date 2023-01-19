@@ -2,8 +2,7 @@ import { GetExtractor } from "@application/extraction/types";
 import { Something } from "@domain";
 import { Step } from "@lib/pipeline";
 import { CategoriseFilesResult } from "./categoriseFiles";
-
-type ExtractDataResult = { somethings: Something[] };
+import { ExtractDataResult } from "./types";
 
 const extractData =
   (getExtractor: GetExtractor): Step<CategoriseFilesResult, ExtractDataResult> =>

@@ -1,9 +1,7 @@
 import { Logger } from "@application/logging";
-import { Config } from "@domain";
 import { Step } from "@lib/pipeline";
 import { normalize } from "path";
-
-type SetDefaultConfigResult = { config: Config };
+import { SetDefaultConfigResult } from "./types";
 
 const setDefaultConfig =
   (log: Logger): Step<void, SetDefaultConfigResult> =>

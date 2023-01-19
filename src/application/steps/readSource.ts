@@ -1,12 +1,9 @@
 import { Logger } from "@application/logging";
 import { Config } from "@domain";
-import { File, fileFrom, IO } from "@domain/io";
-import { fromGenerator, isFulfilled } from "@domain/utils";
+import { fileFrom, IO } from "@domain/io";
+import { fromGenerator, isFulfilled } from "@lib/utils";
 import { Step } from "@lib/pipeline";
-
-type ReadSourceState = { sourcePaths?: string[] };
-
-type ReadSourceResult = { sourceFiles: File[] };
+import { ReadSourceResult, ReadSourceState } from "./types";
 
 const readSource =
   (io: IO, log: Logger, config: Config): Step<ReadSourceState, ReadSourceResult> =>

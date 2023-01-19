@@ -4,8 +4,7 @@ import { SetDefaultConfigResult } from "./setDefaultConfig";
 import { Step } from "@lib/pipeline";
 import dotenv from "dotenv";
 import { Logger } from "@application/logging";
-
-type LoadConfigResult = Pick<SetDefaultConfigResult, keyof SetDefaultConfigResult>;
+import { LoadConfigResult } from "./types";
 
 const loadConfig =
   (log: Logger): Step<SetDefaultConfigResult, LoadConfigResult> =>

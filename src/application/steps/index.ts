@@ -5,3 +5,4 @@ export * from "./extractData";
 export * from "./readSource";
 export * from "./loadConfig";
 export * from "./setDefaultConfig";
+export * from "./types";
