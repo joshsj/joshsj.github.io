@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "generate": "node -r dotenv/config -r module-alias/register dist/index.js",
-    "both": "npm run build && npm run generate",
+    "generate": "node -r module-alias/register dist/entry/index.js",
+    "watch": "npm run generate -- --watch",
     "clean": "rimraf dist build"
   },
   "dependencies": {
     "@types/node": "^18.11.18",
     "@types/pug": "^2.0.6",
+    "chokidar": "^3.5.3",
     "dotenv": "^16.0.3",
     "gray-matter": "^4.0.3",
     "module-alias": "^2.2.2",

@@ -1,5 +1,5 @@
-import { CategorisedFile } from "@application/steps";
-import {Something, SomethingCategory, SomethingFor} from "@domain";
+import { CategorisedFile } from "@application/steps/build";
+import { SomethingCategory, SomethingFor } from "@domain";
 
 type Extractor<T extends SomethingCategory> = (file: CategorisedFile & { category: T }) => SomethingFor<T>
 

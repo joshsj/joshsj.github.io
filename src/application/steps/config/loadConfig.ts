@@ -2,17 +2,26 @@ import path from "path";
 import { Env } from "@domain";
 import { SetDefaultConfigResult } from "./setDefaultConfig";
 import { Step } from "@lib/pipeline";
+import dotenv from "dotenv"
 
 type LoadConfigResult = SetDefaultConfigResult;
 
 const loadConfig: Step<SetDefaultConfigResult, LoadConfigResult> = async ({ config: _default }) => {
-  const base = process.cwd();
+  dotenv.config();
+
   const env = process.env as Env;
+  const rootDir = env.ROOT_DIR || _default.rootDir;
 
   const config = Object.assign(_default, {
-    sourceDir: env.SOURCE_DIR ? path.resolve(base, env.SOURCE_DIR) : _default.sourceDir,
+    rootDir,
 
-    buildDir: env.BUILD_DIR ? path.resolve(base, env.BUILD_DIR) : _default.buildDir,
+    sourceDir: env.SOURCE_DIR
+      ? path.resolve(rootDir, env.SOURCE_DIR)
+      : _default.sourceDir,
+
+    buildDir: env.BUILD_DIR
+      ? path.resolve(rootDir, env.BUILD_DIR)
+      : _default.buildDir,
 
     assetDir: env.ASSET_DIR || _default.assetDir,
     pageDir: env.PAGE_DIR || _default.pageDir,

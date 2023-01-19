@@ -1,9 +1,10 @@
-import { File } from "./io";
 import { SomethingCategory } from "./something";
 
 type Map<T extends string> = { [K in T]: string };
 
-type Env = Partial<Map<`${Uppercase<SomethingCategory | "source" | "build">}_DIR`>>;
-type Config = Map<`${SomethingCategory | "source" | "build"}Dir`>;
+type Key = SomethingCategory | "source" | "build" | "root";
+
+type Env = Partial<Map<`${Uppercase<Key>}_DIR`>>;
+type Config = Map<`${Key}Dir`>;
 
 export { Env, Config };
