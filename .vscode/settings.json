@@ -22,5 +22,6 @@
     "unrooted",
     "vlogs",
     "Walkthrough"
-  ]
+  ],
+  "liveServer.settings.root": "/build"
 }
