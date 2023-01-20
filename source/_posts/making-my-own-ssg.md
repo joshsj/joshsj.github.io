@@ -7,7 +7,7 @@ tags:
   - Projects
 ---
 
-Despite the abundance of **[abundance](https://jamstack.org/generators/)** of
+Despite the **[abundance](https://jamstack.org/generators/)** of
 great site generators, I want to make my own. It _should_ be a fun and
 achievable project, plus I'll have full creative control over any kind of
 content I want to post in the future.
