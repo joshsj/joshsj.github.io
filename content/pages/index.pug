@@ -1,36 +1,23 @@
 ---yaml
 title: "Hello World"
 ---
-doctype html
+extends /layouts/default.pug
 
-mixin css(name)
-  link(rel="stylesheet", href=`styles/${name}.css`)
+block content
+  p Some #[strong bold text]
 
-mixin js(name)
-  script(src=`scripts/${name}.js` async defer)
+  p Some #[em italic text]
 
-html
-  head 
-    +css("variables")
-    +css("utilities")
-    +css("base")
-    +css("layout")
+  p Another page #[a(href="blog/test.html") here]
 
-  body 
-    main 
-      h1 #{title}
+  blockquote A quotation
 
-      p Some #[strong bold text]
-
-      p Some #[em italic text]
-
-      q A quotation
-
+  ul 
+    li Some
       ul 
-        li Some
-          ul 
-            li list
-              ul
-                li items
+        li list
+          ul
+            li items
 
-      code public static void main() {}
+  pre
+    code public static void main() {}

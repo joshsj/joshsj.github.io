@@ -2,7 +2,10 @@
 title: "it works!"
 created: 2023-01-17
 ---
+extends /layouts/default.pug
 
-h1 #{title}
+block content
 
-p lorem ipsum 
+  p lorem ipsum
+
+  p go to the #[a(href="/") home] page

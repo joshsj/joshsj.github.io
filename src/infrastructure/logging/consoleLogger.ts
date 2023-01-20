@@ -2,10 +2,14 @@ import { Logger } from "@application/logging";
 
 const consoleLogger =
   (context: string): Logger =>
-  (message: string, ...data: any[]) => {
+  (message: string, data?: any[]) => {
+    if (data && !data.length) {
+      return;
+    }
+
     console.log(`${date()} [${context}] ${message}`);
 
-    for (const d of data) {
+    for (const d of data ?? []) {
       console.log(d);
     }
   };

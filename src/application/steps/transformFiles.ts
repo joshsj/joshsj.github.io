@@ -1,4 +1,4 @@
-import { isFulfilled } from "@lib/utils";
+import { isFulfilled, isRejected } from "@lib/utils";
 import { Step } from "@lib/pipeline";
 import { Config } from "@domain";
 import { GetTransformer } from "@application/transformation";
@@ -9,9 +9,14 @@ import { TransformFilesResult } from "./types";
 const transformFiles =
   (getTransformer: GetTransformer, log: Logger, config: Config): Step<ExtractDataResult, TransformFilesResult> =>
   async ({ somethings }) => {
-    const results = await Promise.allSettled(somethings.map((s) => getTransformer(s.category)(s)));
+    const results = await Promise.allSettled(somethings.map((s) => getTransformer(s.category)(s, config)));
 
     const buildFiles = results.filter(isFulfilled).map((r) => r.value);
+
+    log(
+      "Failures:",
+      results.filter(isRejected).map((r) => r.reason)
+    );
 
     return { buildFiles, config };
   };

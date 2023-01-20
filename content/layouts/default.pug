@@ -1,0 +1,21 @@
+doctype html
+
+mixin css(name)
+  link(rel="stylesheet", href=`/styles/${name}.css`)
+
+mixin js(name)
+  script(src=`/scripts/${name}.js` async defer)
+
+html
+  head 
+    +css("variables")
+    +css("utilities")
+    +css("base")
+    +css("layout")
+    +css("components")
+
+  body 
+    main.content
+      h1 #{title}
+
+      block content

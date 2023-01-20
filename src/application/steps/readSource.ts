@@ -1,7 +1,7 @@
 import { Logger } from "@application/logging";
 import { Config } from "@domain";
 import { fileFrom, IO } from "@domain/io";
-import { fromGenerator, isFulfilled } from "@lib/utils";
+import { fromGenerator, isFulfilled, isRejected } from "@lib/utils";
 import { Step } from "@lib/pipeline";
 import { ReadSourceResult, ReadSourceState } from "./types";
 
@@ -15,6 +15,11 @@ const readSource =
     const sourceFiles = results.filter(isFulfilled).map((r) => r.value);
 
     log(`Successfully read ${sourceFiles.length}/${sourcePaths.length} source files`);
+
+    log(
+      "Failures:",
+      results.filter(isRejected).map((r) => r.reason)
+    );
 
     return { sourceFiles };
   };
