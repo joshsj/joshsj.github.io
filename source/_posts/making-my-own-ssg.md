@@ -374,3 +374,46 @@ return {
 
 When rendering pug, the context is used for the 'locals' object and now pages &
 posts can render site-wide data 🎉
+
+
+## Watching for changes...
+
+Out of the features I use in Hexo, the only major one missing from this generator is a 'watch' mode (where added/changed files automatically build). This is a big help when writing posts, but it will help immensely when the time comes to migrate the existing content.
+
+[//]: # (TODO add links)
+Turns out this is pretty straight forward. [chokidar](#) and [node-watch](#) outline their advantages over `watch` and `watchfile` in the fs module and people on the internet don't lie. I'm using chokiar for the same reasons as [grey-matter](#): configurable and clean.
+
+The pipeline needs a small change: we need to specify which files to build in watch mode without affecting the process for normal builds. 
+
+For the time being, I'm separating the config pipeline from the build pipeline as it doesn't need to be watched and it opens up the entry point. To the steps that use the config, it can be provided like a dependency instead: 
+
+```typescript
+const getConfig = pipeline()
+  .add(setDefaultConfig)
+  .add(loadConfig)
+  .build();
+
+const generate = pipeline()
+  .add(readSource)
+  .add(categoriseFiles)
+  .add(extractData)
+  .add(transformFiles)
+  .add(writeBuild)
+  .build();
+```
+
+With a small change to the `readSource` step, we can optionally accept a list of source paths and walk the directory as a fallback; a little chokidar configuration and it just seems to work..? 
+
+```typescript
+await generate(); // Initial build
+
+// Watch for changes and send them into the pipeline
+watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
+  .on("add", (path) => generate({ sourcePaths: [path] })) 
+  .on("change", (path) => generate({ sourcePaths: [path] }));
+```
+
+[//]: # (TODO add gif of watched)
+
+[//]: # (Very cool.)
+
