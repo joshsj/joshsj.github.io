@@ -1,0 +1,30 @@
+/* normal margin */
+.content > * + :not(.squish, ol, ul) {
+  margin-top: var(--space-4);
+}
+
+/* reduced list margin */
+.content > * + :where(ol, ul) {
+  margin-top: var(--space-1);
+}
+
+.card > :not(:first-child, .squish) {
+  margin-top: var(--space-1);
+}
+
+.card > .extra {
+  font-size: var(--fs-small);
+  display: flex;
+}
+
+.card > .extra > .corner {
+  /* push right */
+  margin-left: auto;
+  order: 9999;
+}
+
+.spotify {
+  border-radius: 12px;
+  width: 100%;
+  height: 80px;
+}
