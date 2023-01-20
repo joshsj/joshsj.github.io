@@ -40,7 +40,7 @@ const main = async () => {
     return;
   }
 
-  watch("**/*", { cwd: config.sourceDir })
+  watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
     .on("add", (path) => build({ sourcePaths: [path] }))
     .on("change", (path) => build({ sourcePaths: [path] }));
 };
