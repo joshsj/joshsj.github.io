@@ -15,8 +15,9 @@ import {
 import { watch } from "chokidar";
 import { loadEnv } from "@infrastructure/steps";
 import { BenchmarkContext, benchmarkEnd, benchmarkStart } from "./entry/benchmark";
+import { watchIndicator } from "./entry/watchIndicator";
 
-const configure = async () => {
+const configure = async (isWatch: boolean) => {
   const getConfig = pipeline()
     .add(setDefaultConfig(logger("config")))
     .add(loadEnv(logger("config")))
@@ -28,29 +29,32 @@ const configure = async () => {
 
   const benchmarkContext: BenchmarkContext = {};
 
-  const build = pipeline()
+  const buildPipeline = pipeline()
     .add(benchmarkStart(benchmarkContext))
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
     .add(extractData(getExtractor))
     .add(transformFiles(getTransformer, log, config))
     .add(writeBuild(io, log, config))
-    .add(benchmarkEnd(benchmarkContext, logger("benchmark")))
-    .build();
+    .add(benchmarkEnd(benchmarkContext, logger("benchmark")));
 
-  return { config, getConfig, build };
-}
+  if (isWatch) {
+    buildPipeline.add(watchIndicator(logger()));
+  }
+
+  return { config, getConfig, build: buildPipeline.build() };
+};
 
 const main = async () => {
-  const { config, build } = await configure();
+  const isWatch = process.argv.at(2) === "--watch";
+
+  const { config, build } = await configure(isWatch);
 
   await build();
 
-  if (process.argv.at(2) !== "--watch") { return; }
-
-  watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
-    .on("add", build)
-    .on("change", build);
+  if (isWatch) {
+    watch("**/*", { cwd: config.sourceDir, ignoreInitial: true }).on("add", build).on("change", build);
+  }
 };
 
 main();

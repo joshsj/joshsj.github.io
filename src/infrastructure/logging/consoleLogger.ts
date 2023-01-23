@@ -1,18 +1,20 @@
 import { Log } from "@application/logging";
 
-const consoleLogger =
-  (context: string): Log =>
-  (message: string, data?: unknown[]) => {
+const consoleLogger = (context?: string): Log => {
+  context = context ? ` [${context}] ` : " ";
+
+  return (message: string, data?: unknown[]) => {
     if (data && !data.length) {
       return;
     }
 
-    console.log(`${date()} [${context}] ${message}`);
+    console.log(date() + context + message);
 
     for (const d of data ?? []) {
       console.log(d);
     }
   };
+};
 
 const date = () => {
   const now = new Date();
