@@ -10,7 +10,7 @@ const extractData =
       somethings: files.map(file => {
         const { content, data } = getExtractor(file.category)(file);
 
-        return { category: file.category, file: file.with({ content }), data };
+        return { category: file.category, file: file.with({ content }), ...data };
       })
     });
 

@@ -3,10 +3,9 @@ import { File } from "./io";
 // TODO work out name for object;
 
 type Make<Category extends string, Data extends {} = {}> = {
-  file: File;
   category: Category;
-  data: Data
-};
+  file: File;
+} & Data;
 
 type Asset = Make<"asset">;
 
