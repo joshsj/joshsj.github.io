@@ -1,4 +1,4 @@
-import { Config, SomethingCategory, Something } from "@domain";
+import { Config, SomethingCategory, Something, Post } from "@domain";
 import { File } from "@domain/io";
 
 type SetDefaultConfigResult = { config: Config };
@@ -15,6 +15,8 @@ type CategoriseFilesResult = { files: CategorisedFile[] };
 
 type ExtractDataResult = { somethings: Something[] };
 
+type Context = { current: Something, posts: Post[] }
+
 type TransformFilesResult = { buildFiles: File[] };
 
 export {
@@ -25,5 +27,6 @@ export {
   CategorisedFile,
   CategoriseFilesResult,
   ExtractDataResult,
+  Context,
   TransformFilesResult,
 };

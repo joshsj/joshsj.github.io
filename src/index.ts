@@ -26,7 +26,7 @@ const main = async () => {
 
   const log = logger("build");
 
-  const build = pipeline<ReadSourceState>()
+  const build = pipeline()
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
     .add(extractData(getExtractor))
@@ -34,15 +34,13 @@ const main = async () => {
     .add(writeBuild(io, log, config))
     .build();
 
-  await build({ sourcePaths: undefined });
+  await build();
 
-  if (process.argv.at(2) !== "--watch") {
-    return;
-  }
+  if (process.argv.at(2) !== "--watch") { return; }
 
   watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
-    .on("add", (path) => build({ sourcePaths: [path] }))
-    .on("change", (path) => build({ sourcePaths: [path] }));
+    .on("add", build)
+    .on("change", build);
 };
 
 main();

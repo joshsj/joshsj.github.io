@@ -1,8 +1,9 @@
 import { Config, Something, SomethingCategory } from "@domain";
 import { File } from "@domain/io";
+import { Context } from "@application/steps";
 
 type Transformer<T extends SomethingCategory> = (
-  something: Something & { category: T },
+  context: Context,
   config: Config
 ) => Promise<File>;
 

@@ -6,16 +6,12 @@ import { ExtractDataResult } from "./types";
 
 const extractData =
   (getExtractor: GetExtractor): Step<CategoriseFilesResult, ExtractDataResult> =>
-  async ({ files }) => {
-    const somethings: Something[] = [];
+    async ({ files }) => ({
+      somethings: files.map(file => {
+        const { content, data } = getExtractor(file.category)(file);
 
-    for (const file of files) {
-      const { content, data } = getExtractor(file.category)(file);
-
-      somethings.push({ category: file.category, file: file.with({ content }), data });
-    }
-
-    return { somethings };
-  };
+        return { category: file.category, file: file.with({ content }), data };
+      })
+    });
 
 export { ExtractDataResult, extractData };

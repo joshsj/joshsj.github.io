@@ -2,8 +2,7 @@ import { GetCategory } from "@application/categorisation";
 import { Logger } from "@application/logging";
 import { Config, SomethingCategory } from "@domain";
 import { Step } from "@lib/pipeline";
-import { CategorisedFile, CategoriseFilesResult } from "./types";
-import { ReadSourceResult } from "./readSource";
+import { CategorisedFile, CategoriseFilesResult, ReadSourceResult } from "./types";
 
 type Counts = { [K in SomethingCategory]: number };
 

@@ -1,35 +1,38 @@
 import { Config, SomethingCategory, SomethingFor } from "@domain";
 import { render } from "pug";
 import { Transformer, GetTransformer } from "./types";
+import { Context } from "@application/steps";
 
 const transformers: { [K in SomethingCategory]: Transformer<K> } = {
-  asset: async ({ file }) => file.with({ segments: file.segments.slice(1) }),
+  asset: async ({ current: { file } }) =>
+    file.with({ segments: file.segments.slice(1) }),
 
-  page: async (something, config) =>
-    something.file.with({
+  page: async (context, config) =>
+    context.current.file.with({
       // Place in root
       segments: [],
-      content: pug(something, config),
+      content: pug(context, config),
       extension: ".html",
     }),
 
-  post: async (something, config) =>
-    something.file.with({
+  post: async (context, config) =>
+    context.current.file.with({
       // Place in posts folder
-      segments: ["blog", ...something.file.segments.slice(1)],
+      segments: [ "blog", ...context.current.file.segments.slice(1) ],
       // Render with pug
-      content: pug(something, config),
+      content: pug(context, config),
       extension: ".html",
     }),
 };
 
 const getTransformer: GetTransformer = (category) => transformers[category];
 
-const pug = <T extends SomethingCategory>(something: SomethingFor<T>, { sourceDir }: Config) =>
-  render(something.file.content, {
-    filename: something.file.name,
+
+const pug = <T extends SomethingCategory>(context: Context, { sourceDir }: Config) =>
+  render(context.current.file.content, {
+    filename: context.current.file.name,
     basedir: sourceDir,
-    ...("data" in something ? something.data : {}),
+    ...context
   });
 
 export { getTransformer };

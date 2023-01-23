@@ -1,6 +1,6 @@
 import { SomethingCategory } from "@domain";
 import { Extractor, GetExtractor } from "./types";
-import { makeExtractor } from "@application/extraction/extractor";
+import { makeExtractor } from "./makeExtractor"
 
 type Extractors = { [K in SomethingCategory]: Extractor<K> };
 

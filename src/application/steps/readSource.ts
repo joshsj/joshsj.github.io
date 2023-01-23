@@ -3,14 +3,24 @@ import { Config } from "@domain";
 import { fileFrom, IO } from "@domain/io";
 import { fromGenerator, isFulfilled, isRejected } from "@lib/utils";
 import { Step } from "@lib/pipeline";
-import { ReadSourceResult, ReadSourceState } from "./types";
+import { ReadSourceResult } from "./types";
 
 const readSource =
-  (io: IO, log: Logger, config: Config): Step<ReadSourceState, ReadSourceResult> =>
-  async ({ sourcePaths }) => {
-    sourcePaths ??= await fromGenerator(io.walk(config.sourceDir));
+  (io: IO, log: Logger, config: Config): Step<void, ReadSourceResult> =>
+  async () => {
+    const readFile = async (path: string) => {
+      const file = fileFrom(path);
 
-    const results = await Promise.allSettled(sourcePaths.map((p) => readFile(p, io, log, config)));
+      log(`Reading file ${file.full}`);
+
+      const contents = await io.read(file, config.sourceDir);
+
+      return file.with({ content: contents });
+    };
+
+    const sourcePaths = await fromGenerator(io.walk(config.sourceDir));
+
+    const results = await Promise.allSettled(sourcePaths.map(readFile));
 
     const sourceFiles = results.filter(isFulfilled).map((r) => r.value);
 
@@ -24,14 +34,4 @@ const readSource =
     return { sourceFiles };
   };
 
-const readFile = async (path: string, io: IO, log: Logger, config: Config) => {
-  const file = fileFrom(path);
-
-  log(`Reading file ${file.full}`);
-
-  const contents = await io.read(file, config.sourceDir);
-
-  return file.with({ content: contents });
-};
-
-export { ReadSourceState, ReadSourceResult, readSource };
+export { readSource };
