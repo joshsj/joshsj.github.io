@@ -376,12 +376,13 @@ When rendering pug, the context is used for the 'locals' object and now pages &
 posts can render site-wide data 🎉
 
 
-## Watching for changes...
+## Watching for changes
 
 Out of the features I use in Hexo, the only major one missing from this generator is a 'watch' mode (where added/changed files automatically build). This is a big help when writing posts, but it will help immensely when the time comes to migrate the existing content.
 
-[//]: # (TODO add links)
-Turns out this is pretty straight forward. [chokidar](#) and [node-watch](#) outline their advantages over `watch` and `watchfile` in the fs module and people on the internet don't lie. I'm using chokiar for the same reasons as [grey-matter](#): configurable and clean.
+## It just works?
+
+Turns out this is pretty straight forward. [chokidar](https://www.npmjs.com/package/chokidar) and [node-watch](https://www.npmjs.com/package/node-watch) outline their advantages over `watch` and `watchfile` in the fs module and people on the internet don't lie. I'm using chokiar for the same reasons as grey-matter: configurable and clean.
 
 The pipeline needs a small change: we need to specify which files to build in watch mode without affecting the process for normal builds. 
 
@@ -402,7 +403,7 @@ const generate = pipeline()
   .build();
 ```
 
-With a small change to the `readSource` step, we can optionally accept a list of source paths and walk the directory as a fallback; a little chokidar configuration and it just seems to work..? 
+With a small change to the `readSource` step and a little chokidar configuration, we can send  the path of the changed file into the pipeline and it builds: 
 
 ```typescript
 await generate(); // Initial build
@@ -416,4 +417,14 @@ watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
 [//]: # (TODO add gif of watched)
 
 [//]: # (Very cool.)
+
+## It doesn't just work
+
+{% caption_img idiot.jpg "What an idiotic boob I was about 10 or 11 seconds ago" %} 
+
+Although the logic is currently correct for posts, it doesn't work for any files that display information about the rest of the system, like a list of all posts; nor does it work for changes to layouts or components.
+
+In the spirit of 'doing what works for now', I'm just gonna rebuild everything when a file changes. The build is almost instant so the additional logic to determine which files need rebuilding isn't worth it --- for now. 
+
+
 
