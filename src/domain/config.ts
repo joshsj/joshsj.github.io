@@ -1,10 +1,7 @@
 import { SomethingCategory } from "./something";
 
-type Map<T extends string> = { [K in T]: string };
+type ConfigKey = SomethingCategory | "source" | "build" | "root";
 
-type Key = SomethingCategory | "source" | "build" | "root";
+type Config = { [K in `${ConfigKey}Dir`]: string };
 
-type Env = Partial<Map<`${Uppercase<Key>}_DIR`>>;
-type Config = Map<`${Key}Dir`>;
-
-export { Env, Config };
+export { ConfigKey, Config };

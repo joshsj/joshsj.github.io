@@ -1,16 +1,14 @@
 import path from "path";
-import { Env } from "@domain";
-import { SetDefaultConfigResult } from "./setDefaultConfig";
 import { Step } from "@lib/pipeline";
-import dotenv from "dotenv";
 import { Logger } from "@application/logging";
-import { LoadConfigResult } from "./types";
+import { ConfigKey } from "@domain";
+import { LoadEnvResult, SetDefaultConfigResult } from "@application/steps";
 
-const loadConfig =
-  (log: Logger): Step<SetDefaultConfigResult, LoadConfigResult> =>
+type Env = { [K in `${Uppercase<ConfigKey>}_DIR`]?: string }
+
+const loadEnv =
+  (log: Logger): Step<SetDefaultConfigResult, LoadEnvResult> =>
   async ({ config: _default }) => {
-    dotenv.config();
-
     const env = process.env as Env;
     const rootDir = env.ROOT_DIR || _default.rootDir;
 
@@ -23,6 +21,7 @@ const loadConfig =
 
       assetDir: env.ASSET_DIR || _default.assetDir,
       pageDir: env.PAGE_DIR || _default.pageDir,
+      postDir: env.POST_DIR || _default.postDir
     });
 
     log("Loaded configuration from env", config);
@@ -30,4 +29,4 @@ const loadConfig =
     return { config };
   };
 
-export { LoadConfigResult, loadConfig };
+export { LoadEnvResult, loadEnv };

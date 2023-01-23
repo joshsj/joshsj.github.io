@@ -7,7 +7,6 @@ import { consoleLogger as logger } from "@infrastructure/logging";
 import {
   categoriseFiles,
   extractData,
-  loadConfig,
   readSource,
   ReadSourceState,
   setDefaultConfig,
@@ -15,11 +14,12 @@ import {
   writeBuild,
 } from "@application/steps";
 import { watch } from "chokidar";
+import { loadEnv } from "@infrastructure/steps";
 
 const main = async () => {
   const getConfig = pipeline()
     .add(setDefaultConfig(logger("config")))
-    .add(loadConfig(logger("config")))
+    .add(loadEnv(logger("config")))
     .build();
 
   const { config } = await getConfig();

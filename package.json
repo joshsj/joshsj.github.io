@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "generate": "node -r module-alias/register dist/index.js",
+    "generate": "node -r module-alias/register -r dotenv/config dist/index.js",
     "watch": "npm run generate -- --watch",
     "clean": "rimraf dist build"
   },

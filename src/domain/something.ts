@@ -5,7 +5,8 @@ import { File } from "./io";
 type Make<Category extends string, Data extends {} = {}> = {
   file: File;
   category: Category;
-} & ({} extends Data ? {} : { data: Data });
+  data: Data
+};
 
 type Asset = Make<"asset">;
 

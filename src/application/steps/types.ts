@@ -3,7 +3,7 @@ import { File } from "@domain/io";
 
 type SetDefaultConfigResult = { config: Config };
 
-type LoadConfigResult = Pick<SetDefaultConfigResult, keyof SetDefaultConfigResult>;
+type LoadEnvResult = Pick<SetDefaultConfigResult, keyof SetDefaultConfigResult>;
 
 type ReadSourceState = { sourcePaths?: string[] };
 
@@ -19,7 +19,7 @@ type TransformFilesResult = { buildFiles: File[] };
 
 export {
   SetDefaultConfigResult,
-  LoadConfigResult,
+  LoadEnvResult,
   ReadSourceState,
   ReadSourceResult,
   CategorisedFile,
