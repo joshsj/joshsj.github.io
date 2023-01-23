@@ -15,8 +15,9 @@ import {
 } from "@application/steps";
 import { watch } from "chokidar";
 import { loadEnv } from "@infrastructure/steps";
+import { BenchmarkContext, benchmarkEnd, benchmarkStart } from "./entry/benchmark";
 
-const main = async () => {
+const configure = async () => {
   const getConfig = pipeline()
     .add(setDefaultConfig(logger("config")))
     .add(loadEnv(logger("config")))
@@ -26,13 +27,23 @@ const main = async () => {
 
   const log = logger("build");
 
+  const benchmarkContext: BenchmarkContext = {};
+
   const build = pipeline()
+    .add(benchmarkStart(benchmarkContext))
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
     .add(extractData(getExtractor))
     .add(transformFiles(getTransformer, log, config))
     .add(writeBuild(io, log, config))
+    .add(benchmarkEnd(benchmarkContext, logger("benchmark")))
     .build();
+
+  return { config, getConfig, build };
+}
+
+const main = async () => {
+  const { config, build } = await configure();
 
   await build();
 
