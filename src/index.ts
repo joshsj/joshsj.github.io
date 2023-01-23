@@ -8,7 +8,6 @@ import {
   categoriseFiles,
   extractData,
   readSource,
-  ReadSourceState,
   setDefaultConfig,
   transformFiles,
   writeBuild,

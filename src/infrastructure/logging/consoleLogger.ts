@@ -1,8 +1,8 @@
-import { Logger } from "@application/logging";
+import { Log } from "@application/logging";
 
 const consoleLogger =
-  (context: string): Logger =>
-  (message: string, data?: any[]) => {
+  (context: string): Log =>
+  (message: string, data?: unknown[]) => {
     if (data && !data.length) {
       return;
     }

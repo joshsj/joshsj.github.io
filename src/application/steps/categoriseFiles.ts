@@ -1,5 +1,5 @@
 import { GetCategory } from "@application/categorisation";
-import { Logger } from "@application/logging";
+import { Log } from "@application/logging";
 import { Config, SomethingCategory } from "@domain";
 import { Step } from "@lib/pipeline";
 import { CategorisedFile, CategoriseFilesResult, ReadSourceResult } from "./types";
@@ -7,7 +7,7 @@ import { CategorisedFile, CategoriseFilesResult, ReadSourceResult } from "./type
 type Counts = { [K in SomethingCategory]: number };
 
 const categoriseFiles =
-  (getCategory: GetCategory, log: Logger, config: Config): Step<ReadSourceResult, CategoriseFilesResult> =>
+  (getCategory: GetCategory, log: Log, config: Config): Step<ReadSourceResult, CategoriseFilesResult> =>
   async ({ sourceFiles }) => {
     const files: CategorisedFile[] = [];
     const counts: Counts = { asset: 0, page: 0, post: 0 };

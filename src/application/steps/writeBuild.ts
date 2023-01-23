@@ -1,11 +1,11 @@
 import { File, IO } from "@domain/io";
 import { Step } from "@lib/pipeline";
 import { Config, isFulfilled, isRejected } from "@domain";
-import { Logger } from "@application/logging";
+import { Log } from "@application/logging";
 import { TransformFilesResult } from "@application/steps/types";
 
 const writeBuild =
-  (io: IO, log: Logger, config: Config): Step<TransformFilesResult, void> =>
+  (io: IO, log: Log, config: Config): Step<TransformFilesResult, void> =>
     async ({ buildFiles }) => {
       const results = await Promise.allSettled(buildFiles.map(async (f) => writeFile(f, io, log, config)));
 
@@ -17,7 +17,7 @@ const writeBuild =
       );
     };
 
-const writeFile = async (file: File, io: IO, log: Logger, config: Config) => {
+const writeFile = async (file: File, io: IO, log: Log, config: Config) => {
   await io.write(file, config.buildDir);
 
   log("Wrote " + file.full);

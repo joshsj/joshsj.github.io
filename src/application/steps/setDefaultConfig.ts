@@ -1,10 +1,10 @@
-import { Logger } from "@application/logging";
+import { Log } from "@application/logging";
 import { Step } from "@lib/pipeline";
 import { normalize } from "path";
 import { SetDefaultConfigResult } from "./types";
 
 const setDefaultConfig =
-  (log: Logger): Step<void, SetDefaultConfigResult> =>
+  (log: Log): Step<void, SetDefaultConfigResult> =>
   async () => {
     log("Set default configuration");
 

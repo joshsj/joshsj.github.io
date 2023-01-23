@@ -1,4 +1,4 @@
-import { Logger } from "@application/logging";
+import { Log } from "@application/logging";
 import { Config } from "@domain";
 import { fileFrom, IO } from "@domain/io";
 import { fromGenerator, isFulfilled, isRejected } from "@lib/utils";
@@ -6,7 +6,7 @@ import { Step } from "@lib/pipeline";
 import { ReadSourceResult } from "./types";
 
 const readSource =
-  (io: IO, log: Logger, config: Config): Step<void, ReadSourceResult> =>
+  (io: IO, log: Log, config: Config): Step<void, ReadSourceResult> =>
   async () => {
     const readFile = async (path: string) => {
       const file = fileFrom(path);
