@@ -6,6 +6,9 @@ mixin css(name)
 mixin js(name)
   script(src=`/scripts/${name}.js` async defer)
 
+mixin navLink(title)
+  a(href=urlFor(page.find(p => p.title === title))) #{title}
+
 html
   head 
     +css("variables")
@@ -35,9 +38,11 @@ html
 
   body 
     nav
+      +navLink("Home")
+
       button#theme-toggle.link(aria-hidden="" aria-role="Toggle for light/dark theme")
 
     main.content
-      h1 #{current.title}
+      h1 #{current.displayTitle || current.title}
 
       block content

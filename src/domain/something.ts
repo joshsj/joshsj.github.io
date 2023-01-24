@@ -9,7 +9,7 @@ type Make<Category extends string, Data extends {} = {}> = {
 
 type Asset = Make<"asset">;
 
-type PageData = { title: string };
+type PageData = { title: string, displayTitle?: string };
 
 type Page = Make<"page", PageData>;
 

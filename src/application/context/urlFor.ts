@@ -1,30 +1,30 @@
-import { File } from "@domain/io";
 import { ContextData, UrlFor } from "./types";
 import { Transformers } from "@application/transformation";
+import { Something } from "@domain";
 
 const urlFor =
   (data: ContextData, transformers: Transformers): UrlFor => {
-    const cache = new Map<string, string>();
+    const cache = new Map<Something, string>();
 
-    return (category, filename) => {
-      const key = category + filename;
+    return (kos, filename) => {
+      const something : Something | undefined = typeof kos === "string"
+        // TODO ???
+        // @ts-ignore
+        ? data[kos].find((x) => x.file.name === filename)
+        : kos;
 
-      if (cache.has(key)) {
-        return cache.get(key)!;
+      if (!something) {
+        throw new Error(`urlFor failed with: ${kos}, ${filename}`);
       }
 
-      // TODO ???
-      // @ts-ignore
-      const file: File | undefined = data[category].find((x) => x.file.name === filename)?.file;
-
-      if (!file) {
-        return cache.set(key, "").get(key)!;
+      if (cache.has(something)) {
+        return cache.get(something)!;
       }
 
-      const { full, sep } = transformers[category].location(file);
+      const { full, sep } = transformers[something.category].location(something.file);
       const url = full.startsWith(sep) ? full : sep + full;
 
-      return cache.set(key, url).get(key)!;
+      return cache.set(something, url).get(something)!;
     }
   };
 

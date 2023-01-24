@@ -1,11 +1,10 @@
 import { Something, SomethingCategory, SomethingFor } from "@domain";
-import { Transformers } from "@application/transformation";
 
 type Key = Extract<SomethingCategory, "post" | "page">;
 
 type ContextData = { [K in Key]: SomethingFor<K>[] };
 
-type UrlFor = (category: Key, filename: string) => string;
+type UrlFor = ((category: Key, filename: string) => string) & ((something: Something, filename?: undefined) => string);
 
 type ContextHelpers = {
   urlFor: UrlFor;
