@@ -1,4 +1,4 @@
-import { Context } from "@application/steps";
+import { Context } from "@application/context";
 import { Config } from "@domain";
 import { render } from "pug";
 import { Transformer, Transformers } from "./types";
@@ -11,8 +11,9 @@ const pug = (context: Context, { sourceDir }: Config) =>
   });
 
 const asset: Transformer = {
+  // Trim one folder
   location: (file) => file.with({ segments: file.segments.slice(1) }),
-  content: async ({ current }) => current.file.content,
+  content: (context) => context.current.file.content,
 };
 
 const page = (config: Config): Transformer => ({
@@ -22,18 +23,18 @@ const page = (config: Config): Transformer => ({
       segments: [],
       extension: ".html",
     }),
-
-  content: async (context) => pug(context, config),
+  content: (context) => pug(context, config),
 });
 
 const post = (config: Config): Transformer => ({
   location: (file) =>
     file.with({
-      // Place in posts folder
+      // Place in folder
       segments: ["blog", ...file.segments.slice(1)],
       extension: ".html",
     }),
-  content: async (context) => pug(context, config),
+
+  content: (context) => pug(context, config),
 });
 
 const transformers = (config: Config): Transformers => ({

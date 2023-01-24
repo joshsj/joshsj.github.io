@@ -1,4 +1,4 @@
-import { Config, SomethingCategory, Something, Post, SomethingFor } from "@domain";
+import { Config, SomethingCategory, SomethingFor } from "@domain";
 import { File } from "@domain/io";
 
 type SetDefaultConfigResult = { config: Config };
@@ -14,8 +14,6 @@ type CategoriseFilesResult = { [K in SomethingCategory]: File[] };
 
 type ExtractDataResult = { [K in SomethingCategory]: SomethingFor<K>[] };
 
-type Context = { current: Something; posts: Post[] };
-
 type TransformFilesResult = { buildFiles: File[] };
 
 export {
@@ -25,6 +23,5 @@ export {
   ReadSourceResult,
   CategoriseFilesResult,
   ExtractDataResult,
-  Context,
   TransformFilesResult,
 };

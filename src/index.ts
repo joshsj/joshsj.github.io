@@ -16,6 +16,7 @@ import { BenchmarkContext, benchmarkEnd, benchmarkStart } from "./entry/benchmar
 import { watchIndicator } from "./entry/watchIndicator";
 import { extractors } from "@application/extraction";
 import { transformers } from "@application/transformation";
+import { getContextHelpers } from "@application/context/getContextHelpers";
 
 const configure = async (isWatch: boolean) => {
   const getConfig = pipeline()
@@ -34,7 +35,7 @@ const configure = async (isWatch: boolean) => {
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
     .add(extractData(extractors))
-    .add(transformFiles(transformers(config), log))
+    .add(transformFiles(transformers(config), getContextHelpers, log))
     .add(writeBuild(io, log, config))
     .add(benchmarkEnd(benchmarkContext, logger("benchmark")));
 
