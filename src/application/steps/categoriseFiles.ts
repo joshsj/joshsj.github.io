@@ -1,8 +1,9 @@
 import { GetCategory } from "@application/categorisation";
 import { Log } from "@application/logging";
-import { Config, SomethingCategory } from "@domain";
+import { Config } from "@domain";
 import { Step } from "@lib/pipeline";
 import { CategoriseFilesResult, ReadSourceResult } from "./types";
+import { counts } from "./utils";
 
 const categoriseFiles =
   (getCategory: GetCategory, log: Log, config: Config): Step<ReadSourceResult, CategoriseFilesResult> =>
@@ -24,12 +25,7 @@ const categoriseFiles =
       result[category].push(Object.assign({}, file, { category }));
     }
 
-    log(
-      "Categorised files " +
-        Object.entries(result)
-          .map(([cat, arr]) => cat + "=" + arr.length)
-          .join(", ")
-    );
+    log("Categorised files " + counts(result));
 
     return result;
   };

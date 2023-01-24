@@ -3,3 +3,51 @@ title: "Portfolio"
 ---
 
 extends /layouts/default.pug
+
+mixin example(title, keywords, link)
+  section.card
+    h2.title #{title}
+    
+    p.sep.sep-pop.squish
+      each k in keywords  
+        span #{k}
+
+    p: block
+
+    if link
+      p: a(href=link[1], target='_blank', rel='noopener') #{link[0]}
+
+    
+
+block content
+
+  p What I've worked on.
+
+  +example(
+    "This Website", 
+    ["Personal", "HTML", "CSS", "JS", "EJS", "Markdown"],
+    ["Source", "https://github.com/joshsj/joshsj.github.io"])
+    | A server-side rendered site built with Hexo, deployed to Github Pages with Github Actions.
+
+  +example(
+    "RailSmart Incident Management",
+    ["Professional", "SQL", "MongoDB", "RabbitMQ", ".NET", "Vue", "Typescript"],
+    ["Product Page", "https://3squared.com/railsmart/incident-management-software"])
+    | My main project on placement. A .NET API serving Web Forms and Vue featuring 
+    | a complex domain, live notifications, user tagging, and reporting.
+
+  +example(
+    "Vue UI Framework",
+    ["Professional", "Vue"])
+    | My other assignment on placement.
+    | The internal UI framework used across the RailSmart suite at 3Squared, 
+    | wrapping Bootstrap, Flatpickr, Chart.js, etc. with new functionality and styles.
+    
+  +example(
+    "ReadBooksOnline",
+    ["University", "Typescript", "MongoDB", "ExpressJS", "Vue", "CQRS", "NPM Workspaces"],
+    ["Source", "https://github.com/joshsj/read-books-online"])
+    | A CRUD application to manage purchase requests and employees featuring ticket status tracking,
+    | email notifications, and real-time chat. Organised like Jason Taylor's 
+    a(target='_blank', rel='noopener', href='https://github.com/jasontaylordev/CleanArchitecture') Clean Architecture
+    | using a custom CQRS implementation.
