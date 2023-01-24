@@ -1,26 +1,26 @@
 import { Extractors } from "@application/extraction/types";
-import { SomethingCategory, SomethingFor } from "@domain";
+import { Log } from "@application/logging";
+import { isFulfilled, isRejected } from "@domain";
 import { Step } from "@lib/pipeline";
-import { CategoriseFilesResult, ExtractDataResult } from "./types";
+import { CategorisedFile, CategoriseFilesResult, ExtractDataResult } from "./types";
 
 const extractData =
-  (extractors: Extractors): Step<CategoriseFilesResult, ExtractDataResult> =>
-  async (files) => {
-    const extract = <T extends SomethingCategory>(category: T): SomethingFor<T>[] => {
-      const extractor = extractors[category];
+  (extractors: Extractors, log: Log): Step<CategoriseFilesResult, ExtractDataResult> =>
+  async ({ files }) => {
+    const extract = async (file: CategorisedFile) => {
+      const { content, data } = extractors[file.category](file);
 
-      return files[category].map((file) => {
-        const { content, data } = extractor(file);
-
-        return { category, file: file.with({ content }), ...data };
-      });
+      return { category: file.category, file: file.with({ content }), ...data };
     };
 
-    return {
-      asset: extract("asset"),
-      page: extract("page"),
-      post: extract("post"),
-    };
+    const results = await Promise.allSettled(files.map(extract));
+    const successes = results.filter(isFulfilled).map((r) => r.value);
+
+    log(`Extracted data for ${successes.length} files`);
+
+    log("Failures", results.filter(isRejected));
+
+    return { files: successes };
   };
 
 export { extractData };

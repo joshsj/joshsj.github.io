@@ -34,7 +34,7 @@ const configure = async (isWatch: boolean) => {
     .add(benchmarkStart(benchmarkContext))
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
-    .add(extractData(extractors))
+    .add(extractData(extractors, log))
     .add(transformFiles(transformers(config), getContextHelpers(transformers(config)), log))
     .add(writeBuild(io, log, config))
     .add(benchmarkEnd(benchmarkContext, logger("benchmark")));

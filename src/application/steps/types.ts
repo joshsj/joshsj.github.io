@@ -1,4 +1,4 @@
-import { Config, SomethingCategory, SomethingFor } from "@domain";
+import { Config, Something, SomethingCategory, SomethingFor } from "@domain";
 import { File } from "@domain/io";
 
 type SetDefaultConfigResult = { config: Config };
@@ -9,10 +9,11 @@ type ReadSourceState = { sourcePaths?: string[] };
 
 type ReadSourceResult = { sourceFiles: File[] };
 
-// TODO pluralise
-type CategoriseFilesResult = { [K in SomethingCategory]: File[] };
+type CategorisedFile = File & { category: SomethingCategory };
 
-type ExtractDataResult = { [K in SomethingCategory]: SomethingFor<K>[] };
+type CategoriseFilesResult = { files: CategorisedFile[] };
+
+type ExtractDataResult = { files: Something[] };
 
 type TransformFilesResult = { buildFiles: File[] };
 
@@ -21,6 +22,7 @@ export {
   LoadEnvResult,
   ReadSourceState,
   ReadSourceResult,
+  CategorisedFile,
   CategoriseFilesResult,
   ExtractDataResult,
   TransformFilesResult,
