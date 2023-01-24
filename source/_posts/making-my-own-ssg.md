@@ -7,10 +7,10 @@ tags:
   - Projects
 ---
 
-Despite the **[abundance](https://jamstack.org/generators/)** of
-great site generators, I want to make my own. It _should_ be a fun and
-achievable project, plus I'll have full creative control over any kind of
-content I want to post in the future.
+Despite the **[abundance](https://jamstack.org/generators/)** of great site
+generators, I want to make my own. It _should_ be a fun and achievable project,
+plus I'll have full creative control over any kind of content I want to post in
+the future.
 
 ## Current Situation
 
@@ -375,24 +375,31 @@ return {
 When rendering pug, the context is used for the 'locals' object and now pages &
 posts can render site-wide data 🎉
 
-
 ## Watching for changes
 
-Out of the features I use in Hexo, the only major one missing from this generator is a 'watch' mode (where added/changed files automatically build). This is a big help when writing posts, but it will help immensely when the time comes to migrate the existing content.
+Out of the features I use in Hexo, the only major one missing from this
+generator is a 'watch' mode (where added/changed files automatically build).
+This is a big help when writing posts, but it will help immensely when the time
+comes to migrate the existing content.
 
 ## It just works?
 
-Turns out this is pretty straight forward. [chokidar](https://www.npmjs.com/package/chokidar) and [node-watch](https://www.npmjs.com/package/node-watch) outline their advantages over `watch` and `watchfile` in the fs module and people on the internet don't lie. I'm using chokiar for the same reasons as grey-matter: configurable and clean.
+Turns out this is pretty straight forward.
+[chokidar](https://www.npmjs.com/package/chokidar) and
+[node-watch](https://www.npmjs.com/package/node-watch) outline their advantages
+over `watch` and `watchfile` in the fs module and people on the internet don't
+lie. I'm using chokiar for the same reasons as grey-matter: configurable and
+clean.
 
-The pipeline needs a small change: we need to specify which files to build in watch mode without affecting the process for normal builds. 
+The pipeline needs a small change: we need to specify which files to build in
+watch mode without affecting the process for normal builds.
 
-For the time being, I'm separating the config pipeline from the build pipeline as it doesn't need to be watched and it opens up the entry point. To the steps that use the config, it can be provided like a dependency instead: 
+For the time being, I'm separating the config pipeline from the build pipeline
+as it doesn't need to be watched and it opens up the entry point. To the steps
+that use the config, it can be provided like a dependency instead:
 
 ```typescript
-const getConfig = pipeline()
-  .add(setDefaultConfig)
-  .add(loadConfig)
-  .build();
+const getConfig = pipeline().add(setDefaultConfig).add(loadConfig).build();
 
 const generate = pipeline()
   .add(readSource)
@@ -403,28 +410,30 @@ const generate = pipeline()
   .build();
 ```
 
-With a small change to the `readSource` step and a little chokidar configuration, we can send  the path of the changed file into the pipeline and it builds: 
+With a small change to the `readSource` step and a little chokidar
+configuration, we can send the path of the changed file into the pipeline and it
+builds:
 
 ```typescript
 await generate(); // Initial build
 
 // Watch for changes and send them into the pipeline
 watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
-  .on("add", (path) => generate({ sourcePaths: [path] })) 
+  .on("add", (path) => generate({ sourcePaths: [path] }))
   .on("change", (path) => generate({ sourcePaths: [path] }));
 ```
 
-[//]: # (TODO add gif of watched)
-
-[//]: # (Very cool.)
+[//]: # "TODO add gif of watched"
+[//]: # "Very cool."
 
 ## It doesn't just work
 
-{% caption_img idiot.jpg "What an idiotic boob I was about 10 or 11 seconds ago" %} 
+{% caption_img "idiot.jpg" "What an idiotic boob I was about 10 or 11 seconds ago" %}
 
-Although the logic is currently correct for posts, it doesn't work for any files that display information about the rest of the system, like a list of all posts; nor does it work for changes to layouts or components.
+Although the logic is currently correct for posts, it doesn't work for any files
+that display information about the rest of the system, like a list of all posts;
+nor does it work for changes to layouts or components.
 
-In the spirit of 'doing what works for now', I'm just gonna rebuild everything when a file changes. The build is almost instant so the additional logic to determine which files need rebuilding isn't worth it --- for now. 
-
-
-
+In the spirit of 'doing what works for now', I'm just gonna rebuild everything
+when a file changes. The build is almost instant so the additional logic to
+determine which files need rebuilding isn't worth it --- for now.
