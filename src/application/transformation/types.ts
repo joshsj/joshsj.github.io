@@ -2,7 +2,12 @@ import { Context } from "@application/steps";
 import { Config, SomethingCategory } from "@domain";
 import { File } from "@domain/io";
 
-type Transformer = (context: Context, config: Config) => Promise<File>;
+// TODO separate?
+
+type Transformer = {
+  location: (file: File) => File;
+  content: (context: Context) => Promise<string>;
+};
 
 type Transformers = { [K in SomethingCategory]: Transformer };
 
