@@ -1,8 +1,6 @@
 import { pipeline } from "@lib/pipeline";
 import { io } from "@infrastructure/io";
-import { getTransformer } from "@application/transformation";
 import { getCategory } from "@application/categorisation";
-import { getExtractor } from "@application/extraction";
 import { consoleLogger as logger } from "@infrastructure/logging";
 import {
   categoriseFiles,
@@ -16,6 +14,8 @@ import { watch } from "chokidar";
 import { loadEnv } from "@infrastructure/steps";
 import { BenchmarkContext, benchmarkEnd, benchmarkStart } from "./entry/benchmark";
 import { watchIndicator } from "./entry/watchIndicator";
+import { extractors } from "@application/extraction";
+import { transformers } from "@application/transformation";
 
 const configure = async (isWatch: boolean) => {
   const getConfig = pipeline()
@@ -33,8 +33,8 @@ const configure = async (isWatch: boolean) => {
     .add(benchmarkStart(benchmarkContext))
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
-    .add(extractData(getExtractor))
-    .add(transformFiles(getTransformer, log, config))
+    .add(extractData(extractors))
+    .add(transformFiles(transformers, log, config))
     .add(writeBuild(io, log, config))
     .add(benchmarkEnd(benchmarkContext, logger("benchmark")));
 

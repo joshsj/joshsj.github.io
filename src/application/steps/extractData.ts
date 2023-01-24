@@ -1,17 +1,26 @@
-import { GetExtractor } from "@application/extraction/types";
-import { Something } from "@domain";
+import { Extractors } from "@application/extraction/types";
+import { SomethingCategory, SomethingFor } from "@domain";
 import { Step } from "@lib/pipeline";
-import { CategoriseFilesResult } from "./categoriseFiles";
-import { ExtractDataResult } from "./types";
+import { CategoriseFilesResult, ExtractDataResult } from "./types";
 
 const extractData =
-  (getExtractor: GetExtractor): Step<CategoriseFilesResult, ExtractDataResult> =>
-  async ({ files }) => ({
-    somethings: files.map((file) => {
-      const { content, data } = getExtractor(file.category)(file);
+  (extractors: Extractors): Step<CategoriseFilesResult, ExtractDataResult> =>
+  async (files) => {
+    const extract = <T extends SomethingCategory>(category: T): SomethingFor<T>[] => {
+      const extractor = extractors[category];
 
-      return { category: file.category, file: file.with({ content }), ...data };
-    }),
-  });
+      return files[category].map((file) => {
+        const { content, data } = extractor(file);
+
+        return { category, file: file.with({ content }), ...data };
+      });
+    };
+
+    return {
+      asset: extract("asset"),
+      page: extract("page"),
+      post: extract("post"),
+    };
+  };
 
 export { extractData };

@@ -1,17 +1,19 @@
 import { isFulfilled, isRejected } from "@lib/utils";
 import { Step } from "@lib/pipeline";
-import { Config, Post } from "@domain";
-import { GetTransformer } from "@application/transformation";
+import { Config, Something } from "@domain";
 import { Log } from "@application/logging";
-import { ExtractDataResult, TransformFilesResult } from "./types";
+import { Context, ExtractDataResult, TransformFilesResult } from "./types";
+import { Transformers } from "@application/transformation";
 
 const transformFiles =
-  (getTransformer: GetTransformer, log: Log, config: Config): Step<ExtractDataResult, TransformFilesResult> =>
-  async ({ somethings }) => {
-    const posts = somethings.filter((s): s is Post => s.category === "post");
+  (transformers: Transformers, log: Log, config: Config): Step<ExtractDataResult, TransformFilesResult> =>
+  async (somethings) => {
+    const context = (current: Something): Context => ({ current, posts: somethings.post });
 
     const results = await Promise.allSettled(
-      somethings.map((s) => getTransformer(s.category)({ current: s, posts }, config))
+      [...somethings.asset, ...somethings.page, ...somethings.post].map((s) =>
+        transformers[s.category](context(s), config)
+      )
     );
 
     const buildFiles = results.filter(isFulfilled).map((r) => r.value);

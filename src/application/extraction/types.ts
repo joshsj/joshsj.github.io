@@ -1,5 +1,5 @@
-import { CategorisedFile } from "@application/steps";
 import { SomethingCategory } from "@domain";
+import { File } from "@domain/io";
 
 type Extracted = {
   content: string;
@@ -7,8 +7,8 @@ type Extracted = {
   data: any;
 };
 
-type Extractor<T extends SomethingCategory> = (file: CategorisedFile & { category: T }) => Extracted;
+type Extractor = (file: File) => Extracted;
 
-type GetExtractor = <T extends SomethingCategory>(category: T) => Extractor<T>;
+type Extractors = { [K in SomethingCategory]: Extractor };
 
-export { Extractor, GetExtractor };
+export { Extractor, Extractors };

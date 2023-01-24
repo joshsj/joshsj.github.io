@@ -1,9 +1,9 @@
-import { Config, SomethingCategory, SomethingFor } from "@domain";
-import { render } from "pug";
-import { Transformer, GetTransformer } from "./types";
 import { Context } from "@application/steps";
+import { Config } from "@domain";
+import { render } from "pug";
+import { Transformers } from "./types";
 
-const transformers: { [K in SomethingCategory]: Transformer<K> } = {
+const transformers: Transformers = {
   asset: async ({ current: { file } }) => file.with({ segments: file.segments.slice(1) }),
 
   page: async (context, config) =>
@@ -24,8 +24,6 @@ const transformers: { [K in SomethingCategory]: Transformer<K> } = {
     }),
 };
 
-const getTransformer: GetTransformer = (category) => transformers[category];
-
 const pug = (context: Context, { sourceDir }: Config) =>
   render(context.current.file.content, {
     filename: context.current.file.name,
@@ -33,4 +31,4 @@ const pug = (context: Context, { sourceDir }: Config) =>
     ...context,
   });
 
-export { getTransformer };
+export { transformers };

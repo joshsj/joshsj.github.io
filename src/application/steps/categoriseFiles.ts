@@ -2,15 +2,16 @@ import { GetCategory } from "@application/categorisation";
 import { Log } from "@application/logging";
 import { Config, SomethingCategory } from "@domain";
 import { Step } from "@lib/pipeline";
-import { CategorisedFile, CategoriseFilesResult, ReadSourceResult } from "./types";
-
-type Counts = { [K in SomethingCategory]: number };
+import { CategoriseFilesResult, ReadSourceResult } from "./types";
 
 const categoriseFiles =
   (getCategory: GetCategory, log: Log, config: Config): Step<ReadSourceResult, CategoriseFilesResult> =>
   async ({ sourceFiles }) => {
-    const files: CategorisedFile[] = [];
-    const counts: Counts = { asset: 0, page: 0, post: 0 };
+    const result: CategoriseFilesResult = {
+      asset: [],
+      page: [],
+      post: [],
+    };
 
     for (const file of sourceFiles) {
       const category = getCategory(file, config);
@@ -20,19 +21,17 @@ const categoriseFiles =
         continue;
       }
 
-      ++counts[category];
-
-      files.push(Object.assign({}, file, { category }));
+      result[category].push(Object.assign({}, file, { category }));
     }
 
     log(
       "Categorised files " +
-        Object.entries(counts)
-          .map(([cat, n]) => cat + "=" + n)
+        Object.entries(result)
+          .map(([cat, arr]) => cat + "=" + arr.length)
           .join(", ")
     );
 
-    return { config, files };
+    return result;
   };
 
-export { CategorisedFile, CategoriseFilesResult, categoriseFiles };
+export { categoriseFiles };

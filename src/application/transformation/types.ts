@@ -1,12 +1,9 @@
-import { Config, Something, SomethingCategory } from "@domain";
-import { File } from "@domain/io";
 import { Context } from "@application/steps";
+import { Config, SomethingCategory } from "@domain";
+import { File } from "@domain/io";
 
-type Transformer<T extends SomethingCategory> = (
-  context: Context,
-  config: Config
-) => Promise<File>;
+type Transformer = (context: Context, config: Config) => Promise<File>;
 
-type GetTransformer = <T extends SomethingCategory>(category: T) => Transformer<T>;
+type Transformers = { [K in SomethingCategory]: Transformer };
 
-export { Transformer, GetTransformer };
+export { Transformer, Transformers };
