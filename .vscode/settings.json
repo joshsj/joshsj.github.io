@@ -23,6 +23,6 @@
     "vlogs",
     "Walkthrough"
   ],
-  "liveServer.settings.root": "/build",
+  "liveServer.settings.root": "/build/site",
   "liveServer.settings.port": 5000
 }
