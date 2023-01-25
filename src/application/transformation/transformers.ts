@@ -1,9 +1,9 @@
-import { Context } from "@application/context";
 import { Config } from "@domain";
 import { render } from "pug";
 import { Transformer, Transformers } from "./types";
+import { RenderContext } from "@application/steps/context";
 
-const pug = (context: Context, { sourceDir }: Config) =>
+const pug = (context: RenderContext, { sourceDir }: Config) =>
   render(context.current.file.content, {
     filename: context.current.file.name,
     basedir: sourceDir,
@@ -30,7 +30,7 @@ const post = (config: Config): Transformer => ({
   location: (file) =>
     file.with({
       // Place in folder
-      segments: ["blog", ...file.segments.slice(1)],
+      segments: [ "blog", ...file.segments.slice(1) ],
       extension: ".html",
     }),
 

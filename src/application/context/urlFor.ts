@@ -1,9 +1,9 @@
-import { ContextData, UrlFor } from "./types";
 import { Transformers } from "@application/transformation";
 import { Something } from "@domain";
+import { Context, UrlFor } from "@application/steps/context";
 
 const urlFor =
-  (data: ContextData, transformers: Transformers): UrlFor => {
+  (context: Context, transformers: Transformers): UrlFor => {
     const cache = new Map<Something, string>();
 
     return (kos, filename) => {

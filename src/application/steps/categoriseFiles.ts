@@ -1,28 +1,29 @@
 import { GetCategory } from "@application/categorisation";
 import { Log } from "@application/logging";
-import { Config } from "@domain";
+import { Config, isFulfilled, isRejected } from "@domain";
 import { Step } from "@lib/pipeline";
-import { CategorisedFile, CategoriseFilesResult, ReadSourceResult } from "./types";
+import { CategoriseFilesResult, ReadSourceResult } from "./types";
 
 const categoriseFiles =
   (getCategory: GetCategory, log: Log, config: Config): Step<ReadSourceResult, CategoriseFilesResult> =>
-  async ({ sourceFiles }) => {
-    const files: CategorisedFile[] = [];
-
-    for (const file of sourceFiles) {
+  async ({ sourceFiles, context }) => {
+    const results = await Promise.allSettled(sourceFiles.map(async (file) => {
       const category = getCategory(file, config);
 
       if (!category) {
-        log(`Failed to identify file: ${file.full}`);
-        continue;
+        log(`Failed to categorise file: ${file.full}`);
+        throw file.full;
       }
 
-      files.push(Object.assign(file, { category }));
-    }
+      return Object.assign(file, { category });
+    }));
 
-    log(`Successfully categorised${files.length}/${sourceFiles.length} source files`);
+    const files = results.filter(isFulfilled).map(r => r.value);
 
-    return { files };
+    log(`Categorised ${files.length}/${sourceFiles.length} source files`);
+    log("Failures", results.filter(isRejected).map(r => r.reason));
+
+    return { files, context };
   };
 
 export { categoriseFiles };

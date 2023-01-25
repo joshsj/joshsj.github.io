@@ -1,21 +1,26 @@
-import { Config, Something, SomethingCategory, SomethingFor } from "@domain";
+import { Config, Something, SomethingCategory, } from "@domain";
 import { File } from "@domain/io";
+import { Context } from "./context";
+
+type Make<T extends {}> = T & { context: Context }
 
 type SetDefaultConfigResult = { config: Config };
 
 type LoadEnvResult = Pick<SetDefaultConfigResult, keyof SetDefaultConfigResult>;
 
-type ReadSourceState = { sourcePaths?: string[] };
+type ReadSourceState = Make<{ sourcePaths?: string[] }>;
 
-type ReadSourceResult = { sourceFiles: File[] };
+type ReadSourceResult = Make<{ sourceFiles: File[] }>;
 
 type CategorisedFile = File & { category: SomethingCategory };
 
-type CategoriseFilesResult = { files: CategorisedFile[] };
+type CategoriseFilesResult = Make<{ files: CategorisedFile[] }>;
 
-type ExtractDataResult = { files: Something[] };
+type ExtractDataResult = Make<{ somethings: Something[] }>;
 
-type TransformFilesResult = { buildFiles: File[] };
+type TransformFilesResult = Make<{ buildFiles: File[] }>;
+
+type WriteBuildResult = Make<{}>;
 
 export {
   SetDefaultConfigResult,
@@ -26,4 +31,5 @@ export {
   CategoriseFilesResult,
   ExtractDataResult,
   TransformFilesResult,
+  WriteBuildResult
 };

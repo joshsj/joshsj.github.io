@@ -5,7 +5,7 @@ import { consoleLogger as logger } from "@infrastructure/logging";
 import {
   categoriseFiles,
   extractData,
-  readSource,
+  readSource, ReadSourceState,
   setDefaultConfig,
   transformFiles,
   writeBuild,
@@ -16,45 +16,68 @@ import { BenchmarkContext, benchmarkEnd, benchmarkStart } from "./entry/benchmar
 import { watchIndicator } from "./entry/watchIndicator";
 import { extractors } from "@application/extraction";
 import { transformers } from "@application/transformation";
-import { getContextHelpers } from "@application/context/getContextHelpers";
+import { getHelpers } from "@application/context/getHelpers";
+import { Config } from "@domain";
+import { Context } from "@application/steps/context";
+import { updateContext } from "@application/steps/updateContext";
 
-const configure = async (isWatch: boolean) => {
-  const getConfig = pipeline()
-    .add(setDefaultConfig(logger("config")))
-    .add(loadEnv(logger("config")))
-    .build();
+type Flags = {
+  watch: boolean;
+  debug: boolean;
+}
 
-  const { config } = await getConfig();
+const getFlags = (): Flags => {
+  const isSet = (arg: string) => process.argv.includes(`--${arg}`);
 
-  const log = logger("build");
+  return { watch: isSet("watch"), debug: isSet("debug") }
+}
+
+const getConfig = pipeline()
+  .add(setDefaultConfig(logger("config")))
+  .add(loadEnv(logger("config")))
+  .build();
+
+const getBuild = (config: Config, flags: Flags) => {
+  const log = flags.debug ? logger("build") : () => {};
 
   const benchmarkContext: BenchmarkContext = {};
 
-  const buildPipeline = pipeline()
+  const buildPipeline = pipeline<ReadSourceState>()
     .add(benchmarkStart(benchmarkContext))
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
     .add(extractData(extractors, log))
-    .add(transformFiles(transformers(config), getContextHelpers(transformers(config)), log))
+    .add(updateContext)
+    .add(transformFiles(transformers(config), getHelpers(transformers(config)), log))
     .add(writeBuild(io, log, config))
-    .add(benchmarkEnd(benchmarkContext, logger("benchmark")));
+    .add(benchmarkEnd(benchmarkContext));
 
-  if (isWatch) {
-    buildPipeline.add(watchIndicator(logger()));
+  if (flags.watch) {
+    buildPipeline.add(watchIndicator);
   }
 
-  return { config, getConfig, build: buildPipeline.build() };
-};
+  return buildPipeline.build();
+}
+
 
 const main = async () => {
-  const isWatch = process.argv.at(2) === "--watch";
+  const flags = getFlags();
+  const { config } = await getConfig();
 
-  const { config, build } = await configure(isWatch);
+  const build = getBuild(config, flags);
 
-  await build();
+  let context: Context = [];
 
-  if (isWatch) {
-    watch("**/*", { cwd: config.sourceDir, ignoreInitial: true }).on("add", build).on("change", build);
+  await build({ context });
+
+  if (flags.watch) {
+    const onChange = (p: string) => build({ context, sourcePaths: [p] }).then(result => {
+      context = result.context;
+    });
+
+    watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
+      .on("add", onChange)
+      .on("change", onChange);
   }
 };
 

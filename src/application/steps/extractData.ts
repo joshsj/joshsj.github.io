@@ -6,7 +6,7 @@ import { CategorisedFile, CategoriseFilesResult, ExtractDataResult } from "./typ
 
 const extractData =
   (extractors: Extractors, log: Log): Step<CategoriseFilesResult, ExtractDataResult> =>
-  async ({ files }) => {
+  async ({ files, context }) => {
     const extract = async (file: CategorisedFile) => {
       const { content, data } = extractors[file.category](file);
 
@@ -14,13 +14,13 @@ const extractData =
     };
 
     const results = await Promise.allSettled(files.map(extract));
-    const successes = results.filter(isFulfilled).map((r) => r.value);
+    const somethings = results.filter(isFulfilled).map((r) => r.value);
 
-    log(`Extracted data for ${successes.length} files`);
+    log(`Extracted data for ${somethings.length} files`);
 
     log("Failures", results.filter(isRejected));
 
-    return { files: successes };
+    return { somethings, context };
   };
 
 export { extractData };

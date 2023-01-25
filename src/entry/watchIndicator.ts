@@ -1,10 +1,11 @@
 import { Log } from "@application/logging";
 import { Step } from "@lib/pipeline";
+import { WriteBuildResult } from "@application/steps";
 
-const watchIndicator =
-  (log: Log): Step<void, void> =>
-  async () => {
-    log("Watching for file changes...");
+const watchIndicator: Step<WriteBuildResult, WriteBuildResult> =
+  async (state) => {
+    console.log("Watching for changes");
+    return state;
   };
 
 export { watchIndicator };

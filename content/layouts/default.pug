@@ -7,8 +7,7 @@ mixin js(name)
   script(src=`/scripts/${name}.js` async defer)
 
 mixin navLink(title)
-  a(href=urlFor(page.find(p => p.title === title))) #{title}
-
+  a(href=urlFor(pages.find(p => p.title === title))) #{title}
 
 html
   head 
