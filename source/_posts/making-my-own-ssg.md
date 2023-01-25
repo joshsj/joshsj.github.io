@@ -382,7 +382,7 @@ generator is a 'watch' mode (where added/changed files automatically build).
 This is a big help when writing posts, but it will help immensely when the time
 comes to migrate the existing content.
 
-## It just works?
+### It just works?
 
 Turns out this is pretty straight forward.
 [chokidar](https://www.npmjs.com/package/chokidar) and
@@ -426,7 +426,7 @@ watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
 [//]: # "TODO add gif of watched"
 [//]: # "Very cool."
 
-## It doesn't just work
+### It doesn't just work
 
 {% caption_img "idiot.jpg" "What an idiotic boob I was about 10 or 11 seconds ago" %}
 
