@@ -3,7 +3,7 @@ import { Config } from "@domain";
 import { fileFrom, IO } from "@domain/io";
 import { fromGenerator, isFulfilled, isRejected } from "@lib/utils";
 import { Step } from "@lib/pipeline";
-import { ReadSourceResult, ReadSourceState } from "./types";
+import { ReadSourceResult, ReadSourceState } from "@application/steps"
 
 const readSource =
   (io: IO, log: Log, config: Config): Step<ReadSourceState, ReadSourceResult> =>

@@ -5,11 +5,11 @@ import { consoleLogger as logger } from "@infrastructure/logging";
 import {
   categoriseFiles,
   extractData,
-  readSource, ReadSourceState,
-  setDefaultConfig,
+  readSource,
   transformFiles,
+  updateContext,
   writeBuild,
-} from "@application/steps";
+} from "@application/steps/build";
 import { watch } from "chokidar";
 import { loadEnv } from "@infrastructure/steps";
 import { BenchmarkContext, benchmarkEnd, benchmarkStart } from "./entry/benchmark";
@@ -19,7 +19,8 @@ import { transformers } from "@application/transformation";
 import { getHelpers } from "@application/context/getHelpers";
 import { Config } from "@domain";
 import { Context } from "@application/steps/context";
-import { updateContext } from "@application/steps/updateContext";
+import { setDefaultConfig } from "@application/steps/config";
+import { ReadSourceState } from "@application/steps";
 
 type Flags = {
   watch: boolean;
@@ -32,13 +33,18 @@ const getFlags = (): Flags => {
   return { watch: isSet("watch"), debug: isSet("debug") }
 }
 
-const getConfig = pipeline()
-  .add(setDefaultConfig(logger("config")))
-  .add(loadEnv(logger("config")))
-  .build();
+const buildGetConfig = (flags: Flags) => {
+  const log = flags.debug ? logger("config") : () => {};
 
-const getBuild = (config: Config, flags: Flags) => {
-  const log = flags.debug ? logger("build") : () => {};
+  return pipeline()
+    .add(setDefaultConfig(log))
+    .add(loadEnv(log))
+    .build();
+}
+
+const buildGenerate = (config: Config, flags: Flags) => {
+  const log = flags.debug ? logger("build") : () => {
+  };
 
   const benchmarkContext: BenchmarkContext = {};
 
@@ -62,16 +68,17 @@ const getBuild = (config: Config, flags: Flags) => {
 
 const main = async () => {
   const flags = getFlags();
-  const { config } = await getConfig();
 
-  const build = getBuild(config, flags);
+  const getConfig = buildGetConfig(flags);
+  const { config } = await getConfig();
+  const build = buildGenerate(config, flags);
 
   let context: Context = [];
 
   await build({ context });
 
   if (flags.watch) {
-    const onChange = (p: string) => build({ context, sourcePaths: [p] }).then(result => {
+    const onChange = (p: string) => build({ context, sourcePaths: [ p ] }).then(result => {
       context = result.context;
     });
 

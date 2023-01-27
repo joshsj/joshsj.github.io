@@ -1,10 +1,9 @@
-
 import { Log } from "@application/logging";
 import { Transformers } from "@application/transformation";
 import { Asset, Page, Post, Something } from "@domain";
 import { Step } from "@lib/pipeline";
 import { isFulfilled, isRejected } from "@lib/utils";
-import { ExtractDataResult, TransformFilesResult } from "./types";
+import { ExtractDataResult, TransformFilesResult } from "@application/steps";
 import { GetRenderHelpers } from "@application/context";
 import { RenderContext, RenderContextData } from "@application/steps/context";
 

@@ -2,7 +2,7 @@ import { Extractors } from "@application/extraction/types";
 import { Log } from "@application/logging";
 import { isFulfilled, isRejected } from "@domain";
 import { Step } from "@lib/pipeline";
-import { CategorisedFile, CategoriseFilesResult, ExtractDataResult } from "./types";
+import { CategorisedFile, CategoriseFilesResult, ExtractDataResult } from "@application/steps"
 
 const extractData =
   (extractors: Extractors, log: Log): Step<CategoriseFilesResult, ExtractDataResult> =>
