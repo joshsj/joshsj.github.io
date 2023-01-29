@@ -224,6 +224,7 @@ code {
   font-family: var(--ff-mono);
   overflow-wrap: break-word;
   letter-spacing: normal;
+  font-variant-ligatures: none;
 }
 
 iframe {

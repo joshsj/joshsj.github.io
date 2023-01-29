@@ -1,5 +1,5 @@
 ---
-title: Making my own SSG
+title: Making an SSG
 date: 2023-01-06
 updated: 2023-01-08
 tags:
@@ -7,27 +7,15 @@ tags:
   - Projects
 ---
 
-I recently rewatched The Social Network and I enjoyed the stream of
-conciousness-style of blogging. I'm gonna try it and see how it turns out 🤞
-
-<!-- TODO add spoilers component -->
-<!-- There won't any crude comparison websites for this project through. -->
-
----
-
-I've been in my current role for around two months and I'm pretty much settled
-in. Now that I have some energy outside of work, I decided not to refocus my
-efforts and do some programming for myself.
-
-Despite the abundance of [abundance](https://jamstack.org/generators/) of great
-site generators, I want to make my own. It _should_ be a fun and achievable
-project, plus I'll have full creative control over any kind of content I want to
-post in the future.
+Despite the **[abundance](https://jamstack.org/generators/)** of great site
+generators, I want to make my own. It _should_ be a fun and achievable project,
+plus I'll have full creative control over any kind of content I want to post in
+the future.
 
 ## Current Situation
 
 The blog is currently hosted on Github Pages and deployed automatically with
-Github Actions. I have little to no interest in DevOps and this works flawlessly
+Github Actions. I have little to no interest in DevOps and this works just fine
 --- no changes here.
 
 Building the blog is handled by [Hexo](https://github.com/hexojs/hexo) which I
@@ -122,7 +110,7 @@ dotenv should be more than adequate, and I like the
 [preload](https://github.com/motdotla/dotenv#preload) option so that goes in the
 npm scripts too.
 
-We need only two settings for now:
+We need only two values for now:
 
 - `SOURCE_DIR` --- where the content is
 - `BUILD_DIR` --- where to put the content once compiled
@@ -139,9 +127,7 @@ Producing an MVP is now a simple process away:
 
 The only hiccup was with fs module in Node. It doesn't offer a method to
 recursively scan directories, but with some inspiration from the nice folks on
-Stack Overflow, async generators make this a doddle:
-
-{% caption "Walking directories with fs" %}
+Stack Overflow, async generators make this looks easy:
 
 ```typescript
 async function* walk(
@@ -163,8 +149,6 @@ async function* walk(
 }
 ```
 
-{% endcaption %}
-
 ## Static Assets
 
 Times New Roman has a certain charm but I want my hard-earned CSS back.
@@ -181,12 +165,12 @@ With that, the site looks like mine again:
 ## Introducing transformers
 
 Before the system grows, we need a refactor. Adding an `elif` for every file
-type is completely inextensible and would become a mess --- we have design
+type is completely inextensible and would become a mess --- we invented design
 patterns for a reason.
 
 Typescript allows us to take an object-oriented or functional approach. Of
 course, both will be used eventually but I want to lean on FP because I've never
-work on a sizeable application with it.
+developed a useful application with it.
 
 With that in mind, I only know software design from an OOP perspective so expect
 no rules of FP to be followed.
@@ -260,10 +244,10 @@ composition, which composes a single function of many. However, it seems that FP
 nerds still haven't quite achieved this in Typescript, as shown by this thread
 on [Hacker News](https://news.ycombinator.com/item?id=32377646).
 
-Looking at object-oriented design, my understanding (see
+Looking at object-oriented design, the most common patterns (see
 [GoF](https://martinfowler.com/bliki/GangOfFour.html) and
-[DDD](https://martinfowler.com/bliki/DomainDrivenDesign.html)) reveals none are
-quite right:
+[DDD](https://martinfowler.com/bliki/DomainDrivenDesign.html)) don't seem to
+work either:
 
 - Mediator could construct a pipeline but:
   - abstracting the communication between functions is the opposite of
@@ -296,23 +280,160 @@ type PipelineBuilder<Initial, Current> = {
   build: () => Step<Initial, Current>;
 };
 
-type Pipeline = <Initial = void>() => PipelineBuilder<Initial, Initial>;
+type Pipeline = <Initial>() => PipelineBuilder<Initial, Initial>;
 ```
 
-The implementation but simple: `add` stores the step `f` in an array; `build`
+The implementation is simple: `add` stores the step `f` in an array; `build`
 reduces the array and composes the result. This requires some type assertions
-and `any` so you can't see the ugly.
+and `any` so you can't see the ugliness.
 
 We can now decompose the current process into `Step`s and separate some
 behaviours into their own functions:
 
 ```typescript
-const run = pipeline()
+const generate = pipeline()
   .add(setDefaultConfig) // In case .env is missing
   .add(loadConfig) // Load from .env
   .add(readSource) // Read in the source files
   .add(categoriseFiles) // Asset or page?
-  .add(transformFiles) // If you know, you know
+  .add(transformFiles) // See above
   .add(writeBuild) // Write the build files
   .build(); // Compose the added functions
+
+await generate();
 ```
+
+## Forming a context
+
+Some pages inform the site about themselves like the title/created date/tags of
+a post, whereas some pages are informed by the site to render a list of posts,
+for example.
+
+### Adding posts
+
+Before we can start pulling data out of posts to create the context, we need to
+define them as well as the other categories:
+
+```typescript
+type PostData = { title: string; created: Date; updated?: Date; tags?: [] };
+
+type Post = PostData & { file: File; category: "post" };
+type Asset = { file: File; category: "post" }; // No extra data
+type Page = { file: File; category: "post" }; // Also no extra data
+```
+
+The combination of mapped types and template literal types really shine here.
+With a type to represent the file categories, we can derive new types with a
+mapping with keys also derived from the type. Thus we can, for example, ensure a
+'categoriser' implementation exists for all categories:
+
+```typescript
+// "asset" | "page" | "post";
+type Category = (Post | Asset | Page)["category"];
+
+// Produces "assetDir" | "pageDir" | "postDir"
+type Key = `${Category}Categoriser`;
+
+type Categorisers = { [K in Key]: (file: File) => Category };
+```
+
+This moves a typical runtime error (like missing dependencies) to compile time,
+which is awesome and makes me hope languages like C# embrace some type theory in
+future.
+
+Preach over, we need a `POST_DIR` config value and to implement a categoriser
+and transformer for posts. I'm opting out of the `/year/month/day` format for
+post URLs as another quick search shows that there isn't much point and I don't
+like it.
+
+Like assets, their relative path will be preserved but they live inside a
+`/blog` folder.
+
+### Front matter
+
+A feature I first used with Hexo, front matter stores stateful data at the start
+(or front) of a file, which works really well to unify a post's data and
+content.
+
+A quick search of NPM shows its most popular package for parsing front matter
+([gray-matter](https://www.npmjs.com/package/gray-matter)) is also the most
+configurable and has the cleanest interface --- who could have guessed?
+
+With the package installed, a new step to `extractData` goes in the pipeline in
+which gray-matter splits the front matter from the rest of the file and parses
+it as YAML (by default):
+
+```typescript
+const { data, content } = matter(file.contents, { excerpt: false });
+
+return {
+  file: file.with({ contents: content }), // Exclude front matter from contents
+  data: data as PostData, // Putting trust in myself
+};
+```
+
+When rendering pug, the context is used for the 'locals' object and now pages &
+posts can render site-wide data 🎉
+
+## Watching for changes
+
+Out of the features I use in Hexo, the only major one missing from this
+generator is a 'watch' mode (where added/changed files automatically build).
+This is a big help when writing posts, but it will help immensely when the time
+comes to migrate the existing content.
+
+### It just works?
+
+Turns out this is pretty straight forward.
+[chokidar](https://www.npmjs.com/package/chokidar) and
+[node-watch](https://www.npmjs.com/package/node-watch) outline their advantages
+over `watch` and `watchfile` in the fs module and people on the internet don't
+lie. I'm using chokiar for the same reasons as grey-matter: configurable and
+clean.
+
+The pipeline needs a small change: we need to specify which files to build in
+watch mode without affecting the process for normal builds.
+
+For the time being, I'm separating the config pipeline from the build pipeline
+as it doesn't need to be watched and it opens up the entry point. To the steps
+that use the config, it can be provided like a dependency instead:
+
+```typescript
+const getConfig = pipeline().add(setDefaultConfig).add(loadConfig).build();
+
+const generate = pipeline()
+  .add(readSource)
+  .add(categoriseFiles)
+  .add(extractData)
+  .add(transformFiles)
+  .add(writeBuild)
+  .build();
+```
+
+With a small change to the `readSource` step and a little chokidar
+configuration, we can send the path of the changed file into the pipeline and it
+builds:
+
+```typescript
+await generate(); // Initial build
+
+// Watch for changes and send them into the pipeline
+watch("**/*", { cwd: config.sourceDir, ignoreInitial: true })
+  .on("add", (path) => generate({ sourcePaths: [path] }))
+  .on("change", (path) => generate({ sourcePaths: [path] }));
+```
+
+[//]: # "TODO add gif of watched"
+[//]: # "Very cool."
+
+### It doesn't just work
+
+{% caption_img "idiot.jpg" "What an idiotic boob I was about 10 or 11 seconds ago" %}
+
+Although the logic is currently correct for posts, it doesn't work for any files
+that display information about the rest of the system, like a list of all posts;
+nor does it work for changes to layouts or components.
+
+In the spirit of 'doing what works for now', I'm just gonna rebuild everything
+when a file changes. The build is almost instant so the additional logic to
+determine which files need rebuilding isn't worth it --- for now.
