@@ -6,24 +6,29 @@ import { CategoriseFilesResult, ReadSourceResult } from "@application/steps";
 
 const categoriseFiles =
   (getCategory: GetCategory, log: Log, config: Config): Step<ReadSourceResult, CategoriseFilesResult> =>
-  async ({ sourceFiles, context }) => {
-    const results = await Promise.allSettled(sourceFiles.map(async (file) => {
-      const category = getCategory(file, config);
+  async ({ sourceFiles }) => {
+    const results = await Promise.allSettled(
+      sourceFiles.map(async (file) => {
+        const category = getCategory(file, config);
 
-      if (!category) {
-        log(`Failed to categorise file: ${file.full}`);
-        throw file.full;
-      }
+        if (!category) {
+          log(`Failed to categorise file: ${file.full}`);
+          throw file.full;
+        }
 
-      return Object.assign(file, { category });
-    }));
+        return Object.assign(file, { category });
+      })
+    );
 
-    const files = results.filter(isFulfilled).map(r => r.value);
+    const files = results.filter(isFulfilled).map((r) => r.value);
 
     log(`Categorised ${files.length}/${sourceFiles.length} source files`);
-    log("Failures", results.filter(isRejected).map(r => r.reason));
+    log(
+      "Failures",
+      results.filter(isRejected).map((r) => r.reason)
+    );
 
-    return { files, context };
+    return { files };
   };
 
 export { categoriseFiles };

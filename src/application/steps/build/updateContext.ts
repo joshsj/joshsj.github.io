@@ -1,19 +1,20 @@
-﻿import { ExtractDataResult } from "@application/steps/types";
+﻿import { ExtractDataResult, SiteContext } from "@application/steps";
 import { Step } from "@lib/pipeline";
 
-const updateContext : Step<ExtractDataResult, ExtractDataResult> =
-    async ({ somethings, context }) => {
-      for (const something of somethings) {
-        const index = context.findIndex(x => x.file.full === something.file.full);
+const updateContext =
+  (context: SiteContext): Step<ExtractDataResult, ExtractDataResult> =>
+  async ({ somethings }) => {
+    for (const something of somethings) {
+      const index = context.findIndex((x) => x.file.full === something.file.full);
 
-        if (index > -1) {
-          context[index] = something;
-        } else {
-          context.push(something);
-        }
+      if (index > -1) {
+        context[index] = something;
+      } else {
+        context.push(something);
       }
-
-      return { somethings, context }
     }
 
-export { updateContext }
+    return { somethings };
+  };
+
+export { updateContext };

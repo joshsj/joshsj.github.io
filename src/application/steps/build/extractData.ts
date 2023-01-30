@@ -2,11 +2,11 @@ import { Extractors } from "@application/extraction/types";
 import { Log } from "@application/logging";
 import { isFulfilled, isRejected } from "@domain";
 import { Step } from "@lib/pipeline";
-import { CategorisedFile, CategoriseFilesResult, ExtractDataResult } from "@application/steps"
+import { CategorisedFile, CategoriseFilesResult, ExtractDataResult } from "@application/steps";
 
 const extractData =
   (extractors: Extractors, log: Log): Step<CategoriseFilesResult, ExtractDataResult> =>
-  async ({ files, context }) => {
+  async ({ files }) => {
     const extract = async (file: CategorisedFile) => {
       const { content, data } = extractors[file.category](file);
 
@@ -20,7 +20,7 @@ const extractData =
 
     log("Failures", results.filter(isRejected));
 
-    return { somethings, context };
+    return { somethings };
   };
 
 export { extractData };

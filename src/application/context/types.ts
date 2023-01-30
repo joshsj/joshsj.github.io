@@ -1,5 +1,5 @@
-import { Context, RenderHelpers } from "@application/steps/context";
+import { SiteContext, RenderHelpers } from "@application/steps/context";
 
-type GetRenderHelpers = (context: Context) => RenderHelpers;
+type GetRenderHelpers = (context: SiteContext) => RenderHelpers;
 
-export { GetRenderHelpers }
+export { GetRenderHelpers };

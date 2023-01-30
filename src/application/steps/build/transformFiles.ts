@@ -5,21 +5,22 @@ import { Step } from "@lib/pipeline";
 import { isFulfilled, isRejected } from "@lib/utils";
 import { ExtractDataResult, TransformFilesResult } from "@application/steps";
 import { GetRenderHelpers } from "@application/context";
-import { RenderContext, RenderContextData } from "@application/steps/context";
+import { RenderContext, RenderContextData, SiteContext } from "@application/steps/context";
 
 const transformFiles =
   (
+    context: SiteContext,
     transformers: Transformers,
     getHelpers: GetRenderHelpers,
     log: Log
   ): Step<ExtractDataResult, TransformFilesResult> =>
-  async ({ somethings, context }) => {
+  async ({ somethings }) => {
     const helpers = getHelpers(context);
-    const renderContextData : RenderContextData = {
+    const renderContextData: RenderContextData = {
       assets: context.filter((x): x is Asset => x.category === "asset"),
       pages: context.filter((x): x is Page => x.category === "page"),
       posts: context.filter((x): x is Post => x.category === "post"),
-    }
+    };
 
     const toRenderContext = (current: Something): RenderContext => ({ current, ...renderContextData, ...helpers });
 
@@ -41,7 +42,7 @@ const transformFiles =
       results.filter(isRejected).map((r) => r.reason)
     );
 
-    return { buildFiles, context };
+    return { buildFiles };
   };
 
 export { transformFiles };
