@@ -25,10 +25,10 @@
   <link href="/styles/components.css" rel="stylesheet" />
   <link href="/styles/lib.css" rel="stylesheet" />
 
-  <script src="/scripts/theme.js" defer async></script>
-  <script src="/scripts/tag.js" defer async></script>
-  <script src="/scripts/id-jumper.js" defer async></script>
-  <script src="/scripts/konami.js" defer async></script>
+  <script src="/scripts/theme.js" defer></script>
+  <script src="/scripts/tag.js" defer></script>
+  <script src="/scripts/id-jumper.js" defer></script>
+  <script src="/scripts/konami.js" defer></script>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
@@ -41,8 +41,9 @@
 </head>
 
 <body 
-  class="<%- page.hmm ? 'hmm' : ''  %>"
-  <%- env.debug ? "data-dev" : "" %>>  
+    class=<%- page.hmm ? 'hmm' : ''  %>
+    %- env.debug ? "data-dev" : "" %>
+  >
   
   <nav>
       <%- nav_link("Home") %>
@@ -59,6 +60,6 @@
     
     <%- body %>
   </main>
-</>
+</body>
 
 </html>
