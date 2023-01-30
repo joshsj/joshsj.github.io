@@ -316,10 +316,11 @@ define them as well as the other categories:
 
 ```typescript
 type PostData = { title: string; created: Date; updated?: Date; tags?: [] };
+type PageData = { title: string };
 
-type Post = PostData & { file: File; category: "post" };
-type Asset = { file: File; category: "post" }; // No extra data
-type Page = { file: File; category: "post" }; // Also no extra data
+type Post = { category: "post"; file: File } & PostData;
+type Page = { category: "page"; file: File } & PageData;
+type Asset = { category: "asset"; file: File };
 ```
 
 The combination of mapped types and template literal types really shine here.
@@ -437,3 +438,32 @@ nor does it work for changes to layouts or components.
 In the spirit of 'doing what works for now', I'm just gonna rebuild everything
 when a file changes. The build is almost instant so the additional logic to
 determine which files need rebuilding isn't worth it --- for now.
+
+### It can work better
+
+Changed my mind; rebuilding everything is a bad solution.
+
+A quick win is to process only the changed files, reducing compute and file
+reads. We can move the [context](#Forming-a-context) from the pipeline to an
+external dependency (keeping it for the next cycle) and upsert changed files
+when needed using a new step `updateContext`:
+
+```typescript
+for (const changed of files) {
+  const index = context.find((f) => f.full === changed.full);
+
+  if (index > -1) {
+    context[index] = something;
+  } else {
+    context.push(something);
+  }
+}
+```
+
+Mow the site builds much quicker in watch mode and
+[Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+can refresh the page automatically.
+
+{% caption_img "watching.gif" "Building source files on file change" %}
+
+Very cool.
