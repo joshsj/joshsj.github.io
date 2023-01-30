@@ -460,7 +460,7 @@ for (const changed of files) {
 }
 ```
 
-Mow the site builds much quicker in watch mode and
+Now the site builds much quicker in watch mode and
 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 can refresh the page automatically.
 
