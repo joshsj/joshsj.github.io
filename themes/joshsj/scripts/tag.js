@@ -2,7 +2,6 @@
 
 const path = require("path");
 const fs = require("fs");
-const katex = require("katex");
 
 const md = (text) => hexo.render.render({ text, engine: "md" });
 
@@ -26,7 +25,7 @@ hexo.extend.tag.register("bigo", (args) => tex(args, "\\mathcal{O}(args)"));
 const counters = {};
 hexo.extend.tag.register(
   "caption",
-  function ([caption, source], content) {
+  async function ([caption, source], content) {
     if (!(this.path in counters)) {
       counters[this.path] = 1;
     }
@@ -34,17 +33,15 @@ hexo.extend.tag.register(
     const dir = path.join(process.cwd(), "public", this.path);
     const filename = `caption${counters[this.path]}.html`;
 
-    hexo.log.debug(filename);
-
     fs.mkdirSync(dir, { recursive: true });
 
-    fs.writeFileSync(path.join(dir, filename), content);
+    fs.writeFileSync(path.join(dir, filename), await md(content));
 
     counters[this.path] += 1;
 
     return `\n+caption("${filename}", "${caption}", "${source}")`;
   },
-  { ends: true }
+  { ends: true, async: true }
 );
 
 hexo.extend.tag.unregister("quote");

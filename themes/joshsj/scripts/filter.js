@@ -1,3 +1,7 @@
+const fs = require("fs");
+const path = require("path");
+const yaml = require("yaml");
+
 const ExcerptRegex = (() => {
   const marker = "<!--\\s*excerpt\\s*-->";
   const capture = "(?<excerpt>(.|\\n)+)";
@@ -25,4 +29,28 @@ hexo.extend.filter.register("after_post_render", function (data) {
   data.excerpt = `<p>${capitalize(
     excerpt + (ValidEndPunctuation.some((p) => excerpt.endsWith(p)) ? "" : ".")
   )}</p>`;
+});
+
+hexo.extend.filter.register("after_post_render", function (data) {
+  const { title, date, updated, tags, path: p } = data;
+
+  if (p.endsWith(".html")) {
+    return;
+  }
+
+  const dir = path.join("public", p);
+
+  fs.mkdirSync(dir, { recursive: true });
+
+  fs.writeFileSync(
+    path.join(dir, "preamble.yaml"),
+    yaml.stringify({
+      title,
+      created: date,
+      updated,
+      tags: tags.map((t) => t.name),
+    })
+  );
+
+  return data;
 });
