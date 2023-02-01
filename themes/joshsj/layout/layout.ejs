@@ -1,1 +1,65 @@
-<%- body %>
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU" />
+
+  <title>
+    <%- is_home() ? `${config.title} · Software Developer` : `${page.title} · ${config.title}` %>
+  </title>
+
+  <!-- TODO improve this solution -->
+  <% if (env.debug) { %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+    <% } else {%>
+      <link href="/styles/lib/katex/katex.min.css" rel="stylesheet" />
+  <% } %>
+
+  <link href="/styles/variables.css" rel="stylesheet" />
+  <link href="/styles/utilities.css" rel="stylesheet" />
+  <link href="/styles/base.css" rel="stylesheet" />
+  <link href="/styles/layout.css" rel="stylesheet" />
+  <link href="/styles/components.css" rel="stylesheet" />
+  <link href="/styles/lib.css" rel="stylesheet" />
+
+  <script src="/scripts/theme.js" defer></script>
+  <script src="/scripts/tag.js" defer></script>
+  <script src="/scripts/id-jumper.js" defer></script>
+  <script src="/scripts/konami.js" defer></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+  <link rel="manifest" href="/icons/site.webmanifest" />
+  <link rel="shortcut icon" href="/icons/favicon.ico" />
+  <meta name="msapplication-TileColor" content="#603cba" />
+  <meta name="msapplication-config" content="/icons/browserconfig.xml" />
+  <meta name="theme-color" content="#ffffff" />
+</head>
+
+<body 
+    class="<%- page.hmm ? 'hmm' : ''  %>"
+    <%- env.debug ? "data-dev" : "" %>
+  >
+  
+  <nav>
+      <%- nav_link("Home") %>
+      <%- nav_link("Articles") %>
+      <%- nav_link("Collections") %>
+      <%- nav_link("Tags") %>
+      <%- nav_link("Portfolio") %>
+
+    <button id="theme-toggle" class="link" aria-hidden aria-role="Toggle for light/dark theme"></button>
+  </nav>
+
+  <main class="content">
+    <h1><%- page.display_title || page.title %></h1>
+    
+    <%- body %>
+  </main>
+</body>
+
+</html>

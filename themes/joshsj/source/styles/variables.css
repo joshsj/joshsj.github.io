@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500&family=Space+Mono:ital@0;1&display=swap");
+
+body {
+  --space-1: 0.5rem;
+  --space-2: calc(var(--space-1) * 2);
+  --space-3: calc(var(--space-1) * 3);
+  --space-4: calc(var(--space-1) * 4);
+  --separator: "·";
+
+  --border-radius: 0.3rem;
+  --border: 0.1rem solid var(--dark-grey);
+
+  --fs-small: calc(var(--fs-normal) * 0.85);
+  --fs-normal: 1.1rem;
+  --fs-h3: 1.3rem;
+  --fs-h2: 1.7rem;
+  --fs-h1: 2.6rem;
+
+  --ff-normal: Karla, sans-serif;
+  --ff-heading: "Space Grotesk", sans-serif;
+  --ff-mono: "Space Mono", ui-monospace, monospace;
+
+  --code-property: #e45649;
+  --code-params: #986801;
+  --code-title: #4078f2;
+  --code-built-in: #0184bc;
+  --code-keyword: #a626a4;
+  --code-string: #50a14f;
+  --code-comment: #a0a1a7;
+
+  --blue: var(--code-title);
+  --purple: var(--code-keyword);
+  --green: var(--code-string);
+  --red: var(--code-property);
+
+  /* atom one colors */
+  /* default hsl(0, 0%, 98%); */
+  --white: hsl(0, 0%, 99%);
+  /* default hsl(228, 8%, 24%) */
+  --black: hsl(228, 8%, 18%);
+  --dark-grey: #5e616e;
+  --light-grey: #eaeaeb;
+
+  /* theme */
+  --light: var(--white);
+  --dark: var(--black);
+  --pop: var(--purple);
+}
+
+body.dark {
+  --code-property: #e06c75;
+  --code-params: #d19a66;
+  --code-title: #61afef;
+  --code-built-in: #56b6c2;
+  --code-keyword: #c678dd;
+  --code-string: #98c379;
+  --code-comment: #5c6370;
+
+  /* default hsl(219, 14%, 71%) */
+  --white: hsl(219, 10%, 82%);
+  --black: hsl(220, 13%, 18%);
+
+  --dark-grey: #9da3af;
+  --light-grey: #3e4451;
+
+  /* theme */
+  --light: var(--black);
+  --dark: var(--white);
+}
