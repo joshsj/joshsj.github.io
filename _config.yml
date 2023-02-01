@@ -15,7 +15,7 @@ timezone: Europe/London
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://joshsj.github.io
-permalink: :year/:month/:day/:title/
+permalink: :title/
 pretty_urls:
   trailing_index: false
   trailing_html: false
@@ -39,7 +39,8 @@ theme: joshsj
 marked:
   breaks: false
   gfm: true
-  smartypants: true
+  headerIds: false
+  smartypants: false
 
 sitemap:
   tags: true
@@ -47,6 +48,7 @@ sitemap:
 
 # syntax highlighting
 highlight:
+  enable: false
   line_number: false
   wrap: false
   hljs: true
