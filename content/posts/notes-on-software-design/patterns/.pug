@@ -1,0 +1,217 @@
+---
+title: Patterns
+created: 2021-11-28T00:00:00.000Z
+updated: 2021-11-28T00:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    em Design patterns
+    | are
+    // excerpt
+    | a reusable solution to a commonly occurring
+    | problem within a given context.
+    // excerpt
+    | They are only a template, so they
+    | cannot be transformed directly into code and are a starting point: not a final
+    | decision.
+  p
+    | Patterns become more and more relevant as applications grow; complex domains
+    | like banking, patient care, shipping, etc. all involve:
+  ul
+    li Lot of persistent data
+    li Concurrent data access
+    li Varying, complex UIs
+    li Integrations with other enterprise applications
+    li Conceptual dissonance (how we expect people to use it)
+    li Complex business logic
+  h2 Common Concerns
+  p At an architecture level, 
+    a(href="#Layering") layering
+    | is a big point of discussion.
+    | Traditionally, the approach has been horizontal but trends indicate this is
+    | changing. Naturally, the implementation&#39;s context is a factor in this decision,
+    | as the language itself along with its frameworks can make development easier.
+  p
+    | Another concern is domain logic and authorization; where does it belong:
+    | database or backend application code? Should the UI apply the same rules to hide
+    | inoperable&#x2F;unavailable paths? (Yes).
+  h2 Trends in Architecture
+  p
+    | Traditionally enterprise applications have been developed as monoliths: (very)
+    | large applications which perform related tasks to solve a range of business
+    | needs, hosted in a single location.
+  p
+    | However the industry is trending towards distributed systems, which decomposes
+    | the system into subsystems to be developed and hosted independently.
+  h2 Types of Patterns
+  p
+    em Architectural
+    | patterns provide a fundamental system of organisation and
+    | structure. They define conceptual units and their relationships:
+  ul
+    li N-tier
+    li Layered (or onion)
+    li Model-View-Controller (MVC)
+    li Command Query Responsibility Segregation (CQRS)
+    li Inversion of Control (IOC)
+  p
+    em Design
+    | patterns provide a scheme to implement features of a system, or their
+    | relationships:
+  ul
+    li Observer
+    li Builder
+    li Abstraction
+  p An 
+    em idiom
+    | is any low-level pattern in a given programming language, describing
+    | how to approach the implementation of a feature:
+  table
+    thead
+      tr
+        th Feature
+        th Imperative
+        th Functional
+    tbody
+      tr
+        td Mutable objects
+        td ✔️
+        td ❌
+      tr
+        td Default null references
+        td ✔️
+        td ❌
+      tr
+        td Operations
+        td Class methods
+        td Free functions
+  h2 Layering
+  p
+    | Enterprise software (almost) always consists of three principle layers, although
+    | different architecture patterns will use different terminology.
+  h3 Presentation
+  p How the product is &#39;exposed&#39;.
+  p
+    | For client-facing exposure, i.e., user interfaces, the Model-View-Controller
+    | (MVC) pattern is the most widely used pattern, with Model-View-ViewModel (MVVM)
+    | also proving popular.
+  p
+    | For technical exposure, APIs and sockets are very common, implementing
+    | additional protocols such as REST and SOAP for standardisation.
+  h3 Business
+  p Application of business logic, also known as 
+    em domain
+    | .
+  p
+    | It also manages domain models, which represent concepts used in the business
+    | context. These can be data-based, like a
+    code Report
+    | , or technical, like a
+    code ReportQueue
+    | .
+  p
+    | Simple domain models map (pretty much) directly to the database tables, storing
+    | no logic on their instances. Instead, corresponding components will store the
+    | business logic for domain objects, e.g., a
+    code ProductBusiness
+    | .
+  p
+    | However, for newer approaches like domain-driven design (DDD) considers these
+    | models &#39;anaemic&#39;, and instead poses...
+  p
+    | Rich domain models store complex business logic inside instances. They do not
+    | necessarily map directly to a database object, and as such require an additional
+    | layer is required for persistence.
+  h3 Data
+  p Also known as 
+    em persistence
+    | , it&#39;s the mapping of domain models to persistable
+    | objects like documents or relational tables. It also exposes operations to
+    | access the domain models (e.g., &#39;find&#39; &#39;insert&#39;,
+    code delete
+    | )
+  h2 Concurrency
+  p
+    | At a data level, concurrency is the management of resource acquisition from
+    | multiple sources. It uses locks.
+  p An 
+    em optimistic lock
+    | use a timestamp or version field to ensure one session
+    | cannot commit changes to field(s) if another session has updated since. This
+    | allows multiple sessions to update records at the &#39;same time&#39;, however the
+    | integrity of the data can be warped from a business perspective e.g., if a user
+    | updates a field after considering the value other another field which has since
+    | been updated.
+  p Preventing all concurrent access is achieved with a 
+    em pessimistic lock
+    | , which
+    | prevents simultaneous. reads and&#x2F;or writes, usually at a database level. This
+    | however can create deadlocks.
+  h2 Integration
+  p
+    | Modern applications are rarely self-contained solutions; instead they
+    | communicate with other applications consuming and publishing data.
+  ul
+    li Generally simplicity
+      ul
+        li
+          | Reduces the likelihood of needing to update integration processes in the
+          | future
+    li Usage of open standards
+      ul
+        li Protocols and data formats
+        li Reduces single-use interop code
+        li Negates conflicts with changes to standards
+    li Non-proprietary technologies
+      ul
+        li Eliminate specialised software&#x2F;hardware
+    li (A)synchronicity s
+      ul
+        li Simplifies the interop with other applications
+        li Depending on the implementation
+    li Versioning
+      ul
+        li Allows for breaking changes whilst integrated systems can work as-is
+  h3 File Transfer
+  p
+    | Each application produces files containing the information required across
+    | applications. The integrated applications can interact with files periodically,
+    | on-write, or something else depending on the business needs. Either way, a
+    | standard file format is best practise.
+  p
+    | If the applications do not prefer the same file format, extract-transform-load
+    | (ETL) tools manage the interop between formats, e.g., JSON ↔️ XML
+  h3 Data Sharing
+  p Just that, most commonly with a database.
+  p
+    | Database replication is used to reduce an applications access to a dataset by
+    | replicating a subset of a database to another. This accommodates for simple
+    | business needs, e.g., a parent application updating the dataset for a child
+    | periodically. It&#39;s also beneficial for security reasons, i.e., a product
+    | catalogue production system need not know about personnel.
+  h3 Remote Procedure Invocation (RPI)
+  p
+    | Applications implementing RPI provide an interface to invoke functionality
+    | remotely, providing each application with complete control over its exposed
+    | data.
+  p
+    | The most common example is the REST(ful) protocol for APIs. The Remote Procedure
+    | Call (RPC) protocol is more function-oriented; web interfaces are defined
+    | similar to functions, from which libraries offer various levels of abstraction
+    | to invoke them in application code.
+  h3 Messaging
+  p
+    | Using a shared message bus, packets of data are accessible to all subsystem in
+    | the application. The subsystems do not need information about each other, only
+    | the protocol of the message provider and the message format like JSON.
+  p
+    | By nature, messaging is immediate, reliable, and asynchronous. However, the host
+    | application needs to handle invalid and stale messages, (potentially) lots of
+    | subscribers, and possibly support serial messages (i.e., multiple, ordered
+    | messages).
+  

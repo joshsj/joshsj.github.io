@@ -8,3 +8,7 @@ block content
 
   p Disclaimer: I'm no Martin Fowler. These blog posts are more of a creative outlet than a source for knowledge or wisdom.
 
+  ul
+    each post in posts
+      li: a(href=urlFor(post)) #{post.title}
+

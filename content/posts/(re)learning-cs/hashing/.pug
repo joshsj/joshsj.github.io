@@ -1,0 +1,214 @@
+---
+title: Hashing
+created: 2022-09-10T23:00:00.000Z
+updated: 2022-09-10T23:00:00.000Z
+tags:
+  - Computer Science
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | With data structures like a sorted
+    a(href="/(re)learning-cs/lists/#Array") array
+    | or a balanced
+    a(href="/(re)learning-cs/trees/#Binary-Search-Tree")
+      | binary search
+      | tree
+    | , we can find random values in logarithmic time. With hashing, we make
+    | it constant.
+  span#more
+  p
+    | This is the basic idea: for a given key, we use a function to produce a unique
+    | value based on the key; we transform this value into an index where we can store
+    | some data.
+  p
+    | Naturally, we need a backing structure to use the indexes &mdash; an array, cos it&#39;s
+    | hella quick.
+  h2 Structures
+  p How is hashing used to store data?
+  h3 Hash Table
+  p A set, storing the key itself at the index.
+  h3 Hash Map
+  p A 
+    a(href="/(re)learning-cs/abstract-data-types/#Map") map
+    | ,
+    | storing a key-value pair for association.
+  h3 Bloom Filter
+  p
+    | An alternate take on a hash map, useful only to check if a value exists in the
+    | structure.
+  p
+    | It stores boolean values only; for a given value #[:tex(inline) V], we use #[:tex(inline) K]
+    | hash functions to calculate its indexes and set them to true.
+  p The structure is 
+    em probabilistic
+    | ; false negatives aren&#39;t possible but false
+    | positives are, so the precision of a hash map is sacrificed for memory
+    | efficiency. For example, for an array of length #[:tex(inline) m], let:
+  | :tex
+  | H_1(K)=ascii(K)\mod{m} \\ H_2(K)=ascii(K)+4\mod{m} \\ H_3(K)=4\times{}ascii(K)\mod{m}
+  p Inserting B returns indexes 1, 3, and 4; inserting L also returns 1, 3, and 4.
+  h3 Count-Min Sketches
+  p Extending on bloom filters, 
+    em count-min sketches
+    | store the frequency of values
+    | in an #[:tex(inline) m\times{}k] 2D array.
+  p
+    | They&#39;re still probabilistic meaning the frequencies provide an upper limit.
+    | Using the example above, inserting B and L would produce values of 2 at each
+    | index so the upper limit of B or L is 2.
+  p
+    | Keys with fewer collisions are more accurate but we can&#39;t know which those are
+    | 🤔
+  h2 Hash Functions
+  p A 
+    em hash function
+    | #[:tex(inline) h(k)] is any function which transforms data of an
+    | arbitrary size into a fixed size. They&#39;re used to compute the index of a key in
+    | hashing structures.
+  p All hash function obey the 
+    em equality
+    | property: given two keys of equal value,
+    | their hashes must also be equal.
+  p A 
+    em perfect
+    | hash function also obeys the
+    em inequality
+    | property: given two keys
+    | of inequal value, their hashes must be unequal. In the real world, this is
+    | difficult to achieve so a &#39;good&#39; hash function minimises
+    em collisions
+    | .
+  p
+    | Note: As well as hash tables&#x2F;maps, there are many more uses of hashing including
+    | cryptography, version control diffs, password storage etc. Common
+    | implementations include MD5, SHA-1, and CRC.
+  h3 Make It Gud
+  p
+    | Starting with a hash function for only characters, we can return the ASCII
+    | numerical value and ensure its unique.
+  p
+    | Making things harder, lets accept string; applying the same principle, we can
+    | sum the ASCII values to produce an index. This has a glaring issue in that
+    code hello
+    | and
+    code olleh
+    | return the same value.
+  p This means good hash functions must have a time complexity of #[:tex(inline) K], where
+  | #[:tex(inline) K] is the length of the input, and must also perform non-commutative
+  p arithmetic.
+  h3 Producing An Index
+  p To store a object #[:tex(inline) o] in an array of length #[:tex(inline) m]:
+  ol
+    li Create the hash value #[:tex(inline) hv=h(o)]
+    li Transform the hash value into a valid index #[:tex(inline) i=hv\mod{m}]
+  h2 Collision Resolution
+  p
+    | We can control two aspects of hash tables to minimise collisions: the size of
+    | the backing array and the hash function itself.
+  p There are four categories of collision resolution mechanisms:
+  table
+    thead
+      tr
+        th
+        th Closed
+        th Open
+    tbody
+      tr
+        td Addressing
+        td Indexes are directly determined by the hash function
+        td Indexes are determined algorithmically to account for colliding keys
+      tr
+        td Hashing
+        td At at key&#39;s index, the key is stored
+        td At a key&#39;s index, a 
+          a(href="#Separate-Chaining") separate
+          | structure is stored
+  h3 Linear Probe
+  p (Open addressing, closed hashing)
+  p
+    | Simply put, when an index collides, we try the next one and keep going until we
+    | find an empty index 🤷‍♂️. If no index is available, we extend the backing array
+    | and rehash all the values which minimises previous collisions.
+  +caption("Insertion via Linear Probing")
+    include:py caption1.py
+  h3 Double Hashing
+  p (Open addressing, closed hashing)
+  p An issue with linear probing is 
+    em clumping
+    | : groups of adjacent indexes. They&#39;re
+    a(href="https://stepik.org/lesson/31223/step/11") statistically likely
+    | but I never
+    | liked stats.
+  p You can use 
+    em double hashing
+    | to eliminate clumping which determines the
+    em offset
+    | using another hash function. A common choice is #[:tex(inline) 1+\frac{K}{M}\mod{(M-1)}].
+  h3 Random Hashing
+  p (Open addressing, closed hashing)
+  p Another solution to clumping is 
+    em random hashing
+    | in which the offset is produced
+    | by a random number generator
+    strong seeded with the key
+    | which ensures the values
+    | comply with the equality property.
+  p
+    | Because good random number generators are computationally expensive, it&#39;s better
+    | to just go with double hashing.
+  h3 Supporting Deletion
+  p For all the methods above, we need a mechanism to allow for deletion.
+  p
+    | A naive approach is to follow the same logic until an empty cell is reached;
+    | this means the value isn&#39;t in the hash table and we can move on. However, if
+    | another key has been deleted in the same index, the logic fails as it may stop
+    | too early.
+  p
+    | This is resolved using a deleted flag to indicate the cell is available for
+    | insertion but it previously held a value.
+  h3 Separate Chaining
+  p (Closed addressing, open hashing)
+  p Where previous methods store the key at their index, 
+    em separate chaining
+    | uses a
+    | separate data structure (such as a linked list) to store all keys with the same
+    | hash.
+  p
+    | Implicitly, clumps are now irrelevant as the structure itself is a clump and we
+    | can now store multiple values at a given index &mdash; which is cool.
+  h3 Cuckoo Hashing 🐦
+  p (Open addressing, closed hashing (?))
+  p
+    | For those not biologically-inclined (like me), the name comes from the habits of
+    | cuckoos.
+  p
+    | When a key #[:tex(inline) K_1] has been inserted and another key #[:tex(inline) K_2]
+    | collides, the new key is inserted and the previous key is rehashed to a new
+    | location.
+  p
+    em Cuckoo hashing
+    | uses multiple hash tables #[:tex(inline) T_1, T_2] with different
+    | hash functions to reduce the probability of collisions. The algorithm for cuckoo
+    | hashing is limited to a maximum number of attempts, usually 10, to ensure we
+    | don&#39;t
+    a(href="https://docs.google.com/presentation/d/1uNYS51BNM66GJmM0vDIWnac-Y9VUQxOpYikpJoKXJyo/embed") try forever
+    | The algorithm is as follows:
+  ol
+    li A key collides in #[:tex(inline) T_1]
+    li It moves to #[:tex(inline) T_2]
+    li If it collides again in #[:tex(inline) T_2], the existing key is rehashed for #[:tex(inline) T_1]
+    li
+      | If this key collides, the existing key if rehashed for #[:tex(inline) T_2] and so
+      | on and so on...
+  p
+    | See this
+    a(href="https://docs.google.com/presentation/d/1enss8FYHLN5VfPXA1ODzV0rxnr62lFrUrlURqKnkaj8/embed?start=true&loop=true&delayms=1000") visualisation
+    | if that isn&#39;t so clear.
+  p
+    | Cuckoo hashing is #[:tex(inline) \mathcal{O}(1)] for find &amp; delete operations &mdash; if the key isn&#39;t
+    | at #[:tex(inline) H_1(K)] or #[:tex(inline) H_2(K)] then it isn&#39;t in the table.
+  

@@ -1,0 +1,102 @@
+---
+title: Configuration & Options
+created: 2022-08-21T23:00:00.000Z
+updated: 2022-08-21T23:00:00.000Z
+tags:
+  - C#
+  - .NET
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p Configuration functionality comes from the 
+    code Microsoft.Extensions.Configuration
+    | package.
+    span#more
+    | Data is accessed using key-value pairs; nested keys are
+    | separated with colons (e.g.,
+    code Section1:Key1
+    | ).
+  p Simple access to keys and values uses get methods:
+  +caption("Basic configuration access")
+    include:cs caption1.cs
+  p Storing connection strings under the 
+    code ConnectionStrings
+    | key is a common
+    | pattern;
+    code GetConnectionString(cs)
+    | method automatically checks for a string
+    | under the
+    code ConnectionStrings
+    | key.
+  h2 Configuration Sources
+  p
+    code appsettings.json
+    | is the default configuration file used by .NET.
+    | Environment-specific files can override the base config file; e.g.,
+    code appsettings.Development.json
+    | or
+    code appsettings.Staging.json
+    | .
+  p Similarly, Visual Studio has a 
+    code launchSettings.json
+    | which uses
+    code __
+    | for a
+    | hierarchy spacer.
+  p Environment variables can overwrite values further: 
+    code $Favourites__Food=Banana
+    | .
+  p
+    | Finally, command-line arguments can also be used:
+    code $ dotnet run --Favourites:Food Banana
+  h2 Security
+  p
+    | Storing secure data in files is bad as they either live in source control or on
+    | deployment platforms. Dotnet provides
+    code user-secrets
+    | to store secure data at
+    | development-time instead:
+    code $ dotnet user-secrets set &quot;Favourites:Food&quot; &quot;Banana&quot;
+    | .
+  p
+    | For production, Azure Key Vault can be implemented with the
+    code Microsoft.Azure.Services.AppAuthentication
+    | and
+    code Microsoft.Extensions.Configuration.AzureKeyVault
+    | packages.
+  h2 Options Pattern
+  p Although 
+    code IConfiguration
+    strong can
+    | be injected, using getters with magic
+    | string&#x2F;static constant strings isn&#39;t ideal. The Options pattern is much cleaner
+    | and robust, using models matching the structure of configuration data.
+  +caption("Basic Options registration")
+    include:cs caption2.cs
+  h2 Live Updates
+  p The standard 
+    code Configure
+    | method registers a singleton. Alternatively, the
+    code IOptionsSnapshot&lt;&gt;
+    | interface registers configs as scoped dependencies which
+    | provides the latest configuration data on construction.
+  p For the latest data every time, use the 
+    code CurrentValue
+    | property offered by
+    code IOptionsMonitor&lt;&gt;
+    | .
+  h2 Validation
+  p The extension method 
+    code ValidateDataAnnotations()
+    | can validate configuration
+    | files against attributes like
+    code [Required]
+    | .
+  p
+    strong Note:
+    | validation is triggered on the first access to the object, not on
+    | creation, so be smart when using this.
+  

@@ -8,8 +8,9 @@ type Make<Category extends string, Data extends {} = {}> = {
 } & Data;
 
 type Asset = Make<"asset">;
+type PostAsset = Make<"postAsset">;
 
-type PageData = { title: string, displayTitle?: string };
+type PageData = { title: string; displayTitle?: string };
 
 type Page = Make<"page", PageData>;
 
@@ -22,7 +23,7 @@ type PostData = {
 
 type Post = Make<"post", PostData>;
 
-type Something = Asset | Page | Post;
+type Something = Asset | Page | Post | PostAsset;
 
 type SomethingCategory = Something["category"];
 

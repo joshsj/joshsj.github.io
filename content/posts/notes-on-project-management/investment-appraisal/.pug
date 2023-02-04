@@ -1,0 +1,85 @@
+---
+title: Investment Appraisal
+created: 2021-11-24T00:00:00.000Z
+updated: 2021-11-24T00:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | An investment appraisal is used to assess the financial implications of a
+    | business case.
+  span#more
+  p When documenting, always use a currency.
+  h2 Time-Value
+  p
+    em Time-value
+    | refers to the value of an item relative to a point in time.
+    | Currency is a prime example of this, as inflation dictates the value of $1 today
+    | will worth less in a year&#39;s time.
+  p
+    | Applying this concept to a project means its projections need to account for the
+    | value of returns relative to the time.
+  p From the perspective of the investors, this is referred to a 
+    em
+      | return on
+      | investment
+    | , i.e., breaking even one year later is ultimately a loss.
+  h3 Calculations
+  p
+    em Present value
+    | #[:tex(inline) PV] is an amount of money at-present.
+  p
+    em Future value
+    | #[:tex(inline) FV] is an amount of money in the future, corresponding
+    | to some prevent value.
+  p
+    em Interest
+    | is the annual rate #[:tex(inline) R] at which the present value changes;
+    em discount
+    | applies to future value retrospectively.
+  p
+    | Lastly, the rates are applied across a number of annual periods #[:tex(inline) N].
+    | Since the rate for a given year is derived from the year previous, they are
+    | applied cumulatively.
+  +caption("Present & Future Value Formulae")
+    include caption1.html
+  p For example, 10% interest turns $1 into $1.10 across one year:
+  | #[:tex(inline) 1(1 + 0.1)^1 =  \$1.10].
+  h2 Methods of Appraisal
+  h3 Payback
+  p
+    | Payback is the most simple method, as it assumes the time-value of money remains
+    | the same.
+  +caption("Example of Payback calculations")
+    include caption2.html
+  h3 Net Present Value
+  p The 
+    em Net Present Value (NPV)
+    | of the project applies a discount rate to the
+    | project&#39;s returns.
+  p
+    | From the payback example, the initial (year 1) costs were $530. Each following
+    | year had a net return of $150, resulting in a $70 profit at year 5. However,
+    | this does not account for an changes in the value of currency.
+  p
+    | By applying a discount rate of 0.2 (20%), the value of the project can be
+    | calculated relative to the present value; more importantly, the profits become
+    | relative to the initial costs:
+  +caption("Example of NPV calculations")
+    include caption3.html
+  h3 Internal Rate of Return
+  p
+    em Internal Rate of Return (IRR)
+    | uses sensitivity analysis, which applies best
+    | case and worst case scenarios determine the elasticity of the costs. By
+    | providing a range of potential investment options, both the project management
+    | team and potential customers can understand the project&#39;s viability in different
+    | contexts.
+  p
+    | IRR uses the same calculations as above, with changes to the input data, e.g.,
+    | investment period, initial cost(s), net profit.
+  

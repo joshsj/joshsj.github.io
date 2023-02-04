@@ -1,0 +1,94 @@
+---
+title: "User-centric Design: A Worked Example"
+created: 2021-10-21T23:00:00.000Z
+updated: 2021-10-21T23:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p Looking at how we create scenarios, storyboards, and wireframes from a persona.
+  span#more
+  +caption("User persona example, inspired by [Bin collection, BBC](https://www.bbc.co.uk/news/uk-england-47170939)")
+    include caption1.html
+  h2 Observations
+  ul
+    li
+      p Discusses the role of an average bin collector in a city
+    li
+      p The current system is inefficient
+      ul
+        li
+          | Information on bin capacity is non-existant so all bins must be checked for
+          | litter
+        li Time is wasted on empty bins meaning routes may not be completed
+    li
+      p The council wants to add sensors to bins
+      ul
+        li
+          | Only bins that require collection will be scheduled, optimising the
+          | collection process
+        li Workload is reduced for bin men
+        li General public will shut the fuck up
+        li
+          | Local council save money on wages for scheduling roles and
+          | complaints-handling
+  h2 Persona
+  p (I couldn&#39;t be bothered to make one 🤷‍♂️)
+  h2 Scenario
+  ol
+    li James, a 28-year-old bin man, has gotten ready for work
+    li He carries everyday items, such as his phone, and his keys for his work van
+    li He checks which bins need collecting and starts his route
+  h2 Goals
+  ul
+    li Functionality
+      ul
+        li Remotely accessible: it&#39;s a job on the move
+        li Available without internet connection: may not always have a connection
+    li Context factors
+      ul
+        li Events around the city: can additional bin-usage be expected&#x2F;predicted?
+    li Usability goals
+      ul
+        li Easy to read on the move
+    li UX goals
+      ul
+        li Reliable
+  h2 Storyboard
+  +caption("Storyboard for 'James the Bin Man'")
+    img(src="james the bin man.png")
+  h2 Wireframe
+  p (I couldn&#39;t be bothered to make this either)
+  table
+    thead
+      tr
+        th Component
+        th Functionalities
+        th Used by
+    tbody
+      tr
+        td Text box
+        td Entering text 
+          br
+          | Censoring letters
+        td Login fields
+      tr
+        td Button
+        td Navigation
+        td Login button
+      tr
+        td Text
+        td Rendering text 
+          br
+          | Rendering emojis
+        td Scheduled bin component
+      tr
+        td Scheduled bin
+        td Displaying bin name 
+          br
+          | Displaying bin status
+        td Route preview
+  

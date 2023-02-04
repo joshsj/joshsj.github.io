@@ -1,0 +1,38 @@
+---
+title: Resourcing
+created: 2021-11-08T00:00:00.000Z
+updated: 2021-11-08T00:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | A resource is a necessary asset which functions to (help) complete a specific
+    | task(s) or project.
+  span#more
+  ul
+    li Person&#x2F;Team
+    li Tools
+      ul
+        li Software (plus licensing)
+        li Hardware (plus fees)
+    li Equipment
+      ul
+        li Premises
+        li Office space
+        li Chairs, tables
+    li Services (3rd parties to support in-house resources)
+      ul
+        li Domain specialists
+        li Technology specialists
+        li Cloud hosting
+        li Additional team members (pad em out)
+  p
+    | When deducing a resource, consider a &#39;full-time employee&#39; whose actual work
+    | corresponds to ~170 working days per year (or 3.27 days per week).
+  +caption("Proof of a full-time employee's days worked")
+    include caption1.html
+  

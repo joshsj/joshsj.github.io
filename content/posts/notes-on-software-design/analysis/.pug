@@ -1,0 +1,115 @@
+---
+title: Analysis
+created: 2021-10-13T23:00:00.000Z
+updated: 2021-10-13T23:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | Analysing a problem involves identifying the overriding problem to establish its
+    | causes and effects, plus the goals of its solution.
+  span#more
+  p To analyse the goals of a system, we can first look at 
+    em usability
+    | &mdash; the
+    | functional impact of a system:
+  ul
+    li Effective to use
+    li Efficient to use
+    li Safe to use
+    li Have good utility
+    li Easy to learn
+    li Easy to remember how to use
+  p We can also look at 
+    em User Experience (UX)
+    | &mdash; the effect of a system on the
+    | user:
+  ul
+    li Satisfying
+    li Enjoyable
+    li Engaging
+    li Pleasurable
+    li Exciting
+    li Entertaining
+    li Helpful
+    li Motivating
+    li Emotionally fulfilling
+  h2 User Profiles
+  p A 
+    em user profile
+    | are a set of characteristics taken from a typical user of a
+    | system. A product can have any number of user profiles, depending on the scope
+    | of the system&#39;s demographic. Attributes should be all&#x2F;only be relevant to the
+    | system; for example:
+  ul
+    li Age range
+    li Physical competences
+    li Perceptual competences
+    li Education Level
+    li Domain Knowledge &amp; experience
+    li Interests
+    li Financial status
+    li Social grouping
+    li Religion, nationality, culture
+  p If we consider a teenager, we get:
+  blockquote
+    ul
+      li 13 to 18
+      li Limited finances
+      li Varied physical strength (but considerable energy)
+      li Likely to have good hand-eye coordination
+      li Education is varied but likely to be full-time
+      li Interests &#39;youth-related&#39;
+      li Cohesive peer group
+      li Possibly limited respect for authority…
+  h2 Personas
+  p Where user profiles are a generic assessment of the user-base, 
+    em user personas
+    | are rich descriptions of typical users for a system. By specifying the target
+    | user(s), designed can further tailor a product to its end-users.
+  p
+    | They specify a theoretical or an actual end-user requiring an age, personal
+    | background, personal needs, etc., and are formatted as a paragraph.
+  +caption("Example User Persona")
+    include caption1.html
+  h2 Task Analysis
+  p
+    | This a generic term referring to a variety of techniques for analysing and
+    | representing goals and tasks.
+  p
+    em User goals
+    | are derived from the activities in which end-users engage: a state
+    | an end-user wishes to achieve.
+  p
+    em User tasks
+    | describe the functionality to achieve a task: a user activity
+    | required to bring about a goal.
+  p
+    | For example, the goal, &#39;know where next week&#39;s lecture is&#39;, can be described
+    | with a task, &#39;a user activity required to bring about a goal &#39;.
+  p A working design can be validated through a comparison to user goals and tasks:
+  ul
+    li Does it reduce user effort?
+    li Does it improve user performance?
+    li Does it aid&#x2F;assist their use?
+  h2 Scenarios
+  p
+    em Scenarios
+    | are an informal narrative story: simple, &#39;natural&#39;, personal, and
+    | not generalisable. Ultimately, these target the when and where, referred to as
+    | the system&#39;s context.
+  p
+    | Physical context could include where the user is, what their physical situation
+    | is, and what else is happening around them. Temporal context could include:
+    | timing, order of events, and other events.
+  p A basic outline of a scenario consists of:
+  ul
+    li Names of the individuals
+    li Where they are
+    li Why they are doing &#39;it&#39; (the action in the scenario)
+    li Describe what else they are doing at the same time
+  

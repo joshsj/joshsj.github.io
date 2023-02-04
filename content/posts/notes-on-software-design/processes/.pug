@@ -1,0 +1,305 @@
+---
+title: Processes of Decomposition
+created: 2021-11-22T00:00:00.000Z
+updated: 2021-11-22T00:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | The design of a system outlines what the system is and is not for, describes the
+    | overall architecture following which the system will be developed, and details
+    | its static structure and dynamic behaviour.
+  p
+    | At this point, we have some amount of user profiles&#x2F;personas, scenarios,
+    | storyboards, wireframes, and (non-)functional requirements. We can now
+    | start
+    // excerpt
+    | decomposing the system concept into a theoretical
+    | representation.
+    // excerpt
+  p
+    | Documenting the design should be done various levels of complexity&#x2F;abstraction.
+    | Without simplification, the design process would be trivial since it would match
+    | the implementation identically.
+  p
+    em Functional design
+    | concentrates on the functionality of the system, whereas
+    em operational Design
+    | concentrates on the operational aspects; e.g., hardware
+    | set-up, what functionality runs where, network design. With the movement in
+    | modern software development towards the cloud, this is becoming less relevant.
+  p
+    | Good design addresses and includes extensibility, modularity, reusability,
+    | maintainability, usability, and clarity.
+  h2 Balance for all involved
+  p
+    | When designing an application, a requirement will have many possible design
+    | solutions; the users, developers, and maintainers must all be considered, as an
+    | imbalance will lead to detriment for everyone.
+  p
+    | For example, over-simplified applications will be easier to create but the
+    | end-user will not be happy with the system
+  p
+    | By contrast, complex systems will be harder to develop and maintain; this costs
+    | time and money which ultimately affects the end-user.
+  h2 Using patterns
+  p
+    | Most &#39;new&#39; solutions are simply an adaptation of existing applications, so the
+    | wheel need not be reinvented. More importantly, use design patterns which are
+    | relevant to the solution. e.g., N-tier or lter for a .NET API written with C#.
+  p
+    | Design patterns also accommodate for changes and maintenance, as new designers
+    | will have a fundamental understanding of the system before tacking domain
+    | knowledge, implementation, etc.
+  h2 Representation
+  p
+    | Designs should be represented with models because they&#39;re a proven and
+    | well-accepted method.
+  p
+    | They should demonstrate the functionality of the system at different levels of
+    | complexity&#x2F;abstraction. This makes the design more accessible, as the system can
+    | be understood at the level desired by an individual. Inherently, it is important
+    | to ensure a representation is not oversimplified or important details may be
+    | masked.
+  p
+    | Provided the developers of the system respect the design, a system&#39;s model will
+    | closely resemble the technical implementation of the system, so getting the
+    | models correct is key to smooth development.
+  h2 Making Decisions
+  p
+    | Although some aspects of the solution will have a clearly optimal design, most
+    | aspects of a project will require some level of decision-making.
+  p
+    | As such, it is important to document any&#x2F;all decisions. Not only does it simply
+    | provide evidence of the decisions made by the team, but producing a standardized
+    | document ensures all factors motivating the decision are valid.
+  +caption("Example Decision Template")
+    include caption1.html
+  h2 System Boundary
+  p
+    | (This is not well explained; most of this is my interpretation so it might be
+    | wrong 🤷‍♂️)
+  p A 
+    em system boundary
+    | determines where aspects of the system are sourced by
+    | decomposing the top-level functionality of the solution; basically:
+  ul
+    li What is the purpose of the system?
+    li What the system does not do
+    li What are the external dependencies?
+  p
+    | Think of it as an extension of scope; after defining what the system should do,
+    | the system boundary determines whether each aspect of the system is &#39;in scope&#39;
+    | for creation or resourced from an existing solution.
+  p
+    | System boundary also considers human sources for input&#x2F;output, so these devices
+    | should be considered as well, e.g., PIN number entry pad.
+  p Lastly, 
+    em system environment
+    | refers to anything which affects&#x2F;can be affected by
+    | the system, excluding the system itself.
+  h3 Representation
+  p A 
+    em system context diagram
+    | is the typical way to represent the system boundary,
+    | represented as a simple, &#39;free form&#39; sketch. The relationships between systems
+    | can be ambiguous and considers:
+  ul
+    li Who&#x2F;what is interacting with the target system?
+    li What are they doing and how?
+  +caption("System Context Diagram")
+    img(src="system context diagram.png")
+  h2 Solution Structure
+  p Following the system boundary, the 
+    em solution structure
+    | identifies the main
+    | conceptual elements (subsystems) of the system and their relationships; e.g.,
+    | the core subsystem, connections, data stores, users, external systems, etc.
+  p Think about:
+  ul
+    li How the system will be accessed?
+    li What are the main conceptual elements?
+    li How the elements communicate with each other?
+  h3 Representation
+  p An 
+    em architecture overview diagram
+    | is the typical way to represent solution
+    | structure. It is a (usually) static, informal diagram with supporting text.
+  p
+    | The definition is pretty loose, so they can identify a wide range of subsystems.
+    | However, there are some typical organisational groupings: users help to identify
+    | the roles of people using the system; channels identify how the system can be
+    | used&#x2F;accessed, e.g., Browser, Mobile, Integrated PoS terminal; application
+    | identifies the subsystems; and resources contain the systems used by the
+    | application. Additionally, splitting the groups further or color-coding can add
+    | more detail.
+  p
+    | It does not need to be implementation-specific, i.e., &#39;Database&#39; could be
+    | sufficient, but &#39;AWS Cloud Hosting&#39; is also acceptable.
+  +caption("Architecture Overview Diagram")
+    img(src="architecture overview diagram.png")
+  h2 Refinement
+  p Following the 
+    em solution structure
+    | , the application&#39;s subsystems are iteratively
+    | (and recursively) designed in the refinement process:
+  ul
+    li How can the conceptual elements be subdivided into subsystems?
+    li How do the subsystems look like?
+    li How do the subsystems interact with each other functionally?
+  h3 Types of Subsystems
+  p
+    | The definition of a subsystem is very flexible but it basically has to be
+    | sizeable. For example, look at the subsystems for a remote control:
+  ol
+    li Case
+    li Power supply
+    li Circuit board
+      ol
+        li Chips
+        li Fuses
+        li IR blaster
+        li Integrated circuits
+          ol
+            li Capacitors
+            li Resistors
+            li Bridges
+  p There are however some very common subsystem types.
+  p
+    span(role="heading") Component
+    | A modular unit of functionality, usually
+    | identified the architecture definition.
+  p
+    | Its state and operations are declared using one or more interfaces, so the
+    | definition should not be implementation specific.
+  p They are functionally independent, meaning they do one thing.
+  p Components are defined at a technical level, e.g., 
+    code MessageQueue
+    | , or
+    | application level, e.g.,
+    code OrderProcessor
+    | .
+  p
+    span(role="heading") Class
+    | The usual.
+  p
+    span(role="heading") Entity
+    | A class with a conceptualisable existence,
+    | most often physical like a
+    code Person
+    | , or not, like a
+    code Report
+    | .
+  p
+    span(role="heading") Service
+    | A group of specifications, exposed through
+    | JSON, API, method, etc.
+  p They can be consumed, e.g., 
+    code StockPriceService
+    | ,
+    code UserAuthoriser
+    | , or provided
+    | using components or classes.
+  h3 It&#39;s all about the process
+  p
+    | Generally, this process considers the structure of each subsystem, and how they
+    | interact.
+  p Start with 
+    strong identification
+    | of the subsystems, and assign responsibility,
+    | based on the requirements document. Define the relationships between subsystems
+    | and outline their interactions. Use existing design&#x2F;architecture patterns to
+    | ensure the system interactions are clean and consistent.
+  p Next comes 
+    strong specification
+    | , which tackles implementation detail by creating
+    | the interfaces for each subsystem. This includes their operations, i.e.,
+    | parameters, return values; and their contract behaviour, such as pre- and
+    | post-conditions.
+  h3 Guidelines
+  p
+    span(role="heading") Cohesion
+    | The strength of dependency
+    strong within
+    | the
+    | system. The goal is to create functionally independent but interdependent
+    | subsystems, meaning each subsystem has one responsibility and utilises other
+    | subsystems to delegate other responsibilities required to function.
+  p
+    | ❌ Low cohesion means a subsystem&#39;s functionalities have no meaningful
+    | relationship, only in time, i.e., a process may use them in the same block of
+    | code.
+  p
+    | ✔️ High cohesion means the opposite. For example, the functionalities can use
+    | each other (functional), use the output of one as an input for another
+    | (sequential), or compose a greater procedure to be used in order (procedural).
+  p
+    span(role="heading") Coupling
+    | The strength of dependencies
+    strong between
+    | subsystems. Good coupling allows dependencies to change their implementation
+    | without requiring changes to its dependants.
+  p
+    | ❌ Strong coupling means subsystems refer to the same global data &#39;area&#39; and the
+    | internal logic of the subsystem cannot be isolated from the implementation of
+    | its subsystems.
+  p
+    | ✔️ Loose coupling the logic between subsystems to be isolated, and communication
+    | is handled with fundamental data types like domain entities or technical
+    | classes.
+  p
+    span(role="heading") Isolation
+    | The degree to which the product depends on
+    | technologies. It also considers recognisability of its design and
+    | implementation.
+  p
+    | ❌ Low isolation means subsystems depend on technologies, such as a native app;
+    | and fail to use standard patterns, e.g., directing with a database directly.
+  p
+    | ✔️ High isolation means the opposite, e.g., a web app (any platform) which uses
+    | an ORM to omit database specifics from the application code.
+  p
+    span(role="heading") Layering
+    | Partitioning the concerns&#x2F;responsibilities
+    | of a large subsystem into general categories.
+  p
+    | 🤷‍♂️ Horizontal layering categorises by functional responsibility, e.g.,
+    | presentation, business, and data layer. This is referred to N-tier architecture.
+  p
+    | 🤷‍♂️ Vertical layering categorises by business&#x2F;domain responsibility, e.g., a
+    | query, handler, and view model to
+    code CreateProduct
+    | . One example is onion
+    | architecture.
+  h3 Types of Models
+  p
+    span(role="heading") Static models
+    | A static, logical view of the
+    | application including state and relationships (e.g., entity relationship, class,
+    | component, service model).
+  p
+    span(role="heading") Dynamic models
+    | (or
+    em behavioural models
+    | ) demonstrate
+    | the interactions between the subsystems (e.g., use-case diagram, sequence
+    | diagrams).
+  p
+    | End-user interactions are modelled with
+    a(href="/notes-on-software-design/requirements/#Use-Cases")
+      | use-case
+      | diagrams
+    | .
+  p
+    | Technical interactions within a subsystem show the complex behaviours of the
+    | implementation like method and service calls, modelled with flowcharts or
+    | activity diagrams.
+  p
+    | Modelling between systems is captured with interactions models: when ordered by
+    | time, a sequence diagram; when ordered by organization, collaboration or
+    | communication diagrams.
+  

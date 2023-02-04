@@ -1,0 +1,106 @@
+---
+title: Scheduling
+created: 2021-11-08T00:00:00.000Z
+updated: 2021-11-08T00:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p Time is money, so scheduling a project accurately is important.
+  span#more
+  h2 Aspects
+  p
+    em Effort
+    | is the resource required to complete a task.
+  p
+    em Time
+    | indicates how long a job will take to be completed.
+  p
+    em Task partitioning
+    | allocates workloads concurrently; naturally, they cannot be
+    | dependant on each other, so additional prerequisite jobs may be required.
+  p
+    | Alongside the jobs which actually produce the product, the time&#x2F;effort to manage
+    | the project also needs to be scheduled, known as
+    em overhead
+    | . This includes
+    | project artefacts or reports.
+  +caption("Triple Constraint Model")
+    img(src="triple constraint model.png")
+  p
+    | As a guideline, a triangle of time, cost, and scope can be conceptualised, in
+    | which increasing&#x2F;reducing one aspect will impact the other two.
+  h2 Milestones
+  p
+    em Milestones
+    | are points throughout the project at which progress can be
+    | evaluated and changed; i.e., allocating or removing resources.
+  p
+    | Ideally, they also illustrate progress to the customer. As well as confirming
+    | the project is progressing, concrete artefacts can also be delivered, such as
+    | wireframes, prototypes, or reports.
+  p
+    | Payments are often tied to milestones. From the customer&#39;s perspective, proof of
+    | work is a big incentive to pay up; from a management perspective, releasing an
+    | aspect of the final solution should correspond to payment as well.
+  h2 Representations
+  p
+    | A good representation of a project schedule should be clear and concise. By
+    | making a scheduling easily readable, those unfamiliar with the project can
+    | immediately understand its intended and current progress.
+  p
+    | This is especially important in a business context, as superiors of the PM
+    | may&#x2F;will want quick and easy updates on projects.
+  h3 Gantt
+  p Gantt charts represent scheduling information in horizontal bars.
+  p
+    | Each row is labelled with a job title&#x2F;summary, and additional columns can
+    | provide additional important information, e.g., the job&#39;s team, start date, end
+    | date, etc.
+  p
+    | Subsequent columns indicate to when the work is allocated with a filled box,
+    | creating the horizontal bars.
+  h2 Contingency&#x2F;Slippage
+  p
+    | A project plan needs to account for if&#x2F;when things go wrong; prudent project
+    | managers will proactively schedule (and possibly resource) an additional margin
+    | for slippage.
+  p
+    | Contingency also accounts for unforeseeable delays, such as staff sickness,
+    | redundancies, or hardware failure. As such, a project should
+    strong
+      | always plan for
+      | slippage
+    | , even if it goes unused. This allows the project to continue while
+    | management resolve the issue.
+  p By contrast, 
+    strong too much contingency should be avoided
+    | ; it extends the length
+    | (and subsequent cost) of the project, which can loose tenders. It also
+    | diminishes confidence in a company if their project&#39;s are consistently delivered
+    | early. A typical example of this designers&#x2F;developers&#x2F;testers over-estimating
+    | jobs.
+  p How much contingency depend upon:
+  ul
+    li How tightly the requirement is defined
+    li Potential for scope creep
+      ul
+        li A better the initial analysis helps to avoid this
+    li Confidence of the estimates
+      ul
+        li Sometimes you just gotta guess
+    li Degree of innovation of the project
+      ul
+        li The newer, the slippier
+    li Confidence of resources acquisition
+      ul
+        li Consider when, how often, relationship
+    li Knowledge of customer
+      ul
+        li Might be a changeable dickhead
+        li Might lack technical knowledge
+    li Overall assessment of project risks
+  

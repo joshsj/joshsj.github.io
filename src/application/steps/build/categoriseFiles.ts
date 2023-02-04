@@ -12,7 +12,6 @@ const categoriseFiles =
         const category = getCategory(file, config);
 
         if (!category) {
-          log(`Failed to categorise file: ${file.full}`);
           throw file.full;
         }
 
@@ -24,7 +23,7 @@ const categoriseFiles =
 
     log(`Categorised ${files.length}/${sourceFiles.length} source files`);
     log(
-      "Failures",
+      "Failures:",
       results.filter(isRejected).map((r) => r.reason)
     );
 

@@ -1,0 +1,86 @@
+---
+title: Real Time Communication
+created: 2022-08-21T23:00:00.000Z
+updated: 2022-08-21T23:00:00.000Z
+tags:
+  - C#
+  - .NET
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | The vast majority of the web uses HTTP, which doesn&#39;t lend itself to real-time
+    | updates.
+    // excerpt
+    | Request-response isn&#39;t designed for clients to send data
+    | frequently and the server can&#39;t send a response without a request, so how can it
+    | update the client on its terms?
+    // excerpt
+  h2 A History Lesson
+  p
+    | We haven&#39;t always had a convenient way to update web applications in real-time.
+    | We had some jank, then some less jank, then we got there properly.
+  h3 AJAX Polling
+  p
+    | Using standard asynchronous requests, AJAX polling sends requests at a specific
+    | interval to create a two-way communication channel in which both the client and
+    | server can (optionally) send the latest data.
+  p
+    | As above, HTTP isn&#39;t designed for this, so it&#39;s intensive to process so many
+    | HTTP requests given their relative size and complexity.
+  h3 Long Polling
+  p
+    | Long polling solves the intensity issue by delegating it to the server. When the
+    | client sends a request, the server waits for an update (polling) before
+    | responding to the client&#39;s request. Naturally, client requests can last
+    | indefinitely.
+  +caption("Long Polling example")
+    include:cs caption1.cs
+  h3 Server Sent Events (SSE)
+  p SSEs allow servers to send data to the client without an initial request.
+  p
+    span(role="heading") The Good
+  ul
+    li No repetitious additional requests reduces overhead
+    li Web standards
+    li Easy to polyfill for older browsers
+    li Auto-reconnection
+  p
+    span(role="heading") The Bad
+  ul
+    li Most browsers have ~6 connection max
+      ul
+        li 7 tabs and you&#39;re screwed
+        li Includes Chrome and Firefox
+    li Only server-to-client
+  h2 Web Sockets
+  p
+    | Web sockets are a modern, standardised approach to implement real-time
+    | communication on the web, utilising a single TCP socket for two-way
+    | communication.
+  p
+    | The web socket handshake first sends a request to &#39;upgrade&#39; the connection. If
+    | the server supports web sockets, it responds with a
+    code 101
+    | with a key to be
+    | included in the
+    code Accept
+    | header in subsequent communications:
+  +caption("Web Socket Handshake")
+    include caption2.html
+  h2 SignalR
+  p
+    | SignalR is the big daddy of real-time communication on the web. It supports
+    | polling, SSEs and web sockets, managed internally to automatically select the
+    | best technology available. It also provides an API for Remote Procedure Call
+    | (RPC) and scales to handle increasing traffic.
+  p
+    em Hubs
+    | are a component of SignalR; server-side classes that exchange messages
+    | with the client. This includes a (de)serialisation protocol for parameters, JSON
+    | by default. It also supports &#39;MessagePack&#39;, a binary format more compact than
+    | JSON, and inherently faster to process.
+  

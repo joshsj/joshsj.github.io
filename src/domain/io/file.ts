@@ -36,7 +36,18 @@ const file = (values: Values): File => {
 };
 
 const fileFrom = (path: string): File => {
-  const { dir, name, ext } = _path.parse(path);
+  let { dir, name, ext } = _path.parse(path);
+
+  /*
+    Filenames that only have an extension are parsed differently
+
+    Wrong: ".html" = {name: ".html", ext: ""}
+    Right: ".html" = {name: "", ext: ".ext"}
+  */
+  if (!ext && name.startsWith(".")) {
+    ext = name;
+    name = "";
+  }
 
   return file({
     segments: dir.split(_path.sep),

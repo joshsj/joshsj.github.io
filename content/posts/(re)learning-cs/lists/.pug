@@ -1,0 +1,129 @@
+---
+title: Lists
+created: 2022-08-01T23:00:00.000Z
+updated: 2022-08-02T23:00:00.000Z
+tags:
+  - Computer Science
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p In computing, a 
+    em list
+    | is a data collection which stores
+    // excerpt
+    | a linear,
+    | ordered collection of values of the same data type.
+    // excerpt
+  h2 Array
+  p
+    | An array stores its values in adjacent memory locations (contiguous) and has a
+    | fixed length like
+    code int[]
+    | . For cases where the program doesn&#39;t know the data
+    | size in advance, languages also use dynamic arrays, like
+    code vector&lt;T&gt;
+    | , which
+    | resize on the fly (see
+    a(href="#Adding-amp-Removing") adding &amp; removing
+    | )
+  h3 Indexing
+  p Because array elements are stored together, they can use 
+    em pointer arithmetic
+    | for indexing. For any array of type #[:tex(inline) T], where #[:tex(inline) B] is the size
+    | of #[:tex(inline) T] in bytes and #[:tex(inline) X] is its starting memory address, an item
+    | at index #[:tex(inline) I] is at address #[:tex(inline) X+BI].
+  +caption("Example of pointer arithmetic.", "https://stepik.org/lesson/28868/step/1")
+    img(src="array.png")
+  p This means they have 
+    em random access
+    | &mdash; all elements can be accessed in
+    | constant time (#[:tex(inline) \mathcal{O}(1)]).
+  h3 Adding &amp; Removing
+  p
+    | For fixed-length arrays, pushing and popping new elements is #[:tex(inline) \mathcal{O}(1)]
+    | because it&#39;s just indexing. Removing an element from the middle requires all
+    | subsequent elements to be shifted a position, making it #[:tex(inline) \mathcal{O}(n)]. Removing
+    | the first value is #[:tex(inline) \mathcal{O}(1)] however, as the pointer to the first value can
+    | be incremented to the next element.
+  p For dynamic arrays, appending a new value beyond the current array length is #[:tex(inline) \mathcal{O}(n)]:
+  ol
+    li The array size is doubled
+    li New memory is allocated
+    li Its values are copied across
+    li The new element is stored at the end
+  h3 Searching
+  p
+    | For an unsorted array, finding an element is #[:tex(inline) \mathcal{O}(n)] as it must be iterated
+    | to compare against each value.
+  p
+    | Sorted arrays can utilise random access and the binary search algorithm to
+    | achieve #[:tex(inline) \mathcal{O}(\log n)]. The algorithm compares the middle item in the array
+    | to determine whether the search value is in the lower or upper half; this is
+    | performed iteratively&#x2F;recursively, reducing the array&#39;s length for each run and
+    | thus the time complexity.
+  +caption("Binary Search implementation in Python.")
+    include:py caption1.py
+  h2 Linked List
+  p
+    | A linked list is composed of nodes which store a pointer to the next node in a
+    em singly-linked
+    | list, and an additional pointer to the previous node in a
+    em doubly-linked
+    | list.
+  p A global 
+    em head pointer
+    | is kept to directly access the start of the chain, and a
+    em tail pointer
+    | is also typically kept to access the end.
+  h3 Indexing
+  p
+    | Accessing nodes in a linked list is #[:tex(inline) \mathcal{O}(n)], as the nodes must be traversed
+    | until the index is reached. To lessen the blow, we can store the length of the
+    | list #[:tex(inline) L] to determine if an index #[:tex(inline) I] is closer to the head
+    | (#[:tex(inline) 0]) or tail (#[:tex(inline) L-1]).
+  h3 Adding &amp; Removing
+  p Again, it&#39;s #[:tex(inline) \mathcal{O}(n)].
+  p
+    | To insert a new element #[:tex(inline) E] at index #[:tex(inline) I], the current node at
+    | index #[:tex(inline) I] is updated to point to #[:tex(inline) E] and #[:tex(inline) E] is updated
+    | to point at node #[:tex(inline) I+1]. For a double-linked list, the previous pointer
+    | is also updated.
+  p Removal is the same idea but the current value is forgotten about.
+  h3 Searching
+  p Nothing clever can be done in a linked list, so it&#39;s #[:tex(inline) \mathcal{O}(n)] once more.
+  h2 Circular Array
+  p
+    | Arrays are good for random access; linked lists are good for start&#x2F;end
+    | insertions.
+    em Circular arrays
+    | bridge the two.
+  p
+    | A large backing array stores the array values, and its start &amp; end memory
+    | addresses are managed with a
+    em head
+    | &amp;
+    em tail
+    | pointer.
+  +caption("Circular Array with Head and Tail pointers.", "https://stepik.org/lesson/28869/step/6")
+    img(src="circular array.png")
+  h3 Indexing
+  p
+    | We can still use pointer arithmetic to achieve #[:tex(inline) \mathcal{O}(1)], as long as we
+    | respect the head pointer.
+  p
+    | For any array of type #[:tex(inline) T] with length #[:tex(inline) L], where #[:tex(inline) B] is
+    | the size of #[:tex(inline) T] in bytes, and #[:tex(inline) H] is the head pointer address,
+    | an item at index #[:tex(inline) I] is at address #[:tex(inline) (H+BI)\mod{L}].
+  h3 Adding &amp; Removing
+  p
+    | To add values from the start&#x2F;end of a circular array, the appropriate pointer is
+    | incremented and the value is stored in memory. To remove, the logic is reversed
+    | resulting in #[:tex(inline) \mathcal{O}(1)] as long as the backing array isn&#39;t full.
+  h3 Searching
+  p Same as 
+    a(href="#Searching") arrays
+    | &mdash; #[:tex(inline) \mathcal{O}(\log n)].
+  

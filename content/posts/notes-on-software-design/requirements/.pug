@@ -1,0 +1,355 @@
+---
+title: Defining Requirements
+created: 2021-11-06T00:00:00.000Z
+updated: 2021-11-06T00:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | The requirements for a software application are affected by its purpose, focus,
+    | and stakeholders.
+  span#more
+  p
+    | Starting with purpose, think very generally: are we (helping to) solve a
+    | business, scientific, or technical problem?
+  p From its purpose, the focus of the overall application can be considered:
+  ul
+    li Data
+      ul
+        li Traditional database-oriented systems
+        li Normal for business applications
+    li Engagement
+      ul
+        li Decentralised systems which integrate together
+        li Facilitate and orchestrate the user&#39;s experience
+        li Seamless interaction between each other, e.g., Facebook&#x2F;Instagram cross-over
+        li Social media platforms for example
+    li Insight
+      ul
+        li
+          | Support for customer experience through consumption, collection, and
+          | analysis of data
+        li Gathered from data- and engagement-focused systems
+  p
+    | From its focus, the role required within its creation team can also be
+    | considered:
+  ul
+    li Technical
+      ul
+        li System architect
+        li Designer
+        li Developer
+        li Tester;
+    li Business
+      ul
+        li Business analyst
+        li Domain experts
+    li Management
+      ul
+        li Project managers
+        li Programme managers
+        li Team leaders
+  p
+    | Lastly, its stakeholders can further influence its requirements; an application
+    | with an outsourced maintenance team needs to be securely &amp; safely maintainable
+    | by an outsider by design.
+  h2 Sources
+  p
+    | The requirements for an application may be a solution; in the business world, it
+    | could be an entire aspect of the system as a whole like data analytics. This
+    | also applies at a lower level, e.g., persisting data could be implemented using
+    | a database or configuration files.
+  +caption("Requirement Sources Diagram")
+    img(src="requirement sources.png")
+  h2 Functional Requirements
+  p
+    | These describe what is solved by the application , i.e, the fucking point of the
+    | software. Descriptions can be from a number of perspectives, ideally
+    a(href="/notes-on-software-design/analysis/#Personas") personas
+    | ,
+    | to address five main aspects...
+  p
+    span(role="heading") How
+    | (the business functionality)
+  ul
+    li What the system has to do under-the-hood
+    li Captured directly, e.g., with a use-case model
+    li Captured indirectly, e.g., with a business process model
+  p
+    span(role="heading") Who
+    | (its users)
+  ul
+    li How competent are they?
+    li Do they have accessibility requirements?
+    li (Personas may also define these requirements)
+  p
+    span(role="heading") Where
+    | (its users in a context)
+  ul
+    li How do the they access it? Browsers? Mobile app?
+  p
+    span(role="heading") What
+    | (the data)
+  ul
+    li Does the system store all information itself?
+    li Is any data resourced from elsewhere?
+  p
+    span(role="heading") With
+    | (integrations)
+  ul
+    li What the system has to do with other systems
+    li IT , e.g., a payment gateway for an ATM
+    li Human, e.g., a user-friendly input device for PINs
+  h2 Non-Functional Requirements
+  p
+    | Non-function requirements consider everything else; think expectations of usage,
+    | characteristics.
+  h3 Constraints
+  p Non-functional requirements which cannot be changed.
+  p
+    em Technical constraints
+    | are self-explanatory. For example, a project for a large
+    | organisation replacing a legacy system would need to be compatible with their
+    | deployment platform(s); the new system can demand a new deployment mechanism.
+  ul
+    li Legacy Integration
+    li Development Skills
+    li Existing Infrastructure
+    li IT Standards
+    li Implementation Constraints
+  p
+    em Business constraints
+    | are real-word factors which effect the creation of the
+    | solution. Differences in data protection regulations between countries will
+    | determine how the data must be secured.
+  ul
+    li Time
+    li Resource
+    li Scope
+    li Risk Willingness
+    li Regulatory
+    li Geographic
+    li Organizational
+  h2 Qualities
+  p
+    | Expectations of the application. Quality requirements will be appear similar to
+    | constraints, but they are negotiable by-nature.
+  p
+    | Qualities may be drafted from the usage-context of the application (implicit),
+    | like performance. They may also be provided by the customer&#x2F;stakeholder
+    | (explicit).
+  p
+    em Runtime qualities
+    | (or
+    em observable qualities
+    | ) provide a value to the user,
+    | meaning they can be empirically tested. Is the system
+    strong actually
+    | available
+    | 24&#x2F;7? Are page loads quick?
+  ul
+    li Performance: without this, users won&#39;t be able to use the system
+    li Capacity
+    li Availability: without this, users will stop using the system
+    li Security: without this, &#39;users&#39; will stop the system being used
+    li Systems Management
+    li Usability
+    li Accessibility
+  p
+    em Non-runtime qualities
+    | (or
+    em unobservable qualities
+    | ) cannot be measured easily.
+    | For example, disaster management: it&#39;s quite hard, and fairly immoral, to
+    | simulate an earthquake.
+  ul
+    li Portability
+    li Maintainability
+    li Manageability
+    li Scalability
+    li Data Integrity
+    li Environmental
+    li Efficiency
+    li Reliability
+  h2 Documentation
+  p Firstly, some rules of thumb:
+  ul
+    li Use complete sentences
+    li Identify requirements with a unique reference, e.g, ID
+    li Be clear, concise, and explicit (avoid ambiguity, jargon)
+    li Do not make false promises, e.g., 
+      em &quot;100% reliable&quot;
+    li Define success&#x2F;acceptance criteria
+    li Ensure they are measurable and testable
+    li Reference supporting material, instead of duplicating information
+  h3 Phrasing
+  p
+    | The M.O.S.C.O.W acronym helps with phrasing a requirement. I still don&#39;t know
+    | where the first &#39;O&#39; comes from.
+  ul
+    li
+      strong Shall
+      | ,
+      strong Will
+      | , and
+      strong Must
+      | indicate mandatory requirements
+    li
+      strong Should
+      | and
+      strong Might
+      | indicate optional requirements
+    li
+      strong Could
+      | indicate desirable requirements
+  h3 Guideline
+  p
+    | The S.M.A.R.T mnemonic helps to ensure all information for a requirement is
+    | provided. Lets start with a basic, undeveloped requirement:
+  blockquote
+    p
+      | The system should allow a visually impaired elderly person to upload health
+      | parameters.
+  p
+    span(role="heading") Specific
+    | Unambiguous, consistent and be at the
+    | appropriate level of detail:
+  blockquote
+    p R001: The system should 
+      ins
+        | have a higher font screen in the internet
+        | application to allow a visually impaired elderly person to upload blood
+        | pressure and pulse rate
+      | .
+  p
+    span(role="heading") Measurable
+    | Possible to verify a requirement has been
+    | met so include success criteria:
+  blockquote
+    p R001: The system should have a higher font screen 
+      ins
+        | compliant to
+        | Accessibility Requirements for People with Low Vision
+      | in the internet
+      | application to allow a visually impaired elderly person to upload blood
+      | pressure and pulse rate.
+  p
+    span(role="heading") Attainable
+    | Technically feasible and be within the
+    | art of the possible (also known as achievable):
+  blockquote
+    p
+      | R001: The system should have a higher font screen compliant to Accessibility
+      | Requirements for People with Low Vision in the internet application to allow a
+      | visually impaired elderly person to upload blood pressure and pulse rate
+      ins
+        | ,
+        | at least 90% of the time, and assuming all network services and interfacing
+        | applications are operating as defined in the Project Assumptions &amp;
+        | Dependencies
+      | .
+  p
+    span(role="heading") Realisable
+    | Realistic given all the constraints
+    | defined (also known as repeatable):
+  blockquote
+    p
+      | R001: The system should have a higher font screen compliant to Accessibility
+      | Requirements for People with Low Vision in the internet application to allow a
+      | visually impaired elderly person to upload blood pressure and pulse rate, at
+      | least 90% of the time, and assuming all network services and interfacing
+      | applications are operating as defined in the Project Assumptions &amp;
+      | Dependencies.
+      ins
+        | This requirement will be delivered on time provided all
+        | dependencies on infrastructure and resources are resolved as per the plan
+        | outlined in the Project Assumptions &amp; Dependencies.
+  p
+    span(role="heading") Traceable
+    | Linked from conception through
+    | specification, design, implementation and test:
+  blockquote
+    p R001: The system should have a higher font screen 
+      ins
+        | no smaller than Arial
+        | 28,
+      | compliant to Accessibility Requirements for People with Low Vision
+      | in the internet application to allow a visually impaired elderly person to
+      | upload blood pressure and pulse rate, at least 90% of the time, and assuming
+      | all network services and interfacing applications are operating as defined in
+      | the Project Assumptions &amp; Dependencies. This requirement will be delivered on
+      | time provided all dependencies on infrastructure and resources are resolved as
+      | per the plan outlined in the Project Assumptions &amp; Dependencies.
+  p
+    span(role="heading") Testable
+    | There must be acceptance criteria that
+    | aligns with expected business value and converted to a specific test condition.
+  h2 Representations
+  p
+    | Requirement documentation can be very complex and thus difficult to read. By
+    | decomposing requirements and expressing them in human-readable formats, the
+    | subsequent processes (design, development, testing) can be tackled more easily.
+    | It also reduces the likelihood of lost&#x2F;misinterpreted requirements.
+  h3 Use Cases
+  p A 
+    em use case
+    | describes how a system will be used, either though a list of
+    | actions or event steps by considering:
+  ul
+    li Actor &mdash; Anyone or anything using the system
+    li
+      | Stakeholder &mdash; Someone or something with vested interests in the behaviour of
+      | the system
+    li
+      | Primary Actor &mdash; Stakeholder who initiates an interaction with the system to
+      | achieve a goal
+    li
+      | Preconditions &mdash; What must be true or happen before and after the use case
+      | runs.
+    li Triggers &mdash; The event that causes the use case to be initiated.
+    li Main Scenarios &mdash; Use case in which nothing goes wrong.
+    li
+      | Alternative Paths &mdash; These paths are a variation on the main theme. These
+      | exceptions are what happen when things go wrong at the system level
+  h3 User Stories ❤️
+  p A 
+    em user story
+    | describes a feature from an end-user&#39;s perspective. These
+    | features are very small, only further decomposable into
+    | design&#x2F;development&#x2F;testing tasks.
+  p
+    | They can be grouped together under an Epic, which describes a feature of the
+    | application. Naturally, the feature described in a Epic is large.
+  p
+    span(role="heading") Description
+    | Specification of the user, what they
+    | want, and why. This is commonly formatted like &#39;as [user], I want [a goal], so
+    | that [reasoning]&#39;. It&#39;s highly preferable to use a persona as the user, instead
+    | of (re)defining users across stories or referring to &#39;user&#39; generically.
+  p
+    | For example, a user story for &#39;Sam&#39; (a 21-year-old Instagram user) could look
+    | like &#39;As Sam, I want to login with my Facebook account, so that I don&#39;t need to
+    | remember another password&#39;.
+  p
+    span(role="heading") Acceptance Criteria
+    | A description of the expected
+    | functionality of the feature, covering happy and sad paths. These are also
+    | written from a user&#39;s perspective, containing what has happened, what is about
+    | to happen, and when should happen.
+  p
+    | Using a behavioural format helps to maintain consistency, typically &#39;Given the
+    | user..., when..., then...&#39;
+  p
+    | For example, a happy path could look like &#39;Given that Sam clicks the &#39;Sign in&#39;
+    | button, when he first opens the application, then he has the option to use
+    | Facebook to log in&#39;
+  p
+    span(role="heading") Designs
+    | Often they are exclusively for UI (sketches,
+    | wireframes, visual prototypes), but new features may also specify the technical
+    | approach (e.g., an ERD).
+  

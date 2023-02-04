@@ -1,0 +1,118 @@
+---
+title: Planning Processes
+created: 2021-10-18T23:00:00.000Z
+updated: 2021-10-18T23:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  // excerpt
+  p
+    | Starting an IT project needs a good understanding of the requirements. As
+    | specification documents are produced, they wil become increasingly
+    | specific.
+    // excerpt
+    | For projects with specifications which lack detail:
+  ul
+    li
+      p Reject the bid
+      ul
+        li Not worth the time&#x2F;money&#x2F;effort
+    li
+      p Conduct a thorough risk analysis
+      ul
+        li Assumptions must be documented and agreed with the customer
+        li Can be done by the project manager
+        li Better option if done by risk manager
+  h2 Breaking Down Requirements
+  p
+    em Reductionism
+    | is the practice of analysing and describing a complex phenomenon
+    | in terms of its simple or fundamental constituents, especially when this is said
+    | to provide a sufficient explanation.
+  p
+    | In project management terms, it&#39;s the process of decomposing a project into
+    | smaller activities. But when do we stop?
+  ul
+    li When activity doesn&#39;t readily decompose (you&#39;re there!)
+    li When activities are small enough to estimate with reasonable accuracy
+      ul
+        li Each activity should be 0.5--2 days duration
+        li Ensures the creation process does not outweigh the management workload
+  p A 
+    em Work Breakdown Structure (WBS)
+    | is a hierarchical outline of the tasks
+    | required to complete a project.
+  +caption("Work Breakdown Structure diagram")
+    img(src="wbs.png")
+  p Similarly, a 
+    em Product Breakdown Structure (PBS)
+    | hierarchical structure of
+    | things that the project will make or outcomes that it will deliver.
+  +caption("Product Breakdown Structure diagram")
+    img(src="pbs.png")
+  p
+    | By tackling the end products over the project&#39;s activities, a PBS can be much
+    | simpler from a project management perspective:
+  ul
+    li Easier to determine products over technical activities
+      ul
+        li PM can focus is on what is to be achieved
+        li Individuals responsive for creation can tackle this
+        li Estimates can be delegated to them
+    li Once the products are identified, easier to determine
+      ul
+        li Quality standards
+        li Who will review products
+        li Organisational structure
+  p A 
+    em Product Flow Diagrams (PFD)
+    | provides the inputs for the planning process,
+    | such as a set of activities which we will need to resource or an understanding
+    | of dependencies between activities.
+  +caption("Product Flow Diagram")
+    img(src="pfd.png")
+  h2 Product Descriptions &amp; Work Packages
+  p
+    | Product descriptions are the bottom level of PBS; they clearly specify the
+    | quality and completion criteria for the product by addressing four areas:
+  ul
+    li Purpose
+      ul
+        li Why is the product required?
+    li Composition
+      ul
+        li What makes up the product?
+    li Derivation
+      ul
+        li Which, if any, previous products is it based upon?
+        li Where will information needed to develop it come from?
+    li Quality
+      ul
+        li What criteria are required to complete the product?
+  p
+    | By adding an assignee, due date, and estimated effort, a product description can
+    | be moved into creation; this is a work package.
+  h2 Tracking Progress
+  p
+    | Using a Linear Responsibility Chart, individuals can be associated to an
+    | activity in a capacity:
+  ul
+    li
+      strong R
+      | esponsible - for actually creating the work package
+    li
+      strong A
+      | ccountable - manages its creation
+    li
+      strong C
+      | onsultable - provides information
+    li
+      strong I
+      | nformed - must be kept informed about progress
+  +caption("Linear Responsibility Chart")
+    include caption1.html
+  

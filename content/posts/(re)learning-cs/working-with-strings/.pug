@@ -1,0 +1,29 @@
+---
+title: Working with Strings
+created: 2022-09-11T23:00:00.000Z
+updated: 2022-09-11T23:00:00.000Z
+tags:
+  - Computer Science
+draft: true
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p How long in a piece of string?
+  span#more
+  h2 Multiway Trie
+  p Also known as a 
+    em prefix tree
+    | , a
+    em multiway trie
+    | is a tree structure where paths
+    | compose words. Edges are labelled with a letter and the node value indicates
+    | where the path can terminate; i.e., have we made a word yet?
+  +caption("A Multiway Trie containing can, car, and cry.", "https://stepik.org/lesson/30819/step/3")
+    img(src="multiway trie.png")
+  p
+    | We can iterate an ascending- or descending-order tree with a pre-order or
+    | post-order traversal respectively.
+  

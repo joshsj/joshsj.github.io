@@ -1,0 +1,200 @@
+---
+title: Abstract Data Types
+created: 2022-08-03T23:00:00.000Z
+updated: 2022-08-03T23:00:00.000Z
+tags:
+  - Computer Science
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p
+    | Producing software with a real-world purpose means translating a high-level
+    | problem into something computational. When considering its data, we don&#39;t
+    | immediately jump to
+    code CREATE TABLE
+    | ; we start by considering what data is needed,
+    | how it relates, and how we can represent it.
+  p For example, we can represent a Person with a 
+    code Map
+    | , with keys to identify
+    | something about them and corresponding values. More technically, we can model a
+    code List
+    | data type with the functions
+    code insert
+    | ,
+    code find
+    | ,
+    code reduce
+    | with specifying
+    | it as an array or linked list.
+  p An 
+    em Abstract Data Type (ADT)
+    | is
+    // excerpt
+    | a model for a data type defined
+    | by its behaviour from the perspective of a consumer, not its
+    | implementation.
+    // excerpt
+  p Basically, it&#39;s what it does, not how it does it.
+  h2 Double-Ended Queue
+  p
+    | Think of browser history (😬). Values are added and removed from the front as
+    | navigation moves forwards and backwards; to limit its size, the oldest values
+    | are removed from the back.
+  p The 
+    em double-ended queue
+    | ADT (or dequeue, or deque, pronounced &#39;deck&#39;) is
+    | generally defined with:
+  ul
+    li
+      code addFront(x)
+    li
+      code addBack(x)
+    li
+      code peekFront()
+    li
+      code peekBack()
+    li
+      code removeFront()
+    li
+      code removeBack()
+    li
+      code size()
+  p Both a 
+    a(href="/(re)learning-cs/lists/#Circular-Array")
+      | circular
+      | array
+    | or a
+    a(href="/(re)learning-cs/lists/#Linked-List") linked list
+    | can
+    | implement a deque. Neither is perfect, as they are both #[:tex(inline) \mathcal{O}(n)] when
+    | inserting and indexing&#x2F;searching respectively.
+  p The following structures can also use a deque as a backing structure.
+  h2 Queue
+  p
+    | Think of a queue. Values are only added to the back and are only removed from
+    | the front, making it
+    em first in, first out (FIFO)
+    | .
+  p A 
+    em queue
+    | is a generally defined with:
+  table
+    thead
+      tr
+        th Function
+        th Using Deque
+    tbody
+      tr
+        td
+          code enqueue(x)
+        td
+          code addBack(x)
+      tr
+        td
+          code peek()
+        td
+          code peekFront()
+      tr
+        td
+          code dequeue()
+        td
+          code removeFront()
+  h2 Stack
+  p Think a pile of plates ready for the washing up. Values are only added 
+    strong and
+    | removed to the front, making it
+    em last in, first out (LIFO)
+    | .
+  p A 
+    em stack
+    | is generally defined with:
+  table
+    thead
+      tr
+        th Function
+        th Using Deque
+    tbody
+      tr
+        td
+          code push(x)
+        td
+          code addFront(x)
+      tr
+        td
+          code peek()
+        td
+          code peekFront()
+      tr
+        td
+          code pop()
+        td
+          code removeFront()
+  h2 Priority Queue
+  p
+    | Think of the queue in A&amp;E. It&#39;s still FIFO but the elements are reordered by
+    | their priority, making it
+    em highest priority in, first out (HPIFO)
+    | .
+  p A 
+    em priority queue
+    | is generally defined with:
+  ul
+    li
+      code insert(x)
+    li
+      code peek()
+    li
+      code pop()
+  p
+    | Implementing a priority queue with a list structure realises an issue: a sorted
+    | linked list would result in #[:tex(inline) \mathcal{O}(1)] to peek and remove, but #[:tex(inline) \mathcal{O}(n)] to
+    | insert into a sorted position. An unsorted linked list swaps the time
+    | complexities and array implementations suffer the same pain.
+  p
+    | Instead we can use a
+    a(href="/(re)learning-cs/trees/#Heap") heap
+    | , giving us #[:tex(inline) \mathcal{O}(1)] to peek and #[:tex(inline) \mathcal{O}(\log n)] to insert&#x2F;remove.
+  h2 Map
+  p
+    | There&#39;s lots of associated data: a students name and their grade, a customer&#39;s
+    | account number and their balance, etc.
+  p A 
+    em map
+    | uses a
+    em key
+    | to identify data and a
+    em value
+    | to store the data. They are
+    | generally defined with
+  ul
+    li
+      code put(key, value)
+    li
+      code get(key)
+    li
+      code remove(key)
+    li
+      code size()
+    li
+      code has(key)
+  p
+    | When inserting a duplicate key, the value is generally overwritten but C++
+    | deviates from this with its
+    code unordered_map
+    | .
+  p
+    | We can implement maps with many data structures but random lookup is often
+    | prioritised by using
+    a(href="/(re)learning-cs/hashing/#Hash-Map") hash maps
+    | . That
+    | said, a
+    a(href="/(re)learning-cs/trees/#Binary-Search-Tree")
+      | binary search
+      | tree
+    | could keep the keys ordered while sacrificed that sweet sweet constant
+    | lookup time complexity of a hash map.
+  

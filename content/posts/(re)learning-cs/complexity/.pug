@@ -1,0 +1,102 @@
+---
+title: Complexity
+created: 2022-07-29T23:00:00.000Z
+updated: 2022-07-31T23:00:00.000Z
+tags:
+  - Computer Science
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p Looking at the theoretical complexity of computational problems and solutions.
+  span#more
+  h2 Time Complexity
+  p
+    | The most obvious approach to determine the performance of a program is with a
+    | timer, returning human-understandable units like nanoseconds or minutes or
+    | (hopefully not) days.
+  p
+    | However, this doesn&#39;t represent the true efficiency of an algorithm, instead
+    | showing the performance of its implementation. As this is affected by the test
+    | machine, programming language, code quality, etc., we use something better.
+  p
+    em Time complexity
+    | expresses the execution time of an algorithm as a function of
+    | its input size by measuring its number of operations. This provides a purely
+    | conceptual understanding of an algorithm&#39;s speed at any scale and a gauge for
+    | the quality&#x2F;accuracy of an implementation.
+  h3 Notation
+  p The three main notations to describe time complexity are:
+  ul
+    li Big-O (&#39;big oh&#39;) &mdash; the upper bound of operations performed
+    li Big-Ω (&#39;big omega&#39;) &mdash; the lower bound
+    li Big-ϴ (&#39;big theta&#39;) &mdash; both lower and upper
+  p
+    | Generally, we only care about Big-O &#39;cause the fastest case of algorithm can be
+    | taken for granted. When measuring Big-O, some rules apply:
+  ol
+    li
+      p Constant factors of #[:tex(inline) n] are removed so #[:tex(inline) 3n+2] becomes #[:tex(inline) n].
+      p
+        | Mathematical reasons apply which I can&#39;t quite follow but practically,
+        | constant time doesn&#39;t matter as #[:tex(inline) n\to\infty].
+    li
+      p
+        | Only the largest term of #[:tex(inline) n] is considered, so #[:tex(inline) n^2+3n+1]
+        | becomes #[:tex(inline) n^2].
+      p
+        | Again, as #[:tex(inline) n\to\infty], all but the greatest exponent becomes
+        | insignificant.
+  +caption("Graph of time complexities against input size.")
+    img(src="graph.png")
+  h2 (Classes of) Computational Complexity
+  p
+    a(href="#Time-Complexity") Time complexity
+    | looks at the complexity of a solution, but
+    em computational complexity
+    | assesses the practical difficulty of solving a
+    | computational problem.
+  p There are four common classes of computational complexity:
+  ul
+    li
+      p
+        strong P
+        | olynomial &mdash; solvable in polynomial time
+      ul
+        li An algorithm exists which answers the problem
+      // spellchecker: disable-next-line
+    li
+      p
+        strong N
+        | ondeterministic
+        strong P
+        | olynomial &mdash; verifiable in polynomial time
+      ul
+        li An algorithm exists which can verify that an answer to the problem is valid
+        li
+          | This means #[:tex(inline) \text{P} \subseteq \text{NP}], as solving the problem
+          | can verify an answer implicitly
+        li
+          | There may be an algorithm to solve the problem but with a worse time
+          | complexity
+    li
+      p
+        strong NP-Hard
+        | &mdash; the hardest problems in NP, and harder
+    li
+      p
+        strong NP-Complete
+        | &mdash; the hardest problems in NP
+      ul
+        li Or, the problems in NP-Hard which can be verified in polynomial time
+        li #[:tex(inline) \text{NP} \cap \text{NP-Hard}]
+  p
+    | When tackling a computational problem in the real world, it&#39;s ideal for the
+    | solution to exist within #[:tex(inline) P], or to be simplifiable into #[:tex(inline) P]. If
+    | not, two options are available:
+  ul
+    li For small input sizes, a non-polynomial-time solution may work
+    li For larger inputs, heuristics may allow for a &#39;good enough&#39; solution
+  

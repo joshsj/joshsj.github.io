@@ -7,7 +7,9 @@ type RenderHelpers = { urlFor: UrlFor };
 
 type SiteContext = Something[];
 
-type RenderContextData = { [K in SomethingCategory as `${K}s`]: SomethingFor<K>[] };
+type RenderContextData = {
+  [K in Exclude<SomethingCategory, "postAsset"> as `${K}s`]: SomethingFor<K>[];
+};
 
 type RenderContext = { current: Something } & RenderHelpers & RenderContextData;
 

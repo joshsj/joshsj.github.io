@@ -1,0 +1,89 @@
+---
+title: Formatting Reference
+created: 1970-01-01T00:00:01.970Z
+updated: 1970-01-01T00:00:01.970Z
+tags:
+  - Fluff
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p A reference to check my CSS 😬
+  span#more
+  h2 Standard Markdown
+  p
+    | Mr and Mrs Dursley, of number four, Privet Drive, were proud to say that they
+    | were perfectly normal, thank you very much. They were the last people you&#39;d
+    | expect to be involved in anything strange or mysterious, because they just
+    | didn&#39;t hold with such nonsense.
+  p
+    strong Bold
+  p
+    em Italics
+  blockquote
+    p Some quote
+  ul
+    li Why
+    li must
+      ul
+        li a
+        li great
+        li author
+  ol
+    li be
+    li so
+      ul
+        li nasty
+  table
+    thead
+      tr
+        th Column
+        th Column
+    tbody
+      tr
+        td Cell
+        td Cell
+  p
+    code Inline code
+  pre
+    code.python
+      | print(&quot;hello world&quot;)
+  p
+    button Click me
+  h2 My HTML
+  h3 Inline Header
+  p
+    span(role="heading", aria-level="3") Read
+    | this
+  h2 Tags
+  h3
+    code my_email
+  | #[+myEmail]
+  h3
+    code math
+  | #[:tex(inline) 1+2=3]
+  h3
+    code dtex
+  | :tex
+  | 1+2=3
+  h3
+    code bigo
+  | #[:tex(inline) \mathcal{O}(\log{N})]
+  h3
+    code caption
+  +caption("caption", "#caption")
+    include caption1.html
+  h3
+    code caption_img
+  +caption("Code 😎", "https://commons.wikimedia.org/wiki/File:Programming_code.jpg")
+    img(src="code.jpg")
+  h3
+    code quote
+  +quote("Royce")
+  | Waterfall is probably shit
+  h3
+    code spotify
+  +spotify("track/1YrnDTqvcnUKxAIeXyaEmU?si=2cc2b7e8e7834441")
+  

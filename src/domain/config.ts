@@ -1,6 +1,6 @@
 import { SomethingCategory } from "./something";
 
-type ConfigKey = SomethingCategory | "source" | "build" | "root";
+type ConfigKey = Exclude<SomethingCategory, "postAsset"> | "source" | "build" | "root";
 
 type Config = { [K in `${ConfigKey}Dir`]: string };
 

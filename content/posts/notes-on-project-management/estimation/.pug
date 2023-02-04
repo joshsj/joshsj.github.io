@@ -1,0 +1,181 @@
+---
+title: Estimation
+created: 2021-12-11T00:00:00.000Z
+updated: 2021-12-11T00:00:00.000Z
+tags: []
+---
+
+extends /layouts/default.pug
+
+block content
+
+  // excerpt
+  p
+    | Estimation is essential to ensure a project is realistically funded and
+    | resourced, meaning they can be delivered on-time, to-budget, and
+    | to-set-quality.
+    // excerpt
+    | In addition, clients want&#x2F;need to know this to
+    | sign off a project.
+  p
+    | Traditional estimations methods align with
+    a(href="/notes-on-project-management/delivery/")
+      | traditional
+      | delivery approaches
+    | , meaning the project must already be decomposed. The
+    | project is analysed bottom-up; each element is estimated from which a
+  p
+    | Agile estimation approaches top-down. The main features of the application are
+    | estimated as a total for its subtasks, encouraging teams to produce gross total
+    | estimations for time and&#x2F;or effort.
+  h2 Rules of Thumb
+  ul
+    li
+      | Each developer or maintainer can deal with approx. 2000 lines of code (LOC) in
+      | a given &#39;task&#39;
+    li This is one &#39;headful&#39; of code (on average)
+    li
+      | Productivity averages around 5k LOC per year, but it depends heavily on the
+      | type of project
+    li
+      | Productivity also varies from person to person, i.e., mutual ability or an
+      | individual&#39;s fluctuations, so these are average figures
+  h2 Generic Approaches
+  h3 Parkinson Principle
+  blockquote
+    p Work expands to fit the available space
+  p
+    | First observed in management studies, it is sometimes referred to as the
+    | &#39;capacity effect&#39;. The principle relies on the idea that the effort applied to a
+    | task is directly affected to the time constraint.
+  p
+    | This can be exaggerated to the idea that quality of work is correlated to the
+    | time constraint &mdash; it is a generic approach after all.
+  +caption("Graph showing the Parkinson Principle")
+    img(src="parkinson principle.png")
+  p Alone, it cannot be used to estimate work, but it does guide estimations:
+  ul
+    li Estimations should favour less time, to be extended if necessary
+    li Time is not a trustworthy metric in estimations, effort is also important
+    li
+      strong Work evaluation should be based on objectives over time
+  h3 Price to Win
+  p
+    em Price to Win (PTW)
+    | is the process of balancing the company and customer
+    | benefits of a contract using estimates.
+  p
+    | Underestimating a project appeals to client, as the cost and&#x2F;or timescales are
+    | reduced. However, the money has to come from somewhere.
+  p
+    | Taking the hit internally keeps a good rapport with the customer, as a cheaper
+    | and&#x2F;or quicker project makes the company look good. The loss isn&#39;t good
+    | short-term, but future contracts can reclaim the losses (and more).
+  p
+    | Alternatively, the missing costs can be layered onto the client as the project
+    | progresses: this sucks, don&#39;t do it.
+  h3 Analogy
+  p The 
+    em Analogy
+    | method determines estimations from a similar project. Naturally,
+    | the data from the other project must be trusted, and therefore needs to be
+    | accurate. It&#39;s only gives ballpark, similar to
+    a(href="#Top-down") top-down
+    | .
+  p
+    | A simple example is scaling construction work: one house on a new estate is
+    | gonna be real similar to another.
+  p ✔️ Traditional 
+    br
+    | ❔ Agile: the flexibility can easily allow the project to
+    | divert from the comparative project
+  h3 Expert Judgement
+  p Exactly as it sounds, 
+    em Expert Judgement
+    | bases estimations upon specific
+    | criteria and or expertise acquired a specific knowledge area, product area,
+    | language, or discipline. It can be provided by a any number of team
+    | members&#x2F;leaders, but expert knowledge is generally found outside of the
+    | organisation, adding a marginal cost.
+  p
+    | Experts can be difficult to find outright, difficult to find with the require
+    | amount of knowledge, and can be expensive.
+  p ✔️ Traditional 
+    br
+    | ✔️ Agile
+  h2 Work-based Approaches
+  h3 Top-down
+  p
+    | As described, top-down estimation divides a set budget among
+    | features&#x2F;stages&#x2F;tasks of the project to establish that costs are covered and
+    | profit is possible.
+  p
+    | It is ultimately based on guesswork, so it&#39;s very inaccurate, but it is simple,
+    | quick, and easy so it lends itself to smaller projects&#x2F;business with few
+    | resources.
+  p ❔ Traditional: doesn&#39;t account for changes in the project 
+    br
+    | ✔️ Agile: quick,
+    | easy and mutable
+  h3 Bottom-up
+  p
+    | Similar to top-down but a more thorough approach, using the project tasks as a
+    | starting point. Each is priced individually, the sum of which provide a total
+    | estimate.
+  p
+    | This is the most accurate estimation process, as it is the most comprehensive,
+    | meaning tracking progress and expenses is forever easier.
+  p
+    | However, it&#39;s inherently time and resource intensive, as distant tasks like
+    | integration, deployment, and maintenance need to be fully understood in advance.
+    | The level of detail can easily lead to over-estimations.
+  p ✔️ Traditional 
+    br
+    | ❔ Agile: doesn&#39;t fit with iterative delivery
+  h2 Algorithmic Approaches
+  p First concepts, then models...
+  h3 Complexity of Functions
+  p
+    strong Note:
+    | this section is unfinished.
+  p Assessing the complexity of a function uses several factors:
+  ul
+    li
+      p Inputs &mdash; forms, dialogues, messages, JSON data, configuration files, etc.
+    li
+      p Outputs &mdash; web pages, reports, graphs, messages, JSON data, etc.
+    li
+      p Inquiries &mdash; a combination of input and output
+      ul
+        li
+          | Logically these should only be considered when both are isolated to a given
+          | function
+    li
+      p Internal&#x2F;external files &mdash; tables, views, or stored files
+  h3 Basic Cost Model
+  p The 
+    em Basic Cost Model
+    | uses the formula #[:tex(inline) E = A\cdot{}M\cdot{}X\cdot{}S^B] where:
+  ul
+    li #[:tex(inline) A] applies an organisation-wide constant factor to cost models
+    li
+      | #[:tex(inline) S] is software 'size'
+      ul
+        li
+          p LOC is the most common metric; varies wildly by languages &amp; patterns
+        li
+          p Difficult to assess in early phases with external integrations:
+          ul
+            li Existing internal solution
+            li Modified internal&#x2F;open source solution
+            li Bought from a 3rd party
+    li
+      | #[:tex(inline) B] does something, usually between `1` to `1.5`. I'm guessing it
+      p
+        | accounts for complexity, as the complexity of a solution will grow
+        | polynomially relative to size, and it&#39;s applied as a power of #[:tex(inline) S].
+    li
+      | #[:tex(inline) M] is a linear adjustment multiplier, which could also account for
+      p complexity
+    li #[:tex(inline) X] is vector of cost factors
+  
