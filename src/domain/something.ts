@@ -18,7 +18,7 @@ type PostData = {
   title: string;
   created: Date;
   updated?: Date;
-  tags?: [];
+  tags?: string[];
 };
 
 type Post = Make<"post", PostData>;
