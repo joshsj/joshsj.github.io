@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const yaml = require("yaml");
+const xhtml2Pug = require("xhtml2pug");
 
 const ExcerptRegex = (() => {
   const marker = "<!--\\s*excerpt\\s*-->";
@@ -31,26 +32,84 @@ hexo.extend.filter.register("after_post_render", function (data) {
   )}</p>`;
 });
 
-hexo.extend.filter.register("after_post_render", function (data) {
-  const { title, date, updated, tags, path: p } = data;
+let logged = false;
 
-  if (p.endsWith(".html")) {
-    return;
+const htmlPaths = [];
+
+hexo.extend.filter.register("after_post_render", function (data) {
+  if (!logged) {
+    logged = true;
   }
 
-  const dir = path.join("public", p);
+  const {
+    title,
+    date,
+    updated,
+    tags,
+    published,
+    content: html,
+    path: p,
+  } = data;
 
-  fs.mkdirSync(dir, { recursive: true });
+  // Ignore pages
+  if (p.endsWith(".html")) {
+    return data;
+  }
 
-  fs.writeFileSync(
-    path.join(dir, "preamble.yaml"),
-    yaml.stringify({
+  const frontmatter = yaml
+    .stringify({
       title,
       created: date,
       updated,
       tags: tags.map((t) => t.name),
+      draft: published ? undefined : true,
     })
-  );
+    .slice(0, -1); // Trim trailing newline
+
+  const pug = xhtml2Pug
+    .convert(html, {
+      bodyLess: true,
+      attrComma: true,
+      encode: false,
+      classesAtEnd: true,
+    })
+    .split("\n")
+    .map((s) => {
+      s = s
+        .replace(/\| \+/, "+") // Fix pug mixins converted as whitespace
+        .replace("---", "&mdash;"); // Fix m dashes
+
+      // Add intent for layout block
+      return "  " + s;
+    })
+    .join("\n");
+
+  const content = [
+    "---",
+    frontmatter,
+    "---",
+    "",
+    "extends /layouts/default.pug",
+    "",
+    "block content",
+    "",
+    pug,
+  ].join("\n");
+
+  const dir = path.join("public", p);
+
+  // Ensure directory
+  fs.mkdirSync(dir, { recursive: true });
+
+  // Write build file
+  fs.writeFileSync(path.join(dir, ".pug"), content);
+
+  // Save for deletion
+  htmlPaths.push(path.join(dir, "index.html"));
 
   return data;
+});
+
+hexo.extend.filter.register("before_exit", function () {
+  htmlPaths.forEach((p) => fs.rmSync(p));
 });

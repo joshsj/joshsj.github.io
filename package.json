@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "hexo server --draft --debug",
-    "build": "hexo clean && hexo generate"
+    "build": "hexo clean && hexo generate --draft --debug"
   },
   "hexo": {
     "version": "6.1.0"
@@ -15,6 +15,7 @@
     "hexo-renderer-marked": "^5.0.0",
     "hexo-server": "^3.0.0",
     "katex": "^0.16.0",
+    "xhtml2pug": "^4.0.2",
     "yaml": "^2.2.1"
   }
 }
