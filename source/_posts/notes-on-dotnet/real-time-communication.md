@@ -34,7 +34,7 @@ indefinitely.
 
 {% caption "Long Polling example" %}
 
-```c#
+```csharp
 OrderUpdate? result;
 
 while (true)

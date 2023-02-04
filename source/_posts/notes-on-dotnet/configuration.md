@@ -14,7 +14,7 @@ Simple access to keys and values uses get methods:
 
 {% caption "Basic configuration access" %}
 
-```c#
+```csharp
 IConfiguration config = null;
 
 // Value access
@@ -67,7 +67,7 @@ and robust, using models matching the structure of configuration data.
 
 {% caption "Basic Options registration" %}
 
-```c#
+```csharp
 public class AuthOptions
 {
   public TimeSpan CookieLifeTime { get; set; }

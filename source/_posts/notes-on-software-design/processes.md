@@ -150,8 +150,11 @@ more detail.
 It does not need to be implementation-specific, i.e., 'Database' could be
 sufficient, but 'AWS Cloud Hosting' is also acceptable.
 
-{% caption_img "architecture overview diagram.png" "Architecture Overview
-Diagram" %}
+{%
+    caption_img
+    "architecture overview diagram.png"
+    "Architecture Overview Diagram"
+%}
 
 ## Refinement
 

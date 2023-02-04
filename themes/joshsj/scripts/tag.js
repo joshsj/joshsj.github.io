@@ -35,7 +35,7 @@ const counters = {};
 
 const languageExtensions = {
   typescript: "ts",
-  "c#": "cs",
+  csharp: "cs",
   python: "py",
 };
 

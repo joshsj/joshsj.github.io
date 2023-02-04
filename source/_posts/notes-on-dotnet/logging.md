@@ -15,7 +15,7 @@ The generic parameter specifies a _category_ (the source of the log). Its
 arbitrary but the enclosing class is the convention. The log _level_ (how bad it
 is) is specified with the `LogLevel` enum or dedicated methods.
 
-```c#
+```csharp
 public class SomeService
 {
   public SomeService(ILogger<IndexModel> logger) {...}
@@ -47,7 +47,7 @@ Proving an _Event ID_ with the log message allows
 
 For console logging, we can also use a scope.
 
-```c#
+```csharp
 using (_logger.BeginScope("using block message")) {...}
 ```
 
@@ -64,7 +64,7 @@ eliminating boxing to reduce computational overhead.
 
 {% caption "`LoggerMessage` examples." %}
 
-```c#
+```csharp
 // No parameters
 LoggerMessage.Define(
   LogLevel.Information,
