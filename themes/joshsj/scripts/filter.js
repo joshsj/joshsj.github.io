@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
 const yaml = require("yaml");
 const xhtml2Pug = require("xhtml2pug");
@@ -76,10 +76,12 @@ hexo.extend.filter.register("after_post_render", function (data) {
     .split("\n")
     .map((s) => {
       s = s
-        .replace(/\| \+/, "+") // Fix pug mixins converted as whitespace
+        .replace("| +", "+") // Fix mixins converted to whitespace
+        .replace("| capinclude", "  include")
+        .replace("| capimg", "  img")
         .replace("---", "&mdash;"); // Fix m dashes
 
-      // Add intent for layout block
+      // Add indent for layout block
       return "  " + s;
     })
     .join("\n");

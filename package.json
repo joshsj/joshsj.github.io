@@ -10,11 +10,14 @@
     "version": "6.1.0"
   },
   "dependencies": {
+    "fs-extra": "^11.1.0",
     "hexo": "^6.0.0",
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-marked": "^5.0.0",
     "hexo-server": "^3.0.0",
+    "i": "^0.3.7",
     "katex": "^0.16.0",
+    "npm": "^9.4.1",
     "xhtml2pug": "^4.0.2",
     "yaml": "^2.2.1"
   }
