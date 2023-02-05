@@ -1,19 +1,22 @@
 import { Directory, directory as _directory } from "./directory";
 import _path from "path";
 
+type Encoding = Extract<BufferEncoding, "utf8" | "binary">;
+
 type File = Omit<Directory, "with"> &
   Readonly<{
     name: string;
     extension: string;
-    content: string;
     base: string;
+    content: string;
+    encoding?: Encoding;
     with(patch?: Partial<File>): File;
   }>;
 
-type Values = Pick<File, "segments" | "sep" | "name" | "extension" | "content">;
+type Values = Pick<File, "segments" | "sep" | "name" | "extension" | "content" | "encoding">;
 
 const file = (values: Values): File => {
-  const { segments, sep } = values;
+  const { segments, sep, encoding } = values;
   const { directory, full } = _directory(values);
 
   const base = `${values.name}${values.extension}`;
@@ -27,6 +30,7 @@ const file = (values: Values): File => {
     extension: values.extension,
     content: values.content,
     full: [full, base].join(sep),
+    encoding,
     with(patch) {
       return file({ ...f, ...(patch ?? {}) });
     },
@@ -58,4 +62,4 @@ const fileFrom = (path: string): File => {
   });
 };
 
-export { File, file, fileFrom };
+export { File, file, fileFrom, Encoding };

@@ -1,21 +1,29 @@
 import { Log } from "@application/logging";
 import { Config } from "@domain";
-import { fileFrom, IO } from "@domain/io";
+import { Encoding, File, fileFrom, IO } from "@domain/io";
 import { fromGenerator, isFulfilled, isRejected } from "@lib/utils";
 import { Step } from "@lib/pipeline";
 import { ReadSourceResult, ReadSourceState } from "@application/steps";
+import binaryExtensions from "binaryextensions";
+
+const getEncoding = (file: File): Encoding => {
+  const ext = file.extension.slice(1);
+
+  return binaryExtensions.includes(ext) ? "binary" : "utf8";
+};
 
 const readSource =
   (io: IO, log: Log, config: Config): Step<ReadSourceState, ReadSourceResult> =>
   async ({ sourcePaths }) => {
     const readFile = async (path: string) => {
       const file = fileFrom(path);
+      const encoding = getEncoding(file);
 
       log(`Reading file ${file.full}`);
 
-      const contents = await io.read(file, config.sourceDir);
+      const contents = await io.read(file, encoding, config.sourceDir);
 
-      return file.with({ content: contents });
+      return file.with({ content: contents, encoding });
     };
 
     sourcePaths = sourcePaths && sourcePaths.length ? sourcePaths : await fromGenerator(io.walk(config.sourceDir));

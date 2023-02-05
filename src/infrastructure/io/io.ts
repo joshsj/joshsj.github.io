@@ -1,6 +1,6 @@
 import { readdir, mkdir, writeFile, readFile } from "fs/promises";
 import path from "path";
-import { File, IO } from "@domain/io";
+import { IO } from "@domain/io";
 
 async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
   const entries = await readdir(root, { withFileTypes: true });
@@ -17,17 +17,17 @@ async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
 }
 
 const io: IO = {
-  async write(file: File, root = "") {
+  async write(file, root = "") {
     const dir = path.join(root, file.directory);
 
     // Ensure destination folder exists
     await mkdir(dir, { recursive: true });
 
-    await writeFile(path.join(dir, file.base), file.content ?? "");
+    await writeFile(path.join(dir, file.base), file.content ?? "", { encoding: file.encoding });
   },
 
-  async read(file: File, root = "") {
-    return await readFile(path.join(root, file.full), "utf-8");
+  async read(file, encoding, root = "") {
+    return await readFile(path.join(root, file.full), encoding);
   },
 
   async *walk(root: string) {
