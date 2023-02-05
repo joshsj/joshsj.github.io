@@ -1,1 +1,2 @@
-﻿export * from "./loadEnv"
+﻿export * from "./loadEnv";
+export * from "./loadArgv";

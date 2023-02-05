@@ -1,9 +1,9 @@
 doctype html
 
-include /components/caption.pug
-include /components/quote.pug
 include /components/myEmail.pug
 include /components/spotify.pug
+include /components/caption.pug
+include /components/quote.pug
 
 mixin css(name)
   link(rel="stylesheet", href=`/styles/${name}.css`)
@@ -41,13 +41,12 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='google-site-verification', content='--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU')
 
-    title #{title} hello
+    title #{current.title} • joshsj
 
   body(class={hmm: current.title === "404"})
     nav
       +navLink("Home")
-      +navLink("Articles")
-      +navLink("Tags")
+      +navLink("Blog")
       +navLink("Portfolio")
 
       button#theme-toggle.link(aria-hidden="" aria-role="Toggle for light/dark theme")

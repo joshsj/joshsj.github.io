@@ -1,10 +1,7 @@
 import { Config, Something, SomethingCategory } from "@domain";
 import { File } from "@domain/io";
-import { SiteContext } from "./context";
 
-type SetDefaultConfigResult = { config: Config };
-
-type LoadEnvResult = Pick<SetDefaultConfigResult, keyof SetDefaultConfigResult>;
+type LoadConfigResult = { config: Config };
 
 type ReadSourceState = { sourcePaths?: string[] };
 
@@ -19,8 +16,7 @@ type ExtractDataResult = { somethings: Something[] };
 type TransformFilesResult = { buildFiles: File[] };
 
 export {
-  SetDefaultConfigResult,
-  LoadEnvResult,
+  LoadConfigResult,
   ReadSourceState,
   ReadSourceResult,
   CategorisedFile,

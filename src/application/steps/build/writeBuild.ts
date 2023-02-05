@@ -1,8 +1,9 @@
 import { File, IO } from "@domain/io";
 import { Step } from "@lib/pipeline";
-import { Config, isFulfilled, isRejected } from "@domain";
+import { Config } from "@domain";
 import { Log } from "@application/logging";
 import { TransformFilesResult } from "@application/steps/types";
+import { isFulfilled, isRejected } from "@lib";
 
 const writeBuild =
   (io: IO, log: Log, config: Config): Step<TransformFilesResult, void> =>

@@ -1,5 +1,5 @@
 ---yaml
-title: "Articles"
+title: "Blog"
 ---
 
 extends /layouts/default.pug
@@ -10,5 +10,8 @@ block content
 
   ul
     each post in posts
-      li: a(href=urlFor(post)) #{post.title}
+      li
+        p: a(href=urlFor(post)) #{post.title}
+
+        p #{formatDate(post.created)}
 

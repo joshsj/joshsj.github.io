@@ -1,10 +1,10 @@
 import { Log } from "@application/logging";
 import { Step } from "@lib/pipeline";
 import { normalize } from "path";
-import { SetDefaultConfigResult } from "@application/steps";
+import { LoadConfigResult } from "@application/steps";
 
 const setDefaultConfig =
-  (log: Log): Step<void, SetDefaultConfigResult> =>
+  (log: Log): Step<void, LoadConfigResult> =>
   async () => {
     log("Set default configuration");
 
@@ -16,8 +16,11 @@ const setDefaultConfig =
         assetDir: "public",
         pageDir: "pages",
         postDir: "posts",
+
+        debug: false,
+        watch: false,
       },
     };
   };
 
-export { SetDefaultConfigResult, setDefaultConfig };
+export { setDefaultConfig };

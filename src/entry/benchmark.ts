@@ -3,7 +3,7 @@ import { ReadSourceState } from "@application/steps";
 
 type BenchmarkContext = { start?: number; end?: number };
 
-const benchmarkStart =
+const start =
   (context: BenchmarkContext): Step<ReadSourceState, ReadSourceState> =>
   async (state) => {
     context.start = performance.now();
@@ -12,7 +12,7 @@ const benchmarkStart =
     return state;
   };
 
-const benchmarkEnd = (context: BenchmarkContext): Step<void, void> => {
+const end = (context: BenchmarkContext): Step<void, void> => {
   const runs: number[] = [];
 
   return async (state) => {
@@ -31,4 +31,13 @@ const benchmarkEnd = (context: BenchmarkContext): Step<void, void> => {
   };
 };
 
-export { BenchmarkContext, benchmarkStart, benchmarkEnd };
+const benchmarkSteps = () => {
+  const context: BenchmarkContext = {};
+
+  return {
+    benchmarkStart: start(context),
+    benchmarkEnd: end(context),
+  };
+};
+
+export { benchmarkSteps };

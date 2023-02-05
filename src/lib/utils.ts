@@ -13,4 +13,6 @@ const isFulfilled = <T>(result: PromiseSettledResult<T>): result is PromiseFulfi
 
 const isRejected = <T>(result: PromiseSettledResult<T>): result is PromiseRejectedResult => !isFulfilled(result);
 
-export { fromGenerator, isFulfilled, isRejected };
+const dateComparer = (a: Date, b: Date) => a.getTime() - b.getTime();
+
+export { fromGenerator, isFulfilled, isRejected, dateComparer };

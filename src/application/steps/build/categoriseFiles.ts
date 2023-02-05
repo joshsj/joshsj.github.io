@@ -1,8 +1,9 @@
 import { GetCategory } from "@application/categorisation";
 import { Log } from "@application/logging";
-import { Config, isFulfilled, isRejected } from "@domain";
+import { Config } from "@domain";
 import { Step } from "@lib/pipeline";
 import { CategoriseFilesResult, ReadSourceResult } from "@application/steps";
+import { isFulfilled, isRejected } from "@lib";
 
 const categoriseFiles =
   (getCategory: GetCategory, log: Log, config: Config): Step<ReadSourceResult, CategoriseFilesResult> =>

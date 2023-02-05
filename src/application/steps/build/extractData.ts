@@ -1,6 +1,6 @@
 import { Extractors } from "@application/extraction/types";
 import { Log } from "@application/logging";
-import { isFulfilled, isRejected } from "@domain";
+import { isFulfilled, isRejected } from "@lib";
 import { Step } from "@lib/pipeline";
 import { CategorisedFile, CategoriseFilesResult, ExtractDataResult } from "@application/steps";
 
