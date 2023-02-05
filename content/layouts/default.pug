@@ -4,6 +4,7 @@ include /components/myEmail.pug
 include /components/spotify.pug
 include /components/caption.pug
 include /components/quote.pug
+include /components/sep.pug
 
 mixin css(name)
   link(rel="stylesheet", href=`/styles/${name}.css`)
@@ -53,5 +54,19 @@ html
 
     main.content
       h1 #{current.displayTitle || current.title}
+
+      if current.category === "post"
+        p Posted on #{formatDate(current.created)}
+
+        //- TODO remove once same updated dates are removed
+        //- JS dates are shit
+        if current.updated && current.created.getTime() !== current.updated.getTime()
+          p.squish Updated on #{formatDate(current.updated)}
+
+        if (current.tags)
+          p.squish.sep.sep-pop
+            span.skip Talks about
+            each tag in current.tags
+              span #{tag}
 
       block content

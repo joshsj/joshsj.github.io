@@ -46,7 +46,8 @@ const getRenderContext = (context: SiteContext): RenderContextData => {
   const pages = context.filter((x): x is Page => x.category === "page");
   const posts = context
     .filter((x): x is Post => x.category === "post")
-    .sort((a, b) => dateComparer(a.created, b.created));
+    .sort((a, b) => dateComparer(a.created, b.created))
+    .reverse();
 
   return { assets, pages, posts };
 };
