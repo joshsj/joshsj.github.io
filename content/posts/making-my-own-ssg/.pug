@@ -11,461 +11,358 @@ extends /layouts/default.pug
 
 block content
 
-  p Despite the 
-    strong
-      a(href="https://jamstack.org/generators/") abundance
-    | of great site
-    | generators, I want to make my own. It
-    em should
-    | be a fun and achievable project,
-    | plus I&#39;ll have full creative control over any kind of content I want to post in
-    | the future.
+  p.
+    Despite the #[strong: a(href="https://jamstack.org/generators/") abundance] of great site generators, I want to make
+    my own. It #[em should] be a fun and achievable project, plus I'll have full creative control over any kind of 
+    content I want to post in the future. 
+
   h2 Current Situation
-  p
-    | The blog is currently hosted on Github Pages and deployed automatically with
-    | Github Actions. I have little to no interest in DevOps and this works just fine
-    | &mdash; no changes here.
-  p Building the blog is handled by 
-    a(href="https://github.com/hexojs/hexo") Hexo
-    | which I
-    | initially chose it for three main reasons:
+
+  p.
+    The blog is currently hosted on Github Pages and deployed automatically with Github Actions. I have little to no
+    interest in DevOps and this works just fine &mdash; no changes here.
+  
+  p.
+    Building the blog is handled by #[a(href="https://github.com/hexojs/hexo") Hexo] which I initially chose it for 
+    three main reasons:
   ol
     li It uses Node, which I always have installed
-    li
-      | It has a simple API to get things going, while offering a reasonable amount
-      | of configuration and extensibility
-    li
-      | It sticks to templating languages and Markdown (at least by default), instead
-      | of delving into React&#x2F;Vue etc.
-  p
-    | It nails a lot of the functionality expected in a blogging framework and I
-    | anticipate to draw heavily from its features. I do however have some
-    | complaints...
-  h3 Markdown just isn&#39;t cutting it
-  p
-    | Not having complete control over the HTML has proven annoying while I&#39;m trying
-    | to up my blogging game.
-  p
-    | Look at tables; although Markdown syntax is much cleaner, it&#39;s completely
-    | inextensible. Want a
-    code &lt;th&gt;
-    | at the start of each row? Not possible. Want to
-    | include something other than plain text in a cell? Not happening.
-  p
-    | I&#39;ve also found issue with Markdown converters as all seem to lack in one area
-    | or another, be it sanitization, Markdown flavours, line lengths&#x2F;breaks, or modes
-    | like
-    a(href="https://github.com/xoofx/markdig/blob/master/src/Markdig.Tests/Specs/SmartyPantsSpecs.md") smartypants
-    | .
-  p
-    | Falling back to HTML inside Markdown is always an option but then why use
-    | Markdown in the first place?
-  p
-    | I could configure&#x2F;create another file processor in Hexo to use different markup
-    | but I&#39;d rather spend my time on this project.
-  h3 Template languages aren&#39;t cutting it either
-  p
-    | Out of the box, Hexo offers EJS and Nunjucks which are bad and worse
-    | respectively. I don&#39;t care to elaborate; they just aren&#39;t satisfying to use.
-  p
-    | Creating reusable components to get around the shortcomings of Markdown has
-    | worked fine. Nevertheless I&#39;ve ended up with lots of .html and .ejs in my .md
-    | files so the goal is to standardise my markup.
+    li It has a simple API to get things going, while offering a reasonable amount of configuration and extensibility
+    li It sticks to templating languages and Markdown (at least by default), instead of delving into React/Vue etc.
+  
+  p.
+    It nails a lot of the functionality expected in a blogging framework and I anticipate to draw heavily from its 
+    features. I do however have some complaints...
+
+  h3 Markdown just isn't cutting it
+  
+  p Not having complete control over the HTML has proven annoying while I'm tryingv to up my blogging game.
+  
+  p.
+    Look at tables; although Markdown syntax is much cleaner, it's completely inextensible. Want a #[code th] at the
+    start of each row? Not possible. Want to include something other than plain text in a cell? Not happening.
+    
+  p.
+    I've also found issue with Markdown converters as all seem to lack in one area or another, be it sanitization,
+    Markdown flavours, line lengths/breaks, or modes like
+    #[a(href="https://github//.com/xoofx/markdig/blob/master/src/Markdig.Tests/Specs/SmartyPantsSpecs.md") smartypants].
+  
+  p Falling back to HTML inside Markdown is always an option but then why use Markdown in the first place?
+  
+  p.
+    I could configure/create another file processor in Hexo to use different markup but I'd rather spend my time on 
+    this project.
+  
+  h3 Template languages aren't cutting it either
+  
+  p.
+    Out of the box, Hexo offers EJS and Nunjucks which are bad and worse respectively. I don't care to elaborate; they 
+    just aren't satisfying to use.
+  
+  p.
+    Creating reusable components to get around the shortcomings of Markdown has worked fine. Nevertheless I've ended up 
+    with lots of .html and .ejs in my .md files so the goal is to standardise my markup.
+  
   h3 Folder structure is overkill
-  p
-    | This blog doesn&#39;t necessitate the themes or scaffold features of Hexo and these
-    | create the most additional folders.
+  
+  p This blog doesn't necessitate the themes or scaffold features of Hexo and these create the most additional folders.
+  
   h3 Dates are wrong
-  p To my discontent, I&#39;m based in the UK so my post dates should reflect that.
-  p
-    | Although Hexo offers date&#x2F;time localisation, all of my efforts to use it have
-    | failed so (as far as I can tell) posts are currently dated in the time zone of
-    | the build server.
+  
+  p To my discontent, I'm based in the UK so my post dates should reflect that.
+  
+  p.
+    Although Hexo offers date/time localisation, all of my efforts to use it have failed so (as far as I can tell) posts
+    are currently dated in the time zone of the build server.
+  
   h2 System Architecture and Feature Decomposition
+  
   p Just kidding.
-  p I&#39;m making whatever seems best and refactoring as I go.
+  
+  p I'm making whatever seems best and refactoring as I go.
+  
   h2 Getting something to build
-  p
-    | The goal is a HTML file, compiled from a template language, based on file paths
-    | sourced from a config file.
+  
+  p The goal is a HTML file, compiled from a template language, based on file paths sourced from a config file.
+  
   h3 Choosing a templating language
+  
   p I need one template language to rule them all, solving the current mishmash.
-  p
-    | Drawing from EJS, I need first-hand support for Javascript and a mechanism for
-    | reuse (like components).
+  
+  p Drawing from EJS, I need first-hand support for Javascript and a mechanism for reuse (like components).
+  
   p Any templating language designed for HTML will work.
-  p
-    | Nothing will beat Markdown but the deciding factor will be its syntax: clean and
-    | concise.
-  p Of all the languages that fit the bill, 
-    a(href="https://pugjs.org/") pug
-    | looks capable
-    | and easy to write. It&#39;s also a classic, so any issues I have should already have
-    | solutions; and it can be used as the template language in Javascript frameworks,
-    | so I could easily migrate to React&#x2F;Vue&#x2F;whatever down the line.
+  
+  p Nothing will beat Markdown but the deciding factor will be its syntax: clean and concise.
+  
+  p.
+    Of all the languages that fit the bill, #[a(href="https://pugjs.org/") pug] looks capable and easy to write. It's
+    also a classic, so any issues I have should already have solutions; and it can be used as the template language in 
+    Javascript frameworks, so I could easily migrate to React/Vue/whatever down the line.
+  
   h3 Adding configuration
-  p
-    | This project has practically no additional scope but hardcoding paths is for the
-    | weak.
-  p
-    | dotenv should be more than adequate, and I like the
-    a(href="https://github.com/motdotla/dotenv#preload") preload
-    | option so that goes in the
-    | npm scripts too.
+  
+  p This project has practically no additional scope but hardcoding paths is for the weak.
+ 
+  p.
+    dotenv should be more than adequate, and I like the #[a(href="https://github.com/motdotla/dotenv#preload") preload]
+    option so that goes in the npm scripts too.
+  
   p We need only two values for now:
+  
   ul
-    li
-      code SOURCE_DIR
-      | &mdash; where the content is
-    li
-      code BUILD_DIR
-      | &mdash; where to put the content once compiled
+    li #[code SOURCE_DIR] &mdash; where the content is
+    li #[code BUILD_DIR] &mdash; where to put the content once compiled
+  
   h3 A blog is born
+  
   p Producing an MVP is now a simple process away:
+  
   ol
     li Scan the source directory
     li Read in each file and compile it
     li Write it to build directory while preserving the relative path
+  
   +caption("An MVP")
     img(src="wow.gif")
-  p
-    | The only hiccup was with fs module in Node. It doesn&#39;t offer a method to
-    | recursively scan directories, but with some inspiration from the nice folks on
-    | Stack Overflow, async generators make this looks easy:
-  pre
-    code.typescript
-      | async function* walk(
-      | root: string,
-      | options: Options,
-      | walked = &quot;&quot;
-      | ): AsyncGenerator&lt;string&gt; &#123;
-      | const entries = await readdir(root, options);
-      | for (const entry of entries) &#123;
-      | const entryPath = path.join(walked, entry.name);
-      | if (entry.isDirectory()) &#123;
-      | yield* walk(path.join(root, entry.name), options, entryPath);
-      | &#125; else &#123;
-      | yield entryPath;
-      | &#125;
-      | &#125;
-      | &#125;
+
+  p.
+    The only hiccup was with fs module in Node. It doesn't offer a method to recursively scan directories, but with some
+    inspiration from the nice folks on Stack Overflow, async generators make this looks easy:
+    
+  include:ts walk.ts
+  
   h2 Static Assets
+  
   p Times New Roman has a certain charm but I want my hard-earned CSS back.
-  p
-    | Unlike the .pug files, static assets need not be compiled, only copied to the
-    | build folder; they also keep their file extension. I can copy the pug processing
-    | logic in to a new method, make these changes, and add a check to determine the
-    | right method for the file.
+  
+  p.
+    Unlike the .pug files, static assets need not be compiled, only copied to the build folder; they also keep their
+    file extension. I can copy the pug processing logic in to a new method, make these changes, and add a check to
+    determine the right method for the file.
+
   p With that, the site looks like mine again:
-  +caption("Looking good")
-    img(src="with css.png")
+  
+  +caption("Looking good"): img(src="with css.png")
+  
   h2 Introducing transformers
-  p Before the system grows, we need a refactor. Adding an 
-    code elif
-    | for every file
-    | type is completely inextensible and would become a mess &mdash; we invented design
-    | patterns for a reason.
-  p
-    | Typescript allows us to take an object-oriented or functional approach. Of
-    | course, both will be used eventually but I want to lean on FP because I&#39;ve never
-    | developed a useful application with it.
-  p
-    | With that in mind, I only know software design from an OOP perspective so expect
-    | no rules of FP to be followed.
+  
+  p.
+    Before the system grows, we need a refactor. Adding an #[code elif] for every file type is completely inextensible
+    and would become a mess &mdash; we invented design patterns for a reason.
+  
+    Typescript allows us to take an object-oriented or functional approach. Of course, both will be used eventually but
+    I want to lean on FP because I've never developed a useful application with it.
+  
+  p.
+    With that in mind, I only know software design from an OOP perspective so expect no rules of FP to be followed.
+  
   p The essential information of a file is its location and content:
-  pre
-    code.typescript
-      | type File = &#123; path: string; content: string &#125;;
-  p
-    | To transform a file from source to build, we return its new location and content
-    | which can continue to be stored inside the
-    code File
-    | type:
-  pre
-    code.typescript
-      | type Transformer = (file: File) =&gt; Promise&lt;File&gt;;
-  p
-    | The object-oriented designer in me is screaming
-    a(href="https://refactoring.guru/design-patterns/factory-method") factory
-    | to allow a
-    code Transformer
-    | implementation to be provided based on the file&#39;s location.
-  p
-    | Defining a class would be shameful but I agree with the intention: the function
-    | which handles the transformations shouldn&#39;t also determine which transformer to
-    | use.
-  pre
-    code.typescript
-      | type GetTransformer = (file: File) =&gt; Transformer;
-  p
-    | To allow the system to identify where a file came from, we can add more config
-    | values:
+  
+  :ts
+    type File = { path: string; content: string };
+
+  p.
+    To transform a file from source to build, we return its new location and content which can continue to be stored
+    inside the #[code File] type:
+
+  :ts
+    type Transformer = (file: File) => Promise<File>;
+
+  p.
+    The object-oriented designer in me is screaming
+    #[a(href="https://refactoring.guru/design-patterns/factory-method") factory] to allow a #[code Transformer]
+    implementation to be provided based on the file's location.
+  
+  p.
+    Defining a class would be shameful but I agree with the intention: the function which handles the transformations
+    shouldn't also determine which transformer to use.
+
+  :ts
+    type GetTransformer = (file: File) => Transformer;
+  
+  p To allow the system to identify where a file came from, we can add more config values:
+
   ul
-    li
-      code ASSET_DIR
-      | &mdash; folder name for static assets
-    li
-      code PAGE_DIR
-      | &mdash; folder name for pages
+    li #[code ASSET_DIR] &mdash; folder name for static assets
+    li #[code PAGE_DIR] &mdash; folder name for pages
+  
   p And now the application can map the files from source to build:
-  pre
-    code.typescript
-      | const transformFiles =
-      | (getTransformer: GetTransformer) =&gt; async (sourceFiles: File[]) =&gt; &#123;
-      | const transformations = sourceFiles.map((file) =&gt;
-      | getTransformer(file)(file)
-      | );
-      | const transformResults = await Promise.allSettled(transformations);
-      | const buildFiles: File[] = transformResults
-      | .filter((r) =&gt; isFulfilled(r) &amp;&amp; !!r.value)
-      | .map((r) =&gt; r.value);
-      | &#125;;
-  p
-    | Adding new kinds of files (like posts) is now much simpler, requiring only a
-    | transformer implementation and a new configuration value if necessary. The
-    | concept of &#39;transformation&#39; is also formalized and domain is richer 👌
+  
+  include:ts transform.ts
+
+  p.
+    Adding new kinds of files (like posts) is now much simpler, requiring only a transformer implementation and a new
+    configuration value if necessary. The concept of 'transformation' is also formalized and domain is richer 👌
+  
   h2 Creating a pipeline
-  p
-    | Even with limited development, it&#39;s easy to imagine how the codebase will grow
-    | to add the upcoming features: reading in preamble, building the dataset of
-    | posts, generating TOCs, etc. A few bits of architecture will go a long way to
-    | ensure the application scales with complexity.
+  
+  p.
+    Even with limited development, it's easy to imagine how the codebase will grow to add the upcoming features: reading
+    in preamble, building the dataset of posts, generating TOCs, etc. A few bits of architecture will go a long way to
+    ensure the application scales with complexity.
+  
   h3 Spitballing
-  p
-    | The behaviour to generate a site is a sequence of predetermined procedures where
-    | the output of one feeds into the next. I would call this a pipeline.
-  p
-    | Mathematicians and functional programmers can meet this demand with function
-    | composition, which composes a single function of many. However, it seems that FP
-    | nerds still haven&#39;t quite achieved this in Typescript, as shown by this thread
-    | on
-    a(href="https://news.ycombinator.com/item?id=32377646") Hacker News
-    | .
-  p
-    | Looking at object-oriented design, the most common patterns (see
-    a(href="https://martinfowler.com/bliki/GangOfFour.html") GoF
-    | and
-    a(href="https://martinfowler.com/bliki/DomainDrivenDesign.html") DDD
-    | ) don&#39;t seem to
-    | work either:
+  
+  p.
+    The behaviour to generate a site is a sequence of predetermined procedures where the output of one feeds into the
+    next. I would call this a pipeline.
+
+  p.
+    Mathematicians and functional programmers can meet this demand with function composition, which composes a single
+    function of many. However, it seems that FP nerds still haven't quite achieved this in Typescript, as shown by this
+    thread on #[a(href="https://news.ycombinator.com/item?id=32377646") Hacker News].
+  
+  p.
+    Looking at object-oriented design, the most common patterns (see
+    #[a(href="https://martinfowler.com/bliki/GangOfFour.html", target="_blank", rel="noopener noreferrer") GoF]
+    and
+    #[a(href="https://martinfowler.com/bliki/DomainDrivenDesign.html") DDD]) don't seem to work either:
+  
   ul
     li Mediator could construct a pipeline but:
       ul
-        li
-          | abstracting the communication between functions is the opposite of
-          | composition and
-        li
-          | sending requests&#x2F;notifications is a wasted mechanism for this system: the
-          | only request is &#39;build&#39;.
+        li abstracting the communication between functions is the opposite of composition and
+        li sending requests/notifications is a wasted mechanism for this system: the only request is 'build'.
+    
     li
-      | Chain of Responsibility exists to allow multiple handler to try and complete a
-      | single request. It could be modified to create a pipeline, whereby the
-      code next
-      | handler accepts the result of the current handler; however:
+      | Chain of Responsibility exists to allow multiple handler to try and complete a single request. It could be 
+      | modified to create a pipeline, whereby the #[code next()] handler accepts the result of the current handler;
+      | however:
+
       ul
-        li
-          | handlers invoking the next handler only makes sense with the pattern&#39;s
-          | original intention, so it doesn&#39;t fit either.
-  p
-    | The bottom line is that, in Typescript world, there&#39;s no predefined solution
-    | that I know of.
+        li.
+          handlers invoking the next handler only makes sense with the pattern's original intention, so it doesn't fit
+           either.
+
+  p The bottom line is that, in Typescript world, there's no predefined solution that I know of.
+
   h3 Meeting in the middle
-  p
-    | Inspired by some creations the Hacker News thread from above, I&#39;m using the
-    | Builder pattern to add some fluid semantics to function composition:
-  pre
-    code.typescript
-      | // Take in a value, return a value wrapped in a Promise
-      | type Step&lt;Current, Next&gt; = (state: Current) =&gt; Promise&lt;Next&gt;;
-      | // Store an initial state to kick things off
-      | type PipelineBuilder&lt;Initial, Current&gt; = &#123;
-      | // Store a handler for the current state and move onto the next state
-      | add: &lt;Next&gt;(f: Step&lt;Current, Next&gt;) =&gt; PipelineBuilder&lt;Initial, Next&gt;;
-      | // Compose the added functions
-      | build: () =&gt; Step&lt;Initial, Current&gt;;
-      | &#125;;
-      | type Pipeline = &lt;Initial&gt;() =&gt; PipelineBuilder&lt;Initial, Initial&gt;;
-  p The implementation is simple: 
-    code add
-    | stores the step
-    code f
-    | in an array;
-    code build
-    | reduces the array and composes the result. This requires some type assertions
-    | and
-    code any
-    | so you can&#39;t see the ugliness.
-  p We can now decompose the current process into 
-    code Step
-    | s and separate some
-    | behaviours into their own functions:
-  pre
-    code.typescript
-      | const generate = pipeline()
-      | .add(setDefaultConfig) // In case .env is missing
-      | .add(loadConfig) // Load from .env
-      | .add(readSource) // Read in the source files
-      | .add(categoriseFiles) // Asset or page?
-      | .add(transformFiles) // See above
-      | .add(writeBuild) // Write the build files
-      | .build(); // Compose the added functions
-      | await generate();
+  
+  p.
+    Inspired by some creations the Hacker News thread from above, I'm using the Builder pattern to add some fluid
+    semantics to function composition:
+  
+  include:ts steps.ts
+  
+  p.
+    The implementation is simple: #[code add] stores the step #[code f] in an array; #[code build] reduces the array and
+    composes the result. This requires some type assertions and #[code any] so you can't see the ugliness.
+  
+  p We can now decompose the current process into a #[code Step] and separate some behaviours into their own functions:
+  
+  include:ts pipeline.ts
+
   h2 Forming a context
-  p
-    | Some pages inform the site about themselves like the title&#x2F;created date&#x2F;tags of
-    | a post, whereas some pages are informed by the site to render a list of posts,
-    | for example.
+  
+  p.
+    Some pages inform the site about themselves like the title/created date/tags of a post, whereas some pages are
+    informed by the site to render a list of posts, for example.
+  
   h3 Adding posts
-  p
-    | Before we can start pulling data out of posts to create the context, we need to
-    | define them as well as the other categories:
-  pre
-    code.typescript
-      | type PostData = &#123; title: string; created: Date; updated?: Date; tags?: [] &#125;;
-      | type PageData = &#123; title: string &#125;;
-      | type Post = &#123; category: &quot;post&quot;; file: File &#125; &amp; PostData;
-      | type Page = &#123; category: &quot;page&quot;; file: File &#125; &amp; PageData;
-      | type Asset = &#123; category: &quot;asset&quot;; file: File &#125;;
-  p
-    | The combination of mapped types and template literal types really shine here.
-    | With a type to represent the file categories, we can derive new types with a
-    | mapping with keys also derived from the type. Thus we can, for example, ensure a
-    | &#39;categoriser&#39; implementation exists for all categories:
-  pre
-    code.typescript
-      | // &quot;asset&quot; | &quot;page&quot; | &quot;post&quot;;
-      | type Category = (Post | Asset | Page)[&quot;category&quot;];
-      | // Produces &quot;assetDir&quot; | &quot;pageDir&quot; | &quot;postDir&quot;
-      | type Key = `$&#123;Category&#125;Categoriser`;
-      | type Categorisers = &#123; [K in Key]: (file: File) =&gt; Category &#125;;
-  p
-    | This moves a typical runtime error (like missing dependencies) to compile time,
-    | which is awesome and makes me hope languages like C# embrace some type theory in
-    | future.
-  p Preach over, we need a 
-    code POST_DIR
-    | config value and to implement a categoriser
-    | and transformer for posts. I&#39;m opting out of the
-    code /year/month/day
-    | format for
-    | post URLs as another quick search shows that there isn&#39;t much point and I don&#39;t
-    | like it.
-  p
-    | Like assets, their relative path will be preserved but they live inside a
-    code /blog
-    | folder.
+  
+  p.
+    Before we can start pulling data out of posts to create the context, we need to define them as well as the other
+    categories:
+  
+  include:ts domain.ts
+
+  p.
+    The combination of mapped types and template literal types really shine here. With a type to represent the file
+    categories, we can derive new types with a mapping with keys also derived from the type. Thus we can, for example,
+    ensure a 'categoriser' implementation exists for all categories:
+  
+  include:ts categorisers.ts
+
+  p.
+    This moves a typical runtime error (like missing dependencies) to compile time, which is awesome and makes me hope
+    languages like C# embrace some type theory in the future.
+
+  p.
+    Preach over, we need a #[code POST_DIR] config value and to implement a categoriser and transformer for posts. I'm
+    opting out of the #[code /year/month/day] format for post URLs as another quick search shows that there isn't much
+    point and I don't like it.
+  
+  p Like assets, their relative path will be preserved but they live inside a #[code /blog] folder.
+  
   h3 Front matter
-  p
-    | A feature I first used with Hexo, front matter stores stateful data at the start
-    | (or front) of a file, which works really well to unify a post&#39;s data and
-    | content.
-  p
-    | A quick search of NPM shows its most popular package for parsing front matter
-    | (
-    a(href="https://www.npmjs.com/package/gray-matter") gray-matter
-    | ) is also the most
-    | configurable and has the cleanest interface &mdash; who could have guessed?
-  p With the package installed, a new step to 
-    code extractData
-    | goes in the pipeline in
-    | which gray-matter splits the front matter from the rest of the file and parses
-    | it as YAML (by default):
-  pre
-    code.typescript
-      | const &#123; data, content &#125; = matter(file.contents, &#123; excerpt: false &#125;);
-      | return &#123;
-      | file: file.with(&#123; contents: content &#125;), // Exclude front matter from contents
-      | data: data as PostData, // Putting trust in myself
-      | &#125;;
-  p
-    | When rendering pug, the context is used for the &#39;locals&#39; object and now pages &amp;
-    | posts can render site-wide data 🎉
+  
+  p.
+    A feature I first used with Hexo, front matter stores stateful data at the start (or front) of a file, which works
+    really well to unify a post's data and content.
+  
+  p.
+    A quick search of NPM shows its most popular package for parsing front matter
+    (#[a(href="https://www.npmjs.com/package/gray-matter") gray-matter])
+    is also the most configurable and has the cleanest interface &mdash; who could have guessed?
+  
+  p.
+    With the package installed, a new step to #[code extractData] goes in the pipeline in which gray-matter splits the
+    front matter from the rest of the file and parses it as YAML (by default):
+  
+  include:ts extract.ts
+
+  p.
+    When rendering pug, the context is used for the 'locals' object and now pages & posts can render site-wide data 🎉
+  
   h2 Watching for changes
-  p
-    | Out of the features I use in Hexo, the only major one missing from this
-    | generator is a &#39;watch&#39; mode (where added&#x2F;changed files automatically build).
-    | This is a big help when writing posts, but it will help immensely when the time
-    | comes to migrate the existing content.
+  
+  p.
+    Out of the features I use in Hexo, the only major one missing from this generator is a 'watch' mode (where
+    added/changed files automatically build). This is a big help when writing posts, but it will help immensely when the
+    time comes to migrate the existing content.
+  
   h3 It just works?
-  p
-    | Turns out this is pretty straight forward.
-    a(href="https://www.npmjs.com/package/chokidar") chokidar
-    | and
-    a(href="https://www.npmjs.com/package/node-watch") node-watch
-    | outline their advantages
-    | over
-    code watch
-    | and
-    code watchfile
-    | in the fs module and people on the internet don&#39;t
-    | lie. I&#39;m using chokiar for the same reasons as grey-matter: configurable and
-    | clean.
-  p
-    | The pipeline needs a small change: we need to specify which files to build in
-    | watch mode without affecting the process for normal builds.
-  p
-    | For the time being, I&#39;m separating the config pipeline from the build pipeline
-    | as it doesn&#39;t need to be watched and it opens up the entry point. To the steps
-    | that use the config, it can be provided like a dependency instead:
-  pre
-    code.typescript
-      | const getConfig = pipeline().add(setDefaultConfig).add(loadConfig).build();
-      | const generate = pipeline()
-      | .add(readSource)
-      | .add(categoriseFiles)
-      | .add(extractData)
-      | .add(transformFiles)
-      | .add(writeBuild)
-      | .build();
-  p With a small change to the 
-    code readSource
-    | step and a little chokidar
-    | configuration, we can send the path of the changed file into the pipeline and it
-    | builds:
-  pre
-    code.typescript
-      | await generate(); // Initial build
-      | // Watch for changes and send them into the pipeline
-      | watch(&quot;**/*&quot;, &#123; cwd: config.sourceDir, ignoreInitial: true &#125;)
-      | .on(&quot;add&quot;, (path) =&gt; generate(&#123; sourcePaths: [path] &#125;))
-      | .on(&quot;change&quot;, (path) =&gt; generate(&#123; sourcePaths: [path] &#125;));
-  h3 It doesn&#39;t just work
+  
+  p.
+    Turns out this is pretty straight forward. #[a(href="https://www.npmjs.com/package/chokidar") chokidar] and 
+    #[a(href="https://www.npmjs.com/package/node-watch") node-watch] outline their advantages #[code watch] and
+    #[code watchfile] in the fs module and people on the internet don't lie. I'm using chokiar for the same reasons as
+    grey-matter: configurable and clean.
+  
+  p.
+    The pipeline needs a small change: we need to specify which files to build in watch mode without affecting the
+    process for normal builds. For the time being, I'm separating the config pipeline from the build pipeline as it doesn't need to be watched and
+    it opens up an entry point to specify these files. As for any steps that need the config, it can be provided like a
+    dependency instead.
+
+  p.
+    With a small change to the #[code readSource] step and a little chokidar configuration, we can send the path of the
+    changed file into the pipeline and it builds:
+
+  include:ts watching.ts
+  
+  h3 It doesn't just work
+  
   +caption("What an idiotic boob I was about 10 or 11 seconds ago")
     img(src="idiot.jpg")
-  p
-    | Although the logic is currently correct for posts, it doesn&#39;t work for any files
-    | that display information about the rest of the system, like a list of all posts;
-    | nor does it work for changes to layouts or components.
-  p
-    | In the spirit of &#39;doing what works for now&#39;, I&#39;m just gonna rebuild everything
-    | when a file changes. The build is almost instant so the additional logic to
-    | determine which files need rebuilding isn&#39;t worth it &mdash; for now.
+
+  p.
+    Although the logic is currently correct for posts, it doesn't work for any files that display information about the
+    rest of the system, like a list of all posts; nor does it work for changes to layouts or components.
+  
+  p.
+    In the spirit of 'doing what works for now', I'm just gonna rebuild everything when a file changes. The build is
+    almost instant so the additional logic to determine which files need rebuilding isn't worth it.
+  
   h3 It can work better
+  
   p Changed my mind; rebuilding everything is a bad solution.
-  p
-    | A quick win is to process only the changed files, reducing compute and file
-    | reads. We can move the
-    a(href="#Forming-a-context") context
-    | from the pipeline to an
-    | external dependency (keeping it for the next cycle) and upsert changed files
-    | when needed using a new step
-    code updateContext
-    | :
-  pre
-    code.typescript
-      | for (const changed of files) &#123;
-      | const index = context.find((f) =&gt; f.full === changed.full);
-      | if (index &gt; -1) &#123;
-      | context[index] = something;
-      | &#125; else &#123;
-      | context.push(something);
-      | &#125;
-      | &#125;
-  p
-    | Now the site builds much quicker in watch mode and
-    a(href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer") Live Server
-    | can refresh the page automatically.
+  
+  p.
+    A quick win is to process only the changed files, reducing compute and file reads. We can move the
+    #[a(href="#Forming-a-context") context] from the pipeline to an external dependency (keeping it for the next cycle)
+    and upsert changed files when needed using a new step #[code updateContext]:
+  
+  include:ts context.ts
+
+  p.
+    Now the site builds much quicker in watch mode and
+    #[a(href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer") Live Server]
+    can refresh the page automatically.
+
   +caption("Building source files on file change")
     img(src="watching.gif")
+    
   p Very cool.
   

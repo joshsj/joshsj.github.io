@@ -18,30 +18,30 @@ block content
     | timer, returning human-understandable units like nanoseconds or minutes or
     | (hopefully not) days.
   p
-    | However, this doesn&#39;t represent the true efficiency of an algorithm, instead
+    | However, this doesn't represent the true efficiency of an algorithm, instead
     | showing the performance of its implementation. As this is affected by the test
     | machine, programming language, code quality, etc., we use something better.
   p
     em Time complexity
     | expresses the execution time of an algorithm as a function of
     | its input size by measuring its number of operations. This provides a purely
-    | conceptual understanding of an algorithm&#39;s speed at any scale and a gauge for
-    | the quality&#x2F;accuracy of an implementation.
+    | conceptual understanding of an algorithm's speed at any scale and a gauge for
+    | the quality/accuracy of an implementation.
   h3 Notation
   p The three main notations to describe time complexity are:
   ul
-    li Big-O (&#39;big oh&#39;) &mdash; the upper bound of operations performed
-    li Big-Ω (&#39;big omega&#39;) &mdash; the lower bound
-    li Big-ϴ (&#39;big theta&#39;) &mdash; both lower and upper
+    li Big-O ('big oh') &mdash; the upper bound of operations performed
+    li Big-Ω ('big omega') &mdash; the lower bound
+    li Big-ϴ ('big theta') &mdash; both lower and upper
   p
-    | Generally, we only care about Big-O &#39;cause the fastest case of algorithm can be
+    | Generally, we only care about Big-O 'cause the fastest case of algorithm can be
     | taken for granted. When measuring Big-O, some rules apply:
   ol
     li
       p Constant factors of #[:tex(inline) n] are removed so #[:tex(inline) 3n+2] becomes #[:tex(inline) n].
       p
-        | Mathematical reasons apply which I can&#39;t quite follow but practically,
-        | constant time doesn&#39;t matter as #[:tex(inline) n\to\infty].
+        | Mathematical reasons apply which I can't quite follow but practically,
+        | constant time doesn't matter as #[:tex(inline) n\to\infty].
     li
       p
         | Only the largest term of #[:tex(inline) n] is considered, so #[:tex(inline) n^2+3n+1]
@@ -93,10 +93,10 @@ block content
         li Or, the problems in NP-Hard which can be verified in polynomial time
         li #[:tex(inline) \text{NP} \cap \text{NP-Hard}]
   p
-    | When tackling a computational problem in the real world, it&#39;s ideal for the
+    | When tackling a computational problem in the real world, it's ideal for the
     | solution to exist within #[:tex(inline) P], or to be simplifiable into #[:tex(inline) P]. If
     | not, two options are available:
   ul
     li For small input sizes, a non-polynomial-time solution may work
-    li For larger inputs, heuristics may allow for a &#39;good enough&#39; solution
+    li For larger inputs, heuristics may allow for a 'good enough' solution
   

@@ -12,7 +12,7 @@ extends /layouts/default.pug
 block content
 
   p Logging comes out of the box with ASP using 
-    code ILogger&lt;&gt;
+    code ILogger<>
     | from the
     code Microsoft.Extensions.Logging
     | package.
@@ -29,27 +29,27 @@ block content
   pre
     code.csharp
       | public class SomeService
-      | &#123;
-      | public SomeService(ILogger&lt;IndexModel&gt; logger) &#123;...&#125;
+      | {
+      | public SomeService(ILogger<IndexModel> logger) {...}
       | public void SomeMethod()
-      | &#123;
-      | logger.LogInformation(&quot;something&quot;);
-      | logger.Log(LogLevel.Error, &quot;something else&quot;);
-      | &#125;
-      | &#125;
+      | {
+      | logger.LogInformation("something");
+      | logger.Log(LogLevel.Error, "something else");
+      | }
+      | }
   p We can specify the minimum severity of logs per-assembly using 
     em filters
     | .
   pre
     code.json
-      | &#123;
-      | &quot;Logging&quot;: &#123;
-      | &quot;LogLevel&quot;: &#123;
-      | &quot;Default&quot;: &quot;Information&quot;,
-      | &quot;Microsoft&quot;: &quot;Warning&quot;
-      | &#125;
-      | &#125;
-      | &#125;
+      | {
+      | "Logging": {
+      | "LogLevel": {
+      | "Default": "Information",
+      | "Microsoft": "Warning"
+      | }
+      | }
+      | }
   h2 Grouping
   p Proving an 
     em Event ID
@@ -57,12 +57,12 @@ block content
   p For console logging, we can also use a scope.
   pre
     code.csharp
-      | using (_logger.BeginScope(&quot;using block message&quot;)) &#123;...&#125;
+      | using (_logger.BeginScope("using block message")) {...}
   h2 Performance
   p
     | Logging can introduce performance issues in many applications. Unless a
     | directly-loggable value is provided (basically primitives), the logger needs to
-    | do some conversion&#x2F;serialisation. Combine that with the fact that console
+    | do some conversion/serialisation. Combine that with the fact that console
     | logging is synchronous and the overhead can be comparatively huge.
   p By defining a delegate with the 
     code LoggerMessage
@@ -81,9 +81,9 @@ block content
     code app.UseDeveloperExceptionPage()
     | .
   p In the frontend, 
-    code app.UseExceptionHandler(&quot;/Error&quot;)
+    code app.UseExceptionHandler("/Error")
     | specifies a Razor page to
-    | display errors &amp; exceptions to the user.
+    | display errors & exceptions to the user.
   p
     code UseExceptionHandler
     | middleware allows exceptions throughout the application to
@@ -100,12 +100,12 @@ block content
   ul
     li Plain text is hard to query making later analysis tricky
     li
-      | Aggregating files from different servers&#x2F;application&#x2F;deployments is also
+      | Aggregating files from different servers/application/deployments is also
       | tricky
     li No native UI for files to browse them
   p
-    | Cloud-hosting services offer solutions, such as Azure&#39;s &#39;Application Insights&#39;
-    | or &#39;App Service Diagnostics&#39;, integrated into ASP with
+    | Cloud-hosting services offer solutions, such as Azure's 'Application Insights'
+    | or 'App Service Diagnostics', integrated into ASP with
     code Microsoft.Extensions.Logging.AzureAppServices
   p
     | Packages like Serilog can connect to

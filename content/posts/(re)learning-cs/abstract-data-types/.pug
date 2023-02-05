@@ -12,7 +12,7 @@ block content
 
   p
     | Producing software with a real-world purpose means translating a high-level
-    | problem into something computational. When considering its data, we don&#39;t
+    | problem into something computational. When considering its data, we don't
     | immediately jump to
     code CREATE TABLE
     | ; we start by considering what data is needed,
@@ -38,7 +38,7 @@ block content
     | by its behaviour from the perspective of a consumer, not its
     | implementation.
     // excerpt
-  p Basically, it&#39;s what it does, not how it does it.
+  p Basically, it's what it does, not how it does it.
   h2 Double-Ended Queue
   p
     | Think of browser history (😬). Values are added and removed from the front as
@@ -46,7 +46,7 @@ block content
     | are removed from the back.
   p The 
     em double-ended queue
-    | ADT (or dequeue, or deque, pronounced &#39;deck&#39;) is
+    | ADT (or dequeue, or deque, pronounced 'deck') is
     | generally defined with:
   ul
     li
@@ -71,7 +71,7 @@ block content
     a(href="/(re)learning-cs/lists/#Linked-List") linked list
     | can
     | implement a deque. Neither is perfect, as they are both #[:tex(inline) \mathcal{O}(n)] when
-    | inserting and indexing&#x2F;searching respectively.
+    | inserting and indexing/searching respectively.
   p The following structures can also use a deque as a backing structure.
   h2 Queue
   p
@@ -135,7 +135,7 @@ block content
           code removeFront()
   h2 Priority Queue
   p
-    | Think of the queue in A&amp;E. It&#39;s still FIFO but the elements are reordered by
+    | Think of the queue in A&E. It's still FIFO but the elements are reordered by
     | their priority, making it
     em highest priority in, first out (HPIFO)
     | .
@@ -157,10 +157,10 @@ block content
   p
     | Instead we can use a
     a(href="/(re)learning-cs/trees/#Heap") heap
-    | , giving us #[:tex(inline) \mathcal{O}(1)] to peek and #[:tex(inline) \mathcal{O}(\log n)] to insert&#x2F;remove.
+    | , giving us #[:tex(inline) \mathcal{O}(1)] to peek and #[:tex(inline) \mathcal{O}(\log n)] to insert/remove.
   h2 Map
   p
-    | There&#39;s lots of associated data: a students name and their grade, a customer&#39;s
+    | There's lots of associated data: a students name and their grade, a customer's
     | account number and their balance, etc.
   p A 
     em map

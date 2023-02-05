@@ -38,7 +38,7 @@ block content
     img(src="rooted tree.svg")
   p
     | Rooted trees have an implicit hierarchical structure. With only one parent and
-    | multiple children, they can be considered &#39;top-down&#39;.
+    | multiple children, they can be considered 'top-down'.
   h2 Unrooted Tree
   p In an 
     em unrooted tree
@@ -55,8 +55,8 @@ block content
     img(src="unrooted tree.svg")
   p
     | Unrooted trees do not have a string implicit hierarchy. They can be interpreted
-    | as &#39;outside-in&#39;, where only the relationships from lead to internal node are
-    | considered , or vice versa with &#39;inside-out&#39;.
+    | as 'outside-in', where only the relationships from lead to internal node are
+    | considered , or vice versa with 'inside-out'.
   h2 Binary Tree
   p A 
     em binary tree
@@ -83,7 +83,7 @@ block content
     | children (or 7, 8, and 9 would need removing).
   h3 Traversal
   p
-    | We have four algorithms to remember! All of which are #[:tex(inline) \mathcal{O}(n)] &#39;cause every
+    | We have four algorithms to remember! All of which are #[:tex(inline) \mathcal{O}(n)] 'cause every
     | node is visited.
   table
     thead
@@ -135,7 +135,7 @@ block content
   p A 
     em Binary Search Tree (BST)
     | allows arbitrary values to be found fairly quickly.
-    | It&#39;s structured as a rooted binary tree, where every node is greater than all
+    | It's structured as a rooted binary tree, where every node is greater than all
     | nodes to its left and less than all to its right. Inherently, only comparable
     | types can be stored in a BST.
   +caption("A binary search tree.", "https://stepik.org/lesson/28727/step/1")
@@ -149,12 +149,12 @@ block content
     | We can also consider the balance of a BST. When balanced, most leaves are
     | equidistant from the root and most internal nodes have two children. When
     strong perfectly
-    | balanced, it&#39;s all of em. Unbalanced trees are also a thing.
+    | balanced, it's all of em. Unbalanced trees are also a thing.
   +caption("A perfectly balanced BST.", "https://stepik.org/lesson/28727/step/9")
     img(src="perfectly balanced bst.svg")
-  p The average-case time complexity to find an element #[:tex(inline) N] is #[:tex(inline) \mathcal{O}(\log N)]; there is a proof, but it&#39;s 
+  p The average-case time complexity to find an element #[:tex(inline) N] is #[:tex(inline) \mathcal{O}(\log N)]; there is a proof, but it's 
     a(href="https://stepik.org/lesson/28730/step/4") fucking mental
-    | and I can&#39;t understand math so complex any more.
+    | and I can't understand math so complex any more.
   h2 Implementations
   // TODO add link to implementations
   p Generally, implementing a tree structure involves a 

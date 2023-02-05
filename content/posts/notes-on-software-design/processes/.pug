@@ -14,7 +14,7 @@ block content
     | overall architecture following which the system will be developed, and details
     | its static structure and dynamic behaviour.
   p
-    | At this point, we have some amount of user profiles&#x2F;personas, scenarios,
+    | At this point, we have some amount of user profiles/personas, scenarios,
     | storyboards, wireframes, and (non-)functional requirements. We can now
     | start
     // excerpt
@@ -22,7 +22,7 @@ block content
     | representation.
     // excerpt
   p
-    | Documenting the design should be done various levels of complexity&#x2F;abstraction.
+    | Documenting the design should be done various levels of complexity/abstraction.
     | Without simplification, the design process would be trivial since it would match
     | the implementation identically.
   p
@@ -48,7 +48,7 @@ block content
     | time and money which ultimately affects the end-user.
   h2 Using patterns
   p
-    | Most &#39;new&#39; solutions are simply an adaptation of existing applications, so the
+    | Most 'new' solutions are simply an adaptation of existing applications, so the
     | wheel need not be reinvented. More importantly, use design patterns which are
     | relevant to the solution. e.g., N-tier or lter for a .NET API written with C#.
   p
@@ -57,16 +57,16 @@ block content
     | knowledge, implementation, etc.
   h2 Representation
   p
-    | Designs should be represented with models because they&#39;re a proven and
+    | Designs should be represented with models because they're a proven and
     | well-accepted method.
   p
     | They should demonstrate the functionality of the system at different levels of
-    | complexity&#x2F;abstraction. This makes the design more accessible, as the system can
+    | complexity/abstraction. This makes the design more accessible, as the system can
     | be understood at the level desired by an individual. Inherently, it is important
     | to ensure a representation is not oversimplified or important details may be
     | masked.
   p
-    | Provided the developers of the system respect the design, a system&#39;s model will
+    | Provided the developers of the system respect the design, a system's model will
     | closely resemble the technical implementation of the system, so getting the
     | models correct is key to smooth development.
   h2 Making Decisions
@@ -74,7 +74,7 @@ block content
     | Although some aspects of the solution will have a clearly optimal design, most
     | aspects of a project will require some level of decision-making.
   p
-    | As such, it is important to document any&#x2F;all decisions. Not only does it simply
+    | As such, it is important to document any/all decisions. Not only does it simply
     | provide evidence of the decisions made by the team, but producing a standardized
     | document ensures all factors motivating the decision are valid.
   +caption("Example Decision Template")
@@ -93,23 +93,23 @@ block content
     li What are the external dependencies?
   p
     | Think of it as an extension of scope; after defining what the system should do,
-    | the system boundary determines whether each aspect of the system is &#39;in scope&#39;
+    | the system boundary determines whether each aspect of the system is 'in scope'
     | for creation or resourced from an existing solution.
   p
-    | System boundary also considers human sources for input&#x2F;output, so these devices
+    | System boundary also considers human sources for input/output, so these devices
     | should be considered as well, e.g., PIN number entry pad.
   p Lastly, 
     em system environment
-    | refers to anything which affects&#x2F;can be affected by
+    | refers to anything which affects/can be affected by
     | the system, excluding the system itself.
   h3 Representation
   p A 
     em system context diagram
     | is the typical way to represent the system boundary,
-    | represented as a simple, &#39;free form&#39; sketch. The relationships between systems
+    | represented as a simple, 'free form' sketch. The relationships between systems
     | can be ambiguous and considers:
   ul
-    li Who&#x2F;what is interacting with the target system?
+    li Who/what is interacting with the target system?
     li What are they doing and how?
   +caption("System Context Diagram")
     img(src="system context diagram.png")
@@ -133,19 +133,19 @@ block content
     | The definition is pretty loose, so they can identify a wide range of subsystems.
     | However, there are some typical organisational groupings: users help to identify
     | the roles of people using the system; channels identify how the system can be
-    | used&#x2F;accessed, e.g., Browser, Mobile, Integrated PoS terminal; application
+    | used/accessed, e.g., Browser, Mobile, Integrated PoS terminal; application
     | identifies the subsystems; and resources contain the systems used by the
     | application. Additionally, splitting the groups further or color-coding can add
     | more detail.
   p
-    | It does not need to be implementation-specific, i.e., &#39;Database&#39; could be
-    | sufficient, but &#39;AWS Cloud Hosting&#39; is also acceptable.
+    | It does not need to be implementation-specific, i.e., 'Database' could be
+    | sufficient, but 'AWS Cloud Hosting' is also acceptable.
   +caption("Architecture Overview Diagram")
     img(src="architecture overview diagram.png")
   h2 Refinement
   p Following the 
     em solution structure
-    | , the application&#39;s subsystems are iteratively
+    | , the application's subsystems are iteratively
     | (and recursively) designed in the refinement process:
   ul
     li How can the conceptual elements be subdivided into subsystems?
@@ -204,7 +204,7 @@ block content
     code UserAuthoriser
     | , or provided
     | using components or classes.
-  h3 It&#39;s all about the process
+  h3 It's all about the process
   p
     | Generally, this process considers the structure of each subsystem, and how they
     | interact.
@@ -212,7 +212,7 @@ block content
     strong identification
     | of the subsystems, and assign responsibility,
     | based on the requirements document. Define the relationships between subsystems
-    | and outline their interactions. Use existing design&#x2F;architecture patterns to
+    | and outline their interactions. Use existing design/architecture patterns to
     | ensure the system interactions are clean and consistent.
   p Next comes 
     strong specification
@@ -230,7 +230,7 @@ block content
     | subsystems, meaning each subsystem has one responsibility and utilises other
     | subsystems to delegate other responsibilities required to function.
   p
-    | ❌ Low cohesion means a subsystem&#39;s functionalities have no meaningful
+    | ❌ Low cohesion means a subsystem's functionalities have no meaningful
     | relationship, only in time, i.e., a process may use them in the same block of
     | code.
   p
@@ -244,7 +244,7 @@ block content
     | subsystems. Good coupling allows dependencies to change their implementation
     | without requiring changes to its dependants.
   p
-    | ❌ Strong coupling means subsystems refer to the same global data &#39;area&#39; and the
+    | ❌ Strong coupling means subsystems refer to the same global data 'area' and the
     | internal logic of the subsystem cannot be isolated from the implementation of
     | its subsystems.
   p
@@ -264,13 +264,13 @@ block content
     | an ORM to omit database specifics from the application code.
   p
     span(role="heading") Layering
-    | Partitioning the concerns&#x2F;responsibilities
+    | Partitioning the concerns/responsibilities
     | of a large subsystem into general categories.
   p
     | 🤷‍♂️ Horizontal layering categorises by functional responsibility, e.g.,
     | presentation, business, and data layer. This is referred to N-tier architecture.
   p
-    | 🤷‍♂️ Vertical layering categorises by business&#x2F;domain responsibility, e.g., a
+    | 🤷‍♂️ Vertical layering categorises by business/domain responsibility, e.g., a
     | query, handler, and view model to
     code CreateProduct
     | . One example is onion

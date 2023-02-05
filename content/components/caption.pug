@@ -2,8 +2,8 @@ mixin caption(caption, source= "")
   figure
     .inner: block
 
-  figcaption
-    if source
-      a.source(href=source) Source
-    
-    | #{caption}
+    figcaption
+      if source
+        a.source(href=source) Source
+      
+      | #{caption}

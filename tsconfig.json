@@ -18,5 +18,7 @@
       "@infrastructure": ["./src/infrastructure"],
       "@infrastructure/*": ["./src/infrastructure/*"]
     }
-  }
+  },
+
+  "include": ["./src"]
 }

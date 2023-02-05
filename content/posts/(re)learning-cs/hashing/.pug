@@ -25,7 +25,7 @@ block content
     | value based on the key; we transform this value into an index where we can store
     | some data.
   p
-    | Naturally, we need a backing structure to use the indexes &mdash; an array, cos it&#39;s
+    | Naturally, we need a backing structure to use the indexes &mdash; an array, cos it's
     | hella quick.
   h2 Structures
   p How is hashing used to store data?
@@ -45,7 +45,7 @@ block content
     | hash functions to calculate its indexes and set them to true.
   p The structure is 
     em probabilistic
-    | ; false negatives aren&#39;t possible but false
+    | ; false negatives aren't possible but false
     | positives are, so the precision of a hash map is sacrificed for memory
     | efficiency. For example, for an array of length #[:tex(inline) m], let:
   | :tex
@@ -57,17 +57,17 @@ block content
     | store the frequency of values
     | in an #[:tex(inline) m\times{}k] 2D array.
   p
-    | They&#39;re still probabilistic meaning the frequencies provide an upper limit.
+    | They're still probabilistic meaning the frequencies provide an upper limit.
     | Using the example above, inserting B and L would produce values of 2 at each
     | index so the upper limit of B or L is 2.
   p
-    | Keys with fewer collisions are more accurate but we can&#39;t know which those are
+    | Keys with fewer collisions are more accurate but we can't know which those are
     | 🤔
   h2 Hash Functions
   p A 
     em hash function
     | #[:tex(inline) h(k)] is any function which transforms data of an
-    | arbitrary size into a fixed size. They&#39;re used to compute the index of a key in
+    | arbitrary size into a fixed size. They're used to compute the index of a key in
     | hashing structures.
   p All hash function obey the 
     em equality
@@ -79,11 +79,11 @@ block content
     em inequality
     | property: given two keys
     | of inequal value, their hashes must be unequal. In the real world, this is
-    | difficult to achieve so a &#39;good&#39; hash function minimises
+    | difficult to achieve so a 'good' hash function minimises
     em collisions
     | .
   p
-    | Note: As well as hash tables&#x2F;maps, there are many more uses of hashing including
+    | Note: As well as hash tables/maps, there are many more uses of hashing including
     | cryptography, version control diffs, password storage etc. Common
     | implementations include MD5, SHA-1, and CRC.
   h3 Make It Gud
@@ -123,8 +123,8 @@ block content
         td Indexes are determined algorithmically to account for colliding keys
       tr
         td Hashing
-        td At at key&#39;s index, the key is stored
-        td At a key&#39;s index, a 
+        td At at key's index, the key is stored
+        td At a key's index, a 
           a(href="#Separate-Chaining") separate
           | structure is stored
   h3 Linear Probe
@@ -139,7 +139,7 @@ block content
   p (Open addressing, closed hashing)
   p An issue with linear probing is 
     em clumping
-    | : groups of adjacent indexes. They&#39;re
+    | : groups of adjacent indexes. They're
     a(href="https://stepik.org/lesson/31223/step/11") statistically likely
     | but I never
     | liked stats.
@@ -158,13 +158,13 @@ block content
     | which ensures the values
     | comply with the equality property.
   p
-    | Because good random number generators are computationally expensive, it&#39;s better
+    | Because good random number generators are computationally expensive, it's better
     | to just go with double hashing.
   h3 Supporting Deletion
   p For all the methods above, we need a mechanism to allow for deletion.
   p
     | A naive approach is to follow the same logic until an empty cell is reached;
-    | this means the value isn&#39;t in the hash table and we can move on. However, if
+    | this means the value isn't in the hash table and we can move on. However, if
     | another key has been deleted in the same index, the logic fails as it may stop
     | too early.
   p
@@ -194,7 +194,7 @@ block content
     | uses multiple hash tables #[:tex(inline) T_1, T_2] with different
     | hash functions to reduce the probability of collisions. The algorithm for cuckoo
     | hashing is limited to a maximum number of attempts, usually 10, to ensure we
-    | don&#39;t
+    | don't
     a(href="https://docs.google.com/presentation/d/1uNYS51BNM66GJmM0vDIWnac-Y9VUQxOpYikpJoKXJyo/embed") try forever
     | The algorithm is as follows:
   ol
@@ -207,8 +207,8 @@ block content
   p
     | See this
     a(href="https://docs.google.com/presentation/d/1enss8FYHLN5VfPXA1ODzV0rxnr62lFrUrlURqKnkaj8/embed?start=true&loop=true&delayms=1000") visualisation
-    | if that isn&#39;t so clear.
+    | if that isn't so clear.
   p
-    | Cuckoo hashing is #[:tex(inline) \mathcal{O}(1)] for find &amp; delete operations &mdash; if the key isn&#39;t
-    | at #[:tex(inline) H_1(K)] or #[:tex(inline) H_2(K)] then it isn&#39;t in the table.
+    | Cuckoo hashing is #[:tex(inline) \mathcal{O}(1)] for find & delete operations &mdash; if the key isn't
+    | at #[:tex(inline) H_1(K)] or #[:tex(inline) H_2(K)] then it isn't in the table.
   

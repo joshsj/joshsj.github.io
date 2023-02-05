@@ -59,7 +59,7 @@ block content
     code user-secrets
     | to store secure data at
     | development-time instead:
-    code $ dotnet user-secrets set &quot;Favourites:Food&quot; &quot;Banana&quot;
+    code $ dotnet user-secrets set "Favourites:Food" "Banana"
     | .
   p
     | For production, Azure Key Vault can be implemented with the
@@ -72,7 +72,7 @@ block content
     code IConfiguration
     strong can
     | be injected, using getters with magic
-    | string&#x2F;static constant strings isn&#39;t ideal. The Options pattern is much cleaner
+    | string/static constant strings isn't ideal. The Options pattern is much cleaner
     | and robust, using models matching the structure of configuration data.
   +caption("Basic Options registration")
     include:cs caption2.cs
@@ -80,13 +80,13 @@ block content
   p The standard 
     code Configure
     | method registers a singleton. Alternatively, the
-    code IOptionsSnapshot&lt;&gt;
+    code IOptionsSnapshot<>
     | interface registers configs as scoped dependencies which
     | provides the latest configuration data on construction.
   p For the latest data every time, use the 
     code CurrentValue
     | property offered by
-    code IOptionsMonitor&lt;&gt;
+    code IOptionsMonitor<>
     | .
   h2 Validation
   p The extension method 

@@ -34,12 +34,12 @@ block content
     a(href="#Layering") layering
     | is a big point of discussion.
     | Traditionally, the approach has been horizontal but trends indicate this is
-    | changing. Naturally, the implementation&#39;s context is a factor in this decision,
+    | changing. Naturally, the implementation's context is a factor in this decision,
     | as the language itself along with its frameworks can make development easier.
   p
     | Another concern is domain logic and authorization; where does it belong:
     | database or backend application code? Should the UI apply the same rules to hide
-    | inoperable&#x2F;unavailable paths? (Yes).
+    | inoperable/unavailable paths? (Yes).
   h2 Trends in Architecture
   p
     | Traditionally enterprise applications have been developed as monoliths: (very)
@@ -95,7 +95,7 @@ block content
     | Enterprise software (almost) always consists of three principle layers, although
     | different architecture patterns will use different terminology.
   h3 Presentation
-  p How the product is &#39;exposed&#39;.
+  p How the product is 'exposed'.
   p
     | For client-facing exposure, i.e., user interfaces, the Model-View-Controller
     | (MVC) pattern is the most widely used pattern, with Model-View-ViewModel (MVVM)
@@ -122,7 +122,7 @@ block content
     | .
   p
     | However, for newer approaches like domain-driven design (DDD) considers these
-    | models &#39;anaemic&#39;, and instead poses...
+    | models 'anaemic', and instead poses...
   p
     | Rich domain models store complex business logic inside instances. They do not
     | necessarily map directly to a database object, and as such require an additional
@@ -130,9 +130,9 @@ block content
   h3 Data
   p Also known as 
     em persistence
-    | , it&#39;s the mapping of domain models to persistable
+    | , it's the mapping of domain models to persistable
     | objects like documents or relational tables. It also exposes operations to
-    | access the domain models (e.g., &#39;find&#39; &#39;insert&#39;,
+    | access the domain models (e.g., 'find' 'insert',
     code delete
     | )
   h2 Concurrency
@@ -143,14 +143,14 @@ block content
     em optimistic lock
     | use a timestamp or version field to ensure one session
     | cannot commit changes to field(s) if another session has updated since. This
-    | allows multiple sessions to update records at the &#39;same time&#39;, however the
+    | allows multiple sessions to update records at the 'same time', however the
     | integrity of the data can be warped from a business perspective e.g., if a user
     | updates a field after considering the value other another field which has since
     | been updated.
   p Preventing all concurrent access is achieved with a 
     em pessimistic lock
     | , which
-    | prevents simultaneous. reads and&#x2F;or writes, usually at a database level. This
+    | prevents simultaneous. reads and/or writes, usually at a database level. This
     | however can create deadlocks.
   h2 Integration
   p
@@ -169,7 +169,7 @@ block content
         li Negates conflicts with changes to standards
     li Non-proprietary technologies
       ul
-        li Eliminate specialised software&#x2F;hardware
+        li Eliminate specialised software/hardware
     li (A)synchronicity s
       ul
         li Simplifies the interop with other applications
@@ -192,7 +192,7 @@ block content
     | Database replication is used to reduce an applications access to a dataset by
     | replicating a subset of a database to another. This accommodates for simple
     | business needs, e.g., a parent application updating the dataset for a child
-    | periodically. It&#39;s also beneficial for security reasons, i.e., a product
+    | periodically. It's also beneficial for security reasons, i.e., a product
     | catalogue production system need not know about personnel.
   h3 Remote Procedure Invocation (RPI)
   p
