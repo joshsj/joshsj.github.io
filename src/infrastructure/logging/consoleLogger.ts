@@ -1,4 +1,4 @@
-import { Log } from "@application/logging";
+import { Log } from "@common/logging";
 
 const consoleLogger = (context?: string): Log => {
   context = context ? ` [${context}] ` : " ";

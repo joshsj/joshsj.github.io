@@ -1,13 +1,13 @@
 import path from "path";
-import { Step } from "@lib/pipeline";
-import { Log } from "@application/logging";
-import { Config, ConfigKey } from "@domain";
-import { LoadConfigResult } from "@application/steps";
+import { UpdateConfigResult } from "@features/pipelines/config";
+import { Log } from "@common/logging";
+import { Step } from "@common/pipeline";
+import { Config, Key } from "@entities/config";
 
-type Env = { [K in `${Uppercase<ConfigKey>}_DIR`]?: string };
+type Env = { [K in `${Uppercase<Key>}_DIR`]?: string };
 
 const loadEnv =
-  (log: Log): Step<LoadConfigResult, LoadConfigResult> =>
+  (log: Log): Step<UpdateConfigResult, UpdateConfigResult> =>
   async ({ config: _default }) => {
     const env = process.env as Env;
     const rootDir = env.ROOT_DIR || _default.rootDir;

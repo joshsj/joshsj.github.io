@@ -1,52 +1,61 @@
-import { getCategory } from "@application/categorisation";
-import { getExtractors } from "@application/extraction/getExtractors";
-import { getRenderContext as _getRenderContext } from "@application/rendering/getRenderContext";
-import { getRenderers } from "@application/rendering/getRenderers";
-import { ReadSourceState } from "@application/steps";
+import { makeBuilders } from "@common/builder";
+import { makeDefaultExtractors, makeExtractors } from "@common/extraction";
+import { makeNameFor } from "@common/identification/nameFor";
+import { makeLocators } from "@common/locator";
+import { pipeline } from "@common/pipeline";
+import { makeGetRenderContext, makeRenderers } from "@common/rendering";
+import { FeatureStore } from "@common/stores";
+import { Config } from "@entities/config";
+import { makeAssetIdentifier } from "@features/asset/assetIdentifier";
+import { makeCollectionIdentifier } from "@features/collection/collectionIdentifier";
+import { makePageIdentifier } from "@features/page/pageIdentifier";
 import {
-  categoriseFiles,
   extractData,
+  identifyFiles,
   readSource,
+  ReadSourceState,
   transformFiles,
-  updateSiteContext,
+  updateStore,
   writeBuild,
-} from "@application/steps/build";
-import { setDefaultConfig } from "@application/steps/config";
-import { SiteContext } from "@application/steps/context";
-import { getBuilders } from "@application/transformation/getBuilders";
-import { locators } from "@application/transformation/locators";
-import { Config } from "@domain";
+} from "@features/pipelines/build";
+import { setDefaultConfig } from "@features/pipelines/config";
+import { makePostIdentifier } from "@features/post/postIdentifier";
 import { io } from "@infrastructure/io";
-import { consoleLogger as logger } from "@infrastructure/logging";
+import { consoleLogger } from "@infrastructure/logging";
 import { loadArgv, loadEnv } from "@infrastructure/steps";
-import { pipeline } from "@lib/pipeline";
 import { watch } from "chokidar";
 import { benchmarkSteps } from "./entry/benchmark";
 import { watchIndicator } from "./entry/watchIndicator";
 
 const buildGetConfig = () => {
-  const log = logger("config");
+  const log = consoleLogger("config");
+
   return pipeline().add(setDefaultConfig(log)).add(loadArgv).add(loadEnv(log)).build();
 };
 
 const buildGenerate = (config: Config) => {
   const { benchmarkStart, benchmarkEnd } = benchmarkSteps();
 
-  const log = config.debug ? logger("build") : () => {};
-  const siteContext: SiteContext = [];
+  const log = config.debug ? consoleLogger("build") : () => {};
+  const store: FeatureStore = [];
 
-  const getRenderContext = _getRenderContext(siteContext, locators);
-  const renderers = getRenderers(getRenderContext, config);
-  const extractors = getExtractors(renderers);
-  const builders = getBuilders(renderers);
+  const identifiers = [makeAssetIdentifier, makePageIdentifier, makePostIdentifier, makeCollectionIdentifier].map((i) =>
+    i(config)
+  );
+  const nameFor = makeNameFor(identifiers);
+  const locators = makeLocators(config);
+  const getRenderContext = makeGetRenderContext(store, locators);
+  const renderers = makeRenderers(getRenderContext, config);
+  const extractors = makeExtractors(makeDefaultExtractors(), renderers);
+  const builders = makeBuilders(renderers);
 
   const buildPipeline = pipeline<ReadSourceState>()
     .add(benchmarkStart)
     .add(readSource(io, log, config))
-    .add(categoriseFiles(getCategory, log, config))
+    .add(identifyFiles(nameFor, log))
     .add(extractData(extractors, log))
-    .add(updateSiteContext(siteContext, io, log))
-    .add(transformFiles(siteContext, locators, builders, log))
+    .add(updateStore(store, io, log))
+    .add(transformFiles(store, locators, builders, log))
     .add(writeBuild(io, log, config))
     .add(benchmarkEnd);
 

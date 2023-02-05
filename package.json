@@ -26,7 +26,9 @@
   "_moduleAliases": {
     "@lib": "build/generator/lib",
     "@domain": "build/generator/domain",
-    "@application": "build/generator/application",
-    "@infrastructure": "build/generator/infrastructure"
+    "@common": "build/generator/common",
+    "@infrastructure": "build/generator/infrastructure",
+    "@features": "build/generator/features",
+    "@entities": "build/generator/entities"
   }
 }

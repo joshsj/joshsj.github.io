@@ -1,9 +1,9 @@
-import { LoadConfigResult } from "@application/steps";
-import { Step } from "@lib/pipeline";
+import { Step } from "@common/pipeline";
+import { UpdateConfigResult } from "@features/pipelines/config";
 
 const isSet = (arg: string) => process.argv.includes(`--${arg}`);
 
-const loadArgv: Step<LoadConfigResult, LoadConfigResult> = async ({ config }) => {
+const loadArgv: Step<UpdateConfigResult, UpdateConfigResult> = async ({ config }) => {
   config.watch = isSet("watch");
   config.debug = isSet("debug");
 

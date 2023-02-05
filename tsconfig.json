@@ -13,10 +13,14 @@
       "@lib/*": ["./src/lib/*"],
       "@domain": ["./src/domain"],
       "@domain/*": ["./src/domain/*"],
-      "@application": ["./src/application"],
-      "@application/*": ["./src/application/*"],
       "@infrastructure": ["./src/infrastructure"],
-      "@infrastructure/*": ["./src/infrastructure/*"]
+      "@infrastructure/*": ["./src/infrastructure/*"],
+      "@features": ["./src/features"],
+      "@features/*": ["./src/features/*"],
+      "@entities": ["./src/entities"],
+      "@entities/*": ["./src/entities/*"],
+      "@common": ["./src/common"],
+      "@common/*": ["./src/common/*"]
     }
   },
 
