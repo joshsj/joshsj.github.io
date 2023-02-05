@@ -8,14 +8,16 @@ type Directory = Readonly<{
   with(patch: Partial<Directory>): Directory;
 }>;
 
-type Values = Pick<Directory, "segments" | "sep">;
+type Values = Pick<Directory, "segments"> & Partial<Pick<Directory, "sep">>;
 
-const directory = ({ segments, sep }: Values): Directory => {
+const directory = (values: Values): Directory => {
+  const sep = values.sep ?? _path.sep;
+
   const d: Directory = {
-    segments,
+    segments: values.segments,
     sep,
-    directory: segments.join(sep),
-    full: segments.join(sep),
+    directory: values.segments.join(sep),
+    full: values.segments.join(sep),
     with(patch) {
       return directory({ ...d, ...patch });
     },

@@ -11,12 +11,12 @@ type RenderHelpers = {
   formatDateTime: FormatDateTime;
 };
 
-type SiteContext = Something[];
-
-type RenderContextData = Readonly<{
+type RenderData = Readonly<{
   [K in Exclude<SomethingCategory, "postAsset"> as `${K}s`]: SomethingFor<K>[];
 }>;
 
-type RenderContext = { current: Something } & RenderHelpers & RenderContextData;
+type RenderContext = RenderHelpers & RenderData;
 
-export { UrlFor, SiteContext, RenderHelpers, RenderContextData, RenderContext };
+type SiteContext = Something[];
+
+export { UrlFor, SiteContext, RenderHelpers, RenderData, RenderContext };

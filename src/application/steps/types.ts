@@ -13,6 +13,8 @@ type CategoriseFilesResult = { files: CategorisedFile[] };
 
 type ExtractDataResult = { somethings: Something[] };
 
+type UpdateSiteContextResult = void;
+
 type TransformFilesResult = { buildFiles: File[] };
 
 export {
@@ -22,5 +24,6 @@ export {
   CategorisedFile,
   CategoriseFilesResult,
   ExtractDataResult,
+  UpdateSiteContextResult,
   TransformFilesResult,
 };

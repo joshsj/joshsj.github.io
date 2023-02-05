@@ -13,13 +13,14 @@ type File = Omit<Directory, "with"> &
     with(patch?: Partial<File>): File;
   }>;
 
-type Values = Pick<File, "segments" | "sep" | "name" | "extension" | "content" | "encoding">;
+type Values = Pick<File, "segments" | "name" | "extension" | "content" | "encoding"> & Partial<Pick<File, "sep">>;
 
 const file = (values: Values): File => {
-  const { segments, sep, encoding } = values;
+  const { segments, encoding } = values;
   const { directory, full } = _directory(values);
 
   const base = `${values.name}${values.extension}`;
+  const sep = values.sep ?? _path.sep;
 
   const f: File = {
     segments,
@@ -55,7 +56,6 @@ const fileFrom = (path: string): File => {
 
   return file({
     segments: dir.split(_path.sep),
-    sep: _path.sep,
     name,
     extension: ext,
     content: "",

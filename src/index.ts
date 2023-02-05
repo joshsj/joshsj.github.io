@@ -1,26 +1,28 @@
-import { pipeline } from "@lib/pipeline";
-import { io } from "@infrastructure/io";
 import { getCategory } from "@application/categorisation";
-import { consoleLogger as logger } from "@infrastructure/logging";
+import { getExtractors } from "@application/extraction/getExtractors";
+import { getRenderContext as _getRenderContext } from "@application/rendering/getRenderContext";
+import { getRenderers } from "@application/rendering/getRenderers";
+import { ReadSourceState } from "@application/steps";
 import {
   categoriseFiles,
   extractData,
   readSource,
   transformFiles,
-  updateContext,
+  updateSiteContext,
   writeBuild,
 } from "@application/steps/build";
-import { watch } from "chokidar";
+import { setDefaultConfig } from "@application/steps/config";
+import { SiteContext } from "@application/steps/context";
+import { getBuilders } from "@application/transformation/getBuilders";
+import { locators } from "@application/transformation/locators";
+import { Config } from "@domain";
+import { io } from "@infrastructure/io";
+import { consoleLogger as logger } from "@infrastructure/logging";
 import { loadArgv, loadEnv } from "@infrastructure/steps";
+import { pipeline } from "@lib/pipeline";
+import { watch } from "chokidar";
 import { benchmarkSteps } from "./entry/benchmark";
 import { watchIndicator } from "./entry/watchIndicator";
-import { extractors } from "@application/extraction";
-import { transformers } from "@application/transformation";
-import { getHelpers } from "@application/context/getHelpers";
-import { Config } from "@domain";
-import { SiteContext } from "@application/steps/context";
-import { setDefaultConfig } from "@application/steps/config";
-import { ReadSourceState } from "@application/steps";
 
 const buildGetConfig = () => {
   const log = logger("config");
@@ -33,13 +35,18 @@ const buildGenerate = (config: Config) => {
   const log = config.debug ? logger("build") : () => {};
   const siteContext: SiteContext = [];
 
+  const getRenderContext = _getRenderContext(siteContext, locators);
+  const renderers = getRenderers(getRenderContext, config);
+  const extractors = getExtractors(renderers);
+  const builders = getBuilders(renderers);
+
   const buildPipeline = pipeline<ReadSourceState>()
     .add(benchmarkStart)
     .add(readSource(io, log, config))
     .add(categoriseFiles(getCategory, log, config))
     .add(extractData(extractors, log))
-    .add(updateContext(siteContext))
-    .add(transformFiles(siteContext, transformers(config), getHelpers(transformers(config)), log))
+    .add(updateSiteContext(siteContext, io, log))
+    .add(transformFiles(siteContext, locators, builders, log))
     .add(writeBuild(io, log, config))
     .add(benchmarkEnd);
 

@@ -1,12 +1,11 @@
-import { SomethingCategory } from "@domain";
+import { Something, SomethingCategory } from "@domain";
 import { File } from "@domain/io";
-import { RenderContext } from "@application/steps/context";
 
-type Transformer = {
-  location: (file: File) => File;
-  content: (context: RenderContext) => string;
-};
+type Locator = (file: File) => File;
+type Builder = (something: Something) => Promise<string>;
 
-type Transformers = { [K in SomethingCategory]: Transformer };
+type Locators = { [K in SomethingCategory]: Locator | undefined };
 
-export { Transformer, Transformers };
+type Builders = { [K in SomethingCategory]: Builder | undefined };
+
+export { Locator, Locators, Builder, Builders };

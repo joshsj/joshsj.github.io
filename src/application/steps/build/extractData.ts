@@ -8,7 +8,7 @@ const extractData =
   (extractors: Extractors, log: Log): Step<CategoriseFilesResult, ExtractDataResult> =>
   async ({ files }) => {
     const extract = async (file: CategorisedFile) => {
-      const { content, data } = extractors[file.category](file);
+      const { content, data } = await extractors[file.category](file);
 
       return { category: file.category, file: file.with({ content }), ...data };
     };

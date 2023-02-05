@@ -1,2 +1,2 @@
 export * from "./types";
-export * from "./extractors";
+export * from "./getExtractors";

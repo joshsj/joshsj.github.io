@@ -8,6 +8,7 @@
     "clean": "rimraf build"
   },
   "dependencies": {
+    "@types/js-yaml": "^4.0.5",
     "@types/node": "^18.11.18",
     "@types/prismjs": "^1.26.0",
     "@types/pug": "^2.0.6",
@@ -15,6 +16,7 @@
     "chokidar": "^3.5.3",
     "dotenv": "^16.0.3",
     "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
     "module-alias": "^2.2.2",
     "prismjs": "^1.29.0",
     "pug": "^3.0.2",

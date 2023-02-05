@@ -1,0 +1,16 @@
+---
+title: "Collections"
+---
+
+extends /layouts/default.pug
+
+block content
+
+  p Articles with friends.
+
+  ul
+    each collection in collections
+      li
+        p #{collection.title}
+
+        p !{collection.description}

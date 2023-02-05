@@ -1,37 +1,38 @@
 import { Log } from "@application/logging";
-import { Transformers } from "@application/transformation";
-import { Asset, Page, Post, Something } from "@domain";
+import { TransformFilesResult, UpdateSiteContextResult } from "@application/steps";
+import { SiteContext } from "@application/steps/context";
+import { Builders, Locators } from "@application/transformation";
+import { File } from "@domain/io";
 import { Step } from "@lib/pipeline";
-import { dateComparer, isFulfilled, isRejected } from "@lib/utils";
-import { ExtractDataResult, TransformFilesResult } from "@application/steps";
-import { GetRenderHelpers } from "@application/context";
-import { RenderContext, RenderContextData, SiteContext } from "@application/steps/context";
+import { isFulfilled, isRejected } from "@lib/utils";
 
 const transformFiles =
   (
-    context: SiteContext,
-    transformers: Transformers,
-    getHelpers: GetRenderHelpers,
+    siteContext: SiteContext,
+    locators: Locators,
+    builders: Builders,
     log: Log
-  ): Step<ExtractDataResult, TransformFilesResult> =>
+  ): Step<UpdateSiteContextResult, TransformFilesResult> =>
   async () => {
-    const helpers = getHelpers(context);
-    const renderContextData = getRenderContext(context);
-
-    const toRenderContext = (current: Something): RenderContext => ({ current, ...renderContextData, ...helpers });
-
     const results = await Promise.allSettled(
-      context.map(async (s) => {
-        const { location, content } = transformers[s.category];
-        const renderContext = toRenderContext(s);
+      siteContext.map(async (x) => {
+        const locator = locators[x.category];
+        const builder = builders[x.category];
 
-        return location(s.file).with({ content: content(renderContext) });
+        if (!(locator && builder)) {
+          return undefined;
+        }
+
+        return locator(x.file).with({ content: await builder(x) });
       })
     );
 
-    const buildFiles = results.filter(isFulfilled).map((r) => r.value);
+    const buildFiles = results
+      .filter(isFulfilled)
+      .map((r) => r.value)
+      .filter((x): x is File => !!x);
 
-    log(`Successfully transformed ${buildFiles.length}/${context.length} files`);
+    log(`Successfully transformed ${buildFiles.length}/${siteContext.length} files`);
 
     log(
       "Failures",
@@ -40,16 +41,5 @@ const transformFiles =
 
     return { buildFiles };
   };
-
-const getRenderContext = (context: SiteContext): RenderContextData => {
-  const assets = context.filter((x): x is Asset => x.category === "asset");
-  const pages = context.filter((x): x is Page => x.category === "page");
-  const posts = context
-    .filter((x): x is Post => x.category === "post")
-    .sort((a, b) => dateComparer(a.created, b.created))
-    .reverse();
-
-  return { assets, pages, posts };
-};
 
 export { transformFiles };

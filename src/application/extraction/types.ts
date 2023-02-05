@@ -7,8 +7,8 @@ type Extracted = {
   data: any;
 };
 
-type Extractor = (file: File) => Extracted;
+type Extractor = (file: File) => Promise<Extracted>;
 
 type Extractors = { [K in SomethingCategory]: Extractor };
 
-export { Extractor, Extractors };
+export { Extracted, Extractor, Extractors };

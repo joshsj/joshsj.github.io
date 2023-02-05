@@ -10,8 +10,5 @@ block content
 
   ul
     each post in posts
-      li
-        p: a(href=urlFor(post)) #{post.title}
-
-        p #{formatDate(post.created)}
+      li: p #[a(href=urlFor(post)) #{post.title}] (#{formatDate(post.created)})
 
