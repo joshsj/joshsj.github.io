@@ -1,27 +1,15 @@
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
-import { normalize } from "path";
-import { UpdateConfigResult } from ".";
+import { Config } from "@entities/config";
 
-const setDefaultConfig =
-  (log: Log): Step<void, UpdateConfigResult> =>
+type SetDefaultConfigResult = { config: Config };
+
+const makeSetDefaultConfig =
+  (config: Config, log: Log): Step<void, SetDefaultConfigResult> =>
   async () => {
     log("Set default configuration");
 
-    return {
-      config: {
-        rootDir: normalize(process.cwd()),
-        sourceDir: ".",
-        buildDir: ".",
-        assetDir: "public",
-        pageDir: "pages",
-        postDir: "posts",
-
-        debug: false,
-        watch: false,
-        draft: false,
-      },
-    };
+    return { config };
   };
 
-export { setDefaultConfig };
+export { SetDefaultConfigResult, makeSetDefaultConfig };

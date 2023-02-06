@@ -1,0 +1,18 @@
+mixin postDetails(post)
+
+  p Posted on #{formatDate(post.created)}
+
+  //- TODO remove once same updated dates are removed
+  if post.updated
+    p.squish Updated on #{formatDate(post.updated)}
+    
+  if post.collection
+    p.squish Part of 
+      a(href=urlFor("page", "collections")) #{collections.find(c => c.file.segments[1] === post.collection).title}
+
+  if post.tags
+    p.squish.sep.sep-pop
+      span.skip Talks about
+
+      each tag in post.tags
+        span #{tag}

@@ -6,4 +6,4 @@ type Key = Extract<FeatureName, "asset" | "page" | "post"> | "source" | "build" 
 
 type Config = { [K in `${Key}Dir`]: string } & { [K in Flag]: boolean };
 
-export { Key, Config };
+export { Flag, Key, Config };

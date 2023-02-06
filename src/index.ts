@@ -12,10 +12,9 @@ import {
   updateStore,
   writeBuild,
 } from "@features/pipelines/generate";
-import { setDefaultConfig } from "@features/pipelines/config";
 import { io } from "@infrastructure/io";
 import { consoleLogger } from "@infrastructure/logging";
-import { loadArgv, loadEnv } from "@infrastructure/steps";
+import { makeEnvConfigProvider, makeArgvConfigProvider } from "@infrastructure/pipeline/config";
 import { watch } from "chokidar";
 import { benchmarkSteps } from "./entry/benchmark";
 import { watchIndicator } from "./entry/watchIndicator";
@@ -26,11 +25,32 @@ import { makePageIdentifier } from "@features/page";
 import { makePostIdentifier } from "@features/post";
 import { makeCollectionIdentifier } from "@features/collection";
 import { makeBuilders } from "@common/building";
+import { makeApplyConfigurationProviders, makeSetDefaultConfig } from "@features/pipelines/config";
+import { normalize } from "path";
 
 const buildGetConfig = () => {
   const log = consoleLogger("config");
 
-  return pipeline().add(setDefaultConfig(log)).add(loadArgv).add(loadEnv(log)).build();
+  const defaultConfig: Config = {
+    rootDir: normalize(process.cwd()),
+    sourceDir: ".",
+    buildDir: ".",
+    assetDir: "public",
+    pageDir: "pages",
+    postDir: "posts",
+    debug: false,
+    watch: false,
+    draft: false,
+  };
+
+  const setDefaultConfig = makeSetDefaultConfig(defaultConfig, log);
+
+  const applyConfigurationProviders = makeApplyConfigurationProviders([
+    makeEnvConfigProvider(log),
+    makeArgvConfigProvider(log),
+  ]);
+
+  return pipeline().add(setDefaultConfig).add(applyConfigurationProviders).build();
 };
 
 const buildGenerate = (config: Config) => {
