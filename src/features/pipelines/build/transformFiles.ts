@@ -1,5 +1,5 @@
-import { Builders } from "@common/builder";
-import { Locators } from "@common/locator";
+import { Builders } from "@common/building";
+import { Locators } from "@common/locating";
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { FeatureStore } from "@common/stores";

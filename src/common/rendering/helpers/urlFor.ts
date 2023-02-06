@@ -1,4 +1,4 @@
-import { Locators } from "@common/locator";
+import { Locators } from "@common/locating";
 import { FeatureStore } from "@common/stores";
 import { Feature, FeatureName } from "@entities";
 

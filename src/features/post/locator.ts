@@ -1,4 +1,4 @@
-import { Locator } from "@common/locator";
+import { Locator } from "@common/locating";
 
 const postLocator: Locator = (file) =>
   file.with({

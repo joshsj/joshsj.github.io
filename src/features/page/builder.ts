@@ -1,9 +1,9 @@
-import { Builder } from "@common/builder";
+import { Builder } from "@common/building";
 import { Renderers } from "@common/rendering";
 
-const makePostBuilder =
+const makePageBuilder =
   ({ pug }: Renderers): Builder =>
   async (f) =>
     await pug(f);
 
-export { makePostBuilder };
+export { makePageBuilder };

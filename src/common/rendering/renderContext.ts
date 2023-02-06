@@ -1,4 +1,4 @@
-import { Locators } from "@common/locator";
+import { Locators } from "@common/locating";
 import { FeatureStore } from "@common/stores";
 import { dateComparer } from "@common/utilities/comparers";
 import {

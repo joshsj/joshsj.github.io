@@ -1,4 +1,4 @@
-import { Locator } from "@common/locator";
+import { Locator } from "@common/locating";
 import { Config } from "@entities/config";
 
 const makeAssetLocator =

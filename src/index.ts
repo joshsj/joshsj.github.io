@@ -1,14 +1,8 @@
-import { makeBuilders } from "@common/builder";
-import { makeDefaultExtractors, makeExtractors } from "@common/extraction";
-import { makeNameFor } from "@common/identification/nameFor";
-import { makeLocators } from "@common/locator";
+import { makeNameFor } from "@common/identification";
 import { pipeline } from "@common/pipeline";
 import { makeGetRenderContext, makeRenderers } from "@common/rendering";
 import { FeatureStore } from "@common/stores";
 import { Config } from "@entities/config";
-import { makeAssetIdentifier } from "@features/asset/assetIdentifier";
-import { makeCollectionIdentifier } from "@features/collection/collectionIdentifier";
-import { makePageIdentifier } from "@features/page/pageIdentifier";
 import {
   extractData,
   identifyFiles,
@@ -19,13 +13,19 @@ import {
   writeBuild,
 } from "@features/pipelines/build";
 import { setDefaultConfig } from "@features/pipelines/config";
-import { makePostIdentifier } from "@features/post/postIdentifier";
 import { io } from "@infrastructure/io";
 import { consoleLogger } from "@infrastructure/logging";
 import { loadArgv, loadEnv } from "@infrastructure/steps";
 import { watch } from "chokidar";
 import { benchmarkSteps } from "./entry/benchmark";
 import { watchIndicator } from "./entry/watchIndicator";
+import { makeDefaultExtractors, makeExtractors } from "@common/extraction/makeExtractors";
+import { makeLocators } from "@common/locating/makeLocators";
+import { makeAssetIdentifier } from "@features/asset";
+import { makePageIdentifier } from "@features/page";
+import { makePostIdentifier } from "@features/post";
+import { makeCollectionIdentifier } from "@features/collection";
+import { makeBuilders } from "@common/building";
 
 const buildGetConfig = () => {
   const log = consoleLogger("config");
