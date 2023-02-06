@@ -24,8 +24,15 @@ const makeUrlFor = (store: FeatureStore, locators: Locators): UrlFor => {
       throw new Error(`urlFor failed with: ${cos}, ${filename}`);
     }
 
-    const { full, sep } = locator(feature.file);
-    const url = (full.startsWith(sep) ? full : sep + full).replace("index.html", "");
+    let { full: url, sep } = locator(feature.file);
+
+    // Ensure starts at root
+    if (url.at(0) !== sep) {
+      url = sep + url;
+    }
+
+    // Remove more ugly
+    url = url.replace("index.html", "");
 
     return cache.set(feature, url).get(feature)!;
   };

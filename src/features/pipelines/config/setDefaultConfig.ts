@@ -19,6 +19,7 @@ const setDefaultConfig =
 
         debug: false,
         watch: false,
+        draft: false,
       },
     };
   };

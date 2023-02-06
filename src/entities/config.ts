@@ -1,6 +1,6 @@
 import { FeatureName } from "@entities";
 
-type Flag = "watch" | "debug";
+type Flag = "watch" | "debug" | "draft";
 
 type Key = Extract<FeatureName, "asset" | "page" | "post"> | "source" | "build" | "root";
 

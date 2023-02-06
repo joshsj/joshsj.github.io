@@ -21,6 +21,7 @@ type PostData = {
   updated?: Date;
   tags?: string[];
   collection?: string;
+  draft?: boolean;
 };
 
 type Post = Make<"post", PostData>;

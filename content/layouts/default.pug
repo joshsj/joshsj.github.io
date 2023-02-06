@@ -58,15 +58,20 @@ html
     main.content
       h1 #{current.displayTitle || current.title}
 
-      if current.category === "post"
+      if current.name === "post"
         p Posted on #{formatDate(current.created)}
 
         //- TODO remove once same updated dates are removed
         //- JS dates are shit
         if current.updated && current.created.getTime() !== current.updated.getTime()
           p.squish Updated on #{formatDate(current.updated)}
+          
+        if current.collection
+          p.squish 
+            | Part of 
+            a(href=urlFor("page", "collections")) #{collections.find(c => c.segments[1].name === current.collection).title}
 
-        if (current.tags)
+        if current.tags
           p.squish.sep.sep-pop
             span.skip Talks about
             each tag in current.tags

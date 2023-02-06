@@ -10,7 +10,6 @@ import {
   formatTime,
 } from "@common/utilities/formatting";
 import { Asset, Collection, FeatureFor, FeatureName, Page, Post } from "@entities";
-
 import { makeUrlFor, UrlFor } from "./helpers";
 
 type RenderHelpers = {

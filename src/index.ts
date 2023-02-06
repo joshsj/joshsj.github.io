@@ -54,7 +54,7 @@ const buildGenerate = (config: Config) => {
     .add(readSource(io, log, config))
     .add(identifyFiles(nameFor, log))
     .add(extractData(extractors, log))
-    .add(updateStore(store, io, log))
+    .add(updateStore(store, io, log, config))
     .add(transformFiles(store, locators, builders, log))
     .add(writeBuild(io, log, config))
     .add(benchmarkEnd);

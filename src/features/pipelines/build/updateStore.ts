@@ -2,13 +2,18 @@
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { FeatureStore } from "@common/stores";
+import { Config } from "@entities/config";
 import { file } from "@entities/io";
 import { ExtractDataResult } from "./extractData";
 
 const updateStore =
-  (store: FeatureStore, io: IO, log: Log): Step<ExtractDataResult, void> =>
+  (store: FeatureStore, io: IO, log: Log, config: Config): Step<ExtractDataResult, void> =>
   async ({ features }) => {
     for (const feature of features) {
+      if (feature.name === "post" && feature.draft && !config.draft) {
+        continue;
+      }
+
       const index = store.findIndex((x) => x.file.full === feature.file.full);
 
       if (index > -1) {

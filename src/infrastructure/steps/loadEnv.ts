@@ -24,6 +24,7 @@ const loadEnv =
 
       watch: _default.watch,
       debug: _default.debug,
+      draft: _default.draft,
     };
 
     log("Loaded env into config", [config]);

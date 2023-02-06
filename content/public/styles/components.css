@@ -8,6 +8,12 @@
   margin-top: var(--space-1);
 }
 
+.cards > .card + .card {
+  margin-top: var(--space-4);
+  border-top: 0.2rem solid var(--light-grey);
+  padding-top: var(--space-4);
+}
+
 .card > :not(:first-child, .squish) {
   margin-top: var(--space-1);
 }
