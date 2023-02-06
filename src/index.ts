@@ -11,7 +11,7 @@ import {
   transformFiles,
   updateStore,
   writeBuild,
-} from "@features/pipelines/build";
+} from "@features/pipelines/generate";
 import { setDefaultConfig } from "@features/pipelines/config";
 import { io } from "@infrastructure/io";
 import { consoleLogger } from "@infrastructure/logging";
@@ -70,12 +70,12 @@ const main = async () => {
   const getConfig = buildGetConfig();
   const { config } = await getConfig();
 
-  const build = buildGenerate(config);
+  const generate = buildGenerate(config);
 
-  await build({ sourcePaths: [] });
+  await generate({ sourcePaths: [] });
 
   if (config.watch) {
-    const onChange = (p: string) => build({ sourcePaths: [p] });
+    const onChange = (p: string) => generate({ sourcePaths: [p] });
 
     watch("**/*", { cwd: config.sourceDir, ignoreInitial: true }).on("add", onChange).on("change", onChange);
   }
