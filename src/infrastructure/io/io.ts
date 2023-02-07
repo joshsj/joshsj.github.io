@@ -26,12 +26,16 @@ const io: IO = {
     await writeFile(path.join(dir, file.base), file.content ?? "", { encoding: file.encoding });
   },
 
-  async read(file, encoding, root = "") {
-    return await readFile(path.join(root, file.full), encoding);
+  async read(file, root = "") {
+    return await readFile(path.join(root, file.full), file.encoding);
   },
 
   async *walk(root: string) {
     yield* _walk(root);
+  },
+
+  cwd() {
+    return process.cwd();
   },
 };
 

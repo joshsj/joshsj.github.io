@@ -26,25 +26,12 @@ import { makePostIdentifier } from "@features/post";
 import { makeCollectionIdentifier } from "@features/collection";
 import { makeBuilders } from "@common/building";
 import { makeApplyConfigurationProviders, makeSetDefaultConfig } from "@features/pipelines/config";
-import { normalize } from "path";
+import { IO } from "@common/io";
 
-const buildGetConfig = () => {
+const buildGetConfig = (io: IO) => {
   const log = consoleLogger("config");
 
-  const defaultConfig: Config = {
-    rootDir: normalize(process.cwd()),
-    sourceDir: ".",
-    buildDir: ".",
-    assetDir: "public",
-    pageDir: "pages",
-    postDir: "posts",
-    debug: false,
-    watch: false,
-    draft: false,
-  };
-
-  const setDefaultConfig = makeSetDefaultConfig(defaultConfig, log);
-
+  const setDefaultConfig = makeSetDefaultConfig(io, log);
   const applyConfigurationProviders = makeApplyConfigurationProviders([
     makeEnvConfigProvider(log),
     makeArgvConfigProvider(log),
@@ -87,7 +74,7 @@ const buildGenerate = (config: Config) => {
 };
 
 const main = async () => {
-  const getConfig = buildGetConfig();
+  const getConfig = buildGetConfig(io);
   const { config } = await getConfig();
 
   const generate = buildGenerate(config);

@@ -1,7 +1,7 @@
-import { Directory, directory as _directory } from "./directory";
 import _path from "path";
-
-type Encoding = Extract<BufferEncoding, "utf8" | "binary">;
+import { Directory, directory as _directory } from "./directory";
+import { Encoding } from "./encoding";
+import { getEncoding } from "./getEncoding";
 
 type File = Omit<Directory, "with"> &
   Readonly<{
@@ -9,7 +9,7 @@ type File = Omit<Directory, "with"> &
     extension: string;
     base: string;
     content: string;
-    encoding?: Encoding;
+    encoding: Encoding;
     with(patch?: Partial<File>): File;
   }>;
 
@@ -59,6 +59,7 @@ const fileFrom = (path: string): File => {
     name,
     extension: ext,
     content: "",
+    encoding: getEncoding(ext),
   });
 };
 

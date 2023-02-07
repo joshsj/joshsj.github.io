@@ -14,13 +14,11 @@ const readSource =
   async ({ sourcePaths }) => {
     const readFile = async (path: string) => {
       const file = fileFrom(path);
-      const encoding = getEncoding(file);
-
-      const contents = await io.read(file, encoding, config.sourceDir);
+      const content = await io.read(file, config.sourceDir);
 
       log(`Read file ${file.full}`);
 
-      return file.with({ content: contents, encoding });
+      return file.with({ content });
     };
 
     sourcePaths = sourcePaths && sourcePaths.length ? sourcePaths : await fromGenerator(io.walk(config.sourceDir));
