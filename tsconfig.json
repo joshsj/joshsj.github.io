@@ -9,16 +9,12 @@
     "strict": true,
     "skipLibCheck": true,
     "paths": {
-      "@lib": ["./src/lib"],
-      "@lib/*": ["./src/lib/*"],
-      "@domain": ["./src/domain"],
-      "@domain/*": ["./src/domain/*"],
       "@infrastructure": ["./src/infrastructure"],
       "@infrastructure/*": ["./src/infrastructure/*"],
       "@features": ["./src/features"],
       "@features/*": ["./src/features/*"],
-      "@entities": ["./src/entities"],
-      "@entities/*": ["./src/entities/*"],
+      "@models": ["./src/models"],
+      "@models/*": ["./src/models/*"],
       "@common": ["./src/common"],
       "@common/*": ["./src/common/*"]
     }

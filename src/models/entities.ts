@@ -1,4 +1,4 @@
-import { File } from "@entities/io";
+import { File } from "@models/io";
 
 type Make<Name extends string, Data extends {} = {}> = {
   name: Name;
@@ -26,6 +26,7 @@ type PostData = {
 
 type Post = Make<"post", PostData>;
 
+// TODO rename
 type Feature = Asset | Collection | Page | Post;
 
 type FeatureName = Feature["name"];

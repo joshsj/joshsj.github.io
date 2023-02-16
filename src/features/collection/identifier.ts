@@ -1,5 +1,5 @@
 import { Identifier } from "@common/identification";
-import { Config } from "@entities/config";
+import { Config } from "@models/config";
 
 const makeCollectionIdentifier = ({ postDir }: Config): Identifier<"collection"> => ({
   test: ({ segments, name, extension }) =>

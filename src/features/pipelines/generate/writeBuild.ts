@@ -3,8 +3,8 @@ import { IO } from "@common/io";
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { isFulfilled, isRejected } from "@common/utilities/native";
-import { Config } from "@entities/config";
-import { File } from "@entities/io";
+import { Config } from "@models/config";
+import { File } from "@models/io";
 
 const writeBuild =
   (io: IO, log: Log, config: Config): Step<TransformFilesResult, void> =>

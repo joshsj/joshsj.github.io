@@ -1,5 +1,5 @@
 import { Step } from "@common/pipeline";
-import { Config } from "@entities/config";
+import { Config } from "@models/config";
 import { ConfigProvider } from "./provider";
 import { SetDefaultConfigResult } from "./setDefaultConfig";
 

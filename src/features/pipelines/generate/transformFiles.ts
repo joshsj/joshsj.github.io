@@ -4,7 +4,7 @@ import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { FeatureStore } from "@common/stores";
 import { isFulfilled, isRejected } from "@common/utilities/native";
-import { File } from "@entities/io";
+import { File } from "@models/io";
 
 type TransformFilesResult = { buildFiles: File[] };
 

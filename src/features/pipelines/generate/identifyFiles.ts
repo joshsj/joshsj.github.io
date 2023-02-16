@@ -2,7 +2,7 @@ import { NameFor } from "@common/identification/nameFor";
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { isFulfilled, isRejected } from "@common/utilities/native";
-import { Feature } from "@entities";
+import { Feature } from "@models";
 import { ReadSourceResult } from "./readSource";
 
 type Identified = Pick<Feature, "file" | "name">;

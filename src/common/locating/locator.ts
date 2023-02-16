@@ -1,5 +1,5 @@
-import { FeatureName } from "@entities";
-import { File } from "@entities/io";
+import { FeatureName } from "@models";
+import { File } from "@models/io";
 
 type Locator = (file: File) => File;
 

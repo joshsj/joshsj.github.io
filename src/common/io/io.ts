@@ -1,4 +1,4 @@
-import { Encoding, File } from "@entities/io";
+import { Encoding, File } from "@models/io";
 
 type Options = {
   root?: string;

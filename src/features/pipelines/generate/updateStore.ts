@@ -2,8 +2,8 @@
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { FeatureStore } from "@common/stores";
-import { Config } from "@entities/config";
-import { file } from "@entities/io";
+import { Config } from "@models/config";
+import { file } from "@models/io";
 import { ExtractDataResult } from "./extractData";
 
 const updateStore =

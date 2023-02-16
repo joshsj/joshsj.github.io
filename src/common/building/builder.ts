@@ -1,4 +1,4 @@
-import { Feature, FeatureName } from "@entities";
+import { Feature, FeatureName } from "@models";
 
 type Builder = (something: Feature) => Promise<string>;
 

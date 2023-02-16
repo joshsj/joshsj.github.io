@@ -1,6 +1,6 @@
 import { Locators } from "@common/locating";
 import { FeatureStore } from "@common/stores";
-import { Feature, FeatureName } from "@entities";
+import { Feature, FeatureName } from "@models";
 
 type UrlFor = ((name: FeatureName, filename: string) => string) & ((feature: Feature, filename?: undefined) => string);
 

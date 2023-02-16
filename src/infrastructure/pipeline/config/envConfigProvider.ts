@@ -1,5 +1,5 @@
 import { Log } from "@common/logging";
-import { Key } from "@entities/config";
+import { Key } from "@models/config";
 import { ConfigProvider } from "@features/pipelines/config";
 
 type Env = { [K in `${Uppercase<Key>}_DIR`]?: string };

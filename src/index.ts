@@ -2,7 +2,7 @@ import { makeNameFor } from "@common/identification";
 import { pipeline } from "@common/pipeline";
 import { makeGetRenderContext, makeRenderers } from "@common/rendering";
 import { FeatureStore } from "@common/stores";
-import { Config } from "@entities/config";
+import { Config } from "@models/config";
 import {
   extractData,
   identifyFiles,

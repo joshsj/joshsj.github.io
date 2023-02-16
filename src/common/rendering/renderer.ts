@@ -1,6 +1,6 @@
-import { Feature } from "@entities";
-import { Config } from "@entities/config";
-import { File } from "@entities/io";
+import { Feature } from "@models";
+import { Config } from "@models/config";
+import { File } from "@models/io";
 import { makePugRenderer } from "./renderers/pug";
 import { GetRenderContext } from "./renderContext";
 

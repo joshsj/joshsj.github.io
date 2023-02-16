@@ -1,5 +1,5 @@
 import { DefaultExtractors, Extractor } from "@common/extraction/extractor";
-import { PostData } from "@entities";
+import { PostData } from "@models";
 
 const makePostExtractor =
   ({ frontmatter }: DefaultExtractors<PostData>): Extractor<PostData> =>

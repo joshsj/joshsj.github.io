@@ -9,7 +9,7 @@ import {
   FormatTime,
   formatTime,
 } from "@common/utilities/formatting";
-import { Asset, Collection, FeatureFor, FeatureName, Page, Post } from "@entities";
+import { Asset, Collection, FeatureFor, FeatureName, Page, Post } from "@models";
 import { makeUrlFor, UrlFor } from "./helpers";
 
 type RenderHelpers = {

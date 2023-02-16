@@ -1,9 +1,9 @@
 import prism from "prismjs";
 import path from "path";
 import { render } from "pug";
-import { Feature } from "@entities";
+import { Feature } from "@models";
 import { GetRenderContext, Renderer } from "@common/rendering";
-import { Config } from "@entities/config";
+import { Config } from "@models/config";
 
 // Garbage
 require("prismjs/components/index")(["typescript", "python", "csharp"]);

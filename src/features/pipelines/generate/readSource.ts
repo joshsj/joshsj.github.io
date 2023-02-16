@@ -2,8 +2,8 @@ import { IO } from "@common/io";
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { fromGenerator, isFulfilled, isRejected } from "@common/utilities/native";
-import { Config } from "@entities/config";
-import { Encoding, File, fileFrom } from "@entities/io";
+import { Config } from "@models/config";
+import { Encoding, File, fileFrom } from "@models/io";
 import binaryExtensions from "binaryextensions";
 
 type ReadSourceState = { sourcePaths?: string[] };
@@ -16,7 +16,7 @@ const readSource =
       const file = fileFrom(path);
       const content = await io.read(file, config.sourceDir);
 
-      log(`Read file ${file.full}`);
+      log(`Read file ${file.full} as ${file.encoding}`);
 
       return file.with({ content });
     };

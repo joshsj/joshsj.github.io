@@ -1,4 +1,4 @@
-import { FeatureName } from "@entities";
+import { FeatureName } from "@models";
 
 type Flag = "watch" | "debug" | "draft";
 

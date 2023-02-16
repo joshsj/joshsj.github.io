@@ -1,7 +1,7 @@
 import { IO } from "@common/io";
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
-import { Config } from "@entities/config";
+import { Config } from "@models/config";
 
 type SetDefaultConfigResult = { config: Config };
 

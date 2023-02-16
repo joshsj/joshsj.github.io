@@ -1,4 +1,4 @@
-﻿import { Config } from "@entities/config";
+﻿import { Config } from "@models/config";
 import { Locators } from "@common/locating/locator";
 import { makeAssetLocator } from "@features/asset";
 import { pageLocator } from "@features/page";

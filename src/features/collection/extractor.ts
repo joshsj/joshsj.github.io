@@ -1,6 +1,6 @@
 import { Renderers } from "@common/rendering";
 import { Extractor } from "@common/extraction/extractor";
-import { CollectionData } from "@entities";
+import { CollectionData } from "@models";
 import { load } from "js-yaml";
 
 const makeCollectionExtractor =

@@ -1,5 +1,5 @@
 import { Locator } from "@common/locating";
-import { Config } from "@entities/config";
+import { Config } from "@models/config";
 
 const makeAssetLocator =
   ({ assetDir }: Config): Locator =>

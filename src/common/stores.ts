@@ -1,4 +1,4 @@
-import { Feature } from "@entities";
+import { Feature } from "@models";
 
 type FeatureStore = Feature[];
 

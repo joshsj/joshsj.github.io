@@ -46,8 +46,8 @@ const fileFrom = (path: string): File => {
   /*
     Filenames that only have an extension are parsed differently
 
-    Wrong: ".html" = {name: ".html", ext: ""}
-    Right: ".html" = {name: "", ext: ".ext"}
+    Wrong: ".html" => {name: ".html", ext: ""}
+    Right: ".html" => {name: "",      ext: ".ext"}
   */
   if (!ext && name.startsWith(".")) {
     ext = name;

@@ -2,7 +2,7 @@ import { Extractors } from "@common/extraction";
 import { Log } from "@common/logging";
 import { Step } from "@common/pipeline";
 import { isFulfilled, isRejected } from "@common/utilities/native";
-import { Feature } from "@entities";
+import { Feature } from "@models";
 import { Identified, IdentifyFilesResult } from "./identifyFiles";
 
 type ExtractDataResult = { features: Feature[] };
