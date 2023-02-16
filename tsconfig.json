@@ -11,12 +11,10 @@
     "paths": {
       "@infrastructure": ["./generator/infrastructure"],
       "@infrastructure/*": ["./generator/infrastructure/*"],
-      "@features": ["./generator/features"],
-      "@features/*": ["./generator/features/*"],
+      "@application": ["./generator/application"],
+      "@application/*": ["./generator/application/*"],
       "@models": ["./generator/models"],
-      "@models/*": ["./generator/models/*"],
-      "@common": ["./generator/common"],
-      "@common/*": ["./generator/common/*"]
+      "@models/*": ["./generator/models/*"]
     }
   },
 

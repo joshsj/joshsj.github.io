@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "generate": "node -r module-alias/register -r dotenv/config build/generator/index.js",
+    "generate": "node -r module-alias/register -r dotenv/config build/generator/entry/index.js",
     "watch": "npm run generate -- --watch",
     "clean": "rimraf build"
   },
@@ -24,9 +24,8 @@
     "typescript": "^4.9.4"
   },
   "_moduleAliases": {
-    "@common": "build/generator/common",
     "@infrastructure": "build/generator/infrastructure",
-    "@features": "build/generator/features",
+    "@application": "build/generator/application",
     "@models": "build/generator/models"
   }
 }
