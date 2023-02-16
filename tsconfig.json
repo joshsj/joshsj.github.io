@@ -2,23 +2,23 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES2020",
-    "rootDir": "src",
-    "outDir": "build/generator",
+    "rootDir": "./generator",
+    "outDir": "./build/generator",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "paths": {
-      "@infrastructure": ["./src/infrastructure"],
-      "@infrastructure/*": ["./src/infrastructure/*"],
-      "@features": ["./src/features"],
-      "@features/*": ["./src/features/*"],
-      "@models": ["./src/models"],
-      "@models/*": ["./src/models/*"],
-      "@common": ["./src/common"],
-      "@common/*": ["./src/common/*"]
+      "@infrastructure": ["./generator/infrastructure"],
+      "@infrastructure/*": ["./generator/infrastructure/*"],
+      "@features": ["./generator/features"],
+      "@features/*": ["./generator/features/*"],
+      "@models": ["./generator/models"],
+      "@models/*": ["./generator/models/*"],
+      "@common": ["./generator/common"],
+      "@common/*": ["./generator/common/*"]
     }
   },
 
-  "include": ["./src"]
+  "include": ["./generator"]
 }
