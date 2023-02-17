@@ -467,3 +467,48 @@ can refresh the page automatically.
 {% caption_img "watching.gif" "Building source files on file change" %}
 
 Very cool.
+
+<!--
+
+## Migration
+
+The time has come! The generator seems capable and extensible enough to get the
+majority of the site up and running; not to mention, every time I update this
+post, the goalposts get slightly wider.
+
+Overall, the aim to minimise the amount of manual intervention in the process by
+(first) reconfiguring the current setup to generate files more suited to this
+SSG and (second) creating another pipeline to migrate the existing content
+automatically.
+
+- layouts
+- headerIds
+- url format
+- remove extra pages
+- generated post data (toc, creatd, updated, collection, tags)
+- marked
+- highlighting
+
+- components
+- replace ---
+
+migrate using filter 🥳
+
+timezone 2022-05-31T23:00:00.000Z
+
+extracting captioned things
+
+changing source paths to /.pug
+work well with collections
+
+changing transform paths to /index.html
+don't need a trailing slash
+
+
+cleanup:
+fix missing filters, mixins
+weird whitespace issues
+fix binary files
+
+changing step order
+-->
