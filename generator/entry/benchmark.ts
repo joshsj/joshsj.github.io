@@ -1,4 +1,4 @@
-﻿import { ReadSourceState } from "@application/features/pipelines/generate";
+﻿import { ReadSourceState } from "@application/pipeline/steps/generate";
 import { Step } from "@application/pipeline/types";
 
 type BenchmarkContext = { start?: number; end?: number };

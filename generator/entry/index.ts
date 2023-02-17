@@ -6,11 +6,11 @@ import {
   transformFiles,
   updateStore,
   writeBuild,
-} from "@application/features/pipelines/generate";
+} from "@application/pipeline/steps/generate";
 
 import { makeDefaultExtractors, makeExtractors, makeIdentifiers, makeLocators } from "@application/behaviours";
 
-import { makeApplyConfigurationProviders, makeSetDefaultConfig } from "@application/features/pipelines/config";
+import { makeApplyConfigurationProviders, makeSetDefaultConfig } from "@application/pipeline/steps/config";
 import { pipeline } from "@application/pipeline";
 import { makeRenderers } from "@application/renderers";
 import { makeBuilders, makeFeatureNameFor, makeGetRenderContext } from "@application/services";
