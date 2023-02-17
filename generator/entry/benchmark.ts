@@ -1,10 +1,10 @@
-﻿import { ReadSourceState } from "@application/pipeline/steps/generate";
-import { Step } from "@application/pipeline/types";
+﻿import { Step } from "@application/pipeline/types";
+import { InitialState } from "@application/pipeline/types/steps/generate";
 
 type BenchmarkContext = { start?: number; end?: number };
 
 const start =
-  (context: BenchmarkContext): Step<ReadSourceState, ReadSourceState> =>
+  (context: BenchmarkContext): Step<InitialState, InitialState> =>
   async (state) => {
     context.start = performance.now();
     context.end = undefined;

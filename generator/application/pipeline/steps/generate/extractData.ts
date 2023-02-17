@@ -1,14 +1,10 @@
 import { Extractors } from "@application/behaviours/types";
-import { Step } from "@application/pipeline/types";
+import { ExtractDataStep, Identified } from "@application/pipeline/types/steps/generate";
 import { Log } from "@application/services/types";
 import { isFulfilled, isRejected } from "@application/utilities/native";
-import { Feature } from "@models";
-import { Identified, IdentifyFilesResult } from "./identifyFiles";
-
-type ExtractDataResult = { features: Feature[] };
 
 const extractData =
-  (extractors: Extractors, log: Log): Step<IdentifyFilesResult, ExtractDataResult> =>
+  (extractors: Extractors, log: Log): ExtractDataStep =>
   async ({ files }) => {
     const extract = async ({ file, name }: Identified) => {
       const { content, data } = await extractors[name](file);
@@ -26,4 +22,4 @@ const extractData =
     return { features };
   };
 
-export { ExtractDataResult, extractData };
+export { extractData };

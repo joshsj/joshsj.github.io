@@ -1,12 +1,11 @@
-﻿import { IO, Log } from "@application/services/types";
+﻿import { UpdateStoreStep } from "@application/pipeline/types/steps/generate";
+import { IO, Log } from "@application/services/types";
+import { FeatureStore } from "@application/stores/types";
 import { Config } from "@models/config";
 import { file } from "@models/io";
-import { ExtractDataResult } from "./extractData";
-import { Step } from "@application/pipeline/types";
-import { FeatureStore } from "@application/stores/types";
 
 const updateStore =
-  (store: FeatureStore, io: IO, log: Log, config: Config): Step<ExtractDataResult, void> =>
+  (store: FeatureStore, io: IO, log: Log, config: Config): UpdateStoreStep =>
   async ({ features }) => {
     for (const feature of features) {
       if (feature.name === "post" && feature.draft && !config.draft) {

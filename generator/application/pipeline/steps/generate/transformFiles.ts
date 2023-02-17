@@ -1,14 +1,12 @@
-import { File } from "@models/io";
-import { isFulfilled, isRejected } from "@application/utilities/native";
-import { FeatureStore } from "@application/stores/types";
-import { Locators, Builders } from "@application/behaviours/types";
-import { Step } from "@application/pipeline/types";
+import { Builders, Locators } from "@application/behaviours/types";
+import { TransformFilesStep } from "@application/pipeline/types/steps/generate";
 import { Log } from "@application/services/types";
-
-type TransformFilesResult = { buildFiles: File[] };
+import { FeatureStore } from "@application/stores/types";
+import { isFulfilled, isRejected } from "@application/utilities/native";
+import { File } from "@models/io";
 
 const transformFiles =
-  (store: FeatureStore, locators: Locators, builders: Builders, log: Log): Step<void, TransformFilesResult> =>
+  (store: FeatureStore, locators: Locators, builders: Builders, log: Log): TransformFilesStep =>
   async () => {
     const results = await Promise.allSettled(
       store.map(async (f) => {
@@ -38,4 +36,4 @@ const transformFiles =
     return { buildFiles };
   };
 
-export { TransformFilesResult, transformFiles };
+export { transformFiles };

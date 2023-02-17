@@ -1,12 +1,10 @@
 import { IO } from "@application/services/types/io";
 import { Log } from "@application/services/types";
-import { Step } from "@application/pipeline/types";
 import { Config } from "@models/config";
-
-type SetDefaultConfigResult = { config: Config };
+import { SetDefaultConfigStep } from "@application/pipeline/types/steps/config";
 
 const makeSetDefaultConfig =
-  (io: IO, log: Log): Step<void, SetDefaultConfigResult> =>
+  (io: IO, log: Log): SetDefaultConfigStep =>
   async () => {
     const config: Config = {
       rootDir: io.cwd(),
@@ -25,4 +23,4 @@ const makeSetDefaultConfig =
     return { config };
   };
 
-export { SetDefaultConfigResult, makeSetDefaultConfig };
+export { makeSetDefaultConfig };

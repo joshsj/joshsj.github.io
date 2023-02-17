@@ -1,16 +1,12 @@
-import { IO } from "@application/services/types/io";
+import { ReadSourceStep } from "@application/pipeline/types/steps/generate";
 import { Log } from "@application/services/types";
-import { Step } from "@application/pipeline/types";
-import { Config } from "@models/config";
-import { Encoding, File, fileFrom } from "@models/io";
-import binaryExtensions from "binaryextensions";
+import { IO } from "@application/services/types/io";
 import { fromGenerator, isFulfilled, isRejected } from "@application/utilities/native";
-
-type ReadSourceState = { sourcePaths?: string[] };
-type ReadSourceResult = { sourceFiles: File[] };
+import { Config } from "@models/config";
+import { fileFrom } from "@models/io";
 
 const readSource =
-  (io: IO, log: Log, config: Config): Step<ReadSourceState, ReadSourceResult> =>
+  (io: IO, log: Log, config: Config): ReadSourceStep =>
   async ({ sourcePaths }) => {
     const readFile = async (path: string) => {
       const file = fileFrom(path);
@@ -36,10 +32,4 @@ const readSource =
     return { sourceFiles };
   };
 
-const getEncoding = (file: File): Encoding => {
-  const ext = file.extension.slice(1);
-
-  return binaryExtensions.includes(ext) ? "binary" : "utf8";
-};
-
-export { ReadSourceState, ReadSourceResult, readSource };
+export { readSource };

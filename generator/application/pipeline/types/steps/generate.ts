@@ -1,4 +1,5 @@
 import { Feature } from "@models";
+import { File } from "@models/io";
 import { Step } from "../pipeline";
 
 type InitialState = { sourcePaths?: string[] };

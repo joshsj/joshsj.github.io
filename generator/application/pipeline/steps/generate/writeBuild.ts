@@ -1,13 +1,12 @@
-import { Step } from "@application/pipeline/types";
+import { WriteBuildStep } from "@application/pipeline/types/steps/generate";
 import { Log } from "@application/services/types";
 import { IO } from "@application/services/types/io";
 import { isFulfilled, isRejected } from "@application/utilities/native";
 import { Config } from "@models/config";
 import { File } from "@models/io";
-import { TransformFilesResult } from "./transformFiles";
 
 const writeBuild =
-  (io: IO, log: Log, config: Config): Step<TransformFilesResult, void> =>
+  (io: IO, log: Log, config: Config): WriteBuildStep =>
   async ({ buildFiles }) => {
     const writeFile = async (file: File) => {
       await io.write(file, config.buildDir);

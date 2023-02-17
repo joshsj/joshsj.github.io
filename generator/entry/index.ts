@@ -2,16 +2,16 @@ import {
   extractData,
   identifyFiles,
   readSource,
-  ReadSourceState,
   transformFiles,
   updateStore,
   writeBuild,
 } from "@application/pipeline/steps/generate";
+import { makeApplyConfigurationProviders, makeSetDefaultConfig } from "@application/pipeline/steps/config";
 
 import { makeDefaultExtractors, makeExtractors, makeIdentifiers, makeLocators } from "@application/behaviours";
 
-import { makeApplyConfigurationProviders, makeSetDefaultConfig } from "@application/pipeline/steps/config";
 import { pipeline } from "@application/pipeline";
+import { InitialState } from "@application/pipeline/types/steps/generate";
 import { makeRenderers } from "@application/renderers";
 import { makeBuilders, makeFeatureNameFor, makeGetRenderContext } from "@application/services";
 import { IO } from "@application/services/types";
@@ -48,7 +48,7 @@ const buildGenerate = (config: Config) => {
   const extractors = makeExtractors(makeDefaultExtractors(), renderers);
   const builders = makeBuilders(renderers);
 
-  const buildPipeline = pipeline<ReadSourceState>()
+  const buildPipeline = pipeline<InitialState>()
     .add(benchmarkStart)
     .add(readSource(io, log, config))
     .add(identifyFiles(nameFor, log))

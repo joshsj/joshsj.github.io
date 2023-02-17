@@ -1,14 +1,9 @@
+import { IdentifyFilesStep } from "@application/pipeline/types/steps/generate";
 import { FeatureNameFor, Log } from "@application/services/types";
-import { Step } from "@application/pipeline/types";
-import { Feature } from "@models";
-import { ReadSourceResult } from "./readSource";
 import { isFulfilled, isRejected } from "@application/utilities/native";
 
-type Identified = Pick<Feature, "file" | "name">;
-type IdentifyFilesResult = { files: Identified[] };
-
 const identifyFiles =
-  (nameFor: FeatureNameFor, log: Log): Step<ReadSourceResult, IdentifyFilesResult> =>
+  (nameFor: FeatureNameFor, log: Log): IdentifyFilesStep =>
   async ({ sourceFiles }) => {
     const results = await Promise.allSettled(
       sourceFiles.map(async (file) => {
@@ -33,4 +28,4 @@ const identifyFiles =
     return { files };
   };
 
-export { Identified, IdentifyFilesResult, identifyFiles };
+export { identifyFiles };
