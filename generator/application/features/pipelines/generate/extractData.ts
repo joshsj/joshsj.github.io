@@ -1,9 +1,9 @@
-
-import { Extractors, Log } from "@application/types/services";
-import { Step } from "@application/types/pipeline";
+import { Extractors } from "@application/behaviours/types";
+import { Step } from "@application/pipeline/types";
+import { Log } from "@application/services/types";
+import { isFulfilled, isRejected } from "@application/utilities/native";
 import { Feature } from "@models";
 import { Identified, IdentifyFilesResult } from "./identifyFiles";
-import { isFulfilled, isRejected } from "@application/utilities/native";
 
 type ExtractDataResult = { features: Feature[] };
 

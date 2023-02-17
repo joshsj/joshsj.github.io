@@ -1,8 +1,9 @@
-import { Builders, Locators, Log } from "@application/types/services";
-import { Step } from "@application/types/pipeline";
 import { File } from "@models/io";
-import { FeatureStore } from "@application/types/stores";
 import { isFulfilled, isRejected } from "@application/utilities/native";
+import { FeatureStore } from "@application/stores/types";
+import { Locators, Builders } from "@application/behaviours/types";
+import { Step } from "@application/pipeline/types";
+import { Log } from "@application/services/types";
 
 type TransformFilesResult = { buildFiles: File[] };
 

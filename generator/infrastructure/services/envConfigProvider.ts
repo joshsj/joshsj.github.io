@@ -1,4 +1,4 @@
-import { ConfigProvider, Log } from "@application/types/services";
+import { ConfigProvider, Log } from "@application/services/types";
 import { Key } from "@models/config";
 
 type Env = { [K in `${Uppercase<Key>}_DIR`]?: string };

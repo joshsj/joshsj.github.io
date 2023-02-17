@@ -1,4 +1,4 @@
-import { IO } from "@application/types/services/io";
+import { IO } from "@application/services/types/io";
 import { readdir, mkdir, writeFile, readFile } from "fs/promises";
 import path from "path";
 

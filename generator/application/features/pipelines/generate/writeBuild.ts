@@ -1,10 +1,10 @@
-import { TransformFilesResult } from "./transformFiles";
-import { IO } from "@application/types/services/io";
-import { Log } from "@application/types/services";
-import { Step } from "@application/types/pipeline";
+import { Step } from "@application/pipeline/types";
+import { Log } from "@application/services/types";
+import { IO } from "@application/services/types/io";
+import { isFulfilled, isRejected } from "@application/utilities/native";
 import { Config } from "@models/config";
 import { File } from "@models/io";
-import { isFulfilled, isRejected } from "@application/utilities/native";
+import { TransformFilesResult } from "./transformFiles";
 
 const writeBuild =
   (io: IO, log: Log, config: Config): Step<TransformFilesResult, void> =>

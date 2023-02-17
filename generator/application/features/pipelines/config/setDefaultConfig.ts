@@ -1,6 +1,6 @@
-import { IO } from "@application/types/services/io";
-import { Log } from "@application/types/services";
-import { Step } from "@application/types/pipeline";
+import { IO } from "@application/services/types/io";
+import { Log } from "@application/services/types";
+import { Step } from "@application/pipeline/types";
 import { Config } from "@models/config";
 
 type SetDefaultConfigResult = { config: Config };

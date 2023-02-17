@@ -1,5 +1,5 @@
-import { FeatureNameFor, Log } from "@application/types/services";
-import { Step } from "@application/types/pipeline";
+import { FeatureNameFor, Log } from "@application/services/types";
+import { Step } from "@application/pipeline/types";
 import { Feature } from "@models";
 import { ReadSourceResult } from "./readSource";
 import { isFulfilled, isRejected } from "@application/utilities/native";

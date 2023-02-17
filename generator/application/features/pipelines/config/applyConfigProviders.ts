@@ -1,7 +1,7 @@
-import { Step } from "@application/types/pipeline";
+import { Step } from "@application/pipeline/types";
 import { Config } from "@models/config";
 import { SetDefaultConfigResult } from "./setDefaultConfig";
-import { ConfigProvider } from "@application/types/services";
+import { ConfigProvider } from "@application/services/types";
 
 type ApplyConfigProvidersResult = { config: Config };
 

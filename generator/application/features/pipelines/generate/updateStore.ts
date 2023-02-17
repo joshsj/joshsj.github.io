@@ -1,10 +1,9 @@
-﻿import { IO } from "@application/types/services/io";
-import { Log } from "@application/types/services";
-import { Step } from "@application/types/pipeline";
-import { FeatureStore } from "@application/types/stores";
+﻿import { IO, Log } from "@application/services/types";
 import { Config } from "@models/config";
 import { file } from "@models/io";
 import { ExtractDataResult } from "./extractData";
+import { Step } from "@application/pipeline/types";
+import { FeatureStore } from "@application/stores/types";
 
 const updateStore =
   (store: FeatureStore, io: IO, log: Log, config: Config): Step<ExtractDataResult, void> =>

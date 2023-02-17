@@ -1,4 +1,4 @@
-import { ConfigProvider, Log } from "@application/types/services";
+import { ConfigProvider, Log } from "@application/services/types";
 
 const isSet = (arg: string) => process.argv.includes(`--${arg}`);
 

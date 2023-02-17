@@ -1,4 +1,4 @@
-import { Log } from "@application/types/services";
+import { Log } from "@application/services/types";
 
 const consoleLogger = (context?: string): Log => {
   context = context ? ` [${context}] ` : " ";

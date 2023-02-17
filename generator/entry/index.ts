@@ -1,33 +1,26 @@
 import {
-  makeBuilders,
-  makeDefaultExtractors,
-  makeExtractors,
-  makeFeatureNameFor,
-  makeGetRenderContext,
-  makeLocators,
-  makeRenderers
-} from "@application/services";
-
-import {
   extractData,
   identifyFiles,
   readSource,
   ReadSourceState,
   transformFiles,
   updateStore,
-  writeBuild
+  writeBuild,
 } from "@application/features/pipelines/generate";
 
-import { Config } from "@models";
-import { watchIndicator } from "./watchIndicator";
+import { makeDefaultExtractors, makeExtractors, makeIdentifiers, makeLocators } from "@application/behaviours";
+
 import { makeApplyConfigurationProviders, makeSetDefaultConfig } from "@application/features/pipelines/config";
-import { FeatureStore } from "@application/types/stores";
-import { benchmarkSteps } from "./benchmark";
-import { IO } from "@application/types/services";
-import { consoleLogger, io, makeArgvConfigProvider, makeEnvConfigProvider } from "@infrastructure/services";
-import { makeIdentifiers } from "@application/services/makeIdentifiers";
 import { pipeline } from "@application/pipeline";
+import { makeRenderers } from "@application/renderers";
+import { makeBuilders, makeFeatureNameFor, makeGetRenderContext } from "@application/services";
+import { IO } from "@application/services/types";
+import { FeatureStore } from "@application/stores/types";
+import { consoleLogger, io, makeArgvConfigProvider, makeEnvConfigProvider } from "@infrastructure/services";
+import { Config } from "@models";
 import { watch } from "chokidar";
+import { benchmarkSteps } from "./benchmark";
+import { watchIndicator } from "./watchIndicator";
 
 const buildGetConfig = (io: IO) => {
   const log = consoleLogger("config");
@@ -44,10 +37,8 @@ const buildGetConfig = (io: IO) => {
 const buildGenerate = (config: Config) => {
   const { benchmarkStart, benchmarkEnd } = benchmarkSteps();
 
-  const log = config.debug ? consoleLogger("build") : () => {
-  };
+  const log = config.debug ? consoleLogger("build") : () => {};
   const store: FeatureStore = [];
-
 
   const identifiers = makeIdentifiers(config);
   const nameFor = makeFeatureNameFor(identifiers);
@@ -83,7 +74,7 @@ const main = async () => {
   await generate({ sourcePaths: [] });
 
   if (config.watch) {
-    const onChange = (p: string) => generate({ sourcePaths: [ p ] });
+    const onChange = (p: string) => generate({ sourcePaths: [p] });
 
     watch("**/*", { cwd: config.sourceDir, ignoreInitial: true }).on("add", onChange).on("change", onChange);
   }
