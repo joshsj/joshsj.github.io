@@ -51,8 +51,6 @@ const makePostExtractor =
       extracted.data.updated = undefined;
     }
 
-    console.log(extracted.data.title);
-
     extracted.data.toc = generateToc(extracted.content);
 
     return extracted;
