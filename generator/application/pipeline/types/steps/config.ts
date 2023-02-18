@@ -1,10 +1,5 @@
-import { Config } from "@models";
-import { Step } from "../pipeline";
+import { Step } from "@application/pipeline/types";
 
-type SetDefaultConfigResult = { config: Config };
-type SetDefaultConfigStep = Step<void, SetDefaultConfigResult>;
+type ApplyConfigProvidersStep = Step<void, void>;
 
-type ApplyConfigProvidersResult = { config: Config };
-type ApplyConfigProvidersStep = Step<SetDefaultConfigResult, ApplyConfigProvidersResult>;
-
-export { SetDefaultConfigResult, SetDefaultConfigStep, ApplyConfigProvidersResult, ApplyConfigProvidersStep };
+export { ApplyConfigProvidersStep };

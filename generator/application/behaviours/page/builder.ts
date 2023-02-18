@@ -1,4 +1,4 @@
-import { Renderers } from "@application/renderers/types";
+import { Renderers } from "@application/rendering/types";
 import { Builder } from "@application/behaviours/types";
 
 const makePageBuilder =

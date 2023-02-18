@@ -8,6 +8,6 @@ block content
 
   p Disclaimer: I'm no Martin Fowler. These blog posts are more of a creative outlet than a source for knowledge or wisdom.
 
-  ul.space
-    each post in posts.filter(p => !p.collection)
+  ul
+    each post in store.allBy("post").filter(p => !p.collection)
       li: p #[a(href=urlFor(post)) #{post.title}] (#{formatDate(post.created)})

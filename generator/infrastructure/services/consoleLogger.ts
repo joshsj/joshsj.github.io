@@ -1,7 +1,9 @@
 import { Log } from "@application/services/types";
 
-const consoleLogger = (context?: string): Log => {
-  context = context ? ` [${context}] ` : " ";
+const makeConsoleLogger = (): Log => {
+  // TODO work out context
+  //context = context ? ` [${context}] ` : " ";
+  const context = " ";
 
   return (message: string, data?: unknown[]) => {
     if (data && !data.length) {
@@ -28,4 +30,4 @@ const date = () => {
   ].join(":");
 };
 
-export { consoleLogger };
+export { makeConsoleLogger };

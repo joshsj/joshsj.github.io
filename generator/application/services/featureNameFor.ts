@@ -1,9 +1,8 @@
-import { FeatureName } from "@models";
+import { Identifiers } from "@application/behaviours/types";
 import { FeatureNameFor } from "@application/services/types";
-import { Identifier } from "@application/behaviours/types";
 
 const makeFeatureNameFor =
-  (identifiers: Identifier<FeatureName>[]): FeatureNameFor =>
+  (identifiers: Identifiers): FeatureNameFor =>
   (file) =>
     identifiers.find((i) => i.test(file))?.name;
 

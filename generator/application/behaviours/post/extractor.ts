@@ -1,4 +1,5 @@
-import { DefaultExtractors, Extractor } from "@application/behaviours/types";
+import { Extractor } from "@application/behaviours/types";
+import { DefaultExtractors } from "@application/services/types";
 import { PostData } from "@models";
 
 const makePostExtractor =

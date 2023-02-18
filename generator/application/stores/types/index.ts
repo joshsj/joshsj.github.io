@@ -10,6 +10,7 @@ type Store<T> = {
 
 type FeatureStore = Store<Feature> & {
   find: (path: string) => Feature;
+  findBy: (name: FeatureName, title: string) => Feature;
   allBy: <T extends FeatureName>(name: T) => FeatureFor<T>[];
 };
 

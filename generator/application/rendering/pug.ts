@@ -1,9 +1,9 @@
-import { GetRenderContext } from "@application/services/types";
+import { FeatureStore } from "@application/stores/types";
 import { Config, Feature } from "@models";
 import path from "path";
 import prism from "prismjs";
 import { render } from "pug";
-import { Renderer } from "./types";
+import { Renderer, RenderHelpers } from "./types";
 
 // Garbage
 require("prismjs/components/index")(["typescript", "python", "csharp"]);
@@ -44,7 +44,7 @@ const getParts = (hmm: Parameters<Renderer>[0], { sourceDir }: Config): Parts =>
 };
 
 const makePugRenderer =
-  (getRenderContext: GetRenderContext, config: Config): Renderer =>
+  (store: FeatureStore, helpers: RenderHelpers, config: Config): Renderer =>
   async (hmm) => {
     const { data, current, filename } = getParts(hmm, config);
 
@@ -52,8 +52,9 @@ const makePugRenderer =
       basedir: config.sourceDir,
       filename,
       filters,
+      store,
+      ...helpers,
       current: current ?? {},
-      ...getRenderContext(),
     });
   };
 

@@ -1,2 +1,1 @@
-﻿export * from "./setDefaultConfig";
-export * from "./applyConfigProviders";
+﻿export * from "./applyConfigPopulators";

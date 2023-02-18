@@ -1,12 +1,16 @@
 import { Feature, FeatureFor, FeatureName } from "@models";
 import { FeatureStore } from "@application/stores/types";
 
-const makeFeatureStore = (items: Feature[]): FeatureStore => {
+const makeFeatureStore = (): FeatureStore => {
+  const items: Feature[] = [];
+
   const indexOf = (arg: Feature | string) => {
     const path = typeof arg === "object" ? arg.file.full : arg;
 
     return items.findIndex((x) => x.file.full === path);
   };
+
+  const allBy = <T extends FeatureName>(name: T) => items.filter((x): x is FeatureFor<T> => x.name === name);
 
   return {
     find: (path) => {
@@ -19,8 +23,18 @@ const makeFeatureStore = (items: Feature[]): FeatureStore => {
       return items[index];
     },
 
+    findBy: (name, title) => {
+      const item = allBy(name).find((x) => "title" in x && x.title === title);
+
+      if (!item) {
+        throw new Error(`Item does not exist with name ${name}, title ${title}`);
+      }
+
+      return item;
+    },
+
     all: () => [...items],
-    allBy: <T extends FeatureName>(name: T) => items.filter((x): x is FeatureFor<T> => x.name === name),
+    allBy,
 
     count: () => items.length,
 

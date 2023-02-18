@@ -1,5 +1,5 @@
 import { Locators } from "@application/behaviours/types";
-import { UrlFor } from "@application/renderers/types";
+import { UrlFor } from "@application/rendering/types";
 import { FeatureStore } from "@application/stores/types";
 import { Feature } from "@models";
 

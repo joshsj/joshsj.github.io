@@ -1,10 +1,10 @@
 import { Config } from "@models/config";
-import { ConfigProvider } from "@application/services/types";
+import { ConfigPopulator } from "@application/services/types";
 import { ApplyConfigProvidersStep } from "@application/pipeline/types/steps/config";
 
 const makeApplyConfigurationProviders =
-  (providers: ConfigProvider[]): ApplyConfigProvidersStep =>
-  async ({ config }) => {
+  (config: Config, providers: ConfigPopulator[]): ApplyConfigProvidersStep =>
+  async () => {
     for (const patch of providers.map((p) => p(config))) {
       let key: keyof Config;
 
@@ -16,8 +16,6 @@ const makeApplyConfigurationProviders =
         }
       }
     }
-
-    return { config };
   };
 
 export { makeApplyConfigurationProviders };
