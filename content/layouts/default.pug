@@ -58,7 +58,7 @@ html
     main.content
       h1 #{current.displayTitle || current.title}
 
-      //if current.name === "post" 
-      //  +postDetails(current)
+      if current.name === "post" 
+        +postDetails(current)
 
       block content

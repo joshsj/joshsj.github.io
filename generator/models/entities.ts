@@ -22,6 +22,7 @@ type PostData = {
   tags?: string[];
   collection?: string;
   draft?: boolean;
+  toc: string;
 };
 
 type Post = Make<"post", PostData>;

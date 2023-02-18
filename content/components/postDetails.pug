@@ -8,7 +8,8 @@ mixin postDetails(post)
     
   if post.collection
     p.squish Part of 
-      a(href=urlFor("page", "collections")) #{collections.find(c => c.file.segments[1] === post.collection).title}
+      a(href=urlFor("page", "collections")) 
+        | #{store.allBy("collection").find(c => c.file.segments[1] === post.collection).title}
 
   if post.tags
     p.squish.sep.sep-pop
@@ -16,3 +17,8 @@ mixin postDetails(post)
 
       each tag in post.tags
         span #{tag}
+        
+  if post.toc
+    h2 Contents 
+    
+    | !{post.toc}

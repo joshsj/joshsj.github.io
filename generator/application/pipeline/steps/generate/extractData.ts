@@ -17,7 +17,10 @@ const extractData =
 
     log(`Extracted data for ${features.length} files`);
 
-    log("Failures", results.filter(isRejected));
+    log(
+      "Failures",
+      results.filter(isRejected).map((r) => r.reason)
+    );
 
     return { features };
   };
