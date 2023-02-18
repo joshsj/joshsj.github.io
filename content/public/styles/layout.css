@@ -23,11 +23,6 @@ h1 {
   margin-top: var(--space-4);
 }
 
-/* allow the hmm */
-body:not(.hmm) > nav {
-  background-color: var(--light);
-}
-
 #theme-toggle::after {
   content: " Mode";
 }

@@ -18,7 +18,3 @@ mixin postDetails(post)
       each tag in post.tags
         span #{tag}
         
-  if post.toc
-    h2 Contents 
-    
-    | !{post.toc}
