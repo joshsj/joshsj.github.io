@@ -6,11 +6,11 @@ import { Feature } from "@models";
 const makeUrlFor = (store: FeatureStore, locators: Locators): UrlFor => {
   const cache = new Map<Feature, string>();
 
-  return (cos, filename) => {
-    const feature = typeof cos === "string" ? store.find((x) => x.file.name === filename) : cos;
+  return (arg, filename?: string) => {
+    const feature = typeof arg === "object" ? arg : store.allBy(arg).find((x) => x.file.name === filename);
 
     if (!feature) {
-      throw new Error(`urlFor failed with: ${cos}, ${filename}`);
+      throw new Error(`urlFor failed with: ${arg}, ${filename}`);
     }
 
     if (cache.has(feature)) {
@@ -20,7 +20,7 @@ const makeUrlFor = (store: FeatureStore, locators: Locators): UrlFor => {
     const locator = locators[feature.name];
 
     if (!locator) {
-      throw new Error(`urlFor failed with: ${cos}, ${filename}`);
+      throw new Error(`urlFor failed with: ${arg}, ${filename}`);
     }
 
     let { full: url, sep } = locator(feature.file);

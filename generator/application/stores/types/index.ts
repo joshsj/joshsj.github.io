@@ -1,5 +1,16 @@
-import { Feature } from "@models";
+import { Feature, FeatureFor, FeatureName } from "@models";
 
-type FeatureStore = Feature[];
+type Store<T> = {
+  all: () => T[];
+  count: () => number;
+  insert: (item: T) => void;
+  update: (item: T) => void;
+  upsert: (item: T) => void;
+};
 
-export { FeatureStore };
+type FeatureStore = Store<Feature> & {
+  find: (path: string) => Feature;
+  allBy: <T extends FeatureName>(name: T) => FeatureFor<T>[];
+};
+
+export { Store, FeatureStore };

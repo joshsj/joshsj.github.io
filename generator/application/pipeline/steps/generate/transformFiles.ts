@@ -9,7 +9,7 @@ const transformFiles =
   (store: FeatureStore, locators: Locators, builders: Builders, log: Log): TransformFilesStep =>
   async () => {
     const results = await Promise.allSettled(
-      store.map(async (f) => {
+      store.all().map(async (f) => {
         const locator = locators[f.name];
         const builder = builders[f.name];
 
@@ -26,7 +26,7 @@ const transformFiles =
       .map((r) => r.value)
       .filter((x): x is File => !!x);
 
-    log(`Successfully transformed ${buildFiles.length}/${store.length} files`);
+    log(`Successfully transformed ${buildFiles.length}/${store.count()} files`);
 
     log(
       "Failures",

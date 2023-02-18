@@ -18,16 +18,14 @@ const getHelpers = (store: FeatureStore, locators: Locators): RenderHelpers => {
 const makeGetRenderContext =
   (store: FeatureStore, locators: Locators): GetRenderContext =>
   () => {
-    // TODO add caching?
+    const assets = store.allBy("asset");
 
-    const assets = store.filter((x): x is Asset => x.name === "asset");
+    const collections = store.allBy("collection");
 
-    const collections = store.filter((x): x is Collection => x.name === "collection");
-
-    const pages = store.filter((x): x is Page => x.name === "page");
+    const pages = store.allBy("page");
 
     const posts = store
-      .filter((x): x is Post => x.name === "post")
+      .allBy("post")
       .sort((a, b) => dateComparer(a.created, b.created))
       .reverse();
 

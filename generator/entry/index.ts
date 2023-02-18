@@ -21,6 +21,7 @@ import { Config } from "@models";
 import { watch } from "chokidar";
 import { benchmarkSteps } from "./benchmark";
 import { watchIndicator } from "./watchIndicator";
+import { makeFeatureStore } from "@infrastructure/stores";
 
 const buildGetConfig = (io: IO) => {
   const log = consoleLogger("config");
@@ -38,12 +39,12 @@ const buildGenerate = (config: Config) => {
   const { benchmarkStart, benchmarkEnd } = benchmarkSteps();
 
   const log = config.debug ? consoleLogger("build") : () => {};
-  const store: FeatureStore = [];
+  const featureStore: FeatureStore = makeFeatureStore([]);
 
   const identifiers = makeIdentifiers(config);
   const nameFor = makeFeatureNameFor(identifiers);
   const locators = makeLocators(config);
-  const getRenderContext = makeGetRenderContext(store, locators);
+  const getRenderContext = makeGetRenderContext(featureStore, locators);
   const renderers = makeRenderers(getRenderContext, config);
   const extractors = makeExtractors(makeDefaultExtractors(), renderers);
   const builders = makeBuilders(renderers);
@@ -53,8 +54,8 @@ const buildGenerate = (config: Config) => {
     .add(readSource(io, log, config))
     .add(identifyFiles(nameFor, log))
     .add(extractData(extractors, log))
-    .add(updateStore(store, io, log, config))
-    .add(transformFiles(store, locators, builders, log))
+    .add(updateStore(featureStore, io, log, config))
+    .add(transformFiles(featureStore, locators, builders, log))
     .add(writeBuild(io, log, config))
     .add(benchmarkEnd);
 

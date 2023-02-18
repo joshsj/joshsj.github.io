@@ -12,13 +12,7 @@ const updateStore =
         continue;
       }
 
-      const index = store.findIndex((x) => x.file.full === feature.file.full);
-
-      if (index > -1) {
-        store[index] = feature;
-      } else {
-        store.push(feature);
-      }
+      store.upsert(feature);
     }
 
     const f = file({
