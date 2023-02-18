@@ -1,4 +1,5 @@
 import { FeatureStore } from "@application/stores/types";
+import { dateComparer } from "@application/utilities/comparers";
 import { formatDate, formatDateTime, formatTime } from "@application/utilities/formatting";
 import { Config, D } from "@models";
 import { DependencyContainer } from "tsyringe";
@@ -10,6 +11,7 @@ const registerRendering = (c: DependencyContainer) => {
   c.register<RenderHelpers>(D.renderHelpers, {
     useFactory: (c) => ({
       urlFor: makeUrlFor(c.resolve(D.featureStore), c.resolve(D.locators)),
+      dateComparer,
       formatDate,
       formatTime,
       formatDateTime,

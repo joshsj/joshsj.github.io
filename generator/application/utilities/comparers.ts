@@ -1,3 +1,5 @@
-const dateComparer = (a: Date, b: Date) => a.getTime() - b.getTime();
+type Comparer<T> = (a: T, b: T) => number;
 
-export { dateComparer };
+const dateComparer: Comparer<Date> = (a: Date, b: Date) => a.getTime() - b.getTime();
+
+export { Comparer, dateComparer };

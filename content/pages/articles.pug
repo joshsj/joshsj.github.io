@@ -9,5 +9,9 @@ block content
   p Disclaimer: I'm no Martin Fowler. These blog posts are more of a creative outlet than a source for knowledge or wisdom.
 
   ul
-    each post in store.allBy("post").filter(p => !p.collection)
-      li: p #[a(href=urlFor(post)) #{post.title}] (#{formatDate(post.created)})
+    each post in store.allBy("post").filter(p => !p.collection).sort((a, b) => dateComparer(b.created, a.created))
+      li
+        p 
+          a(href=urlFor(post)) #{post.title}
+          |
+          | (#{formatDate(post.created)})

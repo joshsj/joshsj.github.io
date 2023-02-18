@@ -10,7 +10,7 @@ const makeFeatureStore = (): FeatureStore => {
     return items.findIndex((x) => x.file.full === path);
   };
 
-  const allBy = <T extends FeatureName>(name: T) => items.filter((x): x is FeatureFor<T> => x.name === name);
+  const allBy = <T extends FeatureName>(name: T) => [...items.filter((x): x is FeatureFor<T> => x.name === name)];
 
   return {
     find: (path) => {
