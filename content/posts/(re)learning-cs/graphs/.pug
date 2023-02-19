@@ -15,59 +15,36 @@ block content
     | like geographical maps or social networks.
   // more
   h2 The Basics
-  p A 
-    em node
-    | , or
-    em vertex
-    | , is a element (a house).
-  p An 
-    em edge
-    | , is a connection between nodes (the road between houses). These are
-    | not required: nodes are
-    em connected
-    | when they have an edge to another node and
-    | are
-    em disconnected
-    | without.
-  p A 
-    em path
-    | is a sequence of edges (driving from house 1 to 3). A
-    em cycle
-    | is a path
-    | starting and ending at the same node (driving from house 1 to 2 to 1).
-  p A 
-    em graph
-    | is
+  p A #[em node], or#[em vertex], is a element (a house).
+  p
+    | An #[em edge], is a connection between nodes (the road between houses).
+    | These are not required: nodes are #[em connected]
+    | when they have an edge to another node and are #[em disconnected] without.
+  p 
+    | A #[em path] is a sequence of edges (driving from house 1 to 3). A#[em cycle]
+    | is a path starting and ending at the same node (driving from house 1 to 2 to 1).
+  p
+    | A #[em graph] is 
     // excerpt
     | a collection of nodes and edges
     // excerpt
-    | , like a
-    a(href="/(re)learning-cs/lists/#Linked-List") linked list
-    | (a
-    | map of the street).
+    | , like a #[a(href=urlFor(store.findBy("post", "Lists"))) linked list] (a map of the street).
   p There's also the 
     em multigraph
     | , which allows two nodes to have multiple
     | undirected edges between them &mdash; we aren't talking about these 🤫
   h3 Directionality
   p
-    em Directionality
-    | is a property of an edge, indicating how the edge can be
+    | #[em Directionality] is a property of an edge, indicating how the edge can be
     | traversed (which way can you drive down the street).
   p In an 
     em directed
     | graph, defining an edge #[:tex(inline) e = (v, w)] means we can only
-    | traverse from #[:tex(inline) v] to #[:tex(inline) w]. In an
-    em undirected
-    | graph, we can go
-    | both ways.
+    | traverse from #[:tex(inline) v] to #[:tex(inline) w]. In an #[em undirected] 
+    | graph, we can go both ways.
   p To convert from an undirected graph, for each #[:tex(inline) (v, w)] in #[:tex(inline) E], we add #[:tex(inline) (w, v)] to allow traversal in both directions.
   h3 Weight
-  p Another property of edges is 
-    em weight
-    | (or
-    em cost
-    | ); on a map, the cost between
+  p Another property of edges is #[em weight] (or #[em cost]);  on a map, the cost between
     | two places could be distance or elevation change.
   p
     | We define an edge with weight as #[:tex(inline) e = (v, w, 2)], where #[:tex(inline) 2]
@@ -88,36 +65,34 @@ block content
     | We represent graph #[:tex(inline) G = (V, E)], where #[:tex(inline) V] is the set of
     | vertices in #[:tex(inline) G] and #[:tex(inline) E] is the set of edges in #[:tex(inline) G].
   p An edge #[:tex(inline) E] is represented as a pair #[:tex(inline) (v, w)] such that #[:tex(inline) v] and #[:tex(inline) w] are vertices.
-  p When considering the 
-    a(href="#size") size
-    | of a graph, #[:tex(inline) |V|] (or #[:tex(inline) n]) is
+  p 
+    | When considering the  size of a graph, #[:tex(inline) |V|] (or #[:tex(inline) n]) is
     | the total number of vertices and #[:tex(inline) |E|] (or #[:tex(inline) m]) is the total
     | number of edges.
   p
-    | For a full list, see
+    | For a full list, see 
     a(href="https://www3.nd.edu/~dgalvin1/60610/60610_S09/60610graphnotation.pdf") this document
     | .
   h2 Representations
-  p An 
-    em adjacency matrix
-    | is a wham table, where rows represent the vertex 'from'
+  p 
+    | An #[em adjacency matrix] is a wham table, where rows represent the vertex 'from'
     | and columns represent 'to'. The cell value comes from the edge's weight or
     | simply a boolean when unweighted.
   p
     | Undirected graphs have a party trick; because each edge runs in both directions,
-    | the table is
-    a(href="https://en.wikipedia.org/wiki/Symmetric_matrix") symmetric
-    | through
-    | the diagonal.
+    | the table is #[a(href="https://en.wikipedia.org/wiki/Symmetric_matrix") symmetric] 
+    | through the diagonal.
+  
   +caption("An Adjacency Matrix", "https://stepik.org/lesson/28877/step/2")
     img(src="adjacency matrix.png")
+  
   p
     | Adjacency matrices are suited for dense graphs, as they reserve space for every
-    | edge, whereas an
-    em adjacency list
+    | edge, whereas an #[em adjacency list]
     | only specifies existant edges to minimise
     | space. For each vertex, its connected nodes are listed, plus the weight is
     | necessary (with something tuple-y).
+    
   +caption("An Adjacency List", "https://stepik.org/lesson/28877/step/6")
     img(src="adjacency list.png")
   //
