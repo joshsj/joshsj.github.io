@@ -1,7 +1,7 @@
 import { ReadSourceStep } from "@application/pipeline/types/steps/generate";
 import { Log } from "@application/services/types";
 import { IO } from "@application/services/types/io";
-import { fromGenerator, isFulfilled, isRejected } from "@application/utilities/native";
+import { fromGenerator, splitAllSettled } from "@application/utilities/native";
 import { Config } from "@models/config";
 import { fileFrom } from "@models/io";
 
@@ -19,17 +19,12 @@ const readSource =
 
     sourcePaths = sourcePaths && sourcePaths.length ? sourcePaths : await fromGenerator(io.walk(config.sourceDir));
 
-    const results = await Promise.allSettled(sourcePaths.map(readFile));
-    const sourceFiles = results.filter(isFulfilled).map((r) => r.value);
+    const { fulfilled, rejected } = await splitAllSettled(sourcePaths.map(readFile));
 
-    log(`Successfully read ${sourceFiles.length}/${sourcePaths.length} source files`);
+    log(`Successfully read ${fulfilled.length}/${sourcePaths.length} source files`);
+    log("Failures:", rejected);
 
-    log(
-      "Failures:",
-      results.filter(isRejected).map((r) => r.reason)
-    );
-
-    return { sourceFiles };
+    return { sourceFiles: fulfilled };
   };
 
 export { readSource };

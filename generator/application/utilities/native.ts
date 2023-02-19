@@ -13,4 +13,25 @@ const isFulfilled = <T>(result: PromiseSettledResult<T>): result is PromiseFulfi
 
 const isRejected = <T>(result: PromiseSettledResult<T>): result is PromiseRejectedResult => !isFulfilled(result);
 
-export { fromGenerator, isFulfilled, isRejected };
+type SplitAllSettledData<T> = { fulfilled: T[]; rejected: PromiseRejectedResult["reason"][] };
+
+const splitAllSettled = async <T>(promises: Promise<T>[]): Promise<SplitAllSettledData<T>> => {
+  const results = await Promise.allSettled(promises);
+
+  const data: SplitAllSettledData<T> = {
+    fulfilled: [],
+    rejected: [],
+  };
+
+  for (const result of results) {
+    if (isFulfilled(result)) {
+      data.fulfilled.push(result.value);
+    } else {
+      data.rejected.push(result.reason);
+    }
+  }
+
+  return data;
+};
+
+export { fromGenerator, isFulfilled, isRejected, splitAllSettled, SplitAllSettledData };

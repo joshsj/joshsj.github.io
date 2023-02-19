@@ -1,31 +1,27 @@
 import { IdentifyFilesStep } from "@application/pipeline/types/steps/generate";
 import { FeatureNameFor, Log } from "@application/services/types";
-import { isFulfilled, isRejected } from "@application/utilities/native";
+import { splitAllSettled } from "@application/utilities/native";
+import { File } from "@models/io";
 
 const identifyFiles =
   (nameFor: FeatureNameFor, log: Log): IdentifyFilesStep =>
   async ({ sourceFiles }) => {
-    const results = await Promise.allSettled(
-      sourceFiles.map(async (file) => {
-        const name = nameFor(file);
+    const identify = async (file: File) => {
+      const name = nameFor(file);
 
-        if (!name) {
-          throw file.full;
-        }
+      if (!name) {
+        throw file.full;
+      }
 
-        return { file, name };
-      })
-    );
+      return { file, name };
+    };
 
-    const files = results.filter(isFulfilled).map((r) => r.value);
+    const { fulfilled, rejected } = await splitAllSettled(sourceFiles.map(identify));
 
-    log(`Categorised ${files.length}/${sourceFiles.length} source files`);
-    log(
-      "Failures:",
-      results.filter(isRejected).map((r) => r.reason)
-    );
+    log(`Categorised ${fulfilled.length}/${sourceFiles.length} source files`);
+    log("Failures:", rejected);
 
-    return { files };
+    return { files: fulfilled };
   };
 
 export { identifyFiles };

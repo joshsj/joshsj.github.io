@@ -1,7 +1,7 @@
 import { WriteBuildStep } from "@application/pipeline/types/steps/generate";
 import { Log } from "@application/services/types";
 import { IO } from "@application/services/types/io";
-import { isFulfilled, isRejected } from "@application/utilities/native";
+import { splitAllSettled } from "@application/utilities/native";
 import { Config } from "@models/config";
 import { File } from "@models/io";
 
@@ -14,14 +14,10 @@ const writeBuild =
       log("Wrote " + file.full);
     };
 
-    const results = await Promise.allSettled(buildFiles.map(async (f) => writeFile(f)));
+    const { fulfilled, rejected } = await splitAllSettled(buildFiles.map(writeFile));
 
-    log(`Successfully wrote ${results.filter(isFulfilled).length}/${buildFiles.length} build files`);
-
-    log(
-      "Failures",
-      results.filter(isRejected).map((r) => r.reason)
-    );
+    log(`Successfully wrote ${fulfilled.length}/${buildFiles.length} build files`);
+    log("Failures", rejected);
   };
 
 export { writeBuild };
