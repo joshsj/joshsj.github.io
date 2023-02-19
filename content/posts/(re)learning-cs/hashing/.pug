@@ -11,14 +11,9 @@ extends /layouts/default.pug
 block content
 
   p
-    | With data structures like a sorted
-    a(href="/(re)learning-cs/lists/#Array") array
-    | or a balanced
-    a(href="/(re)learning-cs/trees/#Binary-Search-Tree")
-      | binary search
-      | tree
-    | , we can find random values in logarithmic time. With hashing, we make
-    | it constant.
+    | With data structures like a (sorted) #[a(href=urlFor(store.findBy("post", "Lists"))) array]
+    | or a balanced binary search tree, we can find random values in logarithmic time.
+    | With hashing, we make it constant.
   // more
   p
     | This is the basic idea: for a given key, we use a function to produce a unique
@@ -27,15 +22,19 @@ block content
   p
     | Naturally, we need a backing structure to use the indexes &mdash; an array, cos it's
     | hella quick.
+  
   h2 Structures
   p How is hashing used to store data?
+  
   h3 Hash Table
   p A set, storing the key itself at the index.
+  
   h3 Hash Map
   p A 
     a(href="/(re)learning-cs/abstract-data-types/#Map") map
     | ,
     | storing a key-value pair for association.
+  
   h3 Bloom Filter
   p
     | An alternate take on a hash map, useful only to check if a value exists in the
@@ -48,9 +47,11 @@ block content
     | ; false negatives aren't possible but false
     | positives are, so the precision of a hash map is sacrificed for memory
     | efficiency. For example, for an array of length #[:tex(inline) m], let:
-  | :tex
-  | H_1(K)=ascii(K)\mod{m} \\ H_2(K)=ascii(K)+4\mod{m} \\ H_3(K)=4\times{}ascii(K)\mod{m}
+  
+  :tex H_1(K)=ascii(K)\mod{m} \\ H_2(K)=ascii(K)+4\mod{m} \\ H_3(K)=4\times{}ascii(K)\mod{m}
+
   p Inserting B returns indexes 1, 3, and 4; inserting L also returns 1, 3, and 4.
+  
   h3 Count-Min Sketches
   p Extending on bloom filters, 
     em count-min sketches
@@ -63,29 +64,24 @@ block content
   p
     | Keys with fewer collisions are more accurate but we can't know which those are
     | 🤔
+  
   h2 Hash Functions
-  p A 
-    em hash function
-    | #[:tex(inline) h(k)] is any function which transforms data of an
+  p 
+    | A #[em hash function] #[:tex(inline) h(k)] is any function which transforms data of an
     | arbitrary size into a fixed size. They're used to compute the index of a key in
     | hashing structures.
-  p All hash function obey the 
-    em equality
-    | property: given two keys of equal value,
+  p 
+    | All hash function obey the #[em equality] property: given two keys of equal value, 
     | their hashes must also be equal.
-  p A 
-    em perfect
-    | hash function also obeys the
-    em inequality
-    | property: given two keys
+  p 
+    | A #[em perfect] hash function also obeys the #[em inequality] property: given two keys
     | of inequal value, their hashes must be unequal. In the real world, this is
-    | difficult to achieve so a 'good' hash function minimises
-    em collisions
-    | .
+    | difficult to achieve so a 'good' hash function minimises #[em collisions].
   p
     | Note: As well as hash tables/maps, there are many more uses of hashing including
     | cryptography, version control diffs, password storage etc. Common
     | implementations include MD5, SHA-1, and CRC.
+  
   h3 Make It Gud
   p
     | Starting with a hash function for only characters, we can return the ASCII
@@ -97,19 +93,22 @@ block content
     | and
     code olleh
     | return the same value.
-  p This means good hash functions must have a time complexity of #[:tex(inline) K], where
-  | #[:tex(inline) K] is the length of the input, and must also perform non-commutative
-  p arithmetic.
+  p 
+    | This means good hash functions must have a time complexity of #[:tex(inline) K], 
+    | where #[:tex(inline) K] is the length of the input, and must also perform non-commutative arithmetic.
+  
   h3 Producing An Index
   p To store a object #[:tex(inline) o] in an array of length #[:tex(inline) m]:
   ol
     li Create the hash value #[:tex(inline) hv=h(o)]
     li Transform the hash value into a valid index #[:tex(inline) i=hv\mod{m}]
+  
   h2 Collision Resolution
   p
     | We can control two aspects of hash tables to minimise collisions: the size of
     | the backing array and the hash function itself.
   p There are four categories of collision resolution mechanisms:
+  
   table
     thead
       tr
@@ -124,39 +123,32 @@ block content
       tr
         td Hashing
         td At at key's index, the key is stored
-        td At a key's index, a 
-          a(href="#Separate-Chaining") separate
-          | structure is stored
+        td At a key's index, a separate structure is stored
+  
   h3 Linear Probe
   p (Open addressing, closed hashing)
   p
     | Simply put, when an index collides, we try the next one and keep going until we
     | find an empty index 🤷‍♂️. If no index is available, we extend the backing array
     | and rehash all the values which minimises previous collisions.
+  
   +caption("Insertion via Linear Probing")
     include:py caption1.py
+  
   h3 Double Hashing
   p (Open addressing, closed hashing)
-  p An issue with linear probing is 
-    em clumping
-    | : groups of adjacent indexes. They're
-    a(href="https://stepik.org/lesson/31223/step/11") statistically likely
-    | but I never
-    | liked stats.
-  p You can use 
-    em double hashing
-    | to eliminate clumping which determines the
-    em offset
+  p 
+    | An issue with linear probing is #[em clumping]: groups of adjacent indexes. They're
+    | #[a(href="https://stepik.org/lesson/31223/step/11") statistically likely] but I never liked stats.
+  p 
+    | You can use #[em double hashing] to eliminate clumping which determines the #[em offset]
     | using another hash function. A common choice is #[:tex(inline) 1+\frac{K}{M}\mod{(M-1)}].
+  
   h3 Random Hashing
   p (Open addressing, closed hashing)
-  p Another solution to clumping is 
-    em random hashing
-    | in which the offset is produced
-    | by a random number generator
-    strong seeded with the key
-    | which ensures the values
-    | comply with the equality property.
+  p 
+    | Another solution to clumping is #[em random hashing] in which the offset is produced by a random number generator
+    | #[strong seeded with the key] which ensures the values comply with the equality property.
   p
     | Because good random number generators are computationally expensive, it's better
     | to just go with double hashing.
@@ -190,12 +182,10 @@ block content
     | collides, the new key is inserted and the previous key is rehashed to a new
     | location.
   p
-    em Cuckoo hashing
-    | uses multiple hash tables #[:tex(inline) T_1, T_2] with different
+    | #[em Cuckoo hashing] uses multiple hash tables #[:tex(inline) T_1, T_2] with different
     | hash functions to reduce the probability of collisions. The algorithm for cuckoo
-    | hashing is limited to a maximum number of attempts, usually 10, to ensure we
-    | don't
-    a(href="https://docs.google.com/presentation/d/1uNYS51BNM66GJmM0vDIWnac-Y9VUQxOpYikpJoKXJyo/embed") try forever
+    | hashing is limited to a maximum number of attempts (usually 10) to ensure we
+    | don't #[a(href="https://docs.google.com/presentation/d/1uNYS51BNM66GJmM0vDIWnac-Y9VUQxOpYikpJoKXJyo/embed") try forever].
     | The algorithm is as follows:
   ol
     li A key collides in #[:tex(inline) T_1]
@@ -205,8 +195,9 @@ block content
       | If this key collides, the existing key if rehashed for #[:tex(inline) T_2] and so
       | on and so on...
   p
-    | See this
+    | See this 
     a(href="https://docs.google.com/presentation/d/1enss8FYHLN5VfPXA1ODzV0rxnr62lFrUrlURqKnkaj8/embed?start=true&loop=true&delayms=1000") visualisation
+    |
     | if that isn't so clear.
   p
     | Cuckoo hashing is #[:tex(inline) \mathcal{O}(1)] for find & delete operations &mdash; if the key isn't

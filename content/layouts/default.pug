@@ -21,18 +21,6 @@ mixin navLink(title)
 
 html
   head 
-    +css("variables")
-    +css("utilities")
-    +css("base")
-    +css("layout")
-    +css("components")
-    +css("lib")
-
-    +js("theme")
-    +js("myEmail")
-    +js("id-jumper")
-    +js("konami")
-
     link(rel='apple-touch-icon', sizes='180x180', href='/icons/apple-touch-icon.png')
     link(rel='icon', type='image/png', sizes='32x32', href='/icons/favicon-32x32.png')
     link(rel='icon', type='image/png', sizes='16x16', href='/icons/favicon-16x16.png')
@@ -48,6 +36,21 @@ html
     meta(name='google-site-verification', content='--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU')
 
     title #{current.title} • joshsj
+
+    //- TODO replace with copier ??
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous")
+
+    +css("variables") 
+    +css("utilities")
+    +css("base")
+    +css("layout")
+    +css("components")
+    +css("lib")
+
+    +js("theme")
+    +js("myEmail")
+    +js("id-jumper")
+    +js("konami")
 
   body(class={hmm: current.title === "404"})    
     nav

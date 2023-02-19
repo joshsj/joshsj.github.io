@@ -27,7 +27,7 @@ const filters: Filters = {
   cs: highlight("csharp"),
   py: highlight("python"),
   ts: highlight("typescript"),
-  tex: (s) => katex.renderToString(s),
+  tex: (s, { inline }) => katex.renderToString(s, { displayMode: inline === undefined }),
 };
 
 type Parts = { data: string; filename?: string; current?: Feature };

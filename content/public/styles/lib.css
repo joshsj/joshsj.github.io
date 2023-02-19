@@ -17,3 +17,15 @@
 .prism .comment {
   color: var(--code-comment);
 }
+
+.katex {
+  font-size: 1em;
+}
+
+.katex-html > .newline {
+  margin-bottom: 0.5em;
+}
+
+.katex-display {
+  margin: 0;
+}
