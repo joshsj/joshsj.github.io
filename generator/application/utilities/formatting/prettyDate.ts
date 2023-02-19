@@ -16,12 +16,12 @@ const months = [
   "December",
 ];
 
-const ordinals = ["st", "nd", "rd"] as const;
+const ordinals = ["th", "st", "nd", "rd"] as const;
 
 const prettyDate: PrettyDate = (d) => {
   const year = d.getFullYear();
   const month = months[d.getMonth()];
-  const day = d.getDate() + (ordinals.at((d.getDate() % 10) - 1) ?? "th");
+  const day = d.getDate() + (ordinals.at((d.getDate() % 10) % 4) ?? "th");
 
   return `${month} ${day}, ${year}`;
 };

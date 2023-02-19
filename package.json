@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
+    "@types/katex": "^0.16.0",
     "@types/node": "^18.11.18",
     "@types/prismjs": "^1.26.0",
     "@types/pug": "^2.0.6",
@@ -17,6 +18,7 @@
     "dotenv": "^16.0.3",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
+    "katex": "^0.16.4",
     "module-alias": "^2.2.2",
     "prismjs": "^1.29.0",
     "pug": "^3.0.2",

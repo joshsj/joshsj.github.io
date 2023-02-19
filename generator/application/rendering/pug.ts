@@ -1,5 +1,6 @@
 import { FeatureStore } from "@application/stores/types";
 import { Config, Feature } from "@models";
+import katex from "katex";
 import path from "path";
 import prism from "prismjs";
 import { render } from "pug";
@@ -26,7 +27,7 @@ const filters: Filters = {
   cs: highlight("csharp"),
   py: highlight("python"),
   ts: highlight("typescript"),
-  tex: (s) => s, // TODO
+  tex: (s) => katex.renderToString(s),
 };
 
 type Parts = { data: string; filename?: string; current?: Feature };

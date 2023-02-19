@@ -87,8 +87,7 @@ h3 {
   line-height: 1.1;
 }
 
-summary,
-th {
+summary {
   font-family: var(--ff-heading);
 }
 
@@ -202,11 +201,8 @@ tr {
 
 th {
   text-align: left;
-}
-
-th
-/* TODO is this good ? td */ {
   white-space: nowrap;
+  font-weight: bold;
 }
 
 sup {

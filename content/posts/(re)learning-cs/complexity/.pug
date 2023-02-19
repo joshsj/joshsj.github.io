@@ -11,7 +11,7 @@ extends /layouts/default.pug
 block content
 
   p Looking at the theoretical complexity of computational problems and solutions.
-  span#more
+  // more
   h2 Time Complexity
   p
     | The most obvious approach to determine the performance of a program is with a
@@ -22,7 +22,7 @@ block content
     | showing the performance of its implementation. As this is affected by the test
     | machine, programming language, code quality, etc., we use something better.
   p
-    em Time complexity
+    em Time complexity 
     | expresses the execution time of an algorithm as a function of
     | its input size by measuring its number of operations. This provides a purely
     | conceptual understanding of an algorithm's speed at any scale and a gauge for
@@ -34,11 +34,13 @@ block content
     li Big-Ω ('big omega') &mdash; the lower bound
     li Big-ϴ ('big theta') &mdash; both lower and upper
   p
-    | Generally, we only care about Big-O 'cause the fastest case of algorithm can be
+    | Generally, we only care about Big-O cos the fastest case of algorithm can be
     | taken for granted. When measuring Big-O, some rules apply:
   ol
     li
-      p Constant factors of #[:tex(inline) n] are removed so #[:tex(inline) 3n+2] becomes #[:tex(inline) n].
+      p 
+        | Constant factors of #[:tex(inline) n] are removed so #[:tex(inline) 3n+2] 
+        | becomes #[:tex(inline) n].
       p
         | Mathematical reasons apply which I can't quite follow but practically,
         | constant time doesn't matter as #[:tex(inline) n\to\infty].
@@ -49,30 +51,22 @@ block content
       p
         | Again, as #[:tex(inline) n\to\infty], all but the greatest exponent becomes
         | insignificant.
+
   +caption("Graph of time complexities against input size.")
     img(src="graph.png")
+
   h2 (Classes of) Computational Complexity
   p
-    a(href="#Time-Complexity") Time complexity
-    | looks at the complexity of a solution, but
-    em computational complexity
-    | assesses the practical difficulty of solving a
-    | computational problem.
+    | #[a(href="#Time-Complexity") Time complexity] looks at the complexity of
+    | a solution, but #[em computational complexity] assesses the practical
+    | difficulty of solving a computational problem.
   p There are four common classes of computational complexity:
   ul
     li
-      p
-        strong P
-        | olynomial &mdash; solvable in polynomial time
-      ul
-        li An algorithm exists which answers the problem
-      // spellchecker: disable-next-line
+      p #[strong P]olynomial &mdash; solvable in polynomial time
+      ul: An algorithm exists which answers the problem
     li
-      p
-        strong N
-        | ondeterministic
-        strong P
-        | olynomial &mdash; verifiable in polynomial time
+      p #[strong N]ondeterministic #[strong P]olynomial &mdash; verifiable in polynomial time
       ul
         li An algorithm exists which can verify that an answer to the problem is valid
         li
