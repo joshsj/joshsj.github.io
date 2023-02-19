@@ -1,10 +1,10 @@
 mixin postDetails(post)
 
-  p Posted on #{formatDate(post.created)}
+  p Posted on #{prettyDate(post.created)}
 
   //- TODO remove once same updated dates are removed
   if post.updated
-    p.squish Updated on #{formatDate(post.updated)}
+    p.squish Updated on #{prettyDate(post.updated)}
     
   if post.collection
     p.squish Part of 

@@ -1,5 +1,5 @@
 import { Comparer } from "@application/utilities/comparers";
-import { FormatDate, FormatDateTime, FormatTime } from "@application/utilities/formatting";
+import { FormatDate, FormatDateTime, FormatTime, PrettyDate } from "@application/utilities/formatting";
 import { Feature, FeatureName } from "@models";
 
 type UrlFor = ((name: FeatureName, filename: string) => string) & ((feature: Feature) => string);
@@ -10,6 +10,7 @@ type RenderHelpers = {
   formatDate: FormatDate;
   formatTime: FormatTime;
   formatDateTime: FormatDateTime;
+  prettyDate: PrettyDate;
 };
 
 export { UrlFor, RenderHelpers };

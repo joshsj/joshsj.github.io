@@ -1,6 +1,6 @@
 import { FeatureStore } from "@application/stores/types";
 import { dateComparer } from "@application/utilities/comparers";
-import { formatDate, formatDateTime, formatTime } from "@application/utilities/formatting";
+import { formatDate, formatDateTime, formatTime, prettyDate } from "@application/utilities/formatting";
 import { Config, D } from "@models";
 import { DependencyContainer } from "tsyringe";
 import { makeUrlFor } from "./helpers/urlFor";
@@ -15,6 +15,7 @@ const registerRendering = (c: DependencyContainer) => {
       formatDate,
       formatTime,
       formatDateTime,
+      prettyDate,
     }),
   });
 
