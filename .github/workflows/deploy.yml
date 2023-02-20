@@ -36,6 +36,7 @@ jobs:
       - name: generate
         run: |
           npm ci
+          npm run build
           npm run generate -- --debug
 
       - name: add deployment repository
