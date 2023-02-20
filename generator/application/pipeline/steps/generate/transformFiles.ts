@@ -4,7 +4,9 @@ import { Log } from "@application/services/types";
 import { FeatureStore } from "@application/stores/types";
 import { splitAllSettled } from "@application/utilities/native";
 import { Feature } from "@models";
-import { File } from "@models/io";
+import { File, fileFrom } from "@models/io";
+
+const permalinkLocator = (permalink: string) => fileFrom(permalink);
 
 const transformFiles =
   (store: FeatureStore, locators: Locators, builders: Builders, log: Log): TransformFilesStep =>
@@ -17,7 +19,10 @@ const transformFiles =
         return undefined;
       }
 
-      return locator(f.file).with({ content: await builder(f) });
+      const located =
+        "permalink" in f && typeof f.permalink === "string" ? permalinkLocator(f.permalink) : locator(f.file);
+
+      return located.with({ content: await builder(f), encoding: f.file.encoding });
     };
 
     const { fulfilled, rejected } = await splitAllSettled(store.all().map(transform));
