@@ -140,6 +140,10 @@ li::marker {
   margin-right: 1em;
 }
 
+li[data-marker]::marker {
+  content: attr(data-marker);
+}
+
 select {
   color: var(--black);
   background-color: var(--white);
