@@ -11,91 +11,49 @@ extends /layouts/default.pug
 
 block content
 
-  p Logging comes out of the box with ASP using 
-    code ILogger<>
-    | from the
-    code Microsoft.Extensions.Logging
-    | package.
+  p
+    | Logging comes out of the box with ASP using #[code ILogger<>] from the
+    | #[code Microsoft.Extensions.Logging] package.
   // more
-  p The generic parameter specifies a 
-    em category
-    | (the source of the log). Its
-    | arbitrary but the enclosing class is the convention. The log
-    em level
-    | (how bad it
-    | is) is specified with the
-    code LogLevel
-    | enum or dedicated methods.
-  pre
-    code.csharp
-      | public class SomeService
-      | {
-      | public SomeService(ILogger<IndexModel> logger) {...}
-      | public void SomeMethod()
-      | {
-      | logger.LogInformation("something");
-      | logger.Log(LogLevel.Error, "something else");
-      | }
-      | }
-  p We can specify the minimum severity of logs per-assembly using 
-    em filters
-    | .
-  pre
-    code.json
-      | {
-      | "Logging": {
-      | "LogLevel": {
-      | "Default": "Information",
-      | "Microsoft": "Warning"
-      | }
-      | }
-      | }
-  h2 Grouping
-  p Proving an 
-    em Event ID
-    | with the log message allows
-  p For console logging, we can also use a scope.
-  pre
-    code.csharp
-      | using (_logger.BeginScope("using block message")) {...}
+  p
+    | The generic parameter specifies a #[em category] (the source of the log). It's arbitrary but
+    | the enclosing class is the convention. The log #[em level] (how bad/important it is) is
+    | specified with the #[code LogLevel] enum or dedicated methods.
+
+  include:cs basic.cs
+
+  p We can specify the minimum severity of logs per-assembly using #[em filters].
+
+  include:json filter.json
+
   h2 Performance
   p
     | Logging can introduce performance issues in many applications. Unless a
     | directly-loggable value is provided (basically primitives), the logger needs to
     | do some conversion/serialisation. Combine that with the fact that console
     | logging is synchronous and the overhead can be comparatively huge.
-  p By defining a delegate with the 
-    code LoggerMessage
-    | class, we can create s
+  p
+    | By defining a delegate with the #[code LoggerMessage] class, we can create a
     | cache-able delegates with strong types, requiring fewer allocations and
     | eliminating boxing to reduce computational overhead.
-  +caption("`LoggerMessage` examples.")
-    include:cs caption1.cs
+
+  +caption("LoggerMessage examples.")
+    include:cs logger message.cs
+
   h2 Custom Exception Handling
   p
-    | In the backend, custom exception handling is implemented via a filter deriving
-    | from
-    code ExceptionFilterAttribute
-    | . .NET also offers an inbuilt exception page for
-    | developers, added with
-    code app.UseDeveloperExceptionPage()
-    | .
-  p In the frontend, 
-    code app.UseExceptionHandler("/Error")
-    | specifies a Razor page to
+    | In the backend, custom exception handling is implemented via a filter deriving from
+    | .NET also offers an inbuilt exception page for #[code ExceptionFilterAttribute]
+    | developers, added with #[code app.UseDeveloperExceptionPage()].
+  p
+    | In the frontend, #[code app.UseExceptionHandler("/Error")] specifies a Razor page to
     | display errors & exceptions to the user.
   p
-    code UseExceptionHandler
-    | middleware allows exceptions throughout the application to
+    | #[code UseExceptionHandler] middleware allows exceptions throughout the application to
     | be captured, and automates page redirects.
+
   h2 Destinations
-  p Also referred to as 
-    em providers
-    | ,
-    em sinks
-    | , or
-    em targets
-    | .
+  p Also referred to as #[em providers], #[em sinks], or #[em targets].
   p Files are the easiest choice but not the best:
   ul
     li Plain text is hard to query making later analysis tricky
@@ -104,11 +62,11 @@ block content
       | tricky
     li No native UI for files to browse them
   p
-    | Cloud-hosting services offer solutions, such as Azure's 'Application Insights'
-    | or 'App Service Diagnostics', integrated into ASP with
-    code Microsoft.Extensions.Logging.AzureAppServices
-  p
-    | Packages like Serilog can connect to
-    a(href="https://github.com/serilog/serilog/wiki/Provided-Sinks#list-of-available-sinks") many external services
-    | to store logs.
+    | Cloud-hosting services offer solutions, such as Azure's Application Insights or
+    | App Service Diagnostics, integrated into ASP with
+    | #[code Microsoft.Extensions.Logging.AzureAppServices].
+  p.
+    Packages like Serilog can connect to
+    #[a(href="https://github.com/serilog/serilog/wiki/Provided-Sinks#list-of-available-sinks") many external services]
+    to store logs.
   
