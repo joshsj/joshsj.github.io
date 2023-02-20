@@ -26,6 +26,10 @@ jobs:
       - name: clone repository
         run: git clone $REPO .
 
+      # TODO remove
+      - name: switch branch (temporary)
+        run: git switch new
+
       - name: delete .git folder
         run: rm -rf ./.git/
 
