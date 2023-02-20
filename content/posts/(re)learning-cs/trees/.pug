@@ -16,51 +16,41 @@ block content
     | To get to grips with the terminology, jump ahead to the basics of
     a(href="/(re)learning-cs/graphs/") graphs
     | .
+
   +spotify("track/4iVTSRiJAA18d3QglhyJ6Q")
+
   h2 Rooted Tree
-  p In a 
-    em rooted tree
-    | , all nodes have a one parent with many children. All above
-    | nodes are
-    em ancestors
-    | and all below nodes are
-    em descendants
-    | .
-  p The single node at the top is the 
-    em root node
-    | (no parents) and the nodes are the
-    | bottom are leaves (no children). Any node with children is also an
-    em
-      | internal
-      | node
-    | .
+  p
+    | In a #[em rooted tree], all nodes have a one parent with many children.
+    | All above nodes are #[em ancestors] and all below nodes are #[em descendants].
+  p
+    | The single node at the top is the #[em root node] (no parents) and the nodes are the
+    | bottom are #[em leaves] (no children). Any node with children is also an #[em internal node].
+
   +caption("A rooted tree.", "https://stepik.org/lesson/28726/step/4")
     img(src="rooted tree.svg")
+
   p
     | Rooted trees have an implicit hierarchical structure. With only one parent and
     | multiple children, they can be considered 'top-down'.
+
   h2 Unrooted Tree
-  p In an 
-    em unrooted tree
-    | , there is no notion of parents or children. A given node
-    | has
-    em neighbours
-    | ; any nodes with one neighbour is a
-    em leaf
-    | and any node with
-    | many neighbours is an
-    em internal node
-    | .
+  p
+    | In an #[em unrooted tree] , there is no notion of parents or children. A given node has
+    | #[em neighbours]; any nodes with one neighbour is a #[em leaf] and any node with many
+    | neighbours is an #[em internal node].
+
   +caption("An unrooted tree.", "https://stepik.org/lesson/28726/step/4")
     img(src="unrooted tree.svg")
+
   p
-    | Unrooted trees do not have a string implicit hierarchy. They can be interpreted
+    | Unrooted trees do not have an implicit hierarchy. They can be interpreted
     | as 'outside-in', where only the relationships from lead to internal node are
     | considered , or vice versa with 'inside-out'.
+
   h2 Binary Tree
-  p A 
-    em binary tree
-    | is a rooted tree with these constraints:
+  p
+    | A #[em binary tree] is a rooted tree with these constraints:
   ul
     li All nodes have a parent except the root
     li All nodes have either 0, 1, or 2 children
@@ -70,12 +60,9 @@ block content
     | the structure changes.
   +caption("A binary tree.", "https://stepik.org/lesson/28726/step/8")
     img(src="binary tree.svg")
-  p We can further consider a binary tree as 
-    em full
-    | , meaning every node has two
-    | children, excluding the leaves; or
-    em complete
-    | , meaning every level, but possibly
+  p
+    | We can further consider a binary tree as #[em full], meaning every node has two
+    | children, excluding the leaves; or #[em complete], meaning every level, but possibly
     | the last, is completely filled and all nodes are to leftmost.
   p
     | To make the diagram above complete, 8 would become the right child of 3 and 9
@@ -83,8 +70,9 @@ block content
     | children (or 7, 8, and 9 would need removing).
   h3 Traversal
   p
-    | We have four algorithms to remember! All of which are #[:tex(inline) \mathcal{O}(n)] 'cause every
-    | node is visited.
+    | We have four algorithms to remember! All of which are #[:tex(inline) \mathcal{O}(n)]
+    | cos every node is visited.
+
   table
     thead
       tr
@@ -95,78 +83,74 @@ block content
       tr
         td Pre-order
         td Visit Left Right
-        td
-          code 0 1 3 7 4 2 5 8 6 9
+        td: code 0 1 3 7 4 2 5 8 6 9
       tr
         td In-order
         td Left Visit Right
-        td
-          code 7 3 1 4 0 5 8 2 6 9
+        td: code 7 3 1 4 0 5 8 2 6 9
       tr
         td Post-order
         td Left Right Visit
-        td
-          code 7 3 4 1 8 5 9 6 2 0
+        td: code 7 3 4 1 8 5 9 6 2 0
       tr
         td Level-order
         td Visit each level
-        td
-          code 0 1 2 3 4 5 6 7 8 9
+        td: code 0 1 2 3 4 5 6 7 8 9
+
   h2 Heap
-  p A heap is a tree that satisfies the 
-    em heap property
-    | : a parent node means higher
-    | priority. A binary heap must also satisfy the binary tree constraints and be
-    em complete
-    | .
-  p Within the world of heaps, we firstly have 
-    strong min-heaps
-    | , in which a parent node
-    | has a lesser-or-equal value to all of its children. That is, a smaller value
-    | means higher priority. A
-    strong max-heap
-    | is the opposite.
+  p
+    | A heap is a tree that satisfies the #[em heap property]: a parent node means higher
+    | priority. A binary heap must also satisfy the binary tree constraints and be #[em complete].
+  p
+    | Within the world of heaps, we firstly have #[strong min-heaps], in which a parent node
+    | has a lesser-or-equal value to all of its children. That is, a smaller value means higher priority.
+    | A #[strong max-heap] is the opposite.
+
   +caption("A min and max-heap.", "https://stepik.org/lesson/28863/step/4")
     img(src="min max heap.svg")
+
   p
     | It is also valid for duplicate node values in a heap &mdash; two things can have the
     | same priority.
+
   h2 Binary Search Tree
-  p A 
-    em Binary Search Tree (BST)
-    | allows arbitrary values to be found fairly quickly.
+  p
+    | A #[em Binary Search Tree (BST)] allows arbitrary values to be found fairly quickly.
     | It's structured as a rooted binary tree, where every node is greater than all
     | nodes to its left and less than all to its right. Inherently, only comparable
     | types can be stored in a BST.
+
   +caption("A binary search tree.", "https://stepik.org/lesson/28727/step/1")
     img(src="bst.svg")
-  p The 
-    em height
-    | of a BST is the longest distance from the root of the tree to a
+
+  p
+    | The #[em height] of a BST is the longest distance from the root of the tree to a
     | leaf; a tree with no nodes has a height of -1, only a root has a height of 0,
     | and a node+leaf has a height of 1, etc.
   p
     | We can also consider the balance of a BST. When balanced, most leaves are
-    | equidistant from the root and most internal nodes have two children. When
-    strong perfectly
-    | balanced, it's all of em. Unbalanced trees are also a thing.
+    | equidistant from the root and most internal nodes have two children. When #[strong perfectly]
+    | balanced, it's all of em.
+
+  p Unbalanced trees are also a thing.
+
   +caption("A perfectly balanced BST.", "https://stepik.org/lesson/28727/step/9")
     img(src="perfectly balanced bst.svg")
-  p The average-case time complexity to find an element #[:tex(inline) N] is #[:tex(inline) \mathcal{O}(\log N)]; there is a proof, but it's 
-    a(href="https://stepik.org/lesson/28730/step/4") fucking mental
-    | and I can't understand math so complex any more.
+
+  p
+    | The average-case time complexity to find an element #[:tex(inline) N] is #[:tex(inline) \mathcal{O}(\log N)];
+    | there is a proof, but it's #[a(href="https://stepik.org/lesson/28730/step/4") fucking mental].
+
   h2 Implementations
   // TODO add link to implementations
-  p Generally, implementing a tree structure involves a 
-    code Node
-    | object containing a a
-    | value and child pointers &mdash; an array for normal trees,
-    code left
-    | and
-    code right
+  p
+    | Generally, implementing a tree structure involves a #[code Node] object containing a
+    | value and child pointers &mdash; an array for normal trees, #[code left] and #[code right]
     | properties for binary trees.
+
   +caption("A heap structured with an array.", "https://stepik.org/lesson/28863/step/11")
     img(src="heap array.png")
+
   p
     | Alternatively, we can utilise pointer arithmetic to store binary trees in
     a(href="/(re)learning-cs/lists/#Array") arrays

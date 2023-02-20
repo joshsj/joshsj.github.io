@@ -10,7 +10,7 @@ import { Renderer, RenderHelpers } from "./types";
 require("prismjs/components/index")(["typescript", "python", "csharp"]);
 
 type Lang = "ts" | "cs" | "py" | "tex";
-type Options = { inline?: boolean };
+type Options = { inline?: true };
 type Filter = (s: string, options: Options) => string;
 
 type Filters = { [L in Lang]: Filter };
@@ -27,7 +27,10 @@ const filters: Filters = {
   cs: highlight("csharp"),
   py: highlight("python"),
   ts: highlight("typescript"),
-  tex: (s, { inline }) => katex.renderToString(s, { displayMode: inline === undefined }),
+  tex: (s, { inline }) => katex.renderToString(s, {
+    displayMode: inline === undefined,
+    throwOnError: true
+  }),
 };
 
 type Parts = { data: string; filename?: string; current?: Feature };
