@@ -9,25 +9,20 @@ extends /layouts/default.pug
 
 block content
 
-  // excerpt
-  p
-    | Estimation is essential to ensure a project is realistically funded and
-    | resourced, meaning they can be delivered on-time, to-budget, and
-    | to-set-quality.
-    // excerpt
-    | In addition, clients want/need to know this to
-    | sign off a project.
-  p
-    | Traditional estimations methods align with
-    a(href="/notes-on-project-management/delivery/")
-      | traditional
-      | delivery approaches
-    | , meaning the project must already be decomposed. The
-    | project is analysed bottom-up; each element is estimated from which a
+  p. 
+    Estimation is essential to ensure a project is realistically funded and resourced, meaning they can be delivered
+    on-time, to-budget, and to-set-quality. In addition, clients want/need to know this to sign off a project.
+  p.
+    Traditional estimation methods align with 
+    #[a(href=urlFor(store.findBy("post", "Project Delivery"))) traditional delivery approaches], meaning the project
+    must already be decomposed. The project is analysed bottom-up, starting with the small things and discovering the
+    mutual functionalities towards the end.
+
   p
     | Agile estimation approaches top-down. The main features of the application are
     | estimated as a total for its subtasks, encouraging teams to produce gross total
     | estimations for time and/or effort.
+  
   h2 Rules of Thumb
   ul
     li
@@ -40,10 +35,13 @@ block content
     li
       | Productivity also varies from person to person, i.e., mutual ability or an
       | individual's fluctuations, so these are average figures
+  
   h2 Generic Approaches
+  
   h3 Parkinson Principle
-  blockquote
-    p Work expands to fit the available space
+  
+  blockquote: p Work expands to fit the available space
+  
   p
     | First observed in management studies, it is sometimes referred to as the
     | 'capacity effect'. The principle relies on the idea that the effort applied to a
@@ -51,8 +49,10 @@ block content
   p
     | This can be exaggerated to the idea that quality of work is correlated to the
     | time constraint &mdash; it is a generic approach after all.
+  
   +caption("Graph showing the Parkinson Principle")
     img(src="parkinson principle.png")
+  
   p Alone, it cannot be used to estimate work, but it does guide estimations:
   ul
     li Estimations should favour less time, to be extended if necessary
@@ -74,14 +74,12 @@ block content
   p
     | Alternatively, the missing costs can be layered onto the client as the project
     | progresses: this sucks, don't do it.
+  
   h3 Analogy
-  p The 
-    em Analogy
-    | method determines estimations from a similar project. Naturally,
-    | the data from the other project must be trusted, and therefore needs to be
-    | accurate. It's only gives ballpark, similar to
-    a(href="#Top-down") top-down
-    | .
+  
+  p.
+    The #[em Analogy method] determines estimations from a similar project. Naturally, the data from the other project
+    must be trusted, and therefore needs to be accurate. It's only gives ballpark, similar to top-down.
   p
     | A simple example is scaling construction work: one house on a new estate is
     | gonna be real similar to another.
@@ -89,14 +87,12 @@ block content
     br
     | ❔ Agile: the flexibility can easily allow the project to
     | divert from the comparative project
+  
   h3 Expert Judgement
-  p Exactly as it sounds, 
-    em Expert Judgement
-    | bases estimations upon specific
-    | criteria and or expertise acquired a specific knowledge area, product area,
-    | language, or discipline. It can be provided by a any number of team
-    | members/leaders, but expert knowledge is generally found outside of the
-    | organisation, adding a marginal cost.
+  p.
+    Exactly as it sounds, #[em Expert Judgement] bases estimations upon specific criteria and or expertise acquired a
+    specific knowledge area, product area, language, or discipline. It can be provided by a any number of team
+    members/leaders, but expert knowledge is generally found outside of the organisation, adding a marginal cost.
   p
     | Experts can be difficult to find outright, difficult to find with the require
     | amount of knowledge, and can be expensive.
@@ -134,10 +130,9 @@ block content
     | ❔ Agile: doesn't fit with iterative delivery
   h2 Algorithmic Approaches
   p First concepts, then models...
+  
   h3 Complexity of Functions
-  p
-    strong Note:
-    | this section is unfinished.
+  p #[strong Note:] this section is unfinished.
   p Assessing the complexity of a function uses several factors:
   ul
     li
@@ -152,17 +147,16 @@ block content
           | function
     li
       p Internal/external files &mdash; tables, views, or stored files
+  
   h3 Basic Cost Model
-  p The 
-    em Basic Cost Model
-    | uses the formula #[:tex(inline) E = A\cdot{}M\cdot{}X\cdot{}S^B] where:
+  p.
+    The #[em Basic Cost Model] uses the formula #[:tex(inline) E = A\cdot{}M\cdot{}X\cdot{}S^B] where:
   ul
     li #[:tex(inline) A] applies an organisation-wide constant factor to cost models
     li
       | #[:tex(inline) S] is software 'size'
       ul
-        li
-          p LOC is the most common metric; varies wildly by languages & patterns
+        li LOC is the most common metric; varies wildly by languages & patterns
         li
           p Difficult to assess in early phases with external integrations:
           ul
@@ -170,12 +164,10 @@ block content
             li Modified internal/open source solution
             li Bought from a 3rd party
     li
-      | #[:tex(inline) B] does something, usually between `1` to `1.5`. I'm guessing it
-      p
-        | accounts for complexity, as the complexity of a solution will grow
-        | polynomially relative to size, and it's applied as a power of #[:tex(inline) S].
-    li
-      | #[:tex(inline) M] is a linear adjustment multiplier, which could also account for
-      p complexity
+      | #[:tex(inline) B] does something, usually between `1` to `1.5`. 
+      p.
+        I'm guessing it accounts for complexity, as the complexity of a solution will grow polynomially relative to
+        size, and it's applied as a power of #[:tex(inline) S].
+    li #[:tex(inline) M] is a linear adjustment multiplier, which could also account for complexity
     li #[:tex(inline) X] is vector of cost factors
   
