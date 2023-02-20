@@ -1,8 +1,6 @@
 ---
 title: Business Case
 created: 2021-11-15T00:00:00.000Z
-updated: 2021-11-15T00:00:00.000Z
-tags: []
 ---
 
 extends /layouts/default.pug
@@ -21,77 +19,56 @@ block content
     | The progress of the project measured is against the business case to ensure
     | timescales/costs are not being exceeded and business benefits are not being
     | eroded (i.e., it is still worth doing).
+  
   h2 Choosing the Right Type
   p
     | Frankly, business cases are boring and confusing, easy to write poorly, and may
     | be unconvincing. As such, business cases are a balancing act of length: long
     | enough to provide sufficient detail, while short enough to maintain interest.
-  p A 
-    em Summary Business Plan
-    | is around 10-15 pages, best used for new ventures and
-    | early stages of development.
-  p A 
-    em Full Business Plan
-    | is still applicable for new ventures, but with interim
-    | stages of development, including a blueprint of the business; these are around
-    | 25-35 pages long.
-  p Lastly, an 
-    em Operational Business Plan
-    | , at 40-100 pages, contains a blueprint
-    | for operations, including details of operational and financial measures.
+  p.
+    A #[em Summary Business Plan] is around 10-15 pages, best used for new ventures and early stages of development.
+  p.
+    A #[em Full Business Plan] is still applicable for new ventures, but with interim stages of development, including
+    a blueprint of the business; these are around 25-35 pages long.
+  p.
+    Lastly, an #[em Operational Business Plan], at 40-100 pages, contains a blueprint for operations, including details
+    of operational and financial measures.
+  
   h2 Speaking Proper
-  p Be 
-    strong specific
-    | and
-    strong explicit
-    | when describing the business benefits. Avoid
-    | vague phrases like 'helps a lot', 'very important', 'too much', and 'too many'.
-    | Instead, use values, estimates, and ranges, e.g.,
-    em
-      | "We will increase customer
-      | patronage by 25%"
-    | .
-  p Be 
-    strong realistic
-    | . Don't make false promises about the product, instead
-    | demonstrating the benefits and challenges.
-  p Be 
-    strong conservative
-    | in objectives, costs, timescales, and deliverables;
-    | overproducing by a small amount is great for client and makes the business look
-    | good. By contrast, being too conservative impresses to the customer that
-    | estimations about your own work aren't accurate.
+  p.
+    Be #[strong specific] and #[strong explicit] when describing the business benefits. Avoid vague phrases like
+    'helps a lot', 'very important', 'too much', and 'too many'. Instead, use values, estimates, and ranges, e.g.,
+    #[em "We will increase customer patronage by 25%"].
+  p.
+    Be #[strong realistic]. Don't make false promises about the product, instead demonstrating the benefits
+    and challenges.
+  p.
+    Be #[strong conservative] in objectives, costs, timescales, and deliverables; overproducing by a small amount is
+    great for client and makes the business look good. By contrast, being too conservative impresses to the customer
+    that estimations about your own work aren't accurate.
   p Use 
     strong visuals
     | ; investors like illustrations, e.g. graphs, charts, business
     | models, and tables. Find them online (with references) or create your own.
+  
   h2 Considerations
-  p
-    strong Aim:
-    | What decision(s) actually need to be made?
-  p
-    strong Audience:
-    | Who is making these decisions? Their interests as a business
-    | should be considered, as well as their style, i.e., grand vision or facts 'n'
-    | figures.
-  p
-    strong Arrangement and Appearance:
-    | How is it going to look? Alongside a good
-    a(href="#structure") structure
-    | , the appearance is just as important. Information should
-    | be easy to find, the
-    a(href="#speaking-proper") writing
-    | should be engaging, and
-    | diagrams should look pretty.
+  p #[strong Aim:] What decision(s) actually need to be made?
+  p.
+    #[strong Audience:] Who is making these decisions? Their interests as a business should be considered, as well as
+    their style, i.e., grand vision or facts 'n' figures.
+  p.
+    #[strong Arrangement and Appearance:] How is it going to look? Alongside a good
+    structure, the appearance is just as important. Information should be easy to find, the
+    writing should be engaging, and diagrams should look pretty.
+  
   h2 Structure
-  p For all 
-    a(href="#Choosing-the-Right-Type") types of business cases
-    | , there will be
-    | roughly 7 aspects to the business case.
+  p For all types of business cases , there will be roughly 7 aspects to the business case.
+  
   h3 Introduction and Background
   p
     | This details the purpose of the document, i.e., the business case for the
     | project, and the background of the proposed project respectively.
+  
   h3 Management Summary
   p
     | Also known as an Executive Summary, it describes the problem/opportunity the
@@ -102,41 +79,37 @@ block content
     | This makes the management summary the most important part of the business case,
     | as most 'executive readers', i.e. potential customers, are cash-rich but
     | time-poor.
+  
   h3 Description of the Problem
   p
     | Elaborating further, this adds adds detail to the business problem &
     | opportunity. It includes the available options to solve the problem, with the
     | considerations and justifications for viable and rejected options. The option of
     | doing nothing should also be discussed.
+  
   h3 Cost/Benefit Analysis
-  p
-    | This quantifies the costs of carrying out the project and the expected benefits.
-    | The costs can either be tangible, like
-    q it will cost x amount
-    | or
-    q
-      | an
-      | expected increase of 20% to the user base
-    | ; or intangible, like long-term
-    | benefits or competitor elimination by offering new products.
+  p.
+    This quantifies the costs of carrying out the project and the expected benefits. The costs can either be
+    tangible, like #[q it will cost x amount] or #[q an expected increase of 20% to the user base]; or intangible,
+    like long-term benefits or competitor elimination by offering new products.
   p
     | Note: intangible benefits will be questioned by the project tenders, as their
     | benefit is subjective by nature.
+  
   h3 Impacts
   p
     | These are essentially the 'side-effects' of the project solution. For example,
     | developing a solution to automate a process within a business affects the
     | employees currently responsible for the manual process. This makes them hard to
     | quantify, as they predominantly affect the customer's business.
+  
   h3 Risks
   p
     | The principle risks must also be outlined, with a recommended option and
     | proposed measures to either avoid or mitigate them.
+  
   h3 Conclusions and Recommendations
-  p
-    | Lastly, a summary of the business case and the required decisions from the
-    | customer are found in the
-    em conclusions and recommendations
-    | , based on the
-    | Management Summary.
+  p.
+    Lastly, a summary of the business case and the required decisions from the customer are found in the
+    #[em conclusions and recommendations], based on the Management Summary.
   
