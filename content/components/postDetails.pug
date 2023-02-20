@@ -11,7 +11,7 @@ mixin postDetails(post)
       a(href=urlFor("page", "collections")) 
         | #{store.allBy("collection").find(c => c.file.segments[1] === post.collection).title}
 
-  if post.tags
+  if post.tags && post.tags.length
     p.squish.sep.sep-pop
       span.skip Talks about
 
