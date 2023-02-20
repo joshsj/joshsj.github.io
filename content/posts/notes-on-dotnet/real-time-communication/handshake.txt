@@ -1,4 +1,4 @@
-<pre><code># Request
+// Request
 Upgrade: websocket
 Connection: Upgrade
 
@@ -7,7 +7,7 @@ Sec-WebSocket-Protocol: chat, superchat
 Sec-WebSocket-Version: 13
 Sec-WebSocket-Extensions: deflate-stream
 
-# Response
+// Response
 HTTP/1.1 101 Switching Protocols
 
 Upgrade: websocket

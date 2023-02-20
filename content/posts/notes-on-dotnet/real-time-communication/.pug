@@ -19,10 +19,12 @@ block content
     | frequently and the server can't send a response without a request, so how can it
     | update the client on its terms?
     // excerpt
+
   h2 A History Lesson
   p
     | We haven't always had a convenient way to update web applications in real-time.
     | We had some jank, then some less jank, then we got there properly.
+
   h3 AJAX Polling
   p
     | Using standard asynchronous requests, AJAX polling sends requests at a specific
@@ -31,14 +33,17 @@ block content
   p
     | As above, HTTP isn't designed for this, so it's intensive to process so many
     | HTTP requests given their relative size and complexity.
+
   h3 Long Polling
   p
     | Long polling solves the intensity issue by delegating it to the server. When the
     | client sends a request, the server waits for an update (polling) before
     | responding to the client's request. Naturally, client requests can last
     | indefinitely.
+
   +caption("Long Polling example")
-    include:cs caption1.cs
+    include:cs long polling.cs
+
   h3 Server Sent Events (SSE)
   p SSEs allow servers to send data to the client without an initial request.
   p
@@ -48,8 +53,9 @@ block content
     li Web standards
     li Easy to polyfill for older browsers
     li Auto-reconnection
-  p
-    span(role="heading") The Bad
+
+  p: span(role="heading") The Bad
+
   ul
     li Most browsers have ~6 connection max
       ul
@@ -63,14 +69,12 @@ block content
     | communication.
   p
     | The web socket handshake first sends a request to 'upgrade' the connection. If
-    | the server supports web sockets, it responds with a
-    code 101
-    | with a key to be
-    | included in the
-    code Accept
-    | header in subsequent communications:
+    | the server supports web sockets, it responds with a #[code 101] status code with
+    | a key to be included in the #[code Accept] header in subsequent communications:
+
   +caption("Web Socket Handshake")
-    include caption2.html
+    pre: include handshake.txt
+
   h2 SignalR
   p
     | SignalR is the big daddy of real-time communication on the web. It supports
@@ -78,8 +82,7 @@ block content
     | best technology available. It also provides an API for Remote Procedure Call
     | (RPC) and scales to handle increasing traffic.
   p
-    em Hubs
-    | are a component of SignalR; server-side classes that exchange messages
+    | #[em Hubs] are a component of SignalR; server-side classes that exchange messages
     | with the client. This includes a (de)serialisation protocol for parameters, JSON
     | by default. It also supports 'MessagePack', a binary format more compact than
     | JSON, and inherently faster to process.
