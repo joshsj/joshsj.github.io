@@ -1,8 +1,6 @@
 ---
 title: Analysis
 created: 2021-10-13T23:00:00.000Z
-updated: 2021-10-13T23:00:00.000Z
-tags: []
 ---
 
 extends /layouts/default.pug
@@ -24,10 +22,7 @@ block content
     li Have good utility
     li Easy to learn
     li Easy to remember how to use
-  p We can also look at 
-    em User Experience (UX)
-    | &mdash; the effect of a system on the
-    | user:
+  p We can also look at #[em User Experience (UX)] &mdash; the effect of a system on the user:
   ul
     li Satisfying
     li Enjoyable
@@ -38,13 +33,12 @@ block content
     li Helpful
     li Motivating
     li Emotionally fulfilling
+  
   h2 User Profiles
-  p A 
-    em user profile
-    | are a set of characteristics taken from a typical user of a
-    | system. A product can have any number of user profiles, depending on the scope
-    | of the system's demographic. Attributes should be all/only be relevant to the
-    | system; for example:
+  p.
+    A #[em user profile] are a set of characteristics taken from a typical user of a system. A product can have any
+    number of user profiles, depending on the scope of the system's demographic. Attributes should be all/only be
+    relevant to the system; for example:
   ul
     li Age range
     li Physical competences
@@ -74,20 +68,27 @@ block content
   p
     | They specify a theoretical or an actual end-user requiring an age, personal
     | background, personal needs, etc., and are formatted as a paragraph.
+  
   +caption("Example User Persona")
-    include caption1.html
+    blockquote: p.
+      Betty is 37 years old, she has been Warehouse Manager for five years and
+      worked for Simpkins Brothers Engineering for twelve years. She didn't go to
+      university, but has studied in her evenings for a business diploma. She has
+      two children aged 15 and 7 and does not like to work late. She did part of
+      an introductory in-house computer course some years ago, but it was
+      interrupted when she was promoted and could no longer afford to take the
+      time. Her vision is perfect, but her right-hand movement is slightly
+      restricted following an car accident three years ago. She is enthusiastic
+      about her work and is happy to delegate responsibility and take suggestions
+      from her staff. However, she does feel threatened by the introduction of yet
+      another new computer system (the third in her time at SBE)
+  
   h2 Task Analysis
   p
     | This a generic term referring to a variety of techniques for analysing and
     | representing goals and tasks.
-  p
-    em User goals
-    | are derived from the activities in which end-users engage: a state
-    | an end-user wishes to achieve.
-  p
-    em User tasks
-    | describe the functionality to achieve a task: a user activity
-    | required to bring about a goal.
+  p #[em User goals] are derived from the activities in which end-users engage: a state an end-user wishes to achieve.
+  p #[em User tasks] describe the functionality to achieve a task: a user activity required to bring about a goal.
   p
     | For example, the goal, 'know where next week's lecture is', can be described
     | with a task, 'a user activity required to bring about a goal '.
@@ -96,12 +97,11 @@ block content
     li Does it reduce user effort?
     li Does it improve user performance?
     li Does it aid/assist their use?
+  
   h2 Scenarios
-  p
-    em Scenarios
-    | are an informal narrative story: simple, 'natural', personal, and
-    | not generalisable. Ultimately, these target the when and where, referred to as
-    | the system's context.
+  p.
+    #[em Scenarios] are an informal narrative story: simple, 'natural', personal, and not generalisable. Ultimately,
+    these target the when and where, referred to as the system's context.
   p
     | Physical context could include where the user is, what their physical situation
     | is, and what else is happening around them. Temporal context could include:
