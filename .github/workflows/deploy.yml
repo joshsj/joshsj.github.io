@@ -19,7 +19,7 @@ jobs:
           echo "deployment branch: $BRANCH"
 
       - name: setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
 
       - name: clone repository
         run: git clone $REPO .
