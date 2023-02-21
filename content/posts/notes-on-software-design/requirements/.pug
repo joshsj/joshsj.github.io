@@ -1,8 +1,6 @@
 ---
 title: Defining Requirements
 created: 2021-11-06T00:00:00.000Z
-updated: 2021-11-06T00:00:00.000Z
-tags: []
 ---
 
 extends /layouts/default.pug
@@ -57,75 +55,65 @@ block content
     | Lastly, its stakeholders can further influence its requirements; an application
     | with an outsourced maintenance team needs to be securely & safely maintainable
     | by an outsider by design.
+
   h2 Sources
   p
     | The requirements for an application may be a solution; in the business world, it
     | could be an entire aspect of the system as a whole like data analytics. This
     | also applies at a lower level, e.g., persisting data could be implemented using
     | a database or configuration files.
+
   +caption("Requirement Sources Diagram")
     img(src="requirement sources.png")
+
   h2 Functional Requirements
-  p
-    | These describe what is solved by the application , i.e, the fucking point of the
-    | software. Descriptions can be from a number of perspectives, ideally
-    a(href="/notes-on-software-design/analysis/#Personas") personas
-    | ,
-    | to address five main aspects...
-  p
-    span(role="heading") How
-    | (the business functionality)
+  p.
+    These describe what is solved by the application, i.e, the point of the software. Descriptions can be from a
+    number of perspectives, ideally #[a(href="/notes-on-software-design/analysis/#Personas") personas], to address
+    five main aspects...
+  p #[strong How] &mdash; the business functionality
   ul
     li What the system has to do under-the-hood
     li Captured directly, e.g., with a use-case model
     li Captured indirectly, e.g., with a business process model
-  p
-    span(role="heading") Who
-    | (its users)
+  p #[strong Who] &mdash; its users
   ul
     li How competent are they?
     li Do they have accessibility requirements?
     li (Personas may also define these requirements)
-  p
-    span(role="heading") Where
-    | (its users in a context)
+  p #[strong Where] &mdash; its users in a context
   ul
     li How do the they access it? Browsers? Mobile app?
-  p
-    span(role="heading") What
-    | (the data)
+  p #[strong What] &mdash; the data
   ul
     li Does the system store all information itself?
     li Is any data resourced from elsewhere?
-  p
-    span(role="heading") With
-    | (integrations)
+  p #[strong With] &mdash; integrations
   ul
     li What the system has to do with other systems
     li IT , e.g., a payment gateway for an ATM
     li Human, e.g., a user-friendly input device for PINs
+
   h2 Non-Functional Requirements
   p
     | Non-function requirements consider everything else; think expectations of usage,
     | characteristics.
+
   h3 Constraints
   p Non-functional requirements which cannot be changed.
-  p
-    em Technical constraints
-    | are self-explanatory. For example, a project for a large
-    | organisation replacing a legacy system would need to be compatible with their
-    | deployment platform(s); the new system can demand a new deployment mechanism.
+  p.
+    #[em Technical constraints] are self-explanatory. For example, a project for a large organisation replacing a
+    legacy system would need to be compatible with their deployment platform(s); the new system can demand a new
+    deployment mechanism.
   ul
     li Legacy Integration
     li Development Skills
     li Existing Infrastructure
     li IT Standards
     li Implementation Constraints
-  p
-    em Business constraints
-    | are real-word factors which effect the creation of the
-    | solution. Differences in data protection regulations between countries will
-    | determine how the data must be secured.
+  p.
+    #[em Business constraints] are real-word factors which effect the creation of the solution. Differences in data
+    protection regulations between countries will determine how the data must be secured.
   ul
     li Time
     li Resource
@@ -142,15 +130,9 @@ block content
     | Qualities may be drafted from the usage-context of the application (implicit),
     | like performance. They may also be provided by the customer/stakeholder
     | (explicit).
-  p
-    em Runtime qualities
-    | (or
-    em observable qualities
-    | ) provide a value to the user,
-    | meaning they can be empirically tested. Is the system
-    strong actually
-    | available
-    | 24/7? Are page loads quick?
+  p.
+    #[em Runtime qualities] (or #[em observable qualities]) provide a value to the user,
+    meaning they can be empirically tested. Is the system #[strong actually] available 24/7? Are page loads quick?
   ul
     li Performance: without this, users won't be able to use the system
     li Capacity
@@ -159,13 +141,9 @@ block content
     li Systems Management
     li Usability
     li Accessibility
-  p
-    em Non-runtime qualities
-    | (or
-    em unobservable qualities
-    | ) cannot be measured easily.
-    | For example, disaster management: it's quite hard, and fairly immoral, to
-    | simulate an earthquake.
+  p.
+    #[em Non-runtime qualities] (or #[em unobservable qualities]) cannot be measured easily. For example, disaster
+    management: it's quite hard, and fairly immoral, to simulate an earthquake.
   ul
     li Portability
     li Maintainability
@@ -175,6 +153,7 @@ block content
     li Environmental
     li Efficiency
     li Reliability
+
   h2 Documentation
   p Firstly, some rules of thumb:
   ul
@@ -186,49 +165,36 @@ block content
     li Define success/acceptance criteria
     li Ensure they are measurable and testable
     li Reference supporting material, instead of duplicating information
+
   h3 Phrasing
   p
     | The M.O.S.C.O.W acronym helps with phrasing a requirement. I still don't know
     | where the first 'O' comes from.
   ul
-    li
-      strong Shall
-      | ,
-      strong Will
-      | , and
-      strong Must
-      | indicate mandatory requirements
-    li
-      strong Should
-      | and
-      strong Might
-      | indicate optional requirements
-    li
-      strong Could
-      | indicate desirable requirements
+    li 'Shall', 'Will', and 'Must' indicate mandatory requirements
+    li 'Should' and 'Might' indicate optional requirements
+    li 'Could' indicates desirable requirements
+
   h3 Guideline
   p
     | The S.M.A.R.T mnemonic helps to ensure all information for a requirement is
     | provided. Lets start with a basic, undeveloped requirement:
+
   blockquote
     p
       | The system should allow a visually impaired elderly person to upload health
       | parameters.
-  p
-    span(role="heading") Specific
-    | Unambiguous, consistent and be at the
-    | appropriate level of detail:
+  p #[span(role="heading") Specific] Unambiguous, consistent and be at the appropriate level of detail.
+
   blockquote
     p R001: The system should 
       ins
         | have a higher font screen in the internet
         | application to allow a visually impaired elderly person to upload blood
-        | pressure and pulse rate
-      | .
-  p
-    span(role="heading") Measurable
-    | Possible to verify a requirement has been
-    | met so include success criteria:
+        | pressure and pulse rate.
+
+  p #[span(role="heading") Measurable] Possible to verify a requirement has been met so include success criteria.
+
   blockquote
     p R001: The system should have a higher font screen 
       ins
@@ -237,10 +203,9 @@ block content
       | in the internet
       | application to allow a visually impaired elderly person to upload blood
       | pressure and pulse rate.
-  p
-    span(role="heading") Attainable
-    | Technically feasible and be within the
-    | art of the possible (also known as achievable):
+
+  p #[span(role="heading") Attainable] Technically feasible and be within the art of the possible (also known as achievable).
+
   blockquote
     p
       | R001: The system should have a higher font screen compliant to Accessibility
@@ -250,12 +215,10 @@ block content
         | ,
         | at least 90% of the time, and assuming all network services and interfacing
         | applications are operating as defined in the Project Assumptions &
-        | Dependencies
-      | .
-  p
-    span(role="heading") Realisable
-    | Realistic given all the constraints
-    | defined (also known as repeatable):
+        | Dependencies.
+
+  p #[span(role="heading") Realisable] Realistic given all the constraints defined (also known as repeatable).
+
   blockquote
     p
       | R001: The system should have a higher font screen compliant to Accessibility
@@ -268,15 +231,13 @@ block content
         | This requirement will be delivered on time provided all
         | dependencies on infrastructure and resources are resolved as per the plan
         | outlined in the Project Assumptions & Dependencies.
-  p
-    span(role="heading") Traceable
-    | Linked from conception through
-    | specification, design, implementation and test:
+
+  p #[span(role="heading") Traceable] Linked from conception through specification, design, implementation and test.
+
   blockquote
     p R001: The system should have a higher font screen 
-      ins
-        | no smaller than Arial
-        | 28,
+      ins no smaller than Arial 28px,
+      |
       | compliant to Accessibility Requirements for People with Low Vision
       | in the internet application to allow a visually impaired elderly person to
       | upload blood pressure and pulse rate, at least 90% of the time, and assuming
@@ -285,20 +246,20 @@ block content
       | time provided all dependencies on infrastructure and resources are resolved as
       | per the plan outlined in the Project Assumptions & Dependencies.
   p
-    span(role="heading") Testable
-    | There must be acceptance criteria that
-    | aligns with expected business value and converted to a specific test condition.
+    | #[span(role="heading") Testable] There must be acceptance criteria that aligns with expected business value and
+    | converted to a specific test condition.
+
   h2 Representations
   p
     | Requirement documentation can be very complex and thus difficult to read. By
     | decomposing requirements and expressing them in human-readable formats, the
     | subsequent processes (design, development, testing) can be tackled more easily.
     | It also reduces the likelihood of lost/misinterpreted requirements.
+
   h3 Use Cases
-  p A 
-    em use case
-    | describes how a system will be used, either though a list of
-    | actions or event steps by considering:
+
+  p.
+    A #[em use case] describes how a system will be used, either though a list of actions or event steps by considering:
   ul
     li Actor &mdash; Anyone or anything using the system
     li
@@ -315,31 +276,26 @@ block content
     li
       | Alternative Paths &mdash; These paths are a variation on the main theme. These
       | exceptions are what happen when things go wrong at the system level
+
   h3 User Stories ❤️
-  p A 
-    em user story
-    | describes a feature from an end-user's perspective. These
-    | features are very small, only further decomposable into
-    | design/development/testing tasks.
+  p.
+    A #[em user story] describes a feature from an end-user's perspective. These features are very small, only further
+    decomposable into design/development/testing tasks.
   p
     | They can be grouped together under an Epic, which describes a feature of the
     | application. Naturally, the feature described in a Epic is large.
-  p
-    span(role="heading") Description
-    | Specification of the user, what they
-    | want, and why. This is commonly formatted like 'as [user], I want [a goal], so
-    | that [reasoning]'. It's highly preferable to use a persona as the user, instead
-    | of (re)defining users across stories or referring to 'user' generically.
+  p.
+    #[span(role="heading") Description] Specification of the user, what they want, and why. This is commonly formatted
+    like 'as [user], I want [a goal], so that [reasoning]'. It's highly preferable to use a persona as the user,
+    instead of (re)defining users across stories or referring to 'user' generically.
   p
     | For example, a user story for 'Sam' (a 21-year-old Instagram user) could look
     | like 'As Sam, I want to login with my Facebook account, so that I don't need to
     | remember another password'.
-  p
-    span(role="heading") Acceptance Criteria
-    | A description of the expected
-    | functionality of the feature, covering happy and sad paths. These are also
-    | written from a user's perspective, containing what has happened, what is about
-    | to happen, and when should happen.
+  p.
+    #[span(role="heading") Acceptance Criteria] A description of the expected functionality of the feature, covering
+    happy and sad paths. These are also written from a user's perspective, containing what has happened, what is about
+    to happen, and when should happen.
   p
     | Using a behavioural format helps to maintain consistency, typically 'Given the
     | user..., when..., then...'
@@ -347,9 +303,7 @@ block content
     | For example, a happy path could look like 'Given that Sam clicks the 'Sign in'
     | button, when he first opens the application, then he has the option to use
     | Facebook to log in'
-  p
-    span(role="heading") Designs
-    | Often they are exclusively for UI (sketches,
-    | wireframes, visual prototypes), but new features may also specify the technical
-    | approach (e.g., an ERD).
+  p.
+    #[span(role="heading") Designs] Often they are exclusively for UI (sketches, wireframes, visual prototypes), but
+    new features may also specify the technical approach (e.g., an ERD).
   
