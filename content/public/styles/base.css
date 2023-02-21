@@ -259,3 +259,8 @@ ins {
 del {
   color: var(--red);
 }
+
+hr {
+  border: 0;
+  border-top: var(--border);
+}

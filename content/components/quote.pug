@@ -1,3 +1,5 @@
 mixin quote(from)
-  +caption(from)
-    blockquote: block
+  figure
+    .inner: blockquote: block
+
+    figcaption: cite #{from}
