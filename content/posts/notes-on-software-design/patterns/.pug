@@ -1,8 +1,6 @@
 ---
 title: Patterns
 created: 2021-11-28T00:00:00.000Z
-updated: 2021-11-28T00:00:00.000Z
-tags: []
 ---
 
 extends /layouts/default.pug
@@ -10,8 +8,8 @@ extends /layouts/default.pug
 block content
 
   p
-    em Design patterns
-    | are
+    em Design patterns 
+    | are 
     // excerpt
     | a reusable solution to a commonly occurring
     | problem within a given context.
@@ -29,9 +27,10 @@ block content
     li Integrations with other enterprise applications
     li Conceptual dissonance (how we expect people to use it)
     li Complex business logic
+  
   h2 Common Concerns
-  p At an architecture level, 
-    a(href="#Layering") layering
+  p 
+    | At an architecture level, layering
     | is a big point of discussion.
     | Traditionally, the approach has been horizontal but trends indicate this is
     | changing. Naturally, the implementation's context is a factor in this decision,
@@ -40,6 +39,7 @@ block content
     | Another concern is domain logic and authorization; where does it belong:
     | database or backend application code? Should the UI apply the same rules to hide
     | inoperable/unavailable paths? (Yes).
+  
   h2 Trends in Architecture
   p
     | Traditionally enterprise applications have been developed as monoliths: (very)
@@ -48,9 +48,10 @@ block content
   p
     | However the industry is trending towards distributed systems, which decomposes
     | the system into subsystems to be developed and hosted independently.
+  
   h2 Types of Patterns
   p
-    em Architectural
+    em Architectural 
     | patterns provide a fundamental system of organisation and
     | structure. They define conceptual units and their relationships:
   ul
@@ -60,7 +61,7 @@ block content
     li Command Query Responsibility Segregation (CQRS)
     li Inversion of Control (IOC)
   p
-    em Design
+    em Design 
     | patterns provide a scheme to implement features of a system, or their
     | relationships:
   ul
@@ -68,7 +69,7 @@ block content
     li Builder
     li Abstraction
   p An 
-    em idiom
+    em idiom 
     | is any low-level pattern in a given programming language, describing
     | how to approach the implementation of a feature:
   table
@@ -90,10 +91,12 @@ block content
         td Operations
         td Class methods
         td Free functions
+  
   h2 Layering
   p
     | Enterprise software (almost) always consists of three principle layers, although
     | different architecture patterns will use different terminology.
+  
   h3 Presentation
   p How the product is 'exposed'.
   p
@@ -103,23 +106,18 @@ block content
   p
     | For technical exposure, APIs and sockets are very common, implementing
     | additional protocols such as REST and SOAP for standardisation.
+  
   h3 Business
   p Application of business logic, also known as 
     em domain
     | .
   p
     | It also manages domain models, which represent concepts used in the business
-    | context. These can be data-based, like a
-    code Report
-    | , or technical, like a
-    code ReportQueue
-    | .
+    | context. These can be data-based, like a #[code Report], or technical, like a #[code ReportQueue].
   p
     | Simple domain models map (pretty much) directly to the database tables, storing
     | no logic on their instances. Instead, corresponding components will store the
-    | business logic for domain objects, e.g., a
-    code ProductBusiness
-    | .
+    | business logic for domain objects, e.g., a #[code ProductBusiness].
   p
     | However, for newer approaches like domain-driven design (DDD) considers these
     | models 'anaemic', and instead poses...
@@ -132,16 +130,15 @@ block content
     em persistence
     | , it's the mapping of domain models to persistable
     | objects like documents or relational tables. It also exposes operations to
-    | access the domain models (e.g., 'find' 'insert',
-    code delete
-    | )
+    | access the domain models (e.g., 'find' 'insert', 'delete')
+  
   h2 Concurrency
   p
     | At a data level, concurrency is the management of resource acquisition from
     | multiple sources. It uses locks.
-  p An 
-    em optimistic lock
-    | use a timestamp or version field to ensure one session
+  p 
+    | An #[em optimistic lock] 
+    | uses a timestamp or version field to ensure one session
     | cannot commit changes to field(s) if another session has updated since. This
     | allows multiple sessions to update records at the 'same time', however the
     | integrity of the data can be warped from a business perspective e.g., if a user
