@@ -1,8 +1,6 @@
 ---
 title: "User-centric Design: A Worked Example"
 created: 2021-10-21T23:00:00.000Z
-updated: 2021-10-21T23:00:00.000Z
-tags: []
 ---
 
 extends /layouts/default.pug
@@ -11,8 +9,31 @@ block content
 
   p Looking at how we create scenarios, storyboards, and wireframes from a persona.
   // more
-  +caption("User persona example, inspired by [Bin collection, BBC](https://www.bbc.co.uk/news/uk-england-47170939)")
-    include caption1.html
+
+  +quote("User persona example")
+    p.
+      James is a 28-year-old man that works as a waste bin collector for the local
+      city council. Part of his job is to empty the bins around the city in public
+      spaces (parks, high streets, etc). He is generally healthy, lives an active
+      lifestyle and doesn't have any health conditions that affect his ability to
+      complete his job. He owns a smartphone, which he uses regularly in his
+      day-today life.
+
+    p.
+      James has a scheduled timetable that he uses for his daily
+      routine, however, there are times when the bins in certain areas are empty,
+      this means that James ends up not collecting any trash leaving other areas
+      with excess trash in the bin. This is quite inefficient and James needs a
+      more robust approach in completing his bin route around the city.
+
+    p.
+      The local city council wants an interconnected sensor network with installed sensors
+      on all of the bins around the city, letting James know how full certain bins
+      are and whether they need emptying or not, saving him time by skipping out
+      particular bins if necessary. Furthermore, the data collected by the sensors
+      is leveraged by the council to figure out if more bins are required in
+      particular areas of the city.
+
   h2 Observations
   ul
     li
@@ -37,11 +58,13 @@ block content
           | complaints-handling
   h2 Persona
   p (I couldn't be bothered to make one 🤷‍♂️)
+
   h2 Scenario
   ol
     li James, a 28-year-old bin man, has gotten ready for work
     li He carries everyday items, such as his phone, and his keys for his work van
     li He checks which bins need collecting and starts his route
+
   h2 Goals
   ul
     li Functionality
@@ -57,11 +80,14 @@ block content
     li UX goals
       ul
         li Reliable
+
   h2 Storyboard
   +caption("Storyboard for 'James the Bin Man'")
     img(src="james the bin man.png")
+
   h2 Wireframe
   p (I couldn't be bothered to make this either)
+
   table
     thead
       tr
@@ -71,7 +97,7 @@ block content
     tbody
       tr
         td Text box
-        td Entering text 
+        td Entering text
           br
           | Censoring letters
         td Login fields
@@ -81,14 +107,13 @@ block content
         td Login button
       tr
         td Text
-        td Rendering text 
+        td Rendering text
           br
           | Rendering emojis
         td Scheduled bin component
       tr
         td Scheduled bin
-        td Displaying bin name 
+        td Displaying bin name
           br
           | Displaying bin status
         td Route preview
-  
