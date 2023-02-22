@@ -83,6 +83,7 @@ h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
   letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 
 /* inline headings */
@@ -123,7 +124,7 @@ blockquote > p:last-of-type:after {
 
 ul,
 ol {
-  margin-left: 1.3em;
+  margin-left: 1.3rem;
 }
 
 :is(ul, ol).space > li + li {
