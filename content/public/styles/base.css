@@ -32,6 +32,7 @@
 body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
+  letter-spacing: -0.01em;
   line-height: 1.6;
   color: var(--dark);
   background-color: var(--light);
@@ -83,7 +84,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 /* inline headings */
