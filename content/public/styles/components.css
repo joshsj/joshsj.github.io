@@ -10,7 +10,7 @@
 
 .cards > .card + .card {
   margin-top: var(--space-4);
-  border-top: 0.2rem solid var(--light-grey);
+  border-top: var(--border);
   padding-top: var(--space-4);
 }
 
