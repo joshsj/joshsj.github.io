@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&family=Fira+Code:ital@0;1&display=swap");
 
 body {
   --space-1: 0.5rem;
@@ -16,9 +16,9 @@ body {
   --fs-h2: 2rem;
   --fs-h1: 2.7rem;
 
-  --ff-normal: "Inter", serif;
+  --ff-normal: "Source Serif Pro", serif;
   --ff-heading: var(--ff-normal);
-  --ff-mono: "Space Mono", ui-monospace, monospace;
+  --ff-mono: "Fira Code", ui-monospace, monospace;
 
   --code-property: #e45649;
   --code-params: #986801;
@@ -36,8 +36,9 @@ body {
   /* atom one colors */
   /* default hsl(0, 0%, 98%); */
   --white: hsl(0, 0%, 99%);
+  --white: white;
   /* default hsl(228, 8%, 24%) */
-  --black: hsl(228, 8%, 24%);
+  --black: hsl(228, 8%, 18%);
   --dark-grey: #5e616e;
   --light-grey: #eaeaeb;
 

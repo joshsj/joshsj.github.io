@@ -32,7 +32,6 @@
 body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
-  letter-spacing: -0.01em;
   line-height: 1.6;
   color: var(--dark);
   background-color: var(--light);
@@ -125,7 +124,7 @@ blockquote > p:last-of-type:after {
 
 ul,
 ol {
-  margin-left: 1em;
+  margin-left: 1.3em;
 }
 
 :is(ul, ol).space > li + li {
