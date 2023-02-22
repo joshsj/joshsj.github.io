@@ -35,8 +35,8 @@ body {
 
   /* atom one colors */
   /* default hsl(0, 0%, 98%); */
-  --white: hsl(0, 0%, 99%);
-  --white: white;
+  --white: hsl(0, 0%, 98%);
+
   /* default hsl(228, 8%, 24%) */
   --black: hsl(228, 8%, 18%);
   --dark-grey: #5e616e;
