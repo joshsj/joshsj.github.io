@@ -1,5 +1,6 @@
 import { Builder } from "@application/behaviours/types";
+import { DefaultBuilders } from "@application/services/types";
 
-const assetBuilder: Builder = async (something) => something.file.content;
+const makeAssetBuilder = ({ minify }: DefaultBuilders): Builder => async (f) => await minify(f);
 
-export { assetBuilder };
+export { makeAssetBuilder };

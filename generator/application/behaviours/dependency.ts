@@ -1,8 +1,9 @@
 import { Renderers } from "@application/rendering/types";
+import { DefaultBuilders } from "@application/services/types";
 import { DefaultExtractors } from "@application/services/types/defaultExtractors";
 import { Config, D } from "@models";
 import { DependencyContainer } from "tsyringe";
-import { assetBuilder, makeAssetExtractor, makeAssetIdentifier, makeAssetLocator } from "./asset";
+import { makeAssetBuilder, makeAssetExtractor, makeAssetIdentifier, makeAssetLocator } from "./asset";
 import { makeCollectionExtractor, makeCollectionIdentifier } from "./collection";
 import { makePageBuilder, makePageExtractor, makePageIdentifier, pageLocator } from "./page";
 import { makePostBuilder, makePostExtractor, makePostIdentifier, postLocator } from "./post";
@@ -11,10 +12,11 @@ import { Builders, Extractors, Identifiers, Locators } from "./types";
 const registerBehaviours = (c: DependencyContainer) => {
   c.register<Builders>(D.builders, {
     useFactory: (c) => {
+      const defaultBuilders = c.resolve<DefaultBuilders>(D.defaultBuilders);
       const renderers = c.resolve<Renderers>(D.renderers);
 
       return {
-        asset: assetBuilder,
+        asset: makeAssetBuilder(defaultBuilders),
         collection: undefined,
         page: makePageBuilder(renderers),
         post: makePostBuilder(renderers),

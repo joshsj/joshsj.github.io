@@ -15,10 +15,11 @@ const Dependency = toDependencies(
   // behaviours
   "builders",
   "locators",
-  "defaultExtractors",
   "extractors",
   "identifiers",
   // services
+  "defaultBuilders",
+  "defaultExtractors",
   "featureNameFor",
   "log",
   "io",

@@ -8,6 +8,7 @@
     "clean": "rimraf build"
   },
   "dependencies": {
+    "@types/csso": "^5.0.0",
     "@types/js-yaml": "^4.0.5",
     "@types/katex": "^0.16.0",
     "@types/node": "^18.11.18",
@@ -15,6 +16,7 @@
     "@types/pug": "^2.0.6",
     "binaryextensions": "^4.18.0",
     "chokidar": "^3.5.3",
+    "csso": "^5.0.5",
     "dotenv": "^16.0.3",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",

@@ -3,3 +3,4 @@ export * from "./io";
 export * from "./log";
 export * from "./configPopulator";
 export * from "./defaultExtractors";
+export * from "./defaultBuilders";
