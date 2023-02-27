@@ -1,11 +1,13 @@
 ﻿import { DefaultBuilders } from "@application/services/types";
 import csso from "csso";
+import terser from "terser"
 
 type Minifier = ((content: string) => Promise<string>);
 type Minifiers = { [extension: string]: Minifier | undefined };
 
 const minifiers: Minifiers = {
-  css: async (s) => csso.minify(s).css
+  css: async (s) => csso.minify(s).css,
+  js: async (s) => (await terser.minify(s)).code!
 };
 
 const none: Minifier = async s => s;
