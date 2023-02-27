@@ -59,7 +59,8 @@ body.dark {
 
   /* default hsl(219, 14%, 71%) */
   --white: hsl(219, 10%, 82%);
-  --black: hsl(220, 13%, 18%);
+  /* default hsl(220, 13%, 18%) */
+  --black: hsl(210, 20%, 13%);
 
   --dark-grey: #9da3af;
   --light-grey: #3e4451;
