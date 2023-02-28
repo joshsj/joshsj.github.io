@@ -25,6 +25,8 @@ const updateStore =
 
     // Background
     io.write(f).then(() => log(`Wrote site context to ${f.base}`));
+
+    return { features }
   };
 
 export { updateStore };

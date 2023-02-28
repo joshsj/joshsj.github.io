@@ -2,6 +2,8 @@ import { Feature } from "@models";
 import { File } from "@models/io";
 import { Step } from "../pipeline";
 
+type Copy<T extends {}> = Pick<T, keyof T>
+
 type InitialState = { sourcePaths?: string[] };
 
 type ReadSourceResult = { sourceFiles: File[] };
@@ -14,10 +16,14 @@ type IdentifyFilesStep = Step<ReadSourceResult, IdentifyFilesResult>;
 type ExtractDataResult = { features: Feature[] };
 type ExtractDataStep = Step<IdentifyFilesResult, ExtractDataResult>;
 
-type UpdateStoreStep = Step<ExtractDataResult, void>;
+type UpdateStoreResult = Copy<ExtractDataResult>
+type UpdateStoreStep = Step<ExtractDataResult, UpdateStoreResult>;
+
+type AddDependenciesResult = Copy<UpdateStoreResult>;
+type AddDependenciesStep = Step<UpdateStoreResult, AddDependenciesResult>;
 
 type TransformFilesResult = { buildFiles: File[] };
-type TransformFilesStep = Step<void, TransformFilesResult>;
+type TransformFilesStep = Step<AddDependenciesResult, TransformFilesResult>;
 
 type WriteBuildStep = Step<TransformFilesResult, void>;
 
@@ -30,7 +36,10 @@ export {
   IdentifyFilesStep,
   ExtractDataResult,
   ExtractDataStep,
+  UpdateStoreResult,
   UpdateStoreStep,
+  AddDependenciesStep,
+  AddDependenciesResult,
   TransformFilesResult,
   TransformFilesStep,
   WriteBuildStep,

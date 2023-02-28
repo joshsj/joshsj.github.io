@@ -1,7 +1,6 @@
 import { Builders, Locators } from "@application/behaviours/types";
 import { TransformFilesStep } from "@application/pipeline/types/steps/generate";
 import { Log } from "@application/services/types";
-import { FeatureStore } from "@application/stores/types";
 import { splitAllSettled } from "@application/utilities/native";
 import { Feature } from "@models";
 import { File, fileFrom } from "@models/io";
@@ -9,8 +8,8 @@ import { File, fileFrom } from "@models/io";
 const permalinkLocator = (permalink: string) => fileFrom(permalink);
 
 const transformFiles =
-  (store: FeatureStore, locators: Locators, builders: Builders, log: Log): TransformFilesStep =>
-  async () => {
+  (locators: Locators, builders: Builders, log: Log): TransformFilesStep =>
+  async ({features}) => {
     const transform = async (f: Feature) => {
       const locator = locators[f.name];
       const builder = builders[f.name];
@@ -25,10 +24,10 @@ const transformFiles =
       return located.with({ content: await builder(f), encoding: f.file.encoding });
     };
 
-    const { fulfilled, rejected } = await splitAllSettled(store.all().map(transform));
+    const { fulfilled, rejected } = await splitAllSettled(features.map(transform));
     const buildFiles = fulfilled.filter((x): x is File => !!x);
 
-    log(`Successfully transformed ${buildFiles.length}/${store.count()} files`);
+    log(`Successfully transformed ${buildFiles.length}/${features.length} files`);
     log("Failures", rejected);
 
     return { buildFiles };

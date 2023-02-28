@@ -29,7 +29,8 @@ const filters: Filters = {
   json: highlight("json"),
   tex: (s, { inline }) => katex.renderToString(s, {
     displayMode: inline === undefined,
-    throwOnError: true
+    throwOnError: true,
+    strict: false
   }),
 };
 

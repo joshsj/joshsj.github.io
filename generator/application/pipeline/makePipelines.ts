@@ -7,6 +7,7 @@ import { makeApplyConfigurationProviders } from "./steps/config";
 import { readSource, identifyFiles, extractData, updateStore, transformFiles, writeBuild } from "./steps/generate";
 import { UpdateConfigPipeline, GeneratePipeline } from "./types";
 import { InitialState } from "./types/steps/generate";
+import { addDependencies } from "@application/pipeline/steps/generate/addDependencies";
 
 const makeConfigPipeline = (config: Config, configPopulators: ConfigPopulator[]): UpdateConfigPipeline =>
   pipeline().add(makeApplyConfigurationProviders(config, configPopulators)).build();
@@ -26,7 +27,8 @@ const makeGeneratePipeline = (
     .add(identifyFiles(featureNameFor, log))
     .add(extractData(extractors, log))
     .add(updateStore(featureStore, io, log, config))
-    .add(transformFiles(featureStore, locators, builders, log))
+    .add(addDependencies(featureStore, log))
+    .add(transformFiles(locators, builders, log))
     .add(writeBuild(io, log, config))
     .build();
 
