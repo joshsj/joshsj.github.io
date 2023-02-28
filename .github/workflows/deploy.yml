@@ -2,14 +2,14 @@ name: Deploy
 on:
   push:
     branches:
-      - new
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     env:
-      BRANCH: "deploy_new"
+      BRANCH: "deploy"
       REPO: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository }}.git"
 
     steps:
@@ -25,10 +25,6 @@ jobs:
 
       - name: clone repository
         run: git clone $REPO .
-
-      # TODO remove
-      - name: switch branch (temporary)
-        run: git switch new
 
       - name: delete .git folder
         run: rm -rf ./.git/
