@@ -33,7 +33,7 @@ jobs:
         run: |
           npm ci
           npm run build
-          npm run generate -- --debug
+          npm run prod
 
       - name: add deployment repository
         working-directory: ./build/site
