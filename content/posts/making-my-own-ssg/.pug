@@ -367,15 +367,82 @@ block content
   p Very cool.
   
 
+  h2 Migrating
+
+  p.
+    The time has come! The generator seems capable and extensible enough to get the
+    majority of the site up and running; not to mention, every time I update this
+    post, the goalposts get slightly wider.
+
+  p.
+    Overall, the aim to minimise the amount of manual intervention in the process by
+    (first) reconfiguring the current setup to generate files more suited to this
+    SSG and (second) creating another pipeline to migrate the existing content
+    automatically.
+
+  h3 Record Scratch
+
+  p.
+    It's been some time since I updated this work log and the migration process turned out to be, 
+    for the most part, boring and tedious. What follows is just the highlights...  
+
+  h3 Abusing Hexo's filters
+
+  p.
+    In Hexo, filters are points of extensibility throughout the build process, normally used to 
+    modify state beyond the default mechanisms offered by Hexo. However, they serve as an excellent
+    place to migrate content.
+    
+  p.
+    In the #[code after_post_render] filter, you have access to the entire site context, such as the post
+    database and configuration; the current build file, including its source code, rendered HTML, and
+    frontmatter; and the file system, because it's just a Node application.
+
+  p.
+    Ultimately, the process looked like this:
+
+  ol
+    li Construct the post's frontmatter
+      ul
+        li Plain JS object
+        li Correct schema for the new site
+    
+    li Convert the rendered HTML to Pug with #[a(href="https://www.npmjs.com/package/xhtml2pug") xhtml2pug]
+
+    li Replace as much undesired syntax as possible with regex
+      ul
+        li Fix mixins rendered as whitespace (see below)
+        li Add indentation for the default layout #[a(href="https://pugjs.org/language/inheritance.html") block]
+        li Replace tokens normally changes with smartypants
+
+    li Compose the file contents
+      ul
+        li Frontmatter wrapped with '---'
+        li Layout block
+        li Pug content
+
+    li Write the migrated file & delete the Hexo build file
+
+  p.
+    Obviously this didn't work first try but it resulted in a folder that dropped into the new site with
+    minimal changes, saving chunks of time & effort doing this manually. 
+
+  h3 Transpiling EJS
+
+  p.
+    The challenge here was to preserve the functionality of components &mdash; that is, convert the
+    usages of components into Pug mixins, as opposed to rendering to HTML and leaving them as 
+    historical garbage.
+
+  p.
+    After some playing around, the best method was to render Pug syntax from within the components as 
+    text nodes in the resulting HTML. Then, once the HTML was converted to Pug, a little regex removes
+    the plain text markers and they become functional Pug syntax!
+    
+  +caption("Rendering Pug inside EJS components")
+    include:ts transpiling.ts
+
 //-
-  ## Migration
-  The time has come! The generator seems capable and extensible enough to get the
-  majority of the site up and running; not to mention, every time I update this
-  post, the goalposts get slightly wider.
-  Overall, the aim to minimise the amount of manual intervention in the process by
-  (first) reconfiguring the current setup to generate files more suited to this
-  SSG and (second) creating another pipeline to migrate the existing content
-  automatically.
   - layouts
   - headerIds
   - url format
