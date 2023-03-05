@@ -218,7 +218,6 @@ pre {
 }
 
 code {
-  font-size: 0.9em;
   font-family: var(--ff-mono);
   overflow-wrap: break-word;
   letter-spacing: normal;
