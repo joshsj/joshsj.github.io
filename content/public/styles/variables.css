@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&family=Fira+Code:ital@0;1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,600;1,400;1,600&display=swap");
 
 body {
@@ -16,9 +17,9 @@ body {
   --fs-h2: 1.7rem;
   --fs-h1: 2.5rem;
 
-  --ff-normal: var(--ff-mono);
-  --ff-heading: var(--ff-mono);
-  --ff-mono: "Roboto Mono", ui-monospace, monospace;
+  --ff-normal: "Roboto Mono", serif;
+  --ff-heading: var(--ff-normal);
+  --ff-mono: "Fira Code", ui-monospace, monospace;
 
   --code-property: #e45649;
   --code-params: #986801;
