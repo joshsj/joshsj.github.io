@@ -50,7 +50,7 @@ button.link {
   text-decoration-line: underline;
   text-decoration-thickness: var(--thickness);
   text-decoration-color: var(--pop);
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.15em;
 }
 
 :is(a, button.link):hover {
@@ -82,7 +82,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
   line-height: 1.2;
 }
 
@@ -122,12 +122,9 @@ blockquote > p:last-of-type:after {
   content: "”";
 }
 
-ul {
-  margin-left: 1.8em;
-}
-
+ul,
 ol {
-  margin-left: 2.5em;
+  margin-left: 1.3rem;
 }
 
 :is(ul, ol).space > li + li {
