@@ -430,17 +430,33 @@ block content
   h3 Transpiling EJS
 
   p.
-    The challenge here was to preserve the functionality of components &mdash; that is, convert the
-    usages of components into Pug mixins, as opposed to rendering to HTML and leaving them as 
-    historical garbage.
+    The challenge here was to keep existing usages of components as components, as opposed to rendering them with EJS
+    and leaving the resulting HTML to the history books.
 
   p.
-    After some playing around, the best method was to render Pug syntax from within the components as 
-    text nodes in the resulting HTML. Then, once the HTML was converted to Pug, a little regex removes
-    the plain text markers and they become functional Pug syntax!
+    After some playing around, the best method was to change the component implementations to render an equivalent call
+    to a Pug mixin. From EJS, the Pug syntax was rendered to plain text nodes and, once xhtml2pug was done, a little Regex
+    removed the tokens that denote plain text and the remainder was valid Pug syntax!
     
   +caption("Rendering Pug inside EJS components")
     include:ts transpiling.ts
+
+  h3 Build dependencies
+
+  p Above, where I concluded, #[q the site builds much quicker in watch mode], I lied.
+
+  p.
+    Once the migrated files were added to the site, performance took an immediate hit because re-rendering everything is,
+    shall we say, #[em sub-optimal] (we could also say #[em lazy] or #[em shit]).
+
+  p.
+    To solve this, I added an #[code addDependencies] step that resolves additional files to render based on the
+    changed file. For example, when a post is changed then all pages are re-rendered as they may reference the post; or,
+    when collection data is changed, all pages and all posts in the collection must re-render.
+
+  p.
+    At this point, I'm stepping on the toes of hot reloads and I wish not to reinvent the wheel so this mechanism won't
+    get more complex.
 
 //-
   - layouts
