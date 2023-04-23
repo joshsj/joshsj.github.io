@@ -1,7 +1,7 @@
 ---
 title: Making an SSG
 created: 2023-01-06
-updated: 2023-02-05
+updated: 2023-04-23
 tags:
   - Software Development
   - Projects
@@ -455,8 +455,35 @@ block content
     when collection data is changed, all pages and all posts in the collection must re-render.
 
   p.
-    At this point, I'm stepping on the toes of hot reloads and I wish not to reinvent the wheel so this mechanism won't
+    At this point, I'm stepping on the toes of hot reloading and I don't wish to reinvent the wheel so this mechanism won't
     get more complex.
+
+  h2 Thoughts and feelings
+
+  p.
+    Compared to the old Hexo implementation, I have all of the features I need without the constraints (and ease) of a framework.
+    From a content perspective, I can create whatever I can think of and update the tooling directly if it falls short.
+
+  p.
+    The development experience is also great; with a clone, install, and build, I can share my #[s bullshit]perspectives
+    quickly and easily from anywhere. Github Actions continues to work flawlessly so I can continue to ignore devops entirely.
+
+  p.
+    Pug is, on the whole, serving me better than Markdown and EJS. One language is more cohesive and intelligible even
+    though it's not designed for content writing like Markdown. I'm also certain that, for writing long passages of text,
+    a whitespace-based language was the right choice over a bracket-based language. 
+
+  p.
+    However, I did not respect the power of tokenization leaving me with #[em different] issues with my markup. With Markdown,
+    you can extend its syntax by adding custom handlers for tokens; e.g., adding an #[code id] attribute to all #[code h] tags 
+    to create links for TOCs. Pug does not offer kind of this extensibility so I need an alternate solution for this use-case and
+    possibly others.
+
+  p.
+    So I have some issues still to solve but I'm happy with the result. It's the first personal application I've deployed
+    so I finally have a real-world playground to experiment with new ideas for software. Working with the file system was a
+    nice change from pure web development and the knowledge is absolutely valuable. With some refactoring, some
+    creative solutions, and possibly some unit tests, this platform should last me a while 🤞
 
 //-
   - layouts
