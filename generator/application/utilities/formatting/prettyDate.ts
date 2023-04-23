@@ -16,12 +16,12 @@ const months = [
   "December",
 ];
 
-const ordinals = ["th", "st", "nd", "rd"] as const;
+const toOrdinal = (n: number) => (n === 11 || n === 12 || n === 13 ? "th" : ["st", "nd", "rd"][(n % 10) - 1] ?? "th");
 
 const prettyDate: PrettyDate = (d) => {
   const year = d.getFullYear();
   const month = months[d.getMonth()];
-  const day = d.getDate() + (ordinals.at((d.getDate() % 10) % 4) ?? "th");
+  const day = d.getDate() + toOrdinal(d.getDate());
 
   return `${month} ${day}, ${year}`;
 };
