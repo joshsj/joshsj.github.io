@@ -1,8 +1,9 @@
-import { Step } from "@application/pipeline/types";
+import { IStep } from "@application/pipeline/types";
 
-const watchIndicator: Step<void, void> = async (state) => {
-  console.log("Watching for changes");
-  return state;
-};
+class WatchIndicator implements IStep<void, void> {
+  async execute() {
+    console.log("Watching for changes");
+  }
+}
 
-export { watchIndicator };
+export { WatchIndicator };

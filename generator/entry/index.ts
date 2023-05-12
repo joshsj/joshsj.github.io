@@ -1,32 +1,29 @@
 import "reflect-metadata";
 
-import { registerApplication } from "@application/dependency";
-import { UpdateConfigPipeline, GeneratePipeline } from "@application/pipeline/types";
-import { registerInfrastructure } from "@infrastructure/dependency";
 import { Config, D } from "@models";
-import { container, DependencyContainer } from "tsyringe";
-import { makeDefaultConfig } from "./defaultConfig";
-import { IO } from "@application/services/types";
+import tsyringe from "tsyringe";
 import { watch } from "chokidar";
-
-const register = (c: DependencyContainer) => {
-  registerApplication(c);
-  registerInfrastructure(c);
-
-  c.register<Config>(D.config, {
-    useValue: makeDefaultConfig(c.resolve<IO>(D.io)),
-  });
-};
+import { ApplicationDependencies } from "@application/dependency";
+import { InfrastructureDependencies } from "@infrastructure/dependency";
+import { EntryDependencies } from "./dependency";
+import { IUpdateConfigPipeline } from "@application/pipeline/types";
+import { UpdateConfigPipelineFactory } from "@application/pipeline/factories/updateConfigPipeline";
+import { GeneratePipelineFactory } from "@application/pipeline/factories/generatePipeline";
 
 const main = async () => {
-  register(container);
+  const container = tsyringe.container.createChildContainer();
+
+  ApplicationDependencies.create(container).registerBehaviours().registerPipelines().registerServices();
+  InfrastructureDependencies.create(container).registerServices().registerStores();
+  EntryDependencies.create(container).register();
 
   const onChange = async (p?: string) => {
-    const updateConfig = container.resolve<UpdateConfigPipeline>(D.configPipeline);
-    await updateConfig();
+    await container.resolve<UpdateConfigPipelineFactory>(D.updateConfigPipelineFactory).get().execute();
 
-    const generate = container.resolve<GeneratePipeline>(D.generatePipeline);
-    await generate(p ? { sourcePaths: [p] } : {});
+    await container
+      .resolve<GeneratePipelineFactory>(D.generatePipelineFactory)
+      .get()
+      .execute(p ? { sourcePaths: [p] } : {});
   };
 
   // Initial build

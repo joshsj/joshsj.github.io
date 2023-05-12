@@ -1,10 +1,15 @@
-import { Locator } from "@application/behaviours/types";
+import { ILocator } from "@application/behaviours/types";
+import { Post } from "@models";
+import { File } from "@models/io";
 
-const postLocator: Locator = (file) =>
-  file.with({
-    segments: ["blog", ...file.segments.slice(1)],
-    name: "index",
-    extension: ".html",
-  });
+class PostLocator implements ILocator<Post> {
+  locate({ file }: Post): File {
+    return file.with({
+      segments: ["blog", ...file.segments.slice(1)],
+      name: "index",
+      extension: ".html",
+    });
+  }
+}
 
-export { postLocator };
+export { PostLocator };

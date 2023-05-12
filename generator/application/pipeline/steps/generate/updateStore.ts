@@ -1,32 +1,43 @@
-﻿import { UpdateStoreStep } from "@application/pipeline/types/steps/generate";
+﻿import { ExtractDataResult } from "@models/steps/generate";
 import { IO, Log } from "@application/services/types";
-import { FeatureStore } from "@application/stores/types";
+import { IFeatureStore } from "@application/stores/types";
 import { Config } from "@models/config";
-import { file } from "@models/io";
+import { IUpdateStoreStep } from "@application/pipeline/types";
+import { File } from "@models/io";
+import { sep } from "path";
 
-const updateStore =
-  (store: FeatureStore, io: IO, log: Log, config: Config): UpdateStoreStep =>
-  async ({ features }) => {
+class UpdateStore implements IUpdateStoreStep {
+  constructor(
+    private readonly store: IFeatureStore,
+    private readonly io: IO,
+    private readonly log: Log,
+    private readonly config: Config
+  ) {}
+
+  async execute({ features }: ExtractDataResult): Promise<ExtractDataResult> {
     for (const feature of features) {
-      if (feature.name === "post" && feature.draft && !config.draft) {
+      if (feature.name === "post" && feature.data?.draft && !this.config.draft) {
         continue;
       }
 
-      store.upsert(feature);
+      this.store.upsert(feature);
     }
 
-    const f = file({
+    const file = File.from({
       name: "store",
       extension: ".json",
       segments: [],
-      content: JSON.stringify(store, undefined, 2),
+      content: JSON.stringify(this.store, undefined, 2),
       encoding: "utf8",
+      // TODO consider not using path lib here
+      sep,
     });
 
     // Background
-    io.write(f).then(() => log(`Wrote site context to ${f.base}`));
+    this.io.write(file).then(() => this.log(`Wrote site context to ${file.base}`));
 
-    return { features }
-  };
+    return { features };
+  }
+}
 
-export { updateStore };
+export { UpdateStore };

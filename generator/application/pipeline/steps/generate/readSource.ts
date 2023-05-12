@@ -1,30 +1,34 @@
-import { ReadSourceStep } from "@application/pipeline/types/steps/generate";
+import { IReadSourceStep } from "@application/pipeline/types/steps";
 import { Log } from "@application/services/types";
 import { IO } from "@application/services/types/io";
 import { fromGenerator, splitAllSettled } from "@application/utilities/native";
 import { Config } from "@models/config";
-import { fileFrom } from "@models/io";
+import { File } from "@models/io";
+import { ReadSourceResult, ReadSourceState } from "@models/steps";
 
-const readSource =
-  (io: IO, log: Log, config: Config): ReadSourceStep =>
-  async ({ sourcePaths }) => {
-    const readFile = async (path: string) => {
-      const file = fileFrom(path);
-      const content = await io.read(file, config.sourceDir);
+class ReadSource implements IReadSourceStep {
+  constructor(private readonly io: IO, private readonly log: Log, private readonly config: Config) {}
 
-      log(`Read file ${file.full} as ${file.encoding}`);
+  async execute({ sourcePaths }: ReadSourceState): Promise<ReadSourceResult> {
+    sourcePaths =
+      sourcePaths && sourcePaths.length ? sourcePaths : await fromGenerator(this.io.walk(this.config.sourceDir));
 
-      return file.with({ content });
-    };
+    const { fulfilled, rejected } = await splitAllSettled(sourcePaths.map(this.readFile));
 
-    sourcePaths = sourcePaths && sourcePaths.length ? sourcePaths : await fromGenerator(io.walk(config.sourceDir));
-
-    const { fulfilled, rejected } = await splitAllSettled(sourcePaths.map(readFile));
-
-    log(`Successfully read ${fulfilled.length}/${sourcePaths.length} source files`);
-    log("Failures:", rejected);
+    this.log(`Successfully read ${fulfilled.length}/${sourcePaths.length} source files`);
+    this.log("Failures:", rejected);
 
     return { sourceFiles: fulfilled };
-  };
+  }
 
-export { readSource };
+  private async readFile(path: string) {
+    const file = File.from(path);
+    const content = await this.io.read(file, this.config.sourceDir);
+
+    this.log(`Read file ${file.full} as ${file.encoding}`);
+
+    return file.with({ content });
+  }
+}
+
+export { ReadSource };

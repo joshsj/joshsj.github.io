@@ -1,5 +1,7 @@
 import { Config } from "@models/config";
 
-type ConfigPopulator = (current: Config) => Partial<Config>;
+interface IConfigPopulator {
+  populate(current: Config): Partial<Config>;
+}
 
-export { ConfigPopulator };
+export { IConfigPopulator };

@@ -1,15 +1,20 @@
 import { Config } from "@models/config";
-import { Locator } from "@application/behaviours/types";
+import { ILocator } from "@application/behaviours/types";
+import { Asset } from "@models";
+import { File } from "@models/io";
 
-const makeAssetLocator =
-  ({ assetDir }: Config): Locator =>
-  (file) => {
+class AssetLocator implements ILocator<Asset> {
+  constructor(private readonly config: Config) {}
+
+  locate({ file }: Asset): File {
+    // TODO factory?
     const segments =
-      file.segments.at(0) === assetDir
+      file.segments.at(0) === this.config.assetDir
         ? file.segments.slice(1) // Static
         : ["blog", ...file.segments.slice(1)]; // Post
 
     return file.with({ segments });
-  };
+  }
+}
 
-export { makeAssetLocator };
+export { AssetLocator };

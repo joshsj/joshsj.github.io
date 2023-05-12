@@ -1,9 +1,16 @@
 import { Config } from "@models/config";
-import { Identifier } from "@application/behaviours/types";
+import { IIdentifier } from "@application/behaviours/types";
+import { Page } from "@models";
+import { File } from "@models/io";
 
-const makePageIdentifier = ({ pageDir }: Config): Identifier<"page"> => ({
-  test: ({ segments, extension }) => segments.at(0) === pageDir && extension === ".pug",
-  name: "page",
-});
+class PageIdentifier implements IIdentifier<Page> {
+  constructor(private readonly config: Config) {}
 
-export { makePageIdentifier };
+  readonly name = "page";
+
+  test({ segments, extension }: File): boolean {
+    return segments.at(0) === this.config.pageDir && extension === ".pug";
+  }
+}
+
+export { PageIdentifier };

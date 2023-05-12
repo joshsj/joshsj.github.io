@@ -3,7 +3,8 @@ import { File } from "@models/io";
 type Make<Name extends string, Data extends {} = {}> = {
   name: Name;
   file: File;
-} & Data;
+  data?: Data;
+};
 
 type Asset = Make<"asset">;
 

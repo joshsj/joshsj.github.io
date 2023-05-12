@@ -1,29 +1,43 @@
-import { ConfigPopulator, IO, Log } from "@application/services/types";
-import { FeatureStore } from "@application/stores/types";
+import { IConfigPopulator, IO, Log } from "@application/services/types";
+import { IFeatureStore } from "@application/stores/types";
 import { Config, D } from "@models";
 import { DependencyContainer } from "tsyringe";
-import { makeArgvConfigProvider } from "./services/argvConfigPopulator";
+import { ArgvConfigProvider } from "./services/argvConfigPopulator";
 import { makeConsoleLogger } from "./services/consoleLogger";
-import { makeEnvConfigProvider } from "./services/envConfigPopulator";
+import { EnvConfigProvider } from "./services/envConfigPopulator";
 import { io } from "./services/io";
-import { makeFeatureStore } from "./stores";
+import { InMemoryFeatureStore } from "./stores";
 
-const registerInfrastructure = (c: DependencyContainer) => {
-  c.register<FeatureStore>(D.featureStore, { useValue: makeFeatureStore() });
+class InfrastructureDependencies {
+  private constructor(private readonly c: DependencyContainer) {}
 
-  c.register<IO>(D.io, { useValue: io });
+  static create(container: DependencyContainer) {
+    return new InfrastructureDependencies(container);
+  }
 
-  c.register<Log>(D.log, {
-    useFactory: (c) => (c.resolve<Config>(D.config).debug ? makeConsoleLogger() : () => {}),
-  });
+  registerServices() {
+    this.c.register<IO>(D.io, { useValue: io });
 
-  c.register<ConfigPopulator>(D.configPopulator, {
-    useValue: makeArgvConfigProvider(),
-  });
+    this.c.register<Log>(D.log, {
+      useFactory: (c) => (c.resolve<Config>(D.config).debug ? makeConsoleLogger() : () => {}),
+    });
 
-  c.register<ConfigPopulator>(D.configPopulator, {
-    useValue: makeEnvConfigProvider(),
-  });
-};
+    this.c.register<IConfigPopulator>(D.configPopulator, {
+      useValue: new ArgvConfigProvider(),
+    });
 
-export { registerInfrastructure };
+    this.c.register<IConfigPopulator>(D.configPopulator, {
+      useValue: new EnvConfigProvider(),
+    });
+
+    return this;
+  }
+
+  registerStores() {
+    this.c.register<IFeatureStore>(D.featureStore, { useValue: new InMemoryFeatureStore() });
+
+    return this;
+  }
+}
+
+export { InfrastructureDependencies };

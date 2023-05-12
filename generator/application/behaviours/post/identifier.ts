@@ -1,9 +1,16 @@
-import { Identifier } from "@application/behaviours/types";
+import { IIdentifier } from "@application/behaviours/types";
+import { Post } from "@models";
 import { Config } from "@models/config";
+import { File } from "@models/io";
 
-const makePostIdentifier = ({ postDir }: Config): Identifier<"post"> => ({
-  test: ({ segments, extension }) => segments.at(0) === postDir && extension === ".pug",
-  name: "post",
-});
+class PostIdentifier implements IIdentifier<Post> {
+  constructor(private readonly config: Config) {}
 
-export { makePostIdentifier };
+  readonly name = "post";
+
+  test({ segments, extension }: File): boolean {
+    return segments.at(0) === this.config.postDir && extension === ".pug";
+  }
+}
+
+export { PostIdentifier };

@@ -1,9 +1,8 @@
-import { Step } from "./pipeline";
-import { ApplyConfigProvidersStep } from "./steps/config";
-import { InitialState } from "./steps/generate";
+import { ReadSourceState } from "@models/steps";
+import { IStep } from "./pipeline";
 
-type UpdateConfigPipeline = ApplyConfigProvidersStep;
+type IUpdateConfigPipeline = IStep;
 
-type GeneratePipeline = Step<InitialState, void>;
+type IGeneratePipeline = IStep<ReadSourceState, void>;
 
-export { UpdateConfigPipeline, GeneratePipeline };
+export { IUpdateConfigPipeline, IGeneratePipeline };

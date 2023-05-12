@@ -5,6 +5,7 @@ type Options = {
   encoding: Encoding;
 };
 
+// TODO change to interface
 type IO = {
   read(file: File, root?: string): Promise<string>;
   write(file: File, root?: string): Promise<void>;

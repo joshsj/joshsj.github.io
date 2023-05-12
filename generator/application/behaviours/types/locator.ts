@@ -1,8 +1,7 @@
-import { FeatureName } from "@models";
+import { Feature } from "@models";
 import { File } from "@models/io";
 
-type Locator = (file: File) => File;
-
-type Locators = { [Name in FeatureName]: Locator | undefined };
-
-export { Locator, Locators };
+interface ILocator<T extends Feature> {
+  locate(feature: T): File;
+}
+export { ILocator };

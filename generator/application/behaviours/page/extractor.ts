@@ -1,6 +1,14 @@
-import { Extractor } from "@application/behaviours/types";
-import { DefaultExtractors } from "@application/services/types";
+import { IExtractor } from "@application/behaviours/types";
+import { Page, PageData } from "@models";
+import { File } from "@models/io";
+import matter from "gray-matter";
 
-const makePageExtractor = ({ frontmatter }: DefaultExtractors): Extractor => frontmatter;
+class PageExtractor implements IExtractor<Page> {
+  async extract(file: File): Promise<Page> {
+    const { content, data } = matter(file.content, { excerpt: false });
 
-export { makePageExtractor };
+    return { name: "page", file: file.with({ content }), data: data as PageData };
+  }
+}
+
+export { PageExtractor };

@@ -1,16 +1,13 @@
-import { CollectionData } from "@models";
-import { load } from "js-yaml";
-import { Renderers } from "@application/rendering/types";
-import { Extractor } from "@application/behaviours/types";
+import { Collection, CollectionData } from "@models";
+import yaml from "js-yaml";
+import { IExtractor } from "@application/behaviours/types";
+import { File } from "@models/io";
 
-const makeCollectionExtractor =
-  ({ pug }: Renderers): Extractor =>
-  async (file) => {
-    const { title, description } = load(file.content) as CollectionData;
+class CollectionExtractor implements IExtractor<Collection> {
+  async extract(file: File): Promise<Collection> {
+    const { title, description } = yaml.load(file.content) as CollectionData;
 
-    const data: CollectionData = { title, description: await pug(description) };
-
-    return { content: file.content, data };
-  };
-
-export { makeCollectionExtractor };
+    return { name: "collection", file, data: { title, description } };
+  }
+}
+export { CollectionExtractor };

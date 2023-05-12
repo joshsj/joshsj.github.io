@@ -1,31 +1,45 @@
 const toDependencies = <T extends string>(...names: T[]): Readonly<{ [K in T]: symbol }> =>
   Object.freeze(Object.assign({}, ...names.map((n) => ({ [n]: Symbol.for(n) }))));
 
-// TODO move
-// this layer probably shouldn't declare this
 const Dependency = toDependencies(
   // config
   "config",
   "configPopulator",
   // stores
   "featureStore",
-  // rendering
-  "renderers",
-  "renderHelpers",
-  // behaviours
-  "builders",
-  "locators",
-  "extractors",
-  "identifiers",
+  // identifiers
+  "assetIdentifier",
+  "collectionIdentifier",
+  "pageIdentifier",
+  "postIdentifier",
+  // extractors
+  "collectionExtractor",
+  "pageExtractor",
+  "postExtractor",
+  // locators
+  "assetLocator",
+  "pageLocator",
+  "postLocator",
+  // builders
+  "assetBuilder",
+  "postBuilder",
+  "pageBuilder",
+  "assetLocator",
+  // providers
+  "identifier",
+  "locatorProvider",
+  "extractorProvider",
+  "builderProvider",
+  // renderer
+  "pugRenderer",
   // services
-  "defaultBuilders",
-  "defaultExtractors",
-  "featureNameFor",
+  "getFeatureName",
+  "getUrl",
   "log",
   "io",
   // pipelines
-  "configPipeline",
-  "generatePipeline"
+  "updateConfigPipelineFactory",
+  "generatePipelineFactory"
 );
 
 export { Dependency, Dependency as D };

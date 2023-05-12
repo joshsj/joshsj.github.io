@@ -1,11 +1,9 @@
-import { FeatureName } from "@models";
+import { Feature } from "@models";
 import { File } from "@models/io";
 
-type Extracted<T extends {}> = { content: string; data: T };
+// TODO add feature name to generics
+interface IExtractor<T extends Feature> {
+  extract(file: File): Promise<T>;
+}
 
-type Extractor<T extends {} = any> = (file: File) => Promise<Extracted<T>>;
-
-// TODO add typing to data object
-type Extractors = { [K in FeatureName]: Extractor };
-
-export { Extracted, Extractor, Extractors };
+export { IExtractor };

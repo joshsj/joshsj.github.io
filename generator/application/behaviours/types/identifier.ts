@@ -1,11 +1,9 @@
-import { FeatureName } from "@models";
+import { Feature } from "@models";
 import { File } from "@models/io";
 
-type Identifier<T extends FeatureName> = {
-  test: (file: File) => boolean;
-  name: T;
-};
+interface IIdentifier<T extends Feature> {
+  readonly name: T["name"];
+  test(file: File): boolean;
+}
 
-type Identifiers = Identifier<FeatureName>[];
-
-export { Identifier, Identifiers };
+export { IIdentifier };

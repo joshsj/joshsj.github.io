@@ -1,1 +1,1 @@
-export * from "./featureStore";
+export * from "./inMemoryFeatureStore";

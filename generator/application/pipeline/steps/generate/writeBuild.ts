@@ -1,23 +1,26 @@
-import { WriteBuildStep } from "@application/pipeline/types/steps/generate";
+import { TransformFilesResult } from "@models/steps/generate";
 import { Log } from "@application/services/types";
 import { IO } from "@application/services/types/io";
 import { splitAllSettled } from "@application/utilities/native";
 import { Config } from "@models/config";
 import { File } from "@models/io";
+import { IWriteBuildStep } from "@application/pipeline/types";
 
-const writeBuild =
-  (io: IO, log: Log, config: Config): WriteBuildStep =>
-  async ({ buildFiles }) => {
+class WriteBuild implements IWriteBuildStep {
+  constructor(private readonly io: IO, private readonly log: Log, private readonly config: Config) {}
+
+  async execute({ buildFiles }: TransformFilesResult): Promise<void> {
     const writeFile = async (file: File) => {
-      await io.write(file, config.buildDir);
+      await this.io.write(file, this.config.buildDir);
 
-      log("Wrote " + file.full);
+      this.log("Wrote " + file.full);
     };
 
     const { fulfilled, rejected } = await splitAllSettled(buildFiles.map(writeFile));
 
-    log(`Successfully wrote ${fulfilled.length}/${buildFiles.length} build files`);
-    log("Failures", rejected);
-  };
+    this.log(`Successfully wrote ${fulfilled.length}/${buildFiles.length} build files`);
+    this.log("Failures", rejected);
+  }
+}
 
-export { writeBuild };
+export { WriteBuild };

@@ -1,6 +1,11 @@
-import { Builder } from "@application/behaviours/types";
-import { DefaultBuilders } from "@application/services/types";
+import { IBuilder } from "@application/behaviours/types";
+import { minifier } from "@application/utilities/minifier";
+import { Asset } from "@models";
 
-const makeAssetBuilder = ({ minify }: DefaultBuilders): Builder => async (f) => await minify(f);
+class AssetBuilder implements IBuilder<Asset> {
+  async build({ file }: Asset): Promise<string> {
+    return await minifier(file);
+  }
+}
 
-export { makeAssetBuilder };
+export { AssetBuilder };

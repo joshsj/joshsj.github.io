@@ -1,21 +1,23 @@
 import { Config } from "@models/config";
-import { ConfigPopulator } from "@application/services/types";
-import { ApplyConfigProvidersStep } from "@application/pipeline/types/steps/config";
+import { IConfigPopulator } from "@application/services/types";
+import { IStep } from "@application/pipeline/types";
 
-const makeApplyConfigurationProviders =
-  (config: Config, providers: ConfigPopulator[]): ApplyConfigProvidersStep =>
-  async () => {
-    for (const patch of providers.map((p) => p(config))) {
+class ApplyConfigurationProviders implements IStep {
+  constructor(private readonly config: Config, private readonly providers: IConfigPopulator[]) {}
+
+  async execute() {
+    for (const patch of this.providers.map((p) => p.populate(this.config))) {
       let key: keyof Config;
 
       for (key in patch) {
         const value = patch[key];
 
         if (value !== undefined) {
-          (config as any)[key] = value;
+          (this.config as any)[key] = value;
         }
       }
     }
-  };
+  }
+}
 
-export { makeApplyConfigurationProviders };
+export { ApplyConfigurationProviders };

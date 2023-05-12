@@ -1,10 +1,15 @@
-import { Locator } from "@application/behaviours/types";
+import { ILocator } from "@application/behaviours/types";
+import { Page } from "@models";
+import { File } from "@models/io";
 
-const pageLocator: Locator = (file) =>
-  file.with({
-    segments: file.name !== "index" ? [file.name] : [],
-    name: "index",
-    extension: ".html",
-  });
+class PageLocator implements ILocator<Page> {
+  locate({ file }: Page): File {
+    return file.with({
+      segments: file.name !== "index" ? [file.name] : [],
+      name: "index",
+      extension: ".html",
+    });
+  }
+}
 
-export { pageLocator };
+export { PageLocator };

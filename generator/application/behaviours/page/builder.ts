@@ -1,9 +1,13 @@
-import { Renderers } from "@application/rendering/types";
-import { Builder } from "@application/behaviours/types";
+import { IBuilder } from "@application/behaviours/types";
+import { IRenderer } from "@application/services/types";
+import { Page } from "@models";
 
-const makePageBuilder =
-  ({ pug }: Renderers): Builder =>
-  async (f) =>
-    await pug(f);
+class PageBuilder implements IBuilder<Page> {
+  constructor(private readonly pug: IRenderer<"pug">) {}
 
-export { makePageBuilder };
+  async build(feature: Page): Promise<string> {
+    return await this.pug.render(feature);
+  }
+}
+
+export { PageBuilder };

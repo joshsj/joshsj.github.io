@@ -1,9 +1,16 @@
 import { Config } from "@models/config";
-import { Identifier } from "@application/behaviours/types";
+import { IIdentifier } from "@application/behaviours/types";
+import { Asset } from "@models";
+import { File } from "@models/io";
 
-const makeAssetIdentifier = ({ assetDir, postDir }: Config): Identifier<"asset"> => ({
-  test: ({ segments, name }) => segments.at(0) === assetDir || (segments.at(0) === postDir && !!name),
-  name: "asset",
-});
+class AssetIdentifier implements IIdentifier<Asset> {
+  constructor(private readonly config: Config) {}
 
-export { makeAssetIdentifier };
+  readonly name = "asset";
+
+  test({ segments, name }: File): boolean {
+    return segments.at(0) === this.config.assetDir || (segments.at(0) === this.config.postDir && !!name);
+  }
+}
+
+export { AssetIdentifier };

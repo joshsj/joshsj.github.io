@@ -1,9 +1,13 @@
-import { Renderers } from "@application/rendering/types";
-import { Builder } from "@application/behaviours/types";
+import { IBuilder } from "@application/behaviours/types";
+import { IRenderer } from "@application/services/types";
+import { Post } from "@models";
 
-const makePostBuilder =
-  ({ pug }: Renderers): Builder =>
-  async (f) =>
-    await pug(f);
+class PostBuilder implements IBuilder<Post> {
+  constructor(private readonly pug: IRenderer<"pug">) {}
 
-export { makePostBuilder };
+  async build(feature: Post): Promise<string> {
+    return await this.pug.render(feature);
+  }
+}
+
+export { PostBuilder };

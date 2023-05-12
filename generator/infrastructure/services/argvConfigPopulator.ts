@@ -1,13 +1,17 @@
-import { ConfigPopulator, Log } from "@application/services/types";
+import { IConfigPopulator } from "@application/services/types";
+import { Config } from "@models";
 
-const isSet = (arg: string) => process.argv.includes(`--${arg}`);
+class ArgvConfigProvider implements IConfigPopulator {
+  populate(current: Config): Partial<Config> {
+    const isSet = (arg: string) => process.argv.includes(`--${arg}`);
 
-const makeArgvConfigProvider = (): ConfigPopulator => () => {
-  return {
-    watch: isSet("watch"),
-    debug: isSet("debug"),
-    draft: isSet("draft"),
-  };
-};
+    return {
+      ...current,
+      watch: isSet("watch"),
+      debug: isSet("debug"),
+      draft: isSet("draft"),
+    };
+  }
+}
 
-export { makeArgvConfigProvider };
+export { ArgvConfigProvider };

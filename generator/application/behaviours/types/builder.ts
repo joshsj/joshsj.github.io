@@ -1,7 +1,7 @@
-import { Feature, FeatureName } from "@models";
+import { Feature } from "@models";
 
-type Builder = (something: Feature) => Promise<string>;
+interface IBuilder<T extends Feature> {
+  build(feature: T): Promise<string>;
+}
 
-type Builders = { [K in FeatureName]: Builder | undefined };
-
-export { Builder, Builders };
+export { IBuilder };

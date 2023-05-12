@@ -1,66 +1,93 @@
 import _path from "path";
-import { Directory, directory as _directory } from "./directory";
 import { Encoding } from "./encoding";
-import { getEncoding } from "./getEncoding";
 
-type File = Omit<Directory, "with"> &
-  Readonly<{
-    name: string;
-    extension: string;
-    base: string;
-    content: string;
-    encoding: Encoding;
-    with(patch?: Partial<File>): File;
-  }>;
+import { IPath } from "./path";
 
-type Values = Pick<File, "segments" | "name" | "extension" | "content" | "encoding"> & Partial<Pick<File, "sep">>;
+import binaryExtensions from "binaryextensions";
 
-const file = (values: Values): File => {
-  const { segments, encoding } = values;
-  const { directory, full } = _directory(values);
+interface IFile extends IPath {
+  readonly name: string;
+  readonly extension: string;
+  readonly base: string;
+  readonly directory: string;
+  readonly full: string;
+  readonly content: string;
+  readonly encoding: Encoding;
+}
 
-  const base = `${values.name}${values.extension}`;
-  const sep = values.sep ?? _path.sep;
+type Patch = Pick<IFile, "segments" | "sep" | "name" | "extension" | "content" | "encoding">;
 
-  const f: File = {
-    segments,
-    sep,
-    directory,
-    base,
-    name: values.name,
-    extension: values.extension,
-    content: values.content,
-    full: [full, base].join(sep),
-    encoding,
-    with(patch) {
-      return file({ ...f, ...(patch ?? {}) });
-    },
-  };
+class File implements IFile {
+  readonly name: string;
+  readonly extension: string;
+  readonly base: string;
+  readonly directory: string;
+  readonly full: string;
+  readonly content: string;
+  readonly encoding: Encoding;
+  readonly segments: string[];
+  readonly sep: string;
 
-  return f;
-};
+  private constructor(patch: Patch) {
+    this.segments = patch.segments;
+    this.sep = patch.sep;
 
-const fileFrom = (path: string): File => {
-  let { dir, name, ext } = _path.parse(path);
+    this.name = patch.name;
+    this.extension = patch.extension;
+    this.content = patch.content;
+    this.encoding = patch.encoding;
 
-  /*
+    this.base = `${patch.name}${patch.extension}`;
+    this.directory = this.segments.join(this.sep);
+    this.full = [this.segments, this.base].join(this.sep);
+  }
+
+  static from(patch: Patch): File;
+  static from(path: string): File;
+  static from(patchOrPath: Patch | string): File {
+    if (typeof patchOrPath === "object") {
+      return new File(patchOrPath);
+    }
+
+    let { dir, name, ext } = _path.parse(patchOrPath);
+
+    /*
     Filenames that only have an extension are parsed differently
 
     Wrong: ".html" => {name: ".html", ext: ""}
-    Right: ".html" => {name: "",      ext: ".ext"}
+    Right: ".html" => {name: "",      ext: ".html"}
   */
-  if (!ext && name.startsWith(".")) {
-    ext = name;
-    name = "";
+    if (!ext && name.startsWith(".")) {
+      ext = name;
+      name = "";
+    }
+
+    const sep = _path.sep;
+
+    return new File({
+      segments: dir.split(sep),
+      sep,
+      name,
+      extension: ext,
+      content: "",
+      encoding: File.getEncoding(ext),
+    });
   }
 
-  return file({
-    segments: dir.split(_path.sep),
-    name,
-    extension: ext,
-    content: "",
-    encoding: getEncoding(ext),
-  });
-};
+  with(patch: Partial<Patch>): File {
+    return new File({ ...this, ...patch });
+  }
 
-export { File, file, fileFrom, Encoding };
+  static getEncoding(fos: File | string): Encoding {
+    let ext = typeof fos === "string" ? fos : fos.extension;
+
+    if (ext.startsWith(".")) {
+      ext = ext.slice(1);
+    }
+
+    // Bold assumption
+    return binaryExtensions.includes(ext) ? "binary" : "utf8";
+  }
+}
+
+export { IFile, File };

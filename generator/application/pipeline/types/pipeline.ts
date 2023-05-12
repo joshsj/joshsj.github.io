@@ -1,11 +1,10 @@
-type Step<Current, Next> = (state: Current) => Promise<Next>;
+interface IStep<Current = void, Next = Current> {
+  execute(state: Current): Promise<Next>;
+}
 
-type PipelineBuilder<Initial, Current> = {
-  add: <Next>(f: Step<Current, Next>) => PipelineBuilder<Initial, Next>;
+interface IPipelineBuilder<Initial, Current> {
+  add<Next>(f: IStep<Current, Next>): IPipelineBuilder<Initial, Next>;
+  build(): IStep<Initial, Current>;
+}
 
-  build: () => Step<Initial, Current>;
-};
-
-type Pipeline = <Initial = void>() => PipelineBuilder<Initial, Initial>;
-
-export { Step, PipelineBuilder, Pipeline };
+export { IStep, IPipelineBuilder };

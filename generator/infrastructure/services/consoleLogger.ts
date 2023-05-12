@@ -1,5 +1,6 @@
 import { Log } from "@application/services/types";
 
+// TODO classify
 const makeConsoleLogger = (): Log => {
   // TODO work out context
   //context = context ? ` [${context}] ` : " ";

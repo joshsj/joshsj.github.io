@@ -1,24 +1,25 @@
-import { Extractors } from "@application/behaviours/types";
-import { ExtractDataStep, Identified } from "@application/pipeline/types/steps/generate";
+import { ExtractDataResult, Identified, IdentifyFilesResult } from "@models/steps/generate";
 import { Log } from "@application/services/types";
 import { splitAllSettled } from "@application/utilities/native";
 import { Feature } from "@models";
+import { IExtractDataStep } from "@application/pipeline/types";
+import { IExtractorProvider } from "@application/behaviours/types";
 
-const extractData =
-  (extractors: Extractors, log: Log): ExtractDataStep =>
-  async ({ files }) => {
-    const extract = async ({ file, name }: Identified): Promise<Feature> => {
-      const { content, data } = await extractors[name](file);
+class ExtractData implements IExtractDataStep {
+  constructor(private readonly extractorProvider: IExtractorProvider, private readonly log: Log) {}
 
-      return { name, file: file.with({ content }), ...data };
-    };
+  async execute({ files }: IdentifyFilesResult): Promise<ExtractDataResult> {
+    const { fulfilled, rejected } = await splitAllSettled(files.map(this.extract));
 
-    const { fulfilled, rejected } = await splitAllSettled(files.map(extract));
-
-    log(`Extracted data for ${fulfilled.length} files`);
-    log("Failures", rejected);
+    this.log(`Extracted data for ${fulfilled.length} files`);
+    this.log("Failures", rejected);
 
     return { features: fulfilled };
-  };
+  }
 
-export { extractData };
+  private async extract(identified: Identified): Promise<Feature> {
+    return this.extractorProvider.get(identified.name)?.extract(identified.file) ?? identified;
+  }
+}
+
+export { ExtractData };
