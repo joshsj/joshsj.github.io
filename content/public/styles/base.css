@@ -48,13 +48,13 @@ button {
 a,
 button.link {
   text-decoration-line: underline;
-  text-decoration-thickness: 0.1em;
+  text-decoration-thickness: 0.05em;
   text-decoration-color: var(--pop);
   text-underline-offset: 0.15em;
 }
 
 :is(a, button.link):hover {
-  text-decoration-thickness: 0.05em;
+  text-decoration-thickness: 0.1em;
 }
 
 button:not(.link) {
