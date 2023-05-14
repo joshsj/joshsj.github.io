@@ -15,19 +15,18 @@ const main = async () => {
   EntryDependencies.create(container).register();
 
   const onChange = async (p?: string) => {
-    await container.resolve<UpdateConfigPipelineFactory>(D.updateConfigPipelineFactory).get().execute();
-
     await container
       .resolve<GeneratePipelineFactory>(D.generatePipelineFactory)
       .get()
       .execute(p ? { sourcePaths: [p] } : {});
   };
 
+  await container.resolve<UpdateConfigPipelineFactory>(D.updateConfigPipelineFactory).get().execute();
+
   // Initial build
   await onChange();
 
   // Set up watching
-  // TODO fix when adding config watching
   const config = container.resolve<Config>(D.config);
 
   if (config.watch) {
