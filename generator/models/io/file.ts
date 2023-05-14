@@ -1,9 +1,7 @@
+import binaryExtensions from "binaryextensions";
 import _path from "path";
 import { Encoding } from "./encoding";
-
 import { IPath } from "./path";
-
-import binaryExtensions from "binaryextensions";
 
 interface IFile extends IPath {
   readonly name: string;
@@ -37,9 +35,9 @@ class File implements IFile {
     this.content = patch.content;
     this.encoding = patch.encoding;
 
-    this.base = `${patch.name}${patch.extension}`;
+    this.base = `${this.name}${this.extension}`;
     this.directory = this.segments.join(this.sep);
-    this.full = [this.segments, this.base].join(this.sep);
+    this.full = [...this.segments, this.base].join(this.sep);
   }
 
   static from(patch: Patch): File;
@@ -90,4 +88,4 @@ class File implements IFile {
   }
 }
 
-export { IFile, File };
+export { File, IFile };

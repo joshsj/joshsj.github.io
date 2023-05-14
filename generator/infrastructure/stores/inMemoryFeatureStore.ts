@@ -1,6 +1,11 @@
 import { Feature, FeatureFor, FeatureName } from "@models";
 import { IFeatureStore } from "@application/stores/types";
 
+const readOut = (values: { [K: string]: unknown }) =>
+  Object.entries(values)
+    .map(([k, v]) => k + "=" + v)
+    .join(", ");
+
 class InMemoryFeatureStore implements IFeatureStore {
   private readonly items: Feature[] = [];
 
@@ -14,17 +19,17 @@ class InMemoryFeatureStore implements IFeatureStore {
     const index = this.indexOf(path);
 
     if (index === -1) {
-      throw new Error(`Item does not exist with path ${path}`);
+      throw new Error(`Item does not exist with ${readOut({ path })}`);
     }
 
     return this.items[index];
   }
 
-  findBy(name: FeatureName, title: string) {
-    const item = this.allBy(name).find((x) => "title" in x && x.title === title);
+  findBy(featureName: FeatureName, title: string) {
+    const item = this.allBy(featureName).find((f) => "title" in f && f.title === title);
 
     if (!item) {
-      throw new Error(`Item does not exist with name ${name}, title ${title}`);
+      throw new Error(`Item does not exist with ${readOut({ featureName, title })}`);
     }
 
     return item;
@@ -46,7 +51,7 @@ class InMemoryFeatureStore implements IFeatureStore {
     const index = this.indexOf(item);
 
     if (index !== -1) {
-      throw new Error(`Item already exists with path ${item.file.full}`);
+      throw new Error(`Item already exists at ${readOut({ path: item.file.full })}`);
     }
 
     this.items.push(item);
@@ -56,7 +61,7 @@ class InMemoryFeatureStore implements IFeatureStore {
     const index = this.indexOf(item);
 
     if (index == -1) {
-      throw new Error(`Item not not exist with path ${item.file.full}`);
+      throw new Error(`Item not not exist with ${readOut({ path: item.file.full })}`);
     }
 
     this.items[index] = item;

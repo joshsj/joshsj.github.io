@@ -22,12 +22,13 @@ class InfrastructureDependencies {
       useFactory: (c) => (c.resolve<Config>(D.config).debug ? makeConsoleLogger() : () => {}),
     });
 
+    // Order is preserved
     this.c.register<IConfigPopulator>(D.configPopulator, {
-      useValue: new ArgvConfigProvider(),
+      useValue: new EnvConfigProvider(),
     });
 
     this.c.register<IConfigPopulator>(D.configPopulator, {
-      useValue: new EnvConfigProvider(),
+      useValue: new ArgvConfigProvider(),
     });
 
     return this;

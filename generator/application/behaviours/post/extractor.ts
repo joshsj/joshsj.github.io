@@ -22,7 +22,7 @@ class PostExtractor implements IExtractor<Post> {
     data.toc = PostExtractor.generateToc(file);
     file = file.with({ content: extracted.content });
 
-    return { name: "post", file, data };
+    return { name: "post", file, ...data };
   }
 
   // Assumes heading levels are well-formed

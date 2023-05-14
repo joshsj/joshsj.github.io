@@ -7,7 +7,7 @@ class CollectionExtractor implements IExtractor<Collection> {
   async extract(file: File): Promise<Collection> {
     const { title, description } = yaml.load(file.content) as CollectionData;
 
-    return { name: "collection", file, data: { title, description } };
+    return { name: "collection", file, ...{ title, description } };
   }
 }
 export { CollectionExtractor };

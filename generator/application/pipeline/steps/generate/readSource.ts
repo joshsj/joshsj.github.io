@@ -13,7 +13,7 @@ class ReadSource implements IReadSourceStep {
     sourcePaths =
       sourcePaths && sourcePaths.length ? sourcePaths : await fromGenerator(this.io.walk(this.config.sourceDir));
 
-    const { fulfilled, rejected } = await splitAllSettled(sourcePaths.map(this.readFile));
+    const { fulfilled, rejected } = await splitAllSettled(sourcePaths.map((p) => this.readFile(p)));
 
     this.log(`Successfully read ${fulfilled.length}/${sourcePaths.length} source files`);
     this.log("Failures:", rejected);

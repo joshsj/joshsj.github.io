@@ -8,7 +8,7 @@ class IdentifyFiles implements IIdentifyFilesStep {
   constructor(private readonly getFeatureName: IGetFeatureName, private readonly log: Log) {}
 
   async execute({ sourceFiles }: ReadSourceResult): Promise<IdentifyFilesResult> {
-    const { fulfilled, rejected } = await splitAllSettled(sourceFiles.map(this.identify));
+    const { fulfilled, rejected } = await splitAllSettled(sourceFiles.map((p) => this.identify(p)));
 
     this.log(`Categorised ${fulfilled.length}/${sourceFiles.length} source files`);
     this.log("Failures:", rejected);

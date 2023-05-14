@@ -9,7 +9,7 @@ class ExtractData implements IExtractDataStep {
   constructor(private readonly extractorProvider: IExtractorProvider, private readonly log: Log) {}
 
   async execute({ files }: IdentifyFilesResult): Promise<ExtractDataResult> {
-    const { fulfilled, rejected } = await splitAllSettled(files.map(this.extract));
+    const { fulfilled, rejected } = await splitAllSettled(files.map((f) => this.extract(f)));
 
     this.log(`Extracted data for ${fulfilled.length} files`);
     this.log("Failures", rejected);
@@ -18,7 +18,7 @@ class ExtractData implements IExtractDataStep {
   }
 
   private async extract(identified: Identified): Promise<Feature> {
-    return this.extractorProvider.get(identified.name)?.extract(identified.file) ?? identified;
+    return this.extractorProvider.get(identified.name)?.extract(identified.file);
   }
 }
 

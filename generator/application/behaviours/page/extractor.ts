@@ -7,7 +7,7 @@ class PageExtractor implements IExtractor<Page> {
   async extract(file: File): Promise<Page> {
     const { content, data } = matter(file.content, { excerpt: false });
 
-    return { name: "page", file: file.with({ content }), data: data as PageData };
+    return { name: "page", file: file.with({ content }), ...(data as PageData) };
   }
 }
 

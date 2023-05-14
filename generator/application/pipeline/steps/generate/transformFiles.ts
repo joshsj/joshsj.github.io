@@ -14,7 +14,7 @@ class TransformFiles implements ITransformFilesStep {
   ) {}
 
   async execute({ features }: ExtractDataResult): Promise<TransformFilesResult> {
-    const { fulfilled, rejected } = await splitAllSettled(features.map(this.transform));
+    const { fulfilled, rejected } = await splitAllSettled(features.map(f => this.transform(f)));
     const buildFiles = fulfilled.filter((x): x is File => !!x);
 
     this.log(`Successfully transformed ${buildFiles.length}/${features.length} files`);

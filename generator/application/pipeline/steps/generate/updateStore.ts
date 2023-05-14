@@ -16,7 +16,7 @@ class UpdateStore implements IUpdateStoreStep {
 
   async execute({ features }: ExtractDataResult): Promise<ExtractDataResult> {
     for (const feature of features) {
-      if (feature.name === "post" && feature.data?.draft && !this.config.draft) {
+      if (feature.name === "post" && feature?.draft && !this.config.draft) {
         continue;
       }
 

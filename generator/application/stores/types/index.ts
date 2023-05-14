@@ -10,6 +10,7 @@ interface IStore<T> {
 
 interface IFeatureStore extends IStore<Feature> {
   find: (path: string) => Feature;
+  // TODO narrow type
   findBy: (name: FeatureName, title: string) => Feature;
   allBy: <T extends FeatureName>(name: T) => FeatureFor<T>[];
 }

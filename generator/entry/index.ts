@@ -1,18 +1,15 @@
 import "reflect-metadata";
 
 import { Config, D } from "@models";
-import tsyringe from "tsyringe";
+import { container } from "tsyringe";
 import { watch } from "chokidar";
 import { ApplicationDependencies } from "@application/dependency";
 import { InfrastructureDependencies } from "@infrastructure/dependency";
 import { EntryDependencies } from "./dependency";
-import { IUpdateConfigPipeline } from "@application/pipeline/types";
 import { UpdateConfigPipelineFactory } from "@application/pipeline/factories/updateConfigPipeline";
 import { GeneratePipelineFactory } from "@application/pipeline/factories/generatePipeline";
 
 const main = async () => {
-  const container = tsyringe.container.createChildContainer();
-
   ApplicationDependencies.create(container).registerBehaviours().registerPipelines().registerServices();
   InfrastructureDependencies.create(container).registerServices().registerStores();
   EntryDependencies.create(container).register();

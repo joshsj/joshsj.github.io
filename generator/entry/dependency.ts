@@ -10,7 +10,8 @@ class EntryDependencies {
 
   register() {
     const baseConfig: Config = {
-      rootDir: ".",
+      // TODO should we be using process here?
+      rootDir: process.cwd(),
       sourceDir: ".",
       buildDir: ".",
       assetDir: "assets",

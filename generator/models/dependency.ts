@@ -12,7 +12,9 @@ const Dependency = toDependencies(
   "collectionIdentifier",
   "pageIdentifier",
   "postIdentifier",
+  "identifier",
   // extractors
+  "assetExtractor",
   "collectionExtractor",
   "pageExtractor",
   "postExtractor",

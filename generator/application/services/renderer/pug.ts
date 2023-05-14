@@ -6,6 +6,8 @@ import prism from "prismjs";
 import { render } from "pug";
 import { IRenderer } from "../types/renderer";
 import { IGetUrl } from "../types";
+import * as formattingHelpers from "@application/utilities/formatting";
+import * as comparers from "@application/utilities/comparers";
 
 // Garbage
 require("prismjs/components/index")(["typescript", "python", "csharp", "json"]);
@@ -50,13 +52,24 @@ class PugRenderer implements IRenderer<"pug"> {
     const data = current.file.content;
     const filename = path.join(this.config.sourceDir, current.file.full);
 
+    // TODO remove rename
+    // @ts-ignore
+    const urlFor: IGetUrl["for"] = (a, b) => this.getUrl.for(a, b);
+
+    const utilities = {
+      ...formattingHelpers,
+      ...comparers,
+      //  getUrl: this.getUrl,
+      urlFor,
+    };
+
     return render(data, {
       basedir: this.config.sourceDir,
+      store: this.store,
+      current,
       filename,
       filters,
-      store: this.store,
-      getUrl: this.getUrl,
-      current: current ?? {},
+      ...utilities,
     });
   }
 }

@@ -5,12 +5,12 @@ import { IBuilder } from "./builder";
 
 // TODO i'm clearly missing something
 
-interface ILocatorProvider {
-  get<T extends Feature>(name: T["name"]): ILocator<T> | undefined;
+interface IExtractorProvider {
+  get<T extends Feature>(name: T["name"]): IExtractor<T>;
 }
 
-interface IExtractorProvider {
-  get<T extends Feature>(name: T["name"]): IExtractor<T> | undefined;
+interface ILocatorProvider {
+  get<T extends Feature>(name: T["name"]): ILocator<T> | undefined;
 }
 
 interface IBuilderProvider {

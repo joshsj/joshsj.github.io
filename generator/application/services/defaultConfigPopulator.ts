@@ -1,10 +1,10 @@
 import { Config } from "@models";
 import { IConfigPopulator, IO } from "./types";
 
-class DefaultConfigProvider implements IConfigPopulator {
+class DefaultConfigPopulator implements IConfigPopulator {
   constructor(private readonly io: IO) {}
 
-  populate(current: Config): Partial<Config> {
+  populate(): Partial<Config> {
     return {
       rootDir: this.io.cwd(),
       sourceDir: ".",
@@ -19,4 +19,4 @@ class DefaultConfigProvider implements IConfigPopulator {
   }
 }
 
-export { DefaultConfigProvider };
+export { DefaultConfigPopulator };

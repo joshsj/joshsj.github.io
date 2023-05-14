@@ -1,5 +1,12 @@
 import { Asset, Collection, Config, D, Feature, Page, Post } from "@models";
 import { DependencyContainer } from "tsyringe";
+import { AssetBuilder, AssetExtractor, AssetIdentifier, AssetLocator } from "./behaviours/asset";
+import { CollectionExtractor, CollectionIdentifier } from "./behaviours/collection";
+import { PageBuilder, PageExtractor, PageIdentifier, PageLocator } from "./behaviours/page";
+import { PostBuilder, PostExtractor, PostIdentifier, PostLocator } from "./behaviours/post";
+import { BuilderProvider } from "./behaviours/provider/builderProvider";
+import { ExtractorProvider } from "./behaviours/provider/extractorProvider";
+import { LocatorProvider } from "./behaviours/provider/locatorProvider";
 import {
   IBuilder,
   IBuilderProvider,
@@ -11,18 +18,12 @@ import {
 } from "./behaviours/types";
 import { GeneratePipelineFactory } from "./pipeline/factories/generatePipeline";
 import { UpdateConfigPipelineFactory } from "./pipeline/factories/updateConfigPipeline";
+import { DefaultConfigPopulator } from "./services/defaultConfigPopulator";
 import { GetFeatureName } from "./services/getFeatureName";
 import { GetUrl } from "./services/getUrl";
 import { PugRenderer } from "./services/renderer/pug";
 import { IConfigPopulator, IGetFeatureName, IGetUrl, IO, IRenderer, Log } from "./services/types";
 import { IFeatureStore } from "./stores/types";
-import { AssetBuilder, AssetIdentifier, AssetLocator } from "./behaviours/asset";
-import { PageBuilder, PageExtractor, PageIdentifier, PageLocator } from "./behaviours/page";
-import { PostBuilder, PostExtractor, PostIdentifier, PostLocator } from "./behaviours/post";
-import { CollectionExtractor, CollectionIdentifier } from "./behaviours/collection";
-import { BuilderProvider } from "./behaviours/provider/builderProvider";
-import { LocatorProvider } from "./behaviours/provider/locatorProvider";
-import { ExtractorProvider } from "./behaviours/provider/extractorProvider";
 
 class ApplicationDependencies {
   private constructor(private readonly c: DependencyContainer) {}
@@ -32,6 +33,10 @@ class ApplicationDependencies {
   }
 
   registerServices() {
+    this.c.register<IConfigPopulator>(D.configPopulator, {
+      useFactory: (c) => new DefaultConfigPopulator(c.resolve<IO>(D.io)),
+    });
+
     this.c.register<IGetFeatureName>(D.getFeatureName, {
       useFactory: (c) => {
         const identifiers = c.resolveAll<IIdentifier<Feature>>(D.identifier);
@@ -103,16 +108,34 @@ class ApplicationDependencies {
     this.c.register<IIdentifier<Asset>>(D.assetIdentifier, {
       useFactory: (c) => new AssetIdentifier(c.resolve<Config>(D.config)),
     });
+    this.c.register<IIdentifier<Asset>>(D.identifier, {
+      useFactory: (c) => new AssetIdentifier(c.resolve<Config>(D.config)),
+    });
+
     this.c.register<IIdentifier<Collection>>(D.collectionIdentifier, {
       useFactory: (c) => new CollectionIdentifier(c.resolve<Config>(D.config)),
     });
+    this.c.register<IIdentifier<Collection>>(D.identifier, {
+      useFactory: (c) => new CollectionIdentifier(c.resolve<Config>(D.config)),
+    });
+
     this.c.register<IIdentifier<Page>>(D.pageIdentifier, {
       useFactory: (c) => new PageIdentifier(c.resolve<Config>(D.config)),
     });
+    this.c.register<IIdentifier<Page>>(D.identifier, {
+      useFactory: (c) => new PageIdentifier(c.resolve<Config>(D.config)),
+    });
+
     this.c.register<IIdentifier<Post>>(D.postIdentifier, {
       useFactory: (c) => new PostIdentifier(c.resolve<Config>(D.config)),
     });
+    this.c.register<IIdentifier<Post>>(D.identifier, {
+      useFactory: (c) => new PostIdentifier(c.resolve<Config>(D.config)),
+    });
 
+    this.c.register<IExtractor<Asset>>(D.assetExtractor, {
+      useFactory: () => new AssetExtractor(),
+    });
     this.c.register<IExtractor<Collection>>(D.collectionExtractor, {
       useFactory: () => new CollectionExtractor(),
     });
@@ -163,11 +186,12 @@ class ApplicationDependencies {
 
     this.c.register<IExtractorProvider>(D.extractorProvider, {
       useFactory: (c) => {
+        const asset = c.resolve<IExtractor<Asset>>(D.assetExtractor);
         const collection = c.resolve<IExtractor<Collection>>(D.collectionExtractor);
         const page = c.resolve<IExtractor<Page>>(D.pageExtractor);
         const post = c.resolve<IExtractor<Post>>(D.postExtractor);
 
-        return new ExtractorProvider(collection, page, post);
+        return new ExtractorProvider(asset, collection, page, post);
       },
     });
 
