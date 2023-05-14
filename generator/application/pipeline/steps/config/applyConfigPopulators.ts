@@ -12,8 +12,6 @@ class ApplyConfigurationProviders implements IStep {
       for (key in patch) {
         const value = patch[key];
 
-        console.log({ key, value });
-
         if (value !== undefined) {
           (this.config as any)[key] = value;
         }

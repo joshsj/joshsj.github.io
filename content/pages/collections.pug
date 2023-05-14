@@ -1,5 +1,5 @@
 ---
-title: "Series"
+title: "Collections"
 ---
 
 extends /layouts/default.pug
@@ -16,7 +16,8 @@ block content
         p !{collection.description}
 
         ul
-          //- TODO replace with relational data
           - const name = collection.file.segments[1];
-          each post in store.allBy("post").filter(p => p.collection === name).sort()
+          - const posts = store.allBy("post").filter(p => p.collection === name).sort();
+
+          each post in posts
             li: p #[a(href=urlFor(post)) #{post.title}]

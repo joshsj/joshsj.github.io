@@ -8,6 +8,7 @@ import { IRenderer } from "../types/renderer";
 import { IGetUrl } from "../types";
 import * as formattingHelpers from "@application/utilities/formatting";
 import * as comparers from "@application/utilities/comparers";
+import { File } from "@models/io";
 
 // Garbage
 require("prismjs/components/index")(["typescript", "python", "csharp", "json"]);
@@ -48,9 +49,9 @@ class PugRenderer implements IRenderer<"pug"> {
     private readonly config: Config
   ) {}
 
-  async render(current: Feature): Promise<string> {
-    const data = current.file.content;
-    const filename = path.join(this.config.sourceDir, current.file.full);
+  async render(toRender: Feature | File): Promise<string> {
+    const [file, current] = "file" in toRender ? [toRender.file, toRender] : [toRender, undefined];
+    const filename = path.join(this.config.sourceDir, file.full);
 
     // TODO remove rename
     // @ts-ignore
@@ -63,7 +64,7 @@ class PugRenderer implements IRenderer<"pug"> {
       urlFor,
     };
 
-    return render(data, {
+    return render(file.content, {
       basedir: this.config.sourceDir,
       store: this.store,
       current,

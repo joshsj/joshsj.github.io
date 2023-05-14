@@ -33,6 +33,7 @@ body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
   line-height: 1.6;
+  letter-spacing: -0.01em;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -47,7 +48,7 @@ button {
 a,
 button.link {
   text-decoration-line: underline;
-  text-decoration-thickness: 0.05em;
+  text-decoration-thickness: 0.1em;
   text-decoration-color: var(--pop);
   text-underline-offset: 0.15em;
 }
@@ -81,7 +82,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 

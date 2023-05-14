@@ -1,4 +1,4 @@
-import { Feature, FeatureFor, FeatureName } from "@models";
+import { Collection, Feature, FeatureFor, FeatureName } from "@models";
 
 interface IStore<T> {
   all: () => T[];
@@ -13,6 +13,7 @@ interface IFeatureStore extends IStore<Feature> {
   // TODO narrow type
   findBy: (name: FeatureName, title: string) => Feature;
   allBy: <T extends FeatureName>(name: T) => FeatureFor<T>[];
+  allIn: (collection: Collection) => Feature[];
 }
 
 export { IStore, IFeatureStore };

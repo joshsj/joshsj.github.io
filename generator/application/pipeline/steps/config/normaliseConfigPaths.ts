@@ -10,8 +10,6 @@ class NormaliseConfigPaths implements IStep {
     for (const key of keys) {
       this.config[key] = path.normalize(this.config[key]);
     }
-
-    console.log(this.config);
   }
 }
 

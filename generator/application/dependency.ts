@@ -137,7 +137,7 @@ class ApplicationDependencies {
       useFactory: () => new AssetExtractor(),
     });
     this.c.register<IExtractor<Collection>>(D.collectionExtractor, {
-      useFactory: () => new CollectionExtractor(),
+      useFactory: (c) => new CollectionExtractor(c.resolve<IRenderer<"pug">>(D.pugRenderer)),
     });
     this.c.register<IExtractor<Page>>(D.pageExtractor, {
       useFactory: () => new PageExtractor(),

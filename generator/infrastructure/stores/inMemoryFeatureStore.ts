@@ -1,4 +1,4 @@
-import { Feature, FeatureFor, FeatureName } from "@models";
+import { Collection, Feature, FeatureFor, FeatureName } from "@models";
 import { IFeatureStore } from "@application/stores/types";
 
 const readOut = (values: { [K: string]: unknown }) =>
@@ -41,6 +41,10 @@ class InMemoryFeatureStore implements IFeatureStore {
 
   allBy<T extends FeatureName>(name: T) {
     return [...this.items.filter((x): x is FeatureFor<T> => x.name === name)];
+  }
+
+  allIn(collection: Collection) {
+    return [...this.items.filter((x) => x.name === "post" && x.collection === collection.file.segments[1])];
   }
 
   count() {
