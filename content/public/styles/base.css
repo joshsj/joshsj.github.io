@@ -33,7 +33,7 @@ body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
   line-height: 1.6;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -82,7 +82,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1.2;
 }
 
@@ -125,7 +125,7 @@ blockquote > p:last-of-type:after {
 ul,
 ol {
   /* why is this so hard */
-  margin-left: 20px;
+  margin-left: 1.5rem;
 }
 
 :is(ul, ol).space > li + li {
