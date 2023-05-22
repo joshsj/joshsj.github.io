@@ -33,7 +33,7 @@ body {
   font-family: var(--ff-normal);
   font-size: var(--fs-normal);
   line-height: 1.6;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: var(--dark);
   background-color: var(--light);
   scroll-behavior: smooth;
@@ -216,10 +216,17 @@ pre {
 }
 
 code {
-  font-size: 0.9em;
+  /* font-size: 0.9em; */
   font-family: var(--ff-mono);
   overflow-wrap: break-word;
   letter-spacing: normal;
+}
+
+:not(pre, h1, h2, h3) > code {
+  background-color: var(--light-grey);
+  border-radius: var(--border-radius);
+  padding-left: 0.2em;
+  padding-right: 0.2em;
 }
 
 iframe {
