@@ -3,7 +3,7 @@ body {
 }
 
 body > * {
-  width: min(37rem, calc(100vw - var(--space-4)));
+  width: min(35rem, calc(100vw - var(--space-4)));
   margin: 0 auto;
 }
 
