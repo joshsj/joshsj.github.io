@@ -39,7 +39,6 @@ const filters: Filters = {
     }),
 };
 
-// TODO move to interface or somethin
 class PugRenderer implements IRenderer<"pug"> {
   readonly of = "pug";
 
@@ -50,11 +49,11 @@ class PugRenderer implements IRenderer<"pug"> {
   ) {}
 
   async render(toRender: Feature | File): Promise<string> {
-    const [file, current] = "file" in toRender ? [toRender.file, toRender] : [toRender, undefined];
+    const [file, current] = toRender instanceof File ? [toRender, undefined] : [toRender.file, toRender];
     const filename = path.join(this.config.sourceDir, file.full);
 
     // TODO remove rename
-    // @ts-ignore
+    // @ts-ignore;
     const urlFor: IGetUrl["for"] = (a, b) => this.getUrl.for(a, b);
 
     const utilities = {

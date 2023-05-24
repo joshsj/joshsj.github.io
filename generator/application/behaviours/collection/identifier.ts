@@ -8,8 +8,8 @@ class CollectionIdentifier implements IIdentifier<Collection> {
 
   readonly name = "collection";
 
-  test({ name, extension, segments }: File): boolean {
-    return segments.at(0) === this.config.postDir && segments.length === 2 && !name && extension === ".yml";
+  test({ dir, name }: File): boolean {
+    return dir.root === this.config.postDir && dir.segments.length === 2 && name.full == ".yml";
   }
 }
 

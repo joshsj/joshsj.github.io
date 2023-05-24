@@ -6,14 +6,14 @@ import { IGetUrl } from "./types";
 class GetUrl implements IGetUrl {
   private readonly cache: Map<Feature, string>;
 
-  constructor(private readonly store: IFeatureStore, private readonly locatorFactory: ILocatorProvider) {
+  constructor(private readonly store: IFeatureStore, private readonly locatorProvider: ILocatorProvider) {
     this.cache = new Map<Feature, string>();
   }
 
   for(name: FeatureName, filename: string): string;
   for(feature: Feature): string;
   for(arg: Feature | FeatureName, filename?: string): string {
-    const feature = typeof arg === "object" ? arg : this.store.allBy(arg).find((x) => x.file.name === filename);
+    const feature = typeof arg === "object" ? arg : this.store.allBy(arg).find((x) => x.file.name.base === filename);
 
     if (!feature) {
       throw new Error(`urlFor failed with: ${arg}, ${filename}`);
@@ -23,13 +23,16 @@ class GetUrl implements IGetUrl {
       return this.cache.get(feature)!;
     }
 
-    const locator = this.locatorFactory.get(feature.name);
+    const locator = this.locatorProvider.get(feature.name);
 
     if (!locator) {
       throw new Error(`urlFor failed with: ${arg}, ${filename}`);
     }
 
-    let { full: url, sep } = locator.locate(feature);
+    let {
+      full: url,
+      dir: { sep },
+    } = locator.locate(feature);
 
     // Ensure starts at root
     if (url.at(0) !== sep) {

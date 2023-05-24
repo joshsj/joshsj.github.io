@@ -8,8 +8,8 @@ class AssetIdentifier implements IIdentifier<Asset> {
 
   readonly name = "asset";
 
-  test({ segments, name }: File): boolean {
-    return segments.at(0) === this.config.assetDir || (segments.at(0) === this.config.postDir && !!name);
+  test({ dir, name: filename }: File): boolean {
+    return dir.root === this.config.assetDir || (dir.root === this.config.postDir && !!filename.base);
   }
 }
 

@@ -5,9 +5,11 @@ import { File } from "@models/io";
 class PageLocator implements ILocator<Page> {
   locate({ file }: Page): File {
     return file.with({
-      segments: file.name !== "index" ? [file.name] : [],
-      name: "index",
-      extension: ".html",
+      dir: file.dir.with({ segments: file.name.base !== "index" ? [file.name.base] : [] }),
+      name: {
+        base: "index",
+        ext: ".html",
+      },
     });
   }
 }

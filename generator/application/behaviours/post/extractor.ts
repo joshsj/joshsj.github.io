@@ -12,7 +12,7 @@ class PostExtractor implements IExtractor<Post> {
     const data = extracted.data as PostData;
 
     // First folder in directory tree
-    data.collection = file.segments.length === 3 ? file.segments[1] : undefined;
+    data.collection = file.dir.segments.length === 3 ? file.dir.segments[1] : undefined;
 
     // Clean updated date
     if (data.created.getTime() === data.updated?.getTime()) {

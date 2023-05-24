@@ -3,8 +3,9 @@ import { IO, Log } from "@application/services/types";
 import { IFeatureStore } from "@application/stores/types";
 import { Config } from "@models/config";
 import { IUpdateStoreStep } from "@application/pipeline/types";
-import { File } from "@models/io";
+import { Directory, File } from "@models/io";
 import { sep } from "path";
+import { Filename } from "@models/io/filename";
 
 class UpdateStore implements IUpdateStoreStep {
   constructor(
@@ -24,17 +25,15 @@ class UpdateStore implements IUpdateStoreStep {
     }
 
     const file = File.from({
-      name: "store",
-      extension: ".json",
-      segments: [],
+      // TODO consider not using path lib here
+      dir: Directory.from({ segments: [], sep }),
+      name: Filename.from({ base: "store", ext: ".json" }),
       content: JSON.stringify(this.store, undefined, 2),
       encoding: "utf8",
-      // TODO consider not using path lib here
-      sep,
     });
 
     // Background
-    this.io.write(file).then(() => this.log(`Wrote site context to ${file.base}`));
+    this.io.write(file).then(() => this.log(`Wrote site context to ${file.full}`));
 
     return { features };
   }

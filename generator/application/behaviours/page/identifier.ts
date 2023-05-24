@@ -8,8 +8,8 @@ class PageIdentifier implements IIdentifier<Page> {
 
   readonly name = "page";
 
-  test({ segments, extension }: File): boolean {
-    return segments.at(0) === this.config.pageDir && extension === ".pug";
+  test({ dir, name }: File): boolean {
+    return dir.root === this.config.pageDir && name.ext === ".pug";
   }
 }
 

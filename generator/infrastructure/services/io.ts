@@ -18,12 +18,12 @@ async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
 
 const io: IO = {
   async write(file, root = "") {
-    const dir = path.join(root, file.directory);
+    const dir = path.join(root, file.dir.full);
 
     // Ensure destination folder exists
     await mkdir(dir, { recursive: true });
 
-    await writeFile(path.join(dir, file.base), file.content ?? "", { encoding: file.encoding });
+    await writeFile(path.join(dir, file.name.full), file.content ?? "", { encoding: file.encoding });
   },
 
   async read(file, root = "") {

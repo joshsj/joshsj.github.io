@@ -8,8 +8,8 @@ class PostIdentifier implements IIdentifier<Post> {
 
   readonly name = "post";
 
-  test({ segments, extension }: File): boolean {
-    return segments.at(0) === this.config.postDir && extension === ".pug";
+  test({ dir, name }: File): boolean {
+    return dir.root === this.config.postDir && name.ext === ".pug";
   }
 }
 

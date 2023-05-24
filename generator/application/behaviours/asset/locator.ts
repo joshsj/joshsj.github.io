@@ -7,13 +7,15 @@ class AssetLocator implements ILocator<Asset> {
   constructor(private readonly config: Config) {}
 
   locate({ file }: Asset): File {
+    const { dir } = file;
+
     // TODO factory?
     const segments =
-      file.segments.at(0) === this.config.assetDir
-        ? file.segments.slice(1) // Static
-        : ["blog", ...file.segments.slice(1)]; // Post
+      dir.root === this.config.assetDir
+        ? dir.segments.slice(1) // Static
+        : ["blog", ...dir.segments.slice(1)]; // Post
 
-    return file.with({ segments });
+    return file.with({ dir: dir.with({ segments }) });
   }
 }
 

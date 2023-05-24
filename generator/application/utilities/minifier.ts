@@ -9,6 +9,6 @@ const minifiers: { [extension: string]: Minify | undefined } = {
   js: async (s) => (await terser.minify(s)).code!,
 };
 
-const minifier = async ({ extension, content }: File) => (minifiers[extension.slice(1)] ?? ((s) => s))(content);
+const minifier = async ({ name, content }: File) => (minifiers[name.ext.slice(1)] ?? ((s) => s))(content);
 
 export { minifier };

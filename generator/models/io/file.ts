@@ -1,83 +1,67 @@
 import binaryExtensions from "binaryextensions";
-import _path from "path";
+import path from "path";
 import { Encoding } from "./encoding";
-import { IPath } from "./path";
+import { IDirectory, Directory } from "./directory";
+import { Filename, IFilename } from "./filename";
 
-interface IFile extends IPath {
-  readonly name: string;
-  readonly extension: string;
-  readonly base: string;
-  readonly directory: string;
-  readonly full: string;
+interface IFile {
+  readonly dir: IDirectory;
+  readonly name: IFilename;
   readonly content: string;
   readonly encoding: Encoding;
 }
 
-type Patch = Pick<IFile, "segments" | "sep" | "name" | "extension" | "content" | "encoding">;
-
 class File implements IFile {
-  readonly name: string;
-  readonly extension: string;
-  readonly base: string;
-  readonly directory: string;
-  readonly full: string;
-  readonly content: string;
-  readonly encoding: Encoding;
-  readonly segments: string[];
-  readonly sep: string;
+  dir: Directory;
+  name: Filename;
+  content: string;
+  encoding: Encoding;
 
-  private constructor(patch: Patch) {
-    this.segments = patch.segments;
-    this.sep = patch.sep;
-
-    this.name = patch.name;
-    this.extension = patch.extension;
-    this.content = patch.content;
-    this.encoding = patch.encoding;
-
-    this.base = `${this.name}${this.extension}`;
-    this.directory = this.segments.join(this.sep);
-    this.full = [...this.segments, this.base].join(this.sep);
+  private constructor({ dir: directory, name: filename, content, encoding }: IFile) {
+    this.dir = Directory.from(directory);
+    this.name = Filename.from(filename);
+    this.content = content;
+    this.encoding = encoding;
   }
 
-  static from(patch: Patch): File;
+  static from(file: IFile): File;
   static from(path: string): File;
-  static from(patchOrPath: Patch | string): File {
-    if (typeof patchOrPath === "object") {
-      return new File(patchOrPath);
+  static from(obj: IFile | string): File {
+    if (typeof obj === "object") {
+      return new File(obj);
     }
 
-    let { dir, name, ext } = _path.parse(patchOrPath);
+    let { dir, name, ext } = path.parse(obj);
 
     /*
-    Filenames that only have an extension are parsed differently
-
-    Wrong: ".html" => {name: ".html", ext: ""}
-    Right: ".html" => {name: "",      ext: ".html"}
-  */
+      Filenames that only have an extension are parsed differently
+  
+      Wrong: ".html" => {name: ".html", ext: ""}
+      Right: ".html" => {name: "",      ext: ".html"}
+    */
     if (!ext && name.startsWith(".")) {
       ext = name;
       name = "";
     }
 
-    const sep = _path.sep;
-
     return new File({
-      segments: dir.split(sep),
-      sep,
-      name,
-      extension: ext,
+      dir: Directory.from(dir),
+      name: { base: name, ext },
       content: "",
       encoding: File.getEncoding(ext),
     });
   }
 
-  with(patch: Partial<Patch>): File {
+  with(patch: Partial<IFile>) {
     return new File({ ...this, ...patch });
   }
 
-  static getEncoding(fos: File | string): Encoding {
-    let ext = typeof fos === "string" ? fos : fos.extension;
+  get full() {
+    return [this.dir.full, this.name.full].join(this.dir.sep);
+  }
+
+  static getEncoding(obj: Filename | string): Encoding {
+    let ext = typeof obj === "string" ? obj : obj.ext ?? "";
 
     if (ext.startsWith(".")) {
       ext = ext.slice(1);

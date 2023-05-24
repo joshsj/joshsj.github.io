@@ -9,7 +9,7 @@ mixin postDetails(post)
   if post.collection
     p.squish Part of 
       a(href=urlFor("page", "collections")) 
-        | #{store.allBy("collection").find(c => c.file.segments[1] === post.collection).title}
+        | #{store.allBy("collection").find(c => c.file.dir.segments[1] === post.collection).title}
 
   if post.tags && post.tags.length
     p.squish.sep.sep-pop

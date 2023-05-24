@@ -44,7 +44,7 @@ class InMemoryFeatureStore implements IFeatureStore {
   }
 
   allIn(collection: Collection) {
-    return [...this.items.filter((x) => x.name === "post" && x.collection === collection.file.segments[1])];
+    return [...this.items.filter((x) => x.name === "post" && x.collection === collection.file.dir.segments[1])];
   }
 
   count() {
