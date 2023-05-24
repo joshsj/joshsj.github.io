@@ -1,7 +1,7 @@
 import { IBuilder, IBuilderProvider } from "@application/behaviours/types";
-import { Asset, Feature, FeatureFor, FeatureName, Page, Post } from "@models";
+import { Asset, Entity, EntityFor, EntityName, Page, Post } from "@models";
 
-type Builders = { [K in FeatureName]: IBuilder<FeatureFor<K>> | undefined };
+type Builders = { [K in EntityName]: IBuilder<EntityFor<K>> | undefined };
 
 class BuilderProvider implements IBuilderProvider {
   private readonly builders: Builders;
@@ -10,7 +10,7 @@ class BuilderProvider implements IBuilderProvider {
     this.builders = { asset, collection: undefined, page, post };
   }
 
-  get<T extends Feature>(name: T["name"]): IBuilder<T> | undefined {
+  get<T extends Entity>(name: T["name"]): IBuilder<T> | undefined {
     return this.builders[name];
   }
 }

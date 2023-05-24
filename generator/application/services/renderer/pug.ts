@@ -1,5 +1,5 @@
-import { IFeatureStore } from "@application/stores/types";
-import { Config, Feature } from "@models";
+import { IEntityStore } from "@application/stores/types";
+import { Config, Entity } from "@models";
 import katex from "katex";
 import path from "path";
 import prism from "prismjs";
@@ -43,12 +43,12 @@ class PugRenderer implements IRenderer<"pug"> {
   readonly of = "pug";
 
   constructor(
-    private readonly store: IFeatureStore,
+    private readonly store: IEntityStore,
     private readonly getUrl: IGetUrl,
     private readonly config: Config
   ) {}
 
-  async render(toRender: Feature | File): Promise<string> {
+  async render(toRender: Entity | File): Promise<string> {
     const [file, current] = toRender instanceof File ? [toRender, undefined] : [toRender.file, toRender];
     const filename = path.join(this.config.sourceDir, file.full);
 

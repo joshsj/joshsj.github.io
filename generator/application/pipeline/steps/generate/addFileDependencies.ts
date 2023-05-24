@@ -1,31 +1,31 @@
-﻿import { IFeatureStore } from "@application/stores/types";
+﻿import { IEntityStore } from "@application/stores/types";
 import { ExtractDataResult } from "@models/steps/generate";
 import { Log } from "@application/services/types";
 import { IAddFileDependenciesStep } from "@application/pipeline/types";
-import { Feature } from "@models";
+import { Entity } from "@models";
 
 class AddFileDependencies implements IAddFileDependenciesStep {
-  constructor(private readonly store: IFeatureStore, private readonly log: Log) {}
+  constructor(private readonly store: IEntityStore, private readonly log: Log) {}
 
-  async execute({ features }: ExtractDataResult): Promise<ExtractDataResult> {
-    const toBuild = new Set(features);
-    const add = (...features: (Feature | undefined)[]) => features.forEach((f) => f && toBuild.add(f));
+  async execute({ entitys }: ExtractDataResult): Promise<ExtractDataResult> {
+    const toBuild = new Set(entitys);
+    const add = (...entitys: (Entity | undefined)[]) => entitys.forEach((f) => f && toBuild.add(f));
     let pagesAdded = false;
 
-    for (const feature of features) {
-      if (!pagesAdded && (feature.name === "post" || feature.name === "page")) {
+    for (const entity of entitys) {
+      if (!pagesAdded && (entity.name === "post" || entity.name === "page")) {
         add(...this.store.allBy("page"));
         pagesAdded = true;
         this.log("Added pages as build dependencies");
       }
 
-      if (feature.name === "collection") {
+      if (entity.name === "collection") {
         add(this.store.allBy("page").find((x) => x.title === "Collections"));
         this.log(`Added collection page as build dependencies `);
       }
     }
 
-    return { features: [...toBuild] };
+    return { entitys: [...toBuild] };
   }
 }
 

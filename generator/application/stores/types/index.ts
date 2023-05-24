@@ -1,4 +1,4 @@
-import { Collection, Feature, FeatureFor, FeatureName } from "@models";
+import { Collection, Entity, EntityFor, EntityName } from "@models";
 
 interface IStore<T> {
   all: () => T[];
@@ -8,12 +8,12 @@ interface IStore<T> {
   upsert: (item: T) => void;
 }
 
-interface IFeatureStore extends IStore<Feature> {
-  find: (path: string) => Feature;
+interface IEntityStore extends IStore<Entity> {
+  find: (path: string) => Entity;
   // TODO narrow type
-  findBy: (name: FeatureName, title: string) => Feature;
-  allBy: <T extends FeatureName>(name: T) => FeatureFor<T>[];
-  allIn: (collection: Collection) => Feature[];
+  findBy: (name: EntityName, title: string) => Entity;
+  allBy: <T extends EntityName>(name: T) => EntityFor<T>[];
+  allIn: (collection: Collection) => Entity[];
 }
 
-export { IStore, IFeatureStore };
+export { IStore, IEntityStore };

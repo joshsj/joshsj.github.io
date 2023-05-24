@@ -1,11 +1,11 @@
 import { IdentifyFilesResult, ReadSourceResult } from "@models/steps/generate";
-import { IGetFeatureName, Log } from "@application/services/types";
+import { IGetEntityName, Log } from "@application/services/types";
 import { splitAllSettled } from "@application/utilities/native";
 import { File } from "@models/io";
 import { IIdentifyFilesStep } from "@application/pipeline/types";
 
 class IdentifyFiles implements IIdentifyFilesStep {
-  constructor(private readonly getFeatureName: IGetFeatureName, private readonly log: Log) {}
+  constructor(private readonly getEntityName: IGetEntityName, private readonly log: Log) {}
 
   async execute({ sourceFiles }: ReadSourceResult): Promise<IdentifyFilesResult> {
     const { fulfilled, rejected } = await splitAllSettled(sourceFiles.map((p) => this.identify(p)));
@@ -17,7 +17,7 @@ class IdentifyFiles implements IIdentifyFilesStep {
   }
 
   private async identify(file: File) {
-    const name = this.getFeatureName.for(file);
+    const name = this.getEntityName.for(file);
 
     if (!name) {
       throw file.full;

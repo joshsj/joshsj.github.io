@@ -5,8 +5,8 @@ import { Post } from "@models";
 class PostBuilder implements IBuilder<Post> {
   constructor(private readonly pug: IRenderer<"pug">) {}
 
-  async build(feature: Post): Promise<string> {
-    return await this.pug.render(feature);
+  async build(entity: Post): Promise<string> {
+    return await this.pug.render(entity);
   }
 }
 

@@ -1,8 +1,8 @@
-import { Feature, FeatureName } from "@models";
+import { Entity, EntityName } from "@models";
 
 interface IGetUrl {
-  for(name: FeatureName, filename: string): string;
-  for(feature: Feature): string;
+  for(name: EntityName, filename: string): string;
+  for(entity: Entity): string;
 }
 
 export { IGetUrl };

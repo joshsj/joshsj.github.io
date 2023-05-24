@@ -1,4 +1,4 @@
-﻿export * from "./getFeatureName";
+﻿export * from "./getEntityName";
 export * from "./io";
 export * from "./log";
 export * from "./configPopulator";

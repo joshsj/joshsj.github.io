@@ -1,6 +1,6 @@
 ﻿import { ExtractDataResult } from "@models/steps/generate";
 import { IO, Log } from "@application/services/types";
-import { IFeatureStore } from "@application/stores/types";
+import { IEntityStore } from "@application/stores/types";
 import { Config } from "@models/config";
 import { IUpdateStoreStep } from "@application/pipeline/types";
 import { Directory, File } from "@models/io";
@@ -9,19 +9,19 @@ import { Filename } from "@models/io/filename";
 
 class UpdateStore implements IUpdateStoreStep {
   constructor(
-    private readonly store: IFeatureStore,
+    private readonly store: IEntityStore,
     private readonly io: IO,
     private readonly log: Log,
     private readonly config: Config
   ) {}
 
-  async execute({ features }: ExtractDataResult): Promise<ExtractDataResult> {
-    for (const feature of features) {
-      if (feature.name === "post" && feature?.draft && !this.config.draft) {
+  async execute({ entitys }: ExtractDataResult): Promise<ExtractDataResult> {
+    for (const entity of entitys) {
+      if (entity.name === "post" && entity?.draft && !this.config.draft) {
         continue;
       }
 
-      this.store.upsert(feature);
+      this.store.upsert(entity);
     }
 
     const file = File.from({
@@ -35,7 +35,7 @@ class UpdateStore implements IUpdateStoreStep {
     // Background
     this.io.write(file).then(() => this.log(`Wrote site context to ${file.full}`));
 
-    return { features };
+    return { entitys };
   }
 }
 

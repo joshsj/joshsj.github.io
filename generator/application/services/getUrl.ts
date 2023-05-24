@@ -1,29 +1,29 @@
 import { ILocatorProvider } from "@application/behaviours/types";
-import { IFeatureStore } from "@application/stores/types";
-import { Feature, FeatureName } from "@models";
+import { IEntityStore } from "@application/stores/types";
+import { Entity, EntityName } from "@models";
 import { IGetUrl } from "./types";
 
 class GetUrl implements IGetUrl {
-  private readonly cache: Map<Feature, string>;
+  private readonly cache: Map<Entity, string>;
 
-  constructor(private readonly store: IFeatureStore, private readonly locatorProvider: ILocatorProvider) {
-    this.cache = new Map<Feature, string>();
+  constructor(private readonly store: IEntityStore, private readonly locatorProvider: ILocatorProvider) {
+    this.cache = new Map<Entity, string>();
   }
 
-  for(name: FeatureName, filename: string): string;
-  for(feature: Feature): string;
-  for(arg: Feature | FeatureName, filename?: string): string {
-    const feature = typeof arg === "object" ? arg : this.store.allBy(arg).find((x) => x.file.name.base === filename);
+  for(name: EntityName, filename: string): string;
+  for(entity: Entity): string;
+  for(arg: Entity | EntityName, filename?: string): string {
+    const entity = typeof arg === "object" ? arg : this.store.allBy(arg).find((x) => x.file.name.base === filename);
 
-    if (!feature) {
+    if (!entity) {
       throw new Error(`urlFor failed with: ${arg}, ${filename}`);
     }
 
-    if (this.cache.has(feature)) {
-      return this.cache.get(feature)!;
+    if (this.cache.has(entity)) {
+      return this.cache.get(entity)!;
     }
 
-    const locator = this.locatorProvider.get(feature.name);
+    const locator = this.locatorProvider.get(entity.name);
 
     if (!locator) {
       throw new Error(`urlFor failed with: ${arg}, ${filename}`);
@@ -32,7 +32,7 @@ class GetUrl implements IGetUrl {
     let {
       full: url,
       dir: { sep },
-    } = locator.locate(feature);
+    } = locator.locate(entity);
 
     // Ensure starts at root
     if (url.at(0) !== sep) {
@@ -42,7 +42,7 @@ class GetUrl implements IGetUrl {
     // Remove more ugly
     url = url.replace("index.html", "");
 
-    return this.cache.set(feature, url).get(feature)!;
+    return this.cache.set(entity, url).get(entity)!;
   }
 }
 

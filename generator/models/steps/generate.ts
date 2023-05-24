@@ -1,4 +1,4 @@
-import { Feature } from "@models";
+import { Entity } from "@models";
 import { File } from "@models/io";
 
 type Copy<T extends {}> = Pick<T, keyof T>;
@@ -8,11 +8,11 @@ type InitialState = { sourcePaths?: string[] };
 type ReadSourceState = Copy<InitialState>;
 type ReadSourceResult = { sourceFiles: File[] };
 
-type Identified = Pick<Feature, "file" | "name">;
+type Identified = Pick<Entity, "file" | "name">;
 
 type IdentifyFilesResult = { files: Identified[] };
 
-type ExtractDataResult = { features: Feature[] };
+type ExtractDataResult = { entitys: Entity[] };
 
 type UpdateStoreResult = Copy<ExtractDataResult>;
 

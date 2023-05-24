@@ -1,7 +1,7 @@
 import { ExtractDataResult, Identified, IdentifyFilesResult } from "@models/steps/generate";
 import { Log } from "@application/services/types";
 import { splitAllSettled } from "@application/utilities/native";
-import { Feature } from "@models";
+import { Entity } from "@models";
 import { IExtractDataStep } from "@application/pipeline/types";
 import { IExtractorProvider } from "@application/behaviours/types";
 
@@ -14,10 +14,10 @@ class ExtractData implements IExtractDataStep {
     this.log(`Extracted data for ${fulfilled.length} files`);
     this.log("Failures", rejected);
 
-    return { features: fulfilled };
+    return { entitys: fulfilled };
   }
 
-  private async extract(identified: Identified): Promise<Feature> {
+  private async extract(identified: Identified): Promise<Entity> {
     return this.extractorProvider.get(identified.name)?.extract(identified.file);
   }
 }

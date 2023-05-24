@@ -6,7 +6,7 @@ const Dependency = toDependencies(
   "config",
   "configPopulator",
   // stores
-  "featureStore",
+  "entityStore",
   // identifiers
   "assetIdentifier",
   "collectionIdentifier",
@@ -35,7 +35,7 @@ const Dependency = toDependencies(
   // renderer
   "pugRenderer",
   // services
-  "getFeatureName",
+  "getEntityName",
   "getUrl",
   "log",
   "io",

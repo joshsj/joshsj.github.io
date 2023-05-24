@@ -5,8 +5,8 @@ import { Page } from "@models";
 class PageBuilder implements IBuilder<Page> {
   constructor(private readonly pug: IRenderer<"pug">) {}
 
-  async build(feature: Page): Promise<string> {
-    return await this.pug.render(feature);
+  async build(entity: Page): Promise<string> {
+    return await this.pug.render(entity);
   }
 }
 

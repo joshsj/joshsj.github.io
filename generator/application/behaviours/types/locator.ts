@@ -1,7 +1,7 @@
-import { Feature } from "@models";
+import { Entity } from "@models";
 import { File } from "@models/io";
 
-interface ILocator<T extends Feature> {
-  locate(feature: T): File;
+interface ILocator<T extends Entity> {
+  locate(entity: T): File;
 }
 export { ILocator };

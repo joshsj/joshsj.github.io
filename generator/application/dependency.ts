@@ -1,4 +1,4 @@
-import { Asset, Collection, Config, D, Feature, Page, Post } from "@models";
+import { Asset, Collection, Config, D, Entity, Page, Post } from "@models";
 import { DependencyContainer } from "tsyringe";
 import { AssetBuilder, AssetExtractor, AssetIdentifier, AssetLocator } from "./behaviours/asset";
 import { CollectionExtractor, CollectionIdentifier } from "./behaviours/collection";
@@ -19,11 +19,11 @@ import {
 import { GeneratePipelineFactory } from "./pipeline/factories/generatePipeline";
 import { UpdateConfigPipelineFactory } from "./pipeline/factories/updateConfigPipeline";
 import { DefaultConfigPopulator } from "./services/defaultConfigPopulator";
-import { GetFeatureName } from "./services/getFeatureName";
+import { GetEntityName } from "./services/getEntityName";
 import { GetUrl } from "./services/getUrl";
 import { PugRenderer } from "./services/renderer/pug";
-import { IConfigPopulator, IGetFeatureName, IGetUrl, IO, IRenderer, Log } from "./services/types";
-import { IFeatureStore } from "./stores/types";
+import { IConfigPopulator, IGetEntityName, IGetUrl, IO, IRenderer, Log } from "./services/types";
+import { IEntityStore } from "./stores/types";
 
 class ApplicationDependencies {
   private constructor(private readonly c: DependencyContainer) {}
@@ -37,30 +37,30 @@ class ApplicationDependencies {
       useFactory: (c) => new DefaultConfigPopulator(c.resolve<IO>(D.io)),
     });
 
-    this.c.register<IGetFeatureName>(D.getFeatureName, {
+    this.c.register<IGetEntityName>(D.getEntityName, {
       useFactory: (c) => {
-        const identifiers = c.resolveAll<IIdentifier<Feature>>(D.identifier);
+        const identifiers = c.resolveAll<IIdentifier<Entity>>(D.identifier);
 
-        return new GetFeatureName(identifiers);
+        return new GetEntityName(identifiers);
       },
     });
 
     this.c.register<IGetUrl>(D.getUrl, {
       useFactory: (c) => {
-        const featureStore = c.resolve<IFeatureStore>(D.featureStore);
+        const entityStore = c.resolve<IEntityStore>(D.entityStore);
         const locatorFactory = c.resolve<ILocatorProvider>(D.locatorProvider);
 
-        return new GetUrl(featureStore, locatorFactory);
+        return new GetUrl(entityStore, locatorFactory);
       },
     });
 
     this.c.register<IRenderer<"pug">>(D.pugRenderer, {
       useFactory: (c) => {
-        const featureStore = c.resolve<IFeatureStore>(D.featureStore);
+        const entityStore = c.resolve<IEntityStore>(D.entityStore);
         const getUrl = c.resolve<IGetUrl>(D.getUrl);
         const config = c.resolve<Config>(D.config);
 
-        return new PugRenderer(featureStore, getUrl, config);
+        return new PugRenderer(entityStore, getUrl, config);
       },
     });
 
@@ -82,8 +82,8 @@ class ApplicationDependencies {
         const io = c.resolve<IO>(D.io);
         const log = c.resolve<Log>(D.log);
         const config = c.resolve<Config>(D.config);
-        const featureStore = c.resolve<IFeatureStore>(D.featureStore);
-        const getFeatureName = c.resolve<IGetFeatureName>(D.getFeatureName);
+        const entityStore = c.resolve<IEntityStore>(D.entityStore);
+        const getEntityName = c.resolve<IGetEntityName>(D.getEntityName);
         const builderProvider = c.resolve<IBuilderProvider>(D.builderProvider);
         const locatorProvider = c.resolve<ILocatorProvider>(D.locatorProvider);
         const extractorProvider = c.resolve<IExtractorProvider>(D.extractorProvider);
@@ -92,8 +92,8 @@ class ApplicationDependencies {
           io,
           log,
           config,
-          featureStore,
-          getFeatureName,
+          entityStore,
+          getEntityName,
           builderProvider,
           locatorProvider,
           extractorProvider

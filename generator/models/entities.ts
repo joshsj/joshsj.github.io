@@ -29,10 +29,10 @@ type PostData = {
 type Post = Make<"post", PostData>;
 
 // TODO rename
-type Feature = Asset | Collection | Page | Post;
+type Entity = Asset | Collection | Page | Post;
 
-type FeatureName = Feature["name"];
+type EntityName = Entity["name"];
 
-type FeatureFor<T extends FeatureName> = Feature & { name: T };
+type EntityFor<T extends EntityName> = Entity & { name: T };
 
-export { Asset, Collection, CollectionData, PageData, Page, PostData, Post, Feature, FeatureName, FeatureFor };
+export { Asset, Collection, CollectionData, PageData, Page, PostData, Post, Entity, EntityName, EntityFor };

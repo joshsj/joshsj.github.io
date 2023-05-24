@@ -1,15 +1,15 @@
-import { Collection, Feature, FeatureFor, FeatureName } from "@models";
-import { IFeatureStore } from "@application/stores/types";
+import { Collection, Entity, EntityFor, EntityName } from "@models";
+import { IEntityStore } from "@application/stores/types";
 
 const readOut = (values: { [K: string]: unknown }) =>
   Object.entries(values)
     .map(([k, v]) => k + "=" + v)
     .join(", ");
 
-class InMemoryFeatureStore implements IFeatureStore {
-  private readonly items: Feature[] = [];
+class InMemoryEntityStore implements IEntityStore {
+  private readonly items: Entity[] = [];
 
-  private indexOf = (arg: Feature | string) => {
+  private indexOf = (arg: Entity | string) => {
     const path = typeof arg === "object" ? arg.file.full : arg;
 
     return this.items.findIndex((x) => x.file.full === path);
@@ -25,11 +25,11 @@ class InMemoryFeatureStore implements IFeatureStore {
     return this.items[index];
   }
 
-  findBy(featureName: FeatureName, title: string) {
-    const item = this.allBy(featureName).find((f) => "title" in f && f.title === title);
+  findBy(entityName: EntityName, title: string) {
+    const item = this.allBy(entityName).find((f) => "title" in f && f.title === title);
 
     if (!item) {
-      throw new Error(`Item does not exist with ${readOut({ featureName, title })}`);
+      throw new Error(`Item does not exist with ${readOut({ entityName, title })}`);
     }
 
     return item;
@@ -39,8 +39,8 @@ class InMemoryFeatureStore implements IFeatureStore {
     return [...this.items];
   }
 
-  allBy<T extends FeatureName>(name: T) {
-    return [...this.items.filter((x): x is FeatureFor<T> => x.name === name)];
+  allBy<T extends EntityName>(name: T) {
+    return [...this.items.filter((x): x is EntityFor<T> => x.name === name)];
   }
 
   allIn(collection: Collection) {
@@ -51,7 +51,7 @@ class InMemoryFeatureStore implements IFeatureStore {
     return this.items.length;
   }
 
-  insert(item: Feature) {
+  insert(item: Entity) {
     const index = this.indexOf(item);
 
     if (index !== -1) {
@@ -61,7 +61,7 @@ class InMemoryFeatureStore implements IFeatureStore {
     this.items.push(item);
   }
 
-  update(item: Feature) {
+  update(item: Entity) {
     const index = this.indexOf(item);
 
     if (index == -1) {
@@ -71,7 +71,7 @@ class InMemoryFeatureStore implements IFeatureStore {
     this.items[index] = item;
   }
 
-  upsert(item: Feature) {
+  upsert(item: Entity) {
     const index = this.indexOf(item);
 
     if (index === -1) {
@@ -82,4 +82,4 @@ class InMemoryFeatureStore implements IFeatureStore {
   }
 }
 
-export { InMemoryFeatureStore };
+export { InMemoryEntityStore };
