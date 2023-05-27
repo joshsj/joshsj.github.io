@@ -1,12 +1,11 @@
-import { Config } from "@models/config";
 import { IIdentifier } from "@application/behaviours/types";
-import { Asset } from "@models";
+import { Config } from "@models/config";
 import { File } from "@models/io";
 
-class AssetIdentifier implements IIdentifier<Asset> {
-  constructor(private readonly config: Config) {}
+class AssetIdentifier implements IIdentifier<"asset"> {
+  readonly for = "asset";
 
-  readonly name = "asset";
+  constructor(private readonly config: Config) {}
 
   test({ dir, name: filename }: File): boolean {
     return dir.root === this.config.assetDir || (dir.root === this.config.postDir && !!filename.base);

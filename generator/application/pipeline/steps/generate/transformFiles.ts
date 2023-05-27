@@ -1,15 +1,15 @@
-import { ExtractDataResult, TransformFilesResult } from "@models/steps/generate";
+import { IBuilder, ILocator } from "@application/behaviours/types";
+import { ITransformFilesStep } from "@application/pipeline/types";
 import { Log } from "@application/services/types";
 import { splitAllSettled } from "@application/utilities/native";
 import { Entity } from "@models";
 import { File } from "@models/io";
-import { ITransformFilesStep } from "@application/pipeline/types";
-import { IBuilderProvider, ILocatorProvider } from "@application/behaviours/types";
+import { ExtractDataResult, TransformFilesResult } from "@models/steps/generate";
 
 class TransformFiles implements ITransformFilesStep {
   constructor(
-    private readonly locatorProvider: ILocatorProvider,
-    private readonly builderProvider: IBuilderProvider,
+    private readonly builders: IBuilder[],
+    private readonly locators: ILocator[],
     private readonly log: Log
   ) {}
 
@@ -24,8 +24,8 @@ class TransformFiles implements ITransformFilesStep {
   }
 
   private async transform(entity: Entity) {
-    const locator = this.locatorProvider.get(entity.name);
-    const builder = this.builderProvider.get(entity.name);
+    const locator = this.locators.find((b) => b.for === entity.name);
+    const builder = this.builders.find((b) => b.for === entity.name);
 
     if (!(locator && builder)) {
       return undefined;

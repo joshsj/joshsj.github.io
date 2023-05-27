@@ -1,13 +1,16 @@
 import { IExtractor } from "@application/behaviours/types";
 import { Post, PostData } from "@models";
 import { File } from "@models/io";
+import { IdentifiedFor } from "@models/steps";
 import matter from "gray-matter";
 
 const TocLinePattern = /(  |\t)h(?<n>\d) (?<text>.+)/g;
 type TocLine = { level: number; text: string };
 
-class PostExtractor implements IExtractor<Post> {
-  async extract(file: File): Promise<Post> {
+class PostExtractor implements IExtractor<"post"> {
+  readonly for = "post";
+
+  async extract({ file }: IdentifiedFor<"post">): Promise<Post> {
     const extracted = matter(file.content, { excerpt: false });
     const data = extracted.data as PostData;
 

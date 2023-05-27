@@ -3,7 +3,9 @@ import { ILocator } from "@application/behaviours/types";
 import { Asset } from "@models";
 import { File } from "@models/io";
 
-class AssetLocator implements ILocator<Asset> {
+class AssetLocator implements ILocator<"asset"> {
+  readonly for = "asset";
+
   constructor(private readonly config: Config) {}
 
   locate({ file }: Asset): File {

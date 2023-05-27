@@ -1,21 +1,10 @@
-import { Asset, Collection, Config, D, Entity, Page, Post } from "@models";
+import { Asset, Collection, Config, D, Page, Post } from "@models";
 import { DependencyContainer } from "tsyringe";
 import { AssetBuilder, AssetExtractor, AssetIdentifier, AssetLocator } from "./behaviours/asset";
 import { CollectionExtractor, CollectionIdentifier } from "./behaviours/collection";
 import { PageBuilder, PageExtractor, PageIdentifier, PageLocator } from "./behaviours/page";
 import { PostBuilder, PostExtractor, PostIdentifier, PostLocator } from "./behaviours/post";
-import { BuilderProvider } from "./behaviours/provider/builderProvider";
-import { ExtractorProvider } from "./behaviours/provider/extractorProvider";
-import { LocatorProvider } from "./behaviours/provider/locatorProvider";
-import {
-  IBuilder,
-  IBuilderProvider,
-  IExtractor,
-  IExtractorProvider,
-  IIdentifier,
-  ILocator,
-  ILocatorProvider,
-} from "./behaviours/types";
+import { IBuilder, IExtractor, IIdentifier, ILocator } from "./behaviours/types";
 import { GeneratePipelineFactory } from "./pipeline/factories/generatePipeline";
 import { UpdateConfigPipelineFactory } from "./pipeline/factories/updateConfigPipeline";
 import { DefaultConfigPopulator } from "./services/defaultConfigPopulator";
@@ -39,7 +28,7 @@ class ApplicationDependencies {
 
     this.c.register<IGetEntityName>(D.getEntityName, {
       useFactory: (c) => {
-        const identifiers = c.resolveAll<IIdentifier<Entity>>(D.identifier);
+        const identifiers = c.resolveAll<IIdentifier>(D.identifier);
 
         return new GetEntityName(identifiers);
       },
@@ -48,9 +37,9 @@ class ApplicationDependencies {
     this.c.register<IGetUrl>(D.getUrl, {
       useFactory: (c) => {
         const entityStore = c.resolve<IEntityStore>(D.entityStore);
-        const locatorFactory = c.resolve<ILocatorProvider>(D.locatorProvider);
+        const locators = c.resolveAll<ILocator>(D.locator);
 
-        return new GetUrl(entityStore, locatorFactory);
+        return new GetUrl(entityStore, locators);
       },
     });
 
@@ -84,20 +73,11 @@ class ApplicationDependencies {
         const config = c.resolve<Config>(D.config);
         const entityStore = c.resolve<IEntityStore>(D.entityStore);
         const getEntityName = c.resolve<IGetEntityName>(D.getEntityName);
-        const builderProvider = c.resolve<IBuilderProvider>(D.builderProvider);
-        const locatorProvider = c.resolve<ILocatorProvider>(D.locatorProvider);
-        const extractorProvider = c.resolve<IExtractorProvider>(D.extractorProvider);
+        const builders = c.resolveAll<IBuilder>(D.builder);
+        const locators = c.resolveAll<ILocator>(D.locator);
+        const extractors = c.resolveAll<IExtractor>(D.extractor);
 
-        return new GeneratePipelineFactory(
-          io,
-          log,
-          config,
-          entityStore,
-          getEntityName,
-          builderProvider,
-          locatorProvider,
-          extractorProvider
-        );
+        return new GeneratePipelineFactory(io, log, config, entityStore, getEntityName, builders, locators, extractors);
       },
     });
 
@@ -105,94 +85,63 @@ class ApplicationDependencies {
   }
 
   registerBehaviours() {
-    this.c.register<IIdentifier<Asset>>(D.assetIdentifier, {
+    this.c.register<IIdentifier<"asset">>(D.assetIdentifier, {
       useFactory: (c) => new AssetIdentifier(c.resolve<Config>(D.config)),
     });
-    this.c.register<IIdentifier<Asset>>(D.identifier, {
+    this.c.register<IIdentifier<"asset">>(D.identifier, {
       useFactory: (c) => new AssetIdentifier(c.resolve<Config>(D.config)),
     });
 
-    this.c.register<IIdentifier<Collection>>(D.collectionIdentifier, {
+    this.c.register<IIdentifier<"collection">>(D.collectionIdentifier, {
       useFactory: (c) => new CollectionIdentifier(c.resolve<Config>(D.config)),
     });
-    this.c.register<IIdentifier<Collection>>(D.identifier, {
+    this.c.register<IIdentifier<"collection">>(D.identifier, {
       useFactory: (c) => new CollectionIdentifier(c.resolve<Config>(D.config)),
     });
 
-    this.c.register<IIdentifier<Page>>(D.pageIdentifier, {
+    this.c.register<IIdentifier<"page">>(D.pageIdentifier, {
       useFactory: (c) => new PageIdentifier(c.resolve<Config>(D.config)),
     });
-    this.c.register<IIdentifier<Page>>(D.identifier, {
+    this.c.register<IIdentifier<"page">>(D.identifier, {
       useFactory: (c) => new PageIdentifier(c.resolve<Config>(D.config)),
     });
 
-    this.c.register<IIdentifier<Post>>(D.postIdentifier, {
+    this.c.register<IIdentifier<"post">>(D.postIdentifier, {
       useFactory: (c) => new PostIdentifier(c.resolve<Config>(D.config)),
     });
-    this.c.register<IIdentifier<Post>>(D.identifier, {
+    this.c.register<IIdentifier<"post">>(D.identifier, {
       useFactory: (c) => new PostIdentifier(c.resolve<Config>(D.config)),
     });
 
-    this.c.register<IExtractor<Asset>>(D.assetExtractor, {
+    this.c.register<IExtractor<"asset">>(D.extractor, {
       useFactory: () => new AssetExtractor(),
     });
-    this.c.register<IExtractor<Collection>>(D.collectionExtractor, {
+    this.c.register<IExtractor<"collection">>(D.extractor, {
       useFactory: (c) => new CollectionExtractor(c.resolve<IRenderer<"pug">>(D.pugRenderer)),
     });
-    this.c.register<IExtractor<Page>>(D.pageExtractor, {
+    this.c.register<IExtractor<"page">>(D.extractor, {
       useFactory: () => new PageExtractor(),
     });
-    this.c.register<IExtractor<Post>>(D.postExtractor, {
+    this.c.register<IExtractor<"post">>(D.extractor, {
       useFactory: () => new PostExtractor(),
     });
 
-    this.c.register<ILocator<Asset>>(D.assetLocator, {
+    this.c.register<ILocator<"asset">>(D.locator, {
       useFactory: (c) => new AssetLocator(c.resolve<Config>(D.config)),
     });
-    this.c.register<ILocator<Page>>(D.pageLocator, {
+    this.c.register<ILocator<"page">>(D.locator, {
       useFactory: () => new PageLocator(),
     });
-    this.c.register<ILocator<Post>>(D.postLocator, {
+    this.c.register<ILocator<"post">>(D.locator, {
       useFactory: () => new PostLocator(),
     });
 
-    this.c.register<IBuilder<Asset>>(D.assetBuilder, { useFactory: () => new AssetBuilder() });
-    this.c.register<IBuilder<Page>>(D.pageBuilder, {
+    this.c.register<IBuilder<"asset">>(D.builder, { useFactory: () => new AssetBuilder() });
+    this.c.register<IBuilder<"page">>(D.builder, {
       useFactory: (c) => new PageBuilder(c.resolve<IRenderer<"pug">>(D.pugRenderer)),
     });
-    this.c.register<IBuilder<Post>>(D.postBuilder, {
+    this.c.register<IBuilder<"post">>(D.builder, {
       useFactory: (c) => new PostBuilder(c.resolve<IRenderer<"pug">>(D.pugRenderer)),
-    });
-
-    this.c.register<IBuilderProvider>(D.builderProvider, {
-      useFactory: (c) => {
-        const asset = c.resolve<IBuilder<Asset>>(D.assetBuilder);
-        const page = c.resolve<IBuilder<Page>>(D.pageBuilder);
-        const post = c.resolve<IBuilder<Post>>(D.postBuilder);
-
-        return new BuilderProvider(asset, page, post);
-      },
-    });
-
-    this.c.register<ILocatorProvider>(D.locatorProvider, {
-      useFactory: (c) => {
-        const asset = c.resolve<ILocator<Asset>>(D.assetLocator);
-        const page = c.resolve<ILocator<Page>>(D.pageLocator);
-        const post = c.resolve<ILocator<Post>>(D.postLocator);
-
-        return new LocatorProvider(asset, page, post);
-      },
-    });
-
-    this.c.register<IExtractorProvider>(D.extractorProvider, {
-      useFactory: (c) => {
-        const asset = c.resolve<IExtractor<Asset>>(D.assetExtractor);
-        const collection = c.resolve<IExtractor<Collection>>(D.collectionExtractor);
-        const page = c.resolve<IExtractor<Page>>(D.pageExtractor);
-        const post = c.resolve<IExtractor<Post>>(D.postExtractor);
-
-        return new ExtractorProvider(asset, collection, page, post);
-      },
     });
 
     return this;

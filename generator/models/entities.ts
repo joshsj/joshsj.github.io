@@ -28,7 +28,6 @@ type PostData = {
 
 type Post = Make<"post", PostData>;
 
-// TODO rename
 type Entity = Asset | Collection | Page | Post;
 
 type EntityName = Entity["name"];

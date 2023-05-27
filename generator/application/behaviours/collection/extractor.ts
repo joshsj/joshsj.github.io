@@ -1,13 +1,15 @@
-import { Collection, CollectionData } from "@models";
-import yaml from "js-yaml";
 import { IExtractor } from "@application/behaviours/types";
-import { File } from "@models/io";
 import { IRenderer } from "@application/services/types";
+import { Collection, CollectionData } from "@models";
+import { IdentifiedFor } from "@models/steps";
+import yaml from "js-yaml";
 
-class CollectionExtractor implements IExtractor<Collection> {
+class CollectionExtractor implements IExtractor<"collection"> {
+  readonly for = "collection";
+
   constructor(private readonly pug: IRenderer<"pug">) {}
 
-  async extract(file: File): Promise<Collection> {
+  async extract({ file }: IdentifiedFor<"collection">): Promise<Collection> {
     const data = yaml.load(file.content) as CollectionData;
 
     data.description = await this.pug.render(file.with({ content: data.description }));

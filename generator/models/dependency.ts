@@ -12,26 +12,11 @@ const Dependency = toDependencies(
   "collectionIdentifier",
   "pageIdentifier",
   "postIdentifier",
+  // steps
   "identifier",
-  // extractors
-  "assetExtractor",
-  "collectionExtractor",
-  "pageExtractor",
-  "postExtractor",
-  // locators
-  "assetLocator",
-  "pageLocator",
-  "postLocator",
-  // builders
-  "assetBuilder",
-  "postBuilder",
-  "pageBuilder",
-  "assetLocator",
-  // providers
-  "identifier",
-  "locatorProvider",
-  "extractorProvider",
-  "builderProvider",
+  "builder",
+  "extractor",
+  "locator",
   // renderer
   "pugRenderer",
   // services

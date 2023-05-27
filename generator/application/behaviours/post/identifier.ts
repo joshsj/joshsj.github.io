@@ -3,7 +3,9 @@ import { Post } from "@models";
 import { Config } from "@models/config";
 import { File } from "@models/io";
 
-class PostIdentifier implements IIdentifier<Post> {
+class PostIdentifier implements IIdentifier<"post"> {
+  readonly for = "post";
+
   constructor(private readonly config: Config) {}
 
   readonly name = "post";

@@ -1,4 +1,4 @@
-import { ILocatorProvider } from "@application/behaviours/types";
+import { ILocator } from "@application/behaviours/types";
 import { IEntityStore } from "@application/stores/types";
 import { Entity, EntityName } from "@models";
 import { IGetUrl } from "./types";
@@ -6,7 +6,7 @@ import { IGetUrl } from "./types";
 class GetUrl implements IGetUrl {
   private readonly cache: Map<Entity, string>;
 
-  constructor(private readonly store: IEntityStore, private readonly locatorProvider: ILocatorProvider) {
+  constructor(private readonly store: IEntityStore, private readonly locators: ILocator[]) {
     this.cache = new Map<Entity, string>();
   }
 
@@ -23,7 +23,7 @@ class GetUrl implements IGetUrl {
       return this.cache.get(entity)!;
     }
 
-    const locator = this.locatorProvider.get(entity.name);
+    const locator = this.locators.find((x) => x.for === entity.name);
 
     if (!locator) {
       throw new Error(`urlFor failed with: ${arg}, ${filename}`);

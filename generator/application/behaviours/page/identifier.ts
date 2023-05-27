@@ -3,7 +3,9 @@ import { IIdentifier } from "@application/behaviours/types";
 import { Page } from "@models";
 import { File } from "@models/io";
 
-class PageIdentifier implements IIdentifier<Page> {
+class PageIdentifier implements IIdentifier<"page"> {
+  readonly for = "page";
+
   constructor(private readonly config: Config) {}
 
   readonly name = "page";

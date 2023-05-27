@@ -1,7 +1,9 @@
-import { Entity } from "@models";
+import { EntityFor, EntityName } from "@models";
 
-interface IBuilder<T extends Entity> {
-  build(entity: T): Promise<string>;
+interface IBuilder<T extends EntityName = EntityName> {
+  readonly for: T;
+
+  build(entity: EntityFor<T>): Promise<string>;
 }
 
 export { IBuilder };

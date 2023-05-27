@@ -1,12 +1,12 @@
-import { ExtractDataResult, Identified, IdentifyFilesResult } from "@models/steps/generate";
+import { IExtractor } from "@application/behaviours/types";
+import { IExtractDataStep } from "@application/pipeline/types";
 import { Log } from "@application/services/types";
 import { splitAllSettled } from "@application/utilities/native";
 import { Entity } from "@models";
-import { IExtractDataStep } from "@application/pipeline/types";
-import { IExtractorProvider } from "@application/behaviours/types";
+import { ExtractDataResult, Identified, IdentifyFilesResult } from "@models/steps/generate";
 
 class ExtractData implements IExtractDataStep {
-  constructor(private readonly extractorProvider: IExtractorProvider, private readonly log: Log) {}
+  constructor(private readonly extractors: IExtractor[], private readonly log: Log) {}
 
   async execute({ files }: IdentifyFilesResult): Promise<ExtractDataResult> {
     const { fulfilled, rejected } = await splitAllSettled(files.map((f) => this.extract(f)));
@@ -18,7 +18,13 @@ class ExtractData implements IExtractDataStep {
   }
 
   private async extract(identified: Identified): Promise<Entity> {
-    return this.extractorProvider.get(identified.name)?.extract(identified.file);
+    const extractor = this.extractors.find((x) => x.for === identified.name);
+
+    if (!extractor) {
+      throw new Error(`An extractor for '${identified.name}' was not provided`);
+    }
+
+    return extractor.extract(identified);
   }
 }
 
