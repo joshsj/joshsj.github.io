@@ -4,7 +4,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node -r module-alias/register -r dotenv/config build/generator/entry/index.js",
-    "dev": "npm start -- --debug --watch",
+    "dev": "npm start -- --debug --watch --draft",
     "prod": "npm start -- --debug",
     "clean": "rimraf build"
   },
