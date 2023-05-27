@@ -23,6 +23,6 @@ h1 {
   margin-top: var(--space-4);
 }
 
-#theme-toggle:not(:empty)::after {
-  content: " Mode";
+#theme-toggle:empty {
+  display: none;
 }

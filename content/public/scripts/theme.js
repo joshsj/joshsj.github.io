@@ -6,7 +6,7 @@
 
   const update = (dark) => {
     body.classList[dark ? "add" : "remove"]("dark");
-    el.textContent = ["Light", "Dark"][+dark];
+    el.textContent = ["Light", "Dark"][+dark] + " Mode";
     localStorage.setItem(key, dark);
   };
 
