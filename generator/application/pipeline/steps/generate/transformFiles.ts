@@ -24,11 +24,16 @@ class TransformFiles implements ITransformFilesStep {
   }
 
   private async transform(entity: Entity) {
-    const locator = this.locators.find((b) => b.for === entity.name);
     const builder = this.builders.find((b) => b.for === entity.name);
 
-    if (!(locator && builder)) {
-      return undefined;
+    if (!builder) {
+      return;
+    }
+
+    const locator = this.locators.find((b) => b.for === entity.name);
+
+    if (!locator) {
+      throw new Error(`A builder was found for '${entity.name}' but a locator was not.`);
     }
 
     const located =
