@@ -1,13 +1,13 @@
 import { IReadSourceStep } from "@application/pipeline/types/steps";
 import { Log } from "@application/services/types";
-import { IO } from "@application/services/types/io";
+import { IIO } from "@application/services/types/io";
 import { fromGenerator, splitAllSettled } from "@application/utilities/native";
 import { Config } from "@models/config";
 import { File } from "@models/io";
 import { ReadSourceResult, ReadSourceState } from "@models/steps";
 
 class ReadSource implements IReadSourceStep {
-  constructor(private readonly io: IO, private readonly log: Log, private readonly config: Config) {}
+  constructor(private readonly io: IIO, private readonly log: Log, private readonly config: Config) {}
 
   async execute({ sourcePaths }: ReadSourceState): Promise<ReadSourceResult> {
     sourcePaths =

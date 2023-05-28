@@ -5,12 +5,11 @@ type Options = {
   encoding: Encoding;
 };
 
-// TODO change to interface
-type IO = {
+interface IIO {
   read(file: File, root?: string): Promise<string>;
   write(file: File, root?: string): Promise<void>;
   walk(root: string): AsyncGenerator<string>;
   cwd(): string;
-};
+}
 
-export { Options, IO };
+export { Options, IIO };

@@ -1,5 +1,5 @@
 ﻿import { ExtractDataResult } from "@models/steps/generate";
-import { IO, Log } from "@application/services/types";
+import { IIO, Log } from "@application/services/types";
 import { IEntityStore } from "@application/stores/types";
 import { Config } from "@models/config";
 import { IUpdateStoreStep } from "@application/pipeline/types";
@@ -10,7 +10,7 @@ import { Filename } from "@models/io/filename";
 class UpdateStore implements IUpdateStoreStep {
   constructor(
     private readonly store: IEntityStore,
-    private readonly io: IO,
+    private readonly io: IIO,
     private readonly log: Log,
     private readonly config: Config
   ) {}

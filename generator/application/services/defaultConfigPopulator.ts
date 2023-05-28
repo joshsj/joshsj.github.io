@@ -1,8 +1,8 @@
 import { Config } from "@models";
-import { IConfigPopulator, IO } from "./types";
+import { IConfigPopulator, IIO } from "./types";
 
 class DefaultConfigPopulator implements IConfigPopulator {
-  constructor(private readonly io: IO) {}
+  constructor(private readonly io: IIO) {}
 
   populate(): Partial<Config> {
     return {

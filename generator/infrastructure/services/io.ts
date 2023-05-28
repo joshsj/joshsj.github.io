@@ -1,5 +1,6 @@
-import { IO } from "@application/services/types/io";
-import { readdir, mkdir, writeFile, readFile } from "fs/promises";
+import { IIO } from "@application/services/types";
+import { File } from "@models/io";
+import { mkdir, readFile, readdir, writeFile } from "fs/promises";
 import path from "path";
 
 async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
@@ -16,27 +17,27 @@ async function* _walk(root: string, walked = ""): AsyncGenerator<string> {
   }
 }
 
-const io: IO = {
-  async write(file, root = "") {
+class IO implements IIO {
+  async write(file: File, root = "") {
     const dir = path.join(root, file.dir.full);
 
     // Ensure destination folder exists
     await mkdir(dir, { recursive: true });
 
     await writeFile(path.join(dir, file.name.full), file.content ?? "", { encoding: file.encoding });
-  },
+  }
 
-  async read(file, root = "") {
+  async read(file: File, root = "") {
     return await readFile(path.join(root, file.full), file.encoding);
-  },
+  }
 
   async *walk(root: string) {
     yield* _walk(root);
-  },
+  }
 
   cwd() {
     return process.cwd();
-  },
-};
+  }
+}
 
-export { io };
+export { IO };

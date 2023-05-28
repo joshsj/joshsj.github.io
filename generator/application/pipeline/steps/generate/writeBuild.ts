@@ -1,13 +1,13 @@
 import { TransformFilesResult } from "@models/steps/generate";
 import { Log } from "@application/services/types";
-import { IO } from "@application/services/types/io";
+import { IIO } from "@application/services/types/io";
 import { splitAllSettled } from "@application/utilities/native";
 import { Config } from "@models/config";
 import { File } from "@models/io";
 import { IWriteBuildStep } from "@application/pipeline/types";
 
 class WriteBuild implements IWriteBuildStep {
-  constructor(private readonly io: IO, private readonly log: Log, private readonly config: Config) {}
+  constructor(private readonly io: IIO, private readonly log: Log, private readonly config: Config) {}
 
   async execute({ buildFiles }: TransformFilesResult): Promise<void> {
     const { fulfilled, rejected } = await splitAllSettled(buildFiles.map((f) => this.writeFile(f)));

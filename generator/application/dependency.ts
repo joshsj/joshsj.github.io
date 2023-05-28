@@ -11,7 +11,7 @@ import { DefaultConfigPopulator } from "./services/defaultConfigPopulator";
 import { GetEntityName } from "./services/getEntityName";
 import { GetUrl } from "./services/getUrl";
 import { PugRenderer } from "./services/renderer/pug";
-import { IConfigPopulator, IGetEntityName, IGetUrl, IO, IRenderer, Log } from "./services/types";
+import { IConfigPopulator, IGetEntityName, IGetUrl, IIO, IRenderer, Log } from "./services/types";
 import { IEntityStore } from "./stores/types";
 
 class ApplicationDependencies {
@@ -23,7 +23,7 @@ class ApplicationDependencies {
 
   registerServices() {
     this.c.register<IConfigPopulator>(D.configPopulator, {
-      useFactory: (c) => new DefaultConfigPopulator(c.resolve<IO>(D.io)),
+      useFactory: (c) => new DefaultConfigPopulator(c.resolve<IIO>(D.io)),
     });
 
     this.c.register<IGetEntityName>(D.getEntityName, {
@@ -68,7 +68,7 @@ class ApplicationDependencies {
 
     this.c.register<GeneratePipelineFactory>(D.generatePipelineFactory, {
       useFactory: (c) => {
-        const io = c.resolve<IO>(D.io);
+        const io = c.resolve<IIO>(D.io);
         const log = c.resolve<Log>(D.log);
         const config = c.resolve<Config>(D.config);
         const entityStore = c.resolve<IEntityStore>(D.entityStore);

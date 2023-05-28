@@ -9,7 +9,7 @@ import {
   WriteBuild,
 } from "@application/pipeline/steps/generate";
 import { IGeneratePipeline } from "@application/pipeline/types";
-import { IGetEntityName, IO, Log } from "@application/services/types";
+import { IGetEntityName, IIO, Log } from "@application/services/types";
 import { IEntityStore } from "@application/stores/types";
 import { Config } from "@models";
 import { ReadSourceState } from "@models/steps";
@@ -17,7 +17,7 @@ import { PipelineBuilder } from "../pipelineBuilder";
 
 class GeneratePipelineFactory {
   constructor(
-    private readonly io: IO,
+    private readonly io: IIO,
     private readonly log: Log,
     private readonly config: Config,
     private readonly entityStore: IEntityStore,
