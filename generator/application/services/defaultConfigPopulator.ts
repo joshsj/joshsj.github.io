@@ -12,7 +12,6 @@ class DefaultConfigPopulator implements IConfigPopulator {
       assetDir: "assets",
       pageDir: "pages",
       postDir: "posts",
-      debug: false,
       watch: false,
       draft: false,
     };

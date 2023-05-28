@@ -34,4 +34,6 @@ const splitAllSettled = async <T>(promises: Promise<T>[]): Promise<SplitAllSettl
   return data;
 };
 
-export { fromGenerator, isFulfilled, isRejected, splitAllSettled, SplitAllSettledData };
+const isDebug = () => process.env.NODE_ENV?.toLowerCase() === "development";
+
+export { fromGenerator, isFulfilled, isRejected, splitAllSettled, SplitAllSettledData, isDebug };

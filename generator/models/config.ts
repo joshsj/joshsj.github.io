@@ -1,6 +1,6 @@
 import { EntityName } from "@models";
 
-type Flag = "watch" | "debug" | "draft";
+type Flag = "watch" | "draft";
 
 type Key = Extract<EntityName, "asset" | "page" | "post"> | "source" | "build" | "root";
 

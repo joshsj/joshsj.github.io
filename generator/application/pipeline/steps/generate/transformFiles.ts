@@ -1,6 +1,6 @@
 import { IBuilder, ILocator } from "@application/behaviours/types";
 import { ITransformFilesStep } from "@application/pipeline/types";
-import { Log } from "@application/services/types";
+import { ILogger } from "@application/services/types";
 import { splitAllSettled } from "@application/utilities/native";
 import { Entity } from "@models";
 import { File } from "@models/io";
@@ -10,15 +10,15 @@ class TransformFiles implements ITransformFilesStep {
   constructor(
     private readonly builders: IBuilder[],
     private readonly locators: ILocator[],
-    private readonly log: Log
+    private readonly logger: ILogger
   ) {}
 
   async execute({ entitys }: ExtractDataResult): Promise<TransformFilesResult> {
     const { fulfilled, rejected } = await splitAllSettled(entitys.map((f) => this.transform(f)));
     const buildFiles = fulfilled.filter((x): x is File => !!x);
 
-    this.log(`Successfully transformed ${buildFiles.length}/${entitys.length} files`);
-    this.log("Failures", rejected);
+    this.logger.log(`Successfully transformed ${buildFiles.length}/${entitys.length} files`);
+    this.logger.log("Failures", rejected);
 
     return { buildFiles };
   }

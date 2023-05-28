@@ -1,34 +1,28 @@
-import { Log } from "@application/services/types";
+import { ILogger } from "@application/services/types";
 
-// TODO classify
-const makeConsoleLogger = (): Log => {
-  // TODO work out context
-  //context = context ? ` [${context}] ` : " ";
-  const context = " ";
-
-  return (message: string, data?: unknown[]) => {
+class ConsoleLogger implements ILogger {
+  log(message: string, data?: unknown[]) {
     if (data && !data.length) {
       return;
     }
 
-    console.log(date() + context + message);
+    console.log(ConsoleLogger.date + " " + message);
 
     for (const d of data ?? []) {
       console.log(d);
     }
-  };
-};
+  }
 
-const date = () => {
-  const now = new Date();
+  private static get date() {
+    const now = new Date();
 
-  // TODO might not perform so well
-  return [
-    now.getHours().toString().padStart(2, "0"),
-    now.getMinutes().toString().padStart(2, "0"),
-    now.getSeconds().toString().padStart(2, "0"),
-    now.getMilliseconds().toString().padStart(3, "0"),
-  ].join(":");
-};
+    return [
+      now.getHours().toString().padStart(2, "0"),
+      now.getMinutes().toString().padStart(2, "0"),
+      now.getSeconds().toString().padStart(2, "0"),
+      now.getMilliseconds().toString().padStart(3, "0"),
+    ].join(":");
+  }
+}
 
-export { makeConsoleLogger };
+export { ConsoleLogger };

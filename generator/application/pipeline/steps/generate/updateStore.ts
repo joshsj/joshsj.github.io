@@ -1,5 +1,5 @@
 ﻿import { ExtractDataResult } from "@models/steps/generate";
-import { IIO, Log } from "@application/services/types";
+import { IIO, ILogger } from "@application/services/types";
 import { IEntityStore } from "@application/stores/types";
 import { Config } from "@models/config";
 import { IUpdateStoreStep } from "@application/pipeline/types";
@@ -11,7 +11,7 @@ class UpdateStore implements IUpdateStoreStep {
   constructor(
     private readonly store: IEntityStore,
     private readonly io: IIO,
-    private readonly log: Log,
+    private readonly logger: ILogger,
     private readonly config: Config
   ) {}
 
@@ -33,7 +33,7 @@ class UpdateStore implements IUpdateStoreStep {
     });
 
     // Background
-    this.io.write(file).then(() => this.log(`Wrote site context to ${file.full}`));
+    this.io.write(file).then(() => this.logger.log(`Wrote site context to ${file.full}`));
 
     return { entitys };
   }

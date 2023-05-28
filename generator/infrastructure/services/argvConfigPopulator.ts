@@ -7,7 +7,6 @@ class ArgvConfigProvider implements IConfigPopulator {
 
     return {
       watch: isSet("watch"),
-      debug: isSet("debug"),
       draft: isSet("draft"),
     };
   }

@@ -9,7 +9,7 @@ import {
   WriteBuild,
 } from "@application/pipeline/steps/generate";
 import { IGeneratePipeline } from "@application/pipeline/types";
-import { IGetEntityName, IIO, Log } from "@application/services/types";
+import { IGetEntityName, IIO, ILogger } from "@application/services/types";
 import { IEntityStore } from "@application/stores/types";
 import { Config } from "@models";
 import { ReadSourceState } from "@models/steps";
@@ -18,7 +18,7 @@ import { PipelineBuilder } from "../pipelineBuilder";
 class GeneratePipelineFactory {
   constructor(
     private readonly io: IIO,
-    private readonly log: Log,
+    private readonly logger: ILogger,
     private readonly config: Config,
     private readonly entityStore: IEntityStore,
     private readonly getEntityName: IGetEntityName,
@@ -29,13 +29,13 @@ class GeneratePipelineFactory {
 
   get(): IGeneratePipeline {
     return new PipelineBuilder<ReadSourceState>()
-      .add(new ReadSource(this.io, this.log, this.config))
-      .add(new IdentifyFiles(this.getEntityName, this.log))
-      .add(new ExtractData(this.extractors, this.log))
-      .add(new UpdateStore(this.entityStore, this.io, this.log, this.config))
-      .add(new AddFileDependencies(this.entityStore, this.log))
-      .add(new TransformFiles(this.builders, this.locators, this.log))
-      .add(new WriteBuild(this.io, this.log, this.config))
+      .add(new ReadSource(this.io, this.logger, this.config))
+      .add(new IdentifyFiles(this.getEntityName, this.logger))
+      .add(new ExtractData(this.extractors, this.logger))
+      .add(new UpdateStore(this.entityStore, this.io, this.logger, this.config))
+      .add(new AddFileDependencies(this.entityStore, this.logger))
+      .add(new TransformFiles(this.builders, this.locators, this.logger))
+      .add(new WriteBuild(this.io, this.logger, this.config))
       .build();
   }
 }

@@ -1,11 +1,11 @@
 ﻿import { IEntityStore } from "@application/stores/types";
 import { ExtractDataResult } from "@models/steps/generate";
-import { Log } from "@application/services/types";
+import { ILogger } from "@application/services/types";
 import { IAddFileDependenciesStep } from "@application/pipeline/types";
 import { Entity } from "@models";
 
 class AddFileDependencies implements IAddFileDependenciesStep {
-  constructor(private readonly store: IEntityStore, private readonly log: Log) {}
+  constructor(private readonly store: IEntityStore, private readonly logger: ILogger) {}
 
   async execute({ entitys }: ExtractDataResult): Promise<ExtractDataResult> {
     const toBuild = new Set(entitys);
@@ -16,12 +16,12 @@ class AddFileDependencies implements IAddFileDependenciesStep {
       if (!pagesAdded && (entity.name === "post" || entity.name === "page")) {
         add(...this.store.allBy("page"));
         pagesAdded = true;
-        this.log("Added pages as build dependencies");
+        this.logger.log("Added pages as build dependencies");
       }
 
       if (entity.name === "collection") {
         add(this.store.allBy("page").find((x) => x.title === "Collections"));
-        this.log(`Added collection page as build dependencies `);
+        this.logger.log(`Added collection page as build dependencies `);
       }
     }
 
