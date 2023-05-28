@@ -1,17 +1,17 @@
 (() => {
   const key = "DarkMode";
 
-  const body = document.querySelector("body");
+  const root = document.querySelector(":root");
   const el = document.getElementById("theme-toggle");
 
   const update = (dark) => {
-    body.classList[dark ? "add" : "remove"]("dark");
+    root.classList[dark ? "add" : "remove"]("dark");
     el.textContent = ["Light", "Dark"][+dark] + " Mode";
     localStorage.setItem(key, dark);
   };
 
   // bind to toggle el
-  el.addEventListener("click", () => update(!body.classList.contains("dark")));
+  el.addEventListener("click", () => update(!root.classList.contains("dark")));
 
   // try storage, fallback to media query
   const storedMode = localStorage.getItem(key);

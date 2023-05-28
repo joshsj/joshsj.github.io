@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400&family=Inconsolata:wght@400;700&display=swap");
 
-body {
+:root {
   --space-1: 0.5rem;
   --space-2: calc(var(--space-1) * 2);
   --space-3: calc(var(--space-1) * 3);
@@ -50,7 +50,7 @@ body {
   --pop: var(--blue);
 }
 
-body.dark {
+:root.dark {
   --code-property: #e06c75;
   --code-params: #d19a66;
   --code-title: #61afef;
