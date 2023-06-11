@@ -47,7 +47,7 @@ button {
 
 a,
 button.link {
-  text-decoration: 0.05em underline dashed var(--pop);
+  text-decoration: 0.05em underline var(--pop);
   text-underline-offset: 0.15em;
 }
 
@@ -80,7 +80,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   line-height: 1.2;
 }
 
