@@ -10,5 +10,4 @@ block content
 
   ul.space
     each post in store.allBy("post").filter(p => !p.collection).sort((a, b) => dateComparer(b.created, a.created))
-      li
-        p: #[a(href=urlFor(post)) #{post.title}], #{prettyDate(post.created)}
+      li: p #[a(href=urlFor(post)) #{post.title}], #{prettyDate(post.created)}
