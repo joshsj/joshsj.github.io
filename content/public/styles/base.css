@@ -47,12 +47,14 @@ button {
 
 a,
 button.link {
-  text-decoration: 0.05em underline var(--pop);
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.05em;
+  text-decoration-color: var(--pop);
   text-underline-offset: 0.15em;
 }
 
 :is(a, button.link):hover {
-  text-decoration-style: solid;
+  text-decoration-thickness: 0.1em;
 }
 
 button:not(.link) {
