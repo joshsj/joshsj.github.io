@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400;1,600&display=swap");
 
 :root {
   --space-1: 0.5rem;
@@ -11,14 +11,14 @@
   --border: 0.1rem solid var(--dark-grey);
 
   --fs-small: calc(var(--fs-normal) * 0.85);
-  --fs-normal: 1.1rem;
+  --fs-normal: 1rem;
   --fs-h3: 1.3rem;
-  --fs-h2: 1.85rem;
-  --fs-h1: 2.5rem;
+  --fs-h2: 1.9rem;
+  --fs-h1: 2.8rem;
 
-  --ff-normal: "Source Serif 4", serif;
+  --ff-normal: "Inter", sans-serif;
   --ff-heading: var(--ff-normal);
-  --ff-mono: Inconsolata, ui-monospace, monospace;
+  --ff-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --code-property: #e45649;
   --code-params: #986801;
@@ -33,11 +33,9 @@
   --green: var(--code-string);
   --red: var(--code-property);
 
-  /* atom one colors */
-  /* default hsl(0, 0%, 98%); */
-  --white: hsl(0, 0%, 98%);
+  /* --white: hsl(0, 0%, 98%); */
+  --white: white;
 
-  /* default hsl(228, 8%, 24%) */
   --black: hsl(228, 8%, 24%);
   --dark-grey: #5e616e;
   --light-grey: #eaeaeb;

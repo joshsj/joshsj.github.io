@@ -15,7 +15,7 @@ block content
 
         p !{collection.description}
 
-        ul
+        ul.unmarked
           - const name = collection.file.dir.segments[1];
           - const posts = store.allBy("post").filter(p => p.collection === name).sort();
 
