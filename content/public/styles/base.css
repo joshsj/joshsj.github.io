@@ -48,9 +48,9 @@ button {
 a,
 button.link {
   text-decoration-line: underline;
-  text-decoration-thickness: 0.05em;
+  text-decoration-thickness: 0.1em;
   text-decoration-color: var(--pop);
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.1em;
 }
 
 button:not(.link) {
@@ -78,7 +78,7 @@ h2,
 h3 {
   font-family: var(--ff-heading);
   font-weight: bold;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.07em;
   line-height: 1;
 }
 
@@ -213,7 +213,7 @@ pre {
 }
 
 code {
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-family: var(--ff-mono);
   overflow-wrap: break-word;
   letter-spacing: normal;

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400;1,600&family=Karla:ital,wght@0,400;0,600;1,400;1,600&display=swap");
 
 :root {
   --space-1: 0.5rem;
@@ -16,7 +16,7 @@
   --fs-h2: 1.9rem;
   --fs-h1: 2.8rem;
 
-  --ff-normal: "Inter", sans-serif;
+  --ff-normal: Karla, sans-serif;
   --ff-heading: var(--ff-normal);
   --ff-mono: "JetBrains Mono", ui-monospace, monospace;
 
