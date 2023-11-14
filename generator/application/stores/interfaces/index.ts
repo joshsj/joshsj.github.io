@@ -1,4 +1,4 @@
-import { Collection, Entity, EntityFor, EntityName } from "@models";
+import { Collection, Resource, ResourceFor, ResourceName } from "@models";
 
 interface IStore<T> {
   all: () => T[];
@@ -8,12 +8,12 @@ interface IStore<T> {
   upsert: (item: T) => void;
 }
 
-interface IEntityStore extends IStore<Entity> {
-  find: (path: string) => Entity;
+interface IResourceStore extends IStore<Resource> {
+  find: (path: string) => Resource;
   // TODO narrow type
-  findBy: (name: EntityName, title: string) => Entity;
-  allBy: <T extends EntityName>(name: T) => EntityFor<T>[];
-  allIn: (collection: Collection) => Entity[];
+  findBy: (name: ResourceName, title: string) => Resource;
+  allBy: <T extends ResourceName>(name: T) => ResourceFor<T>[];
+  allIn: (collection: Collection) => Resource[];
 }
 
-export { IStore, IEntityStore };
+export { IStore, IResourceStore };

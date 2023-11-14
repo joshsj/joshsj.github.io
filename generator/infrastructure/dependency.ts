@@ -1,12 +1,12 @@
 import { IConfigPopulator, IIO, ILogger } from "@application/services/interfaces";
-import { IEntityStore } from "@application/stores/interfaces";
+import { IResourceStore } from "@application/stores/interfaces";
 import { D } from "@models";
 import { DependencyContainer } from "tsyringe";
 import { ArgvConfigProvider } from "./services/ArgvConfigPopulator";
 import { ConsoleLogger } from "./services/ConsoleLogger";
 import { EnvConfigProvider } from "./services/EnvConfigPopulator";
 import { IO } from "./services/IO";
-import { InMemoryEntityStore } from "./stores";
+import { InMemoryResourceStore } from "./stores";
 
 class InfrastructureDependencies {
   private constructor(private readonly c: DependencyContainer) {}
@@ -33,7 +33,7 @@ class InfrastructureDependencies {
   }
 
   registerStores() {
-    this.c.register<IEntityStore>(D.entityStore, { useValue: new InMemoryEntityStore() });
+    this.c.register<IResourceStore>(D.resourceStore, { useValue: new InMemoryResourceStore() });
 
     return this;
   }

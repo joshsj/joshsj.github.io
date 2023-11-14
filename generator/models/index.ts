@@ -1,3 +1,3 @@
-export * from "./entities";
+export * from "./resources";
 export * from "./config";
 export * from "./dependency";

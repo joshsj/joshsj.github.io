@@ -1,29 +1,29 @@
 import { ILocator } from "@application/behaviours/interfaces";
-import { IEntityStore } from "@application/stores/interfaces";
-import { Entity, EntityName } from "@models";
+import { IResourceStore } from "@application/stores/interfaces";
+import { Resource, ResourceName } from "@models";
 import { IGetUrl } from "./interfaces";
 
 class GetUrl implements IGetUrl {
-  private readonly cache: Map<Entity, string>;
+  private readonly cache: Map<Resource, string>;
 
-  constructor(private readonly store: IEntityStore, private readonly locators: ILocator[]) {
-    this.cache = new Map<Entity, string>();
+  constructor(private readonly store: IResourceStore, private readonly locators: ILocator[]) {
+    this.cache = new Map<Resource, string>();
   }
 
-  for(name: EntityName, filename: string): string;
-  for(entity: Entity): string;
-  for(arg: Entity | EntityName, filename?: string): string {
-    const entity = typeof arg === "object" ? arg : this.store.allBy(arg).find((x) => x.file.name.base === filename);
+  for(name: ResourceName, filename: string): string;
+  for(resource: Resource): string;
+  for(arg: Resource | ResourceName, filename?: string): string {
+    const resource = typeof arg === "object" ? arg : this.store.allBy(arg).find((x) => x.file.name.base === filename);
 
-    if (!entity) {
+    if (!resource) {
       throw new Error(`urlFor failed with: ${arg}, ${filename}`);
     }
 
-    if (this.cache.has(entity)) {
-      return this.cache.get(entity)!;
+    if (this.cache.has(resource)) {
+      return this.cache.get(resource)!;
     }
 
-    const locator = this.locators.find((x) => x.for === entity.name);
+    const locator = this.locators.find((x) => x.for === resource.name);
 
     if (!locator) {
       throw new Error(`urlFor failed with: ${arg}, ${filename}`);
@@ -32,7 +32,7 @@ class GetUrl implements IGetUrl {
     let {
       full: url,
       dir: { sep },
-    } = locator.locate(entity);
+    } = locator.locate(resource);
 
     // Ensure starts at root
     if (url.at(0) !== sep) {
@@ -42,7 +42,7 @@ class GetUrl implements IGetUrl {
     // Remove more ugly
     url = url.replace("index.html", "");
 
-    return this.cache.set(entity, url).get(entity)!;
+    return this.cache.set(resource, url).get(resource)!;
   }
 }
 

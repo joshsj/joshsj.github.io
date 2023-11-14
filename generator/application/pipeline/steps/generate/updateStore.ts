@@ -1,6 +1,6 @@
 ﻿import { ExtractDataResult } from "@models/steps/generate";
 import { IIO, ILogger } from "@application/services/interfaces";
-import { IEntityStore } from "@application/stores/interfaces";
+import { IResourceStore } from "@application/stores/interfaces";
 import { Config } from "@models/config";
 import { Directory, File } from "@models/io";
 import { sep } from "path";
@@ -9,19 +9,19 @@ import { IStep } from "@kernel/pipeline/interfaces";
 
 class UpdateStore implements IStep<ExtractDataResult> {
   constructor(
-    private readonly store: IEntityStore,
+    private readonly store: IResourceStore,
     private readonly io: IIO,
     private readonly logger: ILogger,
     private readonly config: Config
   ) {}
 
-  async execute({ entitys }: ExtractDataResult): Promise<ExtractDataResult> {
-    for (const entity of entitys) {
-      if (entity.name === "post" && entity?.draft && !this.config.draft) {
+  async execute({ resources }: ExtractDataResult): Promise<ExtractDataResult> {
+    for (const resource of resources) {
+      if (resource.name === "post" && resource?.draft && !this.config.draft) {
         continue;
       }
 
-      this.store.upsert(entity);
+      this.store.upsert(resource);
     }
 
     const file = File.from({
@@ -35,7 +35,7 @@ class UpdateStore implements IStep<ExtractDataResult> {
     // Background
     this.io.write(file).then(() => this.logger.log(`Wrote site context to ${file.full}`));
 
-    return { entitys };
+    return { resources };
   }
 }
 

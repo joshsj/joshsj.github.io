@@ -1,4 +1,4 @@
-import { Entity } from "@models";
+import { Resource } from "@models";
 import { File } from "@models/io";
 
 type RendererOf = "pug";
@@ -6,7 +6,7 @@ type RendererOf = "pug";
 interface IRenderer<T extends RendererOf> {
   readonly of: T;
   render(file: File): Promise<string>;
-  render(entity: Entity): Promise<string>;
+  render(resource: Resource): Promise<string>;
 }
 
 export { IRenderer, RendererOf };

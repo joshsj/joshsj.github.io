@@ -1,8 +1,8 @@
-import { Entity, EntityName } from "@models";
+import { Resource, ResourceName } from "@models";
 
 interface IGetUrl {
-  for(name: EntityName, filename: string): string;
-  for(entity: Entity): string;
+  for(name: ResourceName, filename: string): string;
+  for(resource: Resource): string;
 }
 
 export { IGetUrl };

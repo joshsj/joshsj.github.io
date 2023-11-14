@@ -1,8 +1,8 @@
-import { EntityFor, EntityName } from "@models";
+import { ResourceFor, ResourceName } from "@models";
 import { File } from "@models/io";
 
-interface ILocator<T extends EntityName = EntityName> {
+interface ILocator<T extends ResourceName = ResourceName> {
   readonly for: T;
-  locate(entity: EntityFor<T>): File;
+  locate(resource: ResourceFor<T>): File;
 }
 export { ILocator };

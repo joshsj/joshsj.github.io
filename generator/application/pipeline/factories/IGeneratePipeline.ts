@@ -8,8 +8,8 @@ import {
   UpdateStore,
   WriteBuild,
 } from "@application/pipeline/steps/generate";
-import { IGetEntityName, IIO, ILogger } from "@application/services/interfaces";
-import { IEntityStore } from "@application/stores/interfaces";
+import { IGetResourceName, IIO, ILogger } from "@application/services/interfaces";
+import { IResourceStore } from "@application/stores/interfaces";
 import { Config } from "@models";
 import { ReadSourceState } from "@models/steps";
 import { IGeneratePipeline } from "../interfaces/IGeneratePipeline";
@@ -20,8 +20,8 @@ class GeneratePipelineFactory {
     private readonly io: IIO,
     private readonly logger: ILogger,
     private readonly config: Config,
-    private readonly entityStore: IEntityStore,
-    private readonly getEntityName: IGetEntityName,
+    private readonly resourceStore: IResourceStore,
+    private readonly getResourceName: IGetResourceName,
     private readonly builders: IBuilder[],
     private readonly locators: ILocator[],
     private readonly extractors: IExtractor[]
@@ -30,10 +30,10 @@ class GeneratePipelineFactory {
   get(): IGeneratePipeline {
     return new PipelineBuilder<ReadSourceState>()
       .add(new ReadSource(this.io, this.logger, this.config))
-      .add(new IdentifyFiles(this.getEntityName, this.logger))
+      .add(new IdentifyFiles(this.getResourceName, this.logger))
       .add(new ExtractData(this.extractors, this.logger))
-      .add(new UpdateStore(this.entityStore, this.io, this.logger, this.config))
-      .add(new AddFileDependencies(this.entityStore, this.logger))
+      .add(new UpdateStore(this.resourceStore, this.io, this.logger, this.config))
+      .add(new AddFileDependencies(this.resourceStore, this.logger))
       .add(new TransformFiles(this.builders, this.locators, this.logger))
       .add(new WriteBuild(this.io, this.logger, this.config))
       .build();

@@ -8,11 +8,11 @@ import { PostBuilder, PostExtractor, PostIdentifier, PostLocator } from "./behav
 import { GeneratePipelineFactory } from "./pipeline/factories/IGeneratePipeline";
 import { UpdateConfigPipelineFactory } from "./pipeline/factories/IUpdateConfigPipeline";
 import { DefaultConfigPopulator } from "./services/DefaultConfigPopulator";
-import { GetEntityName } from "./services/GetEntityName";
+import { GetResourceName } from "./services/GetResourceName";
 import { GetUrl } from "./services/GetUrl";
 import { PugRenderer } from "./services/renderer/PugRenderer";
-import { IConfigPopulator, IGetEntityName, IGetUrl, IIO, ILogger, IRenderer } from "./services/interfaces";
-import { IEntityStore } from "./stores/interfaces";
+import { IConfigPopulator, IGetResourceName, IGetUrl, IIO, ILogger, IRenderer } from "./services/interfaces";
+import { IResourceStore } from "./stores/interfaces";
 
 class ApplicationDependencies {
   private constructor(private readonly c: DependencyContainer) {}
@@ -26,30 +26,30 @@ class ApplicationDependencies {
       useFactory: (c) => new DefaultConfigPopulator(c.resolve<IIO>(D.io)),
     });
 
-    this.c.register<IGetEntityName>(D.getEntityName, {
+    this.c.register<IGetResourceName>(D.getResourceName, {
       useFactory: (c) => {
         const identifiers = c.resolveAll<IIdentifier>(D.identifier);
 
-        return new GetEntityName(identifiers);
+        return new GetResourceName(identifiers);
       },
     });
 
     this.c.register<IGetUrl>(D.getUrl, {
       useFactory: (c) => {
-        const entityStore = c.resolve<IEntityStore>(D.entityStore);
+        const resourceStore = c.resolve<IResourceStore>(D.resourceStore);
         const locators = c.resolveAll<ILocator>(D.locator);
 
-        return new GetUrl(entityStore, locators);
+        return new GetUrl(resourceStore, locators);
       },
     });
 
     this.c.register<IRenderer<"pug">>(D.pugRenderer, {
       useFactory: (c) => {
-        const entityStore = c.resolve<IEntityStore>(D.entityStore);
+        const resourceStore = c.resolve<IResourceStore>(D.resourceStore);
         const getUrl = c.resolve<IGetUrl>(D.getUrl);
         const config = c.resolve<Config>(D.config);
 
-        return new PugRenderer(entityStore, getUrl, config);
+        return new PugRenderer(resourceStore, getUrl, config);
       },
     });
 
@@ -71,13 +71,22 @@ class ApplicationDependencies {
         const io = c.resolve<IIO>(D.io);
         const log = c.resolve<ILogger>(D.log);
         const config = c.resolve<Config>(D.config);
-        const entityStore = c.resolve<IEntityStore>(D.entityStore);
-        const getEntityName = c.resolve<IGetEntityName>(D.getEntityName);
+        const resourceStore = c.resolve<IResourceStore>(D.resourceStore);
+        const getResourceName = c.resolve<IGetResourceName>(D.getResourceName);
         const builders = c.resolveAll<IBuilder>(D.builder);
         const locators = c.resolveAll<ILocator>(D.locator);
         const extractors = c.resolveAll<IExtractor>(D.extractor);
 
-        return new GeneratePipelineFactory(io, log, config, entityStore, getEntityName, builders, locators, extractors);
+        return new GeneratePipelineFactory(
+          io,
+          log,
+          config,
+          resourceStore,
+          getResourceName,
+          builders,
+          locators,
+          extractors
+        );
       },
     });
 

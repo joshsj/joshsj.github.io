@@ -1,15 +1,15 @@
-import { Collection, Entity, EntityFor, EntityName } from "@models";
-import { IEntityStore } from "@application/stores/interfaces";
+import { Collection, Resource, ResourceFor, ResourceName } from "@models";
+import { IResourceStore } from "@application/stores/interfaces";
 
 const readOut = (values: { [K: string]: unknown }) =>
   Object.entries(values)
     .map(([k, v]) => k + "=" + v)
     .join(", ");
 
-class InMemoryEntityStore implements IEntityStore {
-  private readonly items: Entity[] = [];
+class InMemoryResourceStore implements IResourceStore {
+  private readonly items: Resource[] = [];
 
-  private indexOf = (arg: Entity | string) => {
+  private indexOf = (arg: Resource | string) => {
     const path = typeof arg === "object" ? arg.file.full : arg;
 
     return this.items.findIndex((x) => x.file.full === path);
@@ -25,11 +25,11 @@ class InMemoryEntityStore implements IEntityStore {
     return this.items[index];
   }
 
-  findBy(entityName: EntityName, title: string) {
-    const item = this.allBy(entityName).find((f) => "title" in f && f.title === title);
+  findBy(resourceName: ResourceName, title: string) {
+    const item = this.allBy(resourceName).find((f) => "title" in f && f.title === title);
 
     if (!item) {
-      throw new Error(`Item does not exist with ${readOut({ entityName, title })}`);
+      throw new Error(`Item does not exist with ${readOut({ resourceName, title })}`);
     }
 
     return item;
@@ -39,8 +39,8 @@ class InMemoryEntityStore implements IEntityStore {
     return [...this.items];
   }
 
-  allBy<T extends EntityName>(name: T) {
-    return [...this.items.filter((x): x is EntityFor<T> => x.name === name)];
+  allBy<T extends ResourceName>(name: T) {
+    return [...this.items.filter((x): x is ResourceFor<T> => x.name === name)];
   }
 
   allIn(collection: Collection) {
@@ -51,7 +51,7 @@ class InMemoryEntityStore implements IEntityStore {
     return this.items.length;
   }
 
-  insert(item: Entity) {
+  insert(item: Resource) {
     const index = this.indexOf(item);
 
     if (index !== -1) {
@@ -61,7 +61,7 @@ class InMemoryEntityStore implements IEntityStore {
     this.items.push(item);
   }
 
-  update(item: Entity) {
+  update(item: Resource) {
     const index = this.indexOf(item);
 
     if (index == -1) {
@@ -71,7 +71,7 @@ class InMemoryEntityStore implements IEntityStore {
     this.items[index] = item;
   }
 
-  upsert(item: Entity) {
+  upsert(item: Resource) {
     const index = this.indexOf(item);
 
     if (index === -1) {
@@ -82,4 +82,4 @@ class InMemoryEntityStore implements IEntityStore {
   }
 }
 
-export { InMemoryEntityStore };
+export { InMemoryResourceStore };

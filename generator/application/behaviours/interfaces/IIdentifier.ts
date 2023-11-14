@@ -1,7 +1,7 @@
-import { Entity, EntityName } from "@models";
+import { Resource, ResourceName } from "@models";
 import { File } from "@models/io";
 
-interface IIdentifier<T extends EntityName = EntityName> {
+interface IIdentifier<T extends ResourceName = ResourceName> {
   readonly for: T;
 
   test(file: File): boolean;

@@ -1,7 +1,7 @@
-import { IEntityStore } from "@application/stores/interfaces";
+import { IResourceStore } from "@application/stores/interfaces";
 import * as comparers from "@kernel/utilities/comparers";
 import * as formattingHelpers from "@kernel/utilities/formatting";
-import { Config, Entity } from "@models";
+import { Config, Resource } from "@models";
 import { File } from "@models/io";
 import katex from "katex";
 import path from "path";
@@ -43,12 +43,12 @@ class PugRenderer implements IRenderer<"pug"> {
   readonly of = "pug";
 
   constructor(
-    private readonly store: IEntityStore,
+    private readonly store: IResourceStore,
     private readonly getUrl: IGetUrl,
     private readonly config: Config
   ) {}
 
-  async render(toRender: Entity | File): Promise<string> {
+  async render(toRender: Resource | File): Promise<string> {
     const [file, current] = toRender instanceof File ? [toRender, undefined] : [toRender.file, toRender];
     const filename = path.join(this.config.sourceDir, file.full);
 

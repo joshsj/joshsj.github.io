@@ -2,7 +2,7 @@ import { IExtractor } from "@application/behaviours/interfaces";
 import { ILogger } from "@application/services/interfaces";
 import { splitAllSettled } from "@kernel/utilities/native";
 import { IStep } from "@kernel/pipeline/interfaces";
-import { Entity } from "@models";
+import { Resource } from "@models";
 import { ExtractDataResult, Identified, IdentifyFilesResult } from "@models/steps/generate";
 
 class ExtractData implements IStep<IdentifyFilesResult, ExtractDataResult> {
@@ -14,10 +14,10 @@ class ExtractData implements IStep<IdentifyFilesResult, ExtractDataResult> {
     this.logger.log(`Extracted data for ${fulfilled.length} files`);
     this.logger.log("Failures", rejected);
 
-    return { entitys: fulfilled };
+    return { resources: fulfilled };
   }
 
-  private async extract(identified: Identified): Promise<Entity> {
+  private async extract(identified: Identified): Promise<Resource> {
     const extractor = this.extractors.find((x) => x.for === identified.name);
 
     if (!extractor) {

@@ -1,8 +1,8 @@
-import { EntityName } from "@models";
+import { ResourceName } from "@models";
 
 type Flag = "watch" | "draft";
 
-type Key = Extract<EntityName, "asset" | "page" | "post"> | "source" | "build" | "root";
+type Key = Extract<ResourceName, "asset" | "page" | "post"> | "source" | "build" | "root";
 
 type Config = { [K in `${Key}Dir`]: string } & { [K in Flag]: boolean };
 

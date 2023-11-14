@@ -7,8 +7,8 @@ class PageBuilder implements IBuilder<"page"> {
 
   constructor(private readonly pug: IRenderer<"pug">) {}
 
-  async build(entity: Page): Promise<string> {
-    return await this.pug.render(entity);
+  async build(resource: Page): Promise<string> {
+    return await this.pug.render(resource);
   }
 }
 

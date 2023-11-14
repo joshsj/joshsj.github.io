@@ -28,10 +28,10 @@ type PostData = {
 
 type Post = Make<"post", PostData>;
 
-type Entity = Asset | Collection | Page | Post;
+type Resource = Asset | Collection | Page | Post;
 
-type EntityName = Entity["name"];
+type ResourceName = Resource["name"];
 
-type EntityFor<T extends EntityName> = Entity & { name: T };
+type ResourceFor<T extends ResourceName> = Resource & { name: T };
 
-export { Asset, Collection, CollectionData, PageData, Page, PostData, Post, Entity, EntityName, EntityFor };
+export { Asset, Collection, CollectionData, PageData, Page, PostData, Post, Resource, ResourceName, ResourceFor };
