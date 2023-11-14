@@ -39,9 +39,7 @@ const filters: Filters = {
     }),
 };
 
-class PugRenderer implements IRenderer<"pug"> {
-  readonly of = "pug";
-
+export class PugRenderer implements IRenderer {
   constructor(
     private readonly store: IResourceStore,
     private readonly getUrl: IGetUrl,
@@ -73,5 +71,3 @@ class PugRenderer implements IRenderer<"pug"> {
     });
   }
 }
-
-export { PugRenderer };

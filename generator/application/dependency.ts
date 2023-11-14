@@ -43,7 +43,7 @@ class ApplicationDependencies {
       },
     });
 
-    this.c.register<IRenderer<"pug">>(D.pugRenderer, {
+    this.c.register<PugRenderer>(D.pugRenderer, {
       useFactory: (c) => {
         const resourceStore = c.resolve<IResourceStore>(D.resourceStore);
         const getUrl = c.resolve<IGetUrl>(D.getUrl);
@@ -126,7 +126,7 @@ class ApplicationDependencies {
       useFactory: () => new AssetExtractor(),
     });
     this.c.register<IExtractor<"collection">>(D.extractor, {
-      useFactory: (c) => new CollectionExtractor(c.resolve<IRenderer<"pug">>(D.pugRenderer)),
+      useFactory: (c) => new CollectionExtractor(c.resolve<PugRenderer>(D.pugRenderer)),
     });
     this.c.register<IExtractor<"page">>(D.extractor, {
       useFactory: () => new PageExtractor(),
@@ -147,10 +147,10 @@ class ApplicationDependencies {
 
     this.c.register<IBuilder<"asset">>(D.builder, { useFactory: () => new AssetBuilder() });
     this.c.register<IBuilder<"page">>(D.builder, {
-      useFactory: (c) => new PageBuilder(c.resolve<IRenderer<"pug">>(D.pugRenderer)),
+      useFactory: (c) => new PageBuilder(c.resolve<PugRenderer>(D.pugRenderer)),
     });
     this.c.register<IBuilder<"post">>(D.builder, {
-      useFactory: (c) => new PostBuilder(c.resolve<IRenderer<"pug">>(D.pugRenderer)),
+      useFactory: (c) => new PostBuilder(c.resolve<PugRenderer>(D.pugRenderer)),
     });
 
     return this;
