@@ -1,4 +1,4 @@
-import { ILogger } from "@application/services/types";
+import { ILogger } from "@application/services/interfaces";
 
 class ConsoleLogger implements ILogger {
   log(message: string, data?: unknown[]) {

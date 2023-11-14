@@ -1,1 +1,2 @@
-﻿export * from "./applyConfigPopulators";
+﻿export * from "./ApplyConfigPopulators";
+export * from "./NormaliseConfigPaths";

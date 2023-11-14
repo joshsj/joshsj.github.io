@@ -1,5 +1,5 @@
-import { IIdentifier } from "@application/behaviours/types";
-import { IGetEntityName } from "@application/services/types";
+import { IIdentifier } from "@application/behaviours/interfaces";
+import { IGetEntityName } from "@application/services/interfaces";
 import { EntityName } from "@models";
 import { File } from "@models/io";
 

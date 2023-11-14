@@ -1,4 +1,4 @@
-import { IExtractor } from "@application/behaviours/types";
+import { IExtractor } from "@application/behaviours/interfaces";
 import { Page, PageData } from "@models";
 import { IdentifiedFor } from "@models/steps";
 import matter from "gray-matter";

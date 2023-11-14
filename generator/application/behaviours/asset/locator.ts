@@ -1,5 +1,5 @@
 import { Config } from "@models/config";
-import { ILocator } from "@application/behaviours/types";
+import { ILocator } from "@application/behaviours/interfaces";
 import { Asset } from "@models";
 import { File } from "@models/io";
 

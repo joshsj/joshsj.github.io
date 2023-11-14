@@ -1,4 +1,4 @@
-import { IConfigPopulator } from "@application/services/types";
+import { IConfigPopulator } from "@application/services/interfaces";
 import { Config } from "@models";
 
 class ArgvConfigProvider implements IConfigPopulator {

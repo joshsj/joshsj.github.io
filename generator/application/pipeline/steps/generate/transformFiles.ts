@@ -1,12 +1,12 @@
-import { IBuilder, ILocator } from "@application/behaviours/types";
-import { ITransformFilesStep } from "@application/pipeline/types";
-import { ILogger } from "@application/services/types";
-import { splitAllSettled } from "@application/utilities/native";
+import { IBuilder, ILocator } from "@application/behaviours/interfaces";
+import { ILogger } from "@application/services/interfaces";
+import { splitAllSettled } from "@kernel/utilities/native";
+import { IStep } from "@kernel/pipeline/interfaces";
 import { Entity } from "@models";
 import { File } from "@models/io";
 import { ExtractDataResult, TransformFilesResult } from "@models/steps/generate";
 
-class TransformFiles implements ITransformFilesStep {
+class TransformFiles implements IStep<ExtractDataResult, TransformFilesResult> {
   constructor(
     private readonly builders: IBuilder[],
     private readonly locators: ILocator[],

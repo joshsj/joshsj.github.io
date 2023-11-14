@@ -1,5 +1,5 @@
-import { IExtractor } from "@application/behaviours/types";
-import { IRenderer } from "@application/services/types";
+import { IExtractor } from "@application/behaviours/interfaces";
+import { IRenderer } from "@application/services/interfaces";
 import { Collection, CollectionData } from "@models";
 import { IdentifiedFor } from "@models/steps";
 import yaml from "js-yaml";

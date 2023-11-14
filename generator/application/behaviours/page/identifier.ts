@@ -1,5 +1,5 @@
 import { Config } from "@models/config";
-import { IIdentifier } from "@application/behaviours/types";
+import { IIdentifier } from "@application/behaviours/interfaces";
 import { Page } from "@models";
 import { File } from "@models/io";
 

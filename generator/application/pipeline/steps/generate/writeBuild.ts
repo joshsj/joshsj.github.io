@@ -1,12 +1,12 @@
-import { TransformFilesResult } from "@models/steps/generate";
-import { ILogger } from "@application/services/types";
-import { IIO } from "@application/services/types/io";
-import { splitAllSettled } from "@application/utilities/native";
+import { ILogger } from "@application/services/interfaces";
+import { IIO } from "@application/services/interfaces/IO";
+import { splitAllSettled } from "@kernel/utilities/native";
+import { IStep } from "@kernel/pipeline/interfaces";
 import { Config } from "@models/config";
 import { File } from "@models/io";
-import { IWriteBuildStep } from "@application/pipeline/types";
+import { TransformFilesResult } from "@models/steps/generate";
 
-class WriteBuild implements IWriteBuildStep {
+class WriteBuild implements IStep<TransformFilesResult, void> {
   constructor(private readonly io: IIO, private readonly logger: ILogger, private readonly config: Config) {}
 
   async execute({ buildFiles }: TransformFilesResult): Promise<void> {

@@ -1,1 +1,1 @@
-export * from "./inMemoryEntityStore";
+export * from "./InMemoryEntityStore";

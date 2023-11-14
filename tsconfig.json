@@ -2,13 +2,14 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES2020",
-    "rootDir": "./generator",
     "outDir": "./build/generator",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "paths": {
+      "@kernel": ["./generator/kernel"],
+      "@kernel/*": ["./generator/kernel/*"],
       "@infrastructure": ["./generator/infrastructure"],
       "@infrastructure/*": ["./generator/infrastructure/*"],
       "@application": ["./generator/application"],

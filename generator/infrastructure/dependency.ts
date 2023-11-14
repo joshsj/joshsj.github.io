@@ -1,11 +1,11 @@
-import { IConfigPopulator, IIO, ILogger } from "@application/services/types";
-import { IEntityStore } from "@application/stores/types";
+import { IConfigPopulator, IIO, ILogger } from "@application/services/interfaces";
+import { IEntityStore } from "@application/stores/interfaces";
 import { D } from "@models";
 import { DependencyContainer } from "tsyringe";
-import { ArgvConfigProvider } from "./services/argvConfigPopulator";
-import { ConsoleLogger } from "./services/consoleLogger";
-import { EnvConfigProvider } from "./services/envConfigPopulator";
-import { IO } from "./services/io";
+import { ArgvConfigProvider } from "./services/ArgvConfigPopulator";
+import { ConsoleLogger } from "./services/ConsoleLogger";
+import { EnvConfigProvider } from "./services/EnvConfigPopulator";
+import { IO } from "./services/IO";
 import { InMemoryEntityStore } from "./stores";
 
 class InfrastructureDependencies {

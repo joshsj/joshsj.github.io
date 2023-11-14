@@ -1,4 +1,4 @@
-import { IBuilder, IExtractor, ILocator } from "@application/behaviours/types";
+import { IBuilder, IExtractor, ILocator } from "@application/behaviours/interfaces";
 import {
   AddFileDependencies,
   ExtractData,
@@ -8,12 +8,12 @@ import {
   UpdateStore,
   WriteBuild,
 } from "@application/pipeline/steps/generate";
-import { IGeneratePipeline } from "@application/pipeline/types";
-import { IGetEntityName, IIO, ILogger } from "@application/services/types";
-import { IEntityStore } from "@application/stores/types";
+import { IGetEntityName, IIO, ILogger } from "@application/services/interfaces";
+import { IEntityStore } from "@application/stores/interfaces";
 import { Config } from "@models";
 import { ReadSourceState } from "@models/steps";
-import { PipelineBuilder } from "../pipelineBuilder";
+import { IGeneratePipeline } from "../interfaces/IGeneratePipeline";
+import { PipelineBuilder } from "@kernel/pipeline/PipelineBuilder";
 
 class GeneratePipelineFactory {
   constructor(

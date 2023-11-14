@@ -6,8 +6,8 @@ import { watch } from "chokidar";
 import { ApplicationDependencies } from "@application/dependency";
 import { InfrastructureDependencies } from "@infrastructure/dependency";
 import { EntryDependencies } from "./dependency";
-import { UpdateConfigPipelineFactory } from "@application/pipeline/factories/updateConfigPipeline";
-import { GeneratePipelineFactory } from "@application/pipeline/factories/generatePipeline";
+import { UpdateConfigPipelineFactory } from "@application/pipeline/factories/IUpdateConfigPipeline";
+import { GeneratePipelineFactory } from "@application/pipeline/factories/IGeneratePipeline";
 
 const main = async () => {
   ApplicationDependencies.create(container).registerBehaviours().registerPipelines().registerServices();

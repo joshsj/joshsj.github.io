@@ -1,4 +1,4 @@
-import { IExtractor } from "@application/behaviours/types";
+import { IExtractor } from "@application/behaviours/interfaces";
 import { Post, PostData } from "@models";
 import { File } from "@models/io";
 import { IdentifiedFor } from "@models/steps";

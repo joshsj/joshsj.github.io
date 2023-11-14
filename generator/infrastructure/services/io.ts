@@ -1,4 +1,4 @@
-import { IIO } from "@application/services/types";
+import { IIO } from "@application/services/interfaces";
 import { File } from "@models/io";
 import { mkdir, readFile, readdir, writeFile } from "fs/promises";
 import path from "path";

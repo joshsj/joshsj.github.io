@@ -1,11 +1,11 @@
-import { IExtractor } from "@application/behaviours/types";
-import { IExtractDataStep } from "@application/pipeline/types";
-import { ILogger } from "@application/services/types";
-import { splitAllSettled } from "@application/utilities/native";
+import { IExtractor } from "@application/behaviours/interfaces";
+import { ILogger } from "@application/services/interfaces";
+import { splitAllSettled } from "@kernel/utilities/native";
+import { IStep } from "@kernel/pipeline/interfaces";
 import { Entity } from "@models";
 import { ExtractDataResult, Identified, IdentifyFilesResult } from "@models/steps/generate";
 
-class ExtractData implements IExtractDataStep {
+class ExtractData implements IStep<IdentifyFilesResult, ExtractDataResult> {
   constructor(private readonly extractors: IExtractor[], private readonly logger: ILogger) {}
 
   async execute({ files }: IdentifyFilesResult): Promise<ExtractDataResult> {

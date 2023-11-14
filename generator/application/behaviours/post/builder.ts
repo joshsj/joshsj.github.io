@@ -1,5 +1,5 @@
-import { IBuilder } from "@application/behaviours/types";
-import { IRenderer } from "@application/services/types";
+import { IBuilder } from "@application/behaviours/interfaces";
+import { IRenderer } from "@application/services/interfaces";
 import { Post } from "@models";
 
 class PostBuilder implements IBuilder<"post"> {

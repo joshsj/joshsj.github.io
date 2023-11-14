@@ -1,14 +1,14 @@
-import { IEntityStore } from "@application/stores/types";
+import { IEntityStore } from "@application/stores/interfaces";
+import * as comparers from "@kernel/utilities/comparers";
+import * as formattingHelpers from "@kernel/utilities/formatting";
 import { Config, Entity } from "@models";
+import { File } from "@models/io";
 import katex from "katex";
 import path from "path";
 import prism from "prismjs";
 import { render } from "pug";
-import { IRenderer } from "../types/renderer";
-import { IGetUrl } from "../types";
-import * as formattingHelpers from "@application/utilities/formatting";
-import * as comparers from "@application/utilities/comparers";
-import { File } from "@models/io";
+import { IGetUrl } from "../interfaces";
+import { IRenderer } from "../interfaces/Renderer";
 
 // Garbage
 require("prismjs/components/index")(["typescript", "python", "csharp", "json"]);

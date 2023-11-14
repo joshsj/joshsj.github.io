@@ -1,4 +1,4 @@
-import { IStep } from "@application/pipeline/types";
+import { IStep } from "@kernel/pipeline/interfaces";
 import { Config } from "@models";
 import path from "path";
 

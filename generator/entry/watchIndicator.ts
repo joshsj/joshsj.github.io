@@ -1,4 +1,4 @@
-import { IStep } from "@application/pipeline/types";
+import { IStep } from "@kernel/pipeline/interfaces";
 
 class WatchIndicator implements IStep<void, void> {
   async execute() {

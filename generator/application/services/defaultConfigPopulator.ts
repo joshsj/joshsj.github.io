@@ -1,5 +1,5 @@
 import { Config } from "@models";
-import { IConfigPopulator, IIO } from "./types";
+import { IConfigPopulator, IIO } from "./interfaces";
 
 class DefaultConfigPopulator implements IConfigPopulator {
   constructor(private readonly io: IIO) {}

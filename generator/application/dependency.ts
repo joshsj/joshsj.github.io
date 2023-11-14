@@ -1,18 +1,18 @@
-import { Asset, Collection, Config, D, Page, Post } from "@models";
+import { Config, D } from "@models";
 import { DependencyContainer } from "tsyringe";
 import { AssetBuilder, AssetExtractor, AssetIdentifier, AssetLocator } from "./behaviours/asset";
 import { CollectionExtractor, CollectionIdentifier } from "./behaviours/collection";
+import { IBuilder, IExtractor, IIdentifier, ILocator } from "./behaviours/interfaces";
 import { PageBuilder, PageExtractor, PageIdentifier, PageLocator } from "./behaviours/page";
 import { PostBuilder, PostExtractor, PostIdentifier, PostLocator } from "./behaviours/post";
-import { IBuilder, IExtractor, IIdentifier, ILocator } from "./behaviours/types";
-import { GeneratePipelineFactory } from "./pipeline/factories/generatePipeline";
-import { UpdateConfigPipelineFactory } from "./pipeline/factories/updateConfigPipeline";
-import { DefaultConfigPopulator } from "./services/defaultConfigPopulator";
-import { GetEntityName } from "./services/getEntityName";
-import { GetUrl } from "./services/getUrl";
-import { PugRenderer } from "./services/renderer/pug";
-import { IConfigPopulator, IGetEntityName, IGetUrl, IIO, IRenderer, ILogger } from "./services/types";
-import { IEntityStore } from "./stores/types";
+import { GeneratePipelineFactory } from "./pipeline/factories/IGeneratePipeline";
+import { UpdateConfigPipelineFactory } from "./pipeline/factories/IUpdateConfigPipeline";
+import { DefaultConfigPopulator } from "./services/DefaultConfigPopulator";
+import { GetEntityName } from "./services/GetEntityName";
+import { GetUrl } from "./services/GetUrl";
+import { PugRenderer } from "./services/renderer/PugRenderer";
+import { IConfigPopulator, IGetEntityName, IGetUrl, IIO, ILogger, IRenderer } from "./services/interfaces";
+import { IEntityStore } from "./stores/interfaces";
 
 class ApplicationDependencies {
   private constructor(private readonly c: DependencyContainer) {}

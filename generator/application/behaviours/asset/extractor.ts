@@ -1,6 +1,6 @@
 import { Asset } from "@models";
 import { IdentifiedFor } from "@models/steps";
-import { IExtractor } from "../types";
+import { IExtractor } from "../interfaces";
 
 class AssetExtractor implements IExtractor<"asset"> {
   readonly for = "asset";

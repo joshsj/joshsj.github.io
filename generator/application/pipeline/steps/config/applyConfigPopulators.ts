@@ -1,6 +1,6 @@
 import { Config } from "@models/config";
-import { IConfigPopulator } from "@application/services/types";
-import { IStep } from "@application/pipeline/types";
+import { IConfigPopulator } from "@application/services/interfaces";
+import { IStep } from "@kernel/pipeline/interfaces";
 
 class ApplyConfigurationProviders implements IStep {
   constructor(private readonly config: Config, private readonly providers: IConfigPopulator[]) {}

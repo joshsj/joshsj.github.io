@@ -34,6 +34,7 @@
   "_moduleAliases": {
     "@infrastructure": "build/generator/infrastructure",
     "@application": "build/generator/application",
-    "@models": "build/generator/models"
+    "@models": "build/generator/models",
+    "@kernel": "build/generator/kernel"
   }
 }

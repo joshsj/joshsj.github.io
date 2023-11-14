@@ -1,5 +1,5 @@
-import { IBuilder } from "@application/behaviours/types";
-import { minifier } from "@application/utilities/minifier";
+import { IBuilder } from "@application/behaviours/interfaces";
+import { minifier } from "@kernel/utilities/minifier";
 import { Asset } from "@models";
 
 class AssetBuilder implements IBuilder<"asset"> {

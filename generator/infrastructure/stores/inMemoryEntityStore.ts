@@ -1,5 +1,5 @@
 import { Collection, Entity, EntityFor, EntityName } from "@models";
-import { IEntityStore } from "@application/stores/types";
+import { IEntityStore } from "@application/stores/interfaces";
 
 const readOut = (values: { [K: string]: unknown }) =>
   Object.entries(values)

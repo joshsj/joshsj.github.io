@@ -1,10 +1,10 @@
-﻿import { IEntityStore } from "@application/stores/types";
-import { ExtractDataResult } from "@models/steps/generate";
-import { ILogger } from "@application/services/types";
-import { IAddFileDependenciesStep } from "@application/pipeline/types";
+﻿import { ILogger } from "@application/services/interfaces";
+import { IEntityStore } from "@application/stores/interfaces";
+import { IStep } from "@kernel/pipeline/interfaces";
 import { Entity } from "@models";
+import { ExtractDataResult } from "@models/steps/generate";
 
-class AddFileDependencies implements IAddFileDependenciesStep {
+class AddFileDependencies implements IStep<ExtractDataResult> {
   constructor(private readonly store: IEntityStore, private readonly logger: ILogger) {}
 
   async execute({ entitys }: ExtractDataResult): Promise<ExtractDataResult> {

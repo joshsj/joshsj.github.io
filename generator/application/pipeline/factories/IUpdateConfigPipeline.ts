@@ -1,9 +1,9 @@
 import { ApplyConfigurationProviders } from "@application/pipeline/steps/config";
-import { IUpdateConfigPipeline } from "@application/pipeline/types";
-import { IConfigPopulator } from "@application/services/types";
+import { IConfigPopulator } from "@application/services/interfaces";
 import { Config } from "@models";
-import { PipelineBuilder } from "../pipelineBuilder";
-import { NormaliseConfigPaths } from "../steps/config/normaliseConfigPaths";
+import { IUpdateConfigPipeline } from "../interfaces/IUpdateConfigPipeline";
+import { PipelineBuilder } from "../../../kernel/pipeline/PipelineBuilder";
+import { NormaliseConfigPaths } from "../steps/config/NormaliseConfigPaths";
 
 class UpdateConfigPipelineFactory {
   constructor(private readonly config: Config, private readonly providers: IConfigPopulator[]) {}

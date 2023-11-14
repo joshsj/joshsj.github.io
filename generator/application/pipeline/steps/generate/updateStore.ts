@@ -1,13 +1,13 @@
 ﻿import { ExtractDataResult } from "@models/steps/generate";
-import { IIO, ILogger } from "@application/services/types";
-import { IEntityStore } from "@application/stores/types";
+import { IIO, ILogger } from "@application/services/interfaces";
+import { IEntityStore } from "@application/stores/interfaces";
 import { Config } from "@models/config";
-import { IUpdateStoreStep } from "@application/pipeline/types";
 import { Directory, File } from "@models/io";
 import { sep } from "path";
 import { Filename } from "@models/io/filename";
+import { IStep } from "@kernel/pipeline/interfaces";
 
-class UpdateStore implements IUpdateStoreStep {
+class UpdateStore implements IStep<ExtractDataResult> {
   constructor(
     private readonly store: IEntityStore,
     private readonly io: IIO,

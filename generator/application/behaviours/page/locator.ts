@@ -1,4 +1,4 @@
-import { ILocator } from "@application/behaviours/types";
+import { ILocator } from "@application/behaviours/interfaces";
 import { Page } from "@models";
 import { File } from "@models/io";
 

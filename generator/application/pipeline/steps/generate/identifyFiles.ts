@@ -1,10 +1,10 @@
 import { IdentifyFilesResult, ReadSourceResult } from "@models/steps/generate";
-import { IGetEntityName, ILogger } from "@application/services/types";
-import { splitAllSettled } from "@application/utilities/native";
+import { IGetEntityName, ILogger } from "@application/services/interfaces";
+import { splitAllSettled } from "@kernel/utilities/native";
 import { File } from "@models/io";
-import { IIdentifyFilesStep } from "@application/pipeline/types";
+import { IStep } from "@kernel/pipeline/interfaces";
 
-class IdentifyFiles implements IIdentifyFilesStep {
+class IdentifyFiles implements IStep<ReadSourceResult, IdentifyFilesResult> {
   constructor(private readonly getEntityName: IGetEntityName, private readonly logger: ILogger) {}
 
   async execute({ sourceFiles }: ReadSourceResult): Promise<IdentifyFilesResult> {

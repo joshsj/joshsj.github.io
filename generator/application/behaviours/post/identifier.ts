@@ -1,4 +1,4 @@
-import { IIdentifier } from "@application/behaviours/types";
+import { IIdentifier } from "@application/behaviours/interfaces";
 import { Post } from "@models";
 import { Config } from "@models/config";
 import { File } from "@models/io";

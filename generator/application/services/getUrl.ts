@@ -1,7 +1,7 @@
-import { ILocator } from "@application/behaviours/types";
-import { IEntityStore } from "@application/stores/types";
+import { ILocator } from "@application/behaviours/interfaces";
+import { IEntityStore } from "@application/stores/interfaces";
 import { Entity, EntityName } from "@models";
-import { IGetUrl } from "./types";
+import { IGetUrl } from "./interfaces";
 
 class GetUrl implements IGetUrl {
   private readonly cache: Map<Entity, string>;

@@ -1,6 +1,6 @@
-import { IPipelineBuilder, IStep } from "./types";
+import { IPipelineBuilder, IStep } from "./interfaces";
 
-class PipelineBuilder<Initial = void> implements IPipelineBuilder<Initial, Initial> {
+export class PipelineBuilder<Initial = void> implements IPipelineBuilder<Initial, Initial> {
   private readonly steps: IStep<any, any>[];
 
   constructor() {
@@ -28,5 +28,3 @@ class PipelineBuilder<Initial = void> implements IPipelineBuilder<Initial, Initi
     };
   }
 }
-
-export { PipelineBuilder };
