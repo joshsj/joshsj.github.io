@@ -1,0 +1,1 @@
+(()=>{const e=["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","KeyB","KeyA"];let r=0;document.querySelector("h1");document.querySelector(":root").addEventListener("keydown",(({code:o,ctrlKey:t,shiftKey:w,metaKey:n,altKey:y})=>{t||w||n||y||(e[r]===o?++r===e.length&&(alert("TODO something cool"),r=0):r=0)}))})();

@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head> <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"><link rel="manifest" href="/icons/site.webmanifest"><link rel="shortcut icon" href="/icons/favicon.ico"><meta name="msapplication-TileColor" content="#603cba"><meta name="msapplication-config" content="/icons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU"><title>Logging • joshsj</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous"><link rel="stylesheet" href="/styles/variables.css"><link rel="stylesheet" href="/styles/utilities.css"><link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/layout.css"><link rel="stylesheet" href="/styles/components.css"><link rel="stylesheet" href="/styles/lib.css"><script src="/scripts/theme.js" defer></script><script src="/scripts/myEmail.js" defer></script><script src="/scripts/id-jumper.js" defer></script><script src="/scripts/konami.js" defer></script></head><body>   <nav><a href="/">Home</a><a href="/blog/">Blog</a><a href="/collections/">Collections</a><a href="/portfolio/">Portfolio</a><button class="link" id="theme-toggle" aria-hidden="" aria-role="Toggle for light/dark theme"></button></nav><main class="content"><h1>Logging</h1><p>Posted on August 21st, 2022</p><p class="squish">Part of <a href="/collections/"> Notes on .NET</a></p><p class="squish sep sep-pop"><span class="skip">Talks about</span><span>C#</span><span>.NET</span></p><p>Logging comes out of the box with ASP using <code>ILogger<></code> from the
+<code>Microsoft.Extensions.Logging</code> package.</p><!-- more--><p>The generic parameter specifies a <em>category</em> (the source of the log). It's arbitrary but
+the enclosing class is the convention. The log <em>level</em> (how bad/important it is) is
+specified with the <code>LogLevel</code> enum or dedicated methods.</p><pre><code class="prism">﻿<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SomeService</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">public</span> <span class="token function">SomeService</span><span class="token punctuation">(</span><span class="token class-name">ILogger<span class="token punctuation">&lt;</span>IndexModel<span class="token punctuation">></span></span> logger<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token range operator">..</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
+  <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">SomeMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    logger<span class="token punctuation">.</span><span class="token function">LogInformation</span><span class="token punctuation">(</span><span class="token string">"something"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    logger<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>LogLevel<span class="token punctuation">.</span>Error<span class="token punctuation">,</span> <span class="token string">"something else"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>We can specify the minimum severity of logs per-assembly using <em>filters</em>.</p><pre><code class="prism">﻿<span class="token punctuation">{</span>
+  <span class="token property">"Logging"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"LogLevel"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"Default"</span><span class="token operator">:</span> <span class="token string">"Information"</span><span class="token punctuation">,</span>
+      <span class="token property">"Microsoft"</span><span class="token operator">:</span> <span class="token string">"Warning"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><h2>Performance</h2><p>Logging can introduce performance issues in many applications. Unless a
+directly-loggable value is provided (basically primitives), the logger needs to
+do some conversion/serialisation. Combine that with the fact that console
+logging is synchronous and the overhead can be comparatively huge.</p><p>By defining a delegate with the <code>LoggerMessage</code> class, we can create a
+cache-able delegates with strong types, requiring fewer allocations and
+eliminating boxing to reduce computational overhead.</p><figure><div class="inner"><pre><code class="prism"><span class="token comment">// No parameters</span>
+LoggerMessage<span class="token punctuation">.</span><span class="token function">Define</span><span class="token punctuation">(</span>
+  LogLevel<span class="token punctuation">.</span>Information<span class="token punctuation">,</span>
+  <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// ID</span>
+  <span class="token string">"Gonna do something"</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// One parameter of int</span>
+withParam <span class="token operator">=</span> LoggerMessage<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Define</span><span class="token generic class-name"><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">></span></span></span><span class="token punctuation">(</span>
+  LogLevel<span class="token punctuation">.</span>Warning<span class="token punctuation">,</span>
+  <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token string">"User not found: {Id}"</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Scoped</span>
+LoggerMessage<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">DefineScope</span><span class="token generic class-name"><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token string">"Scope with an int: {i}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div><figcaption>LoggerMessage examples.</figcaption></figure><h2>Custom Exception Handling</h2><p>In the backend, custom exception handling is implemented via a filter deriving from
+.NET also offers an inbuilt exception page for <code>ExceptionFilterAttribute</code>
+developers, added with <code>app.UseDeveloperExceptionPage()</code>.</p><p>In the frontend, <code>app.UseExceptionHandler("/Error")</code> specifies a Razor page to
+display errors & exceptions to the user.</p><p><code>UseExceptionHandler</code> middleware allows exceptions throughout the application to
+be captured, and automates page redirects.</p><h2>Destinations</h2><p>Also referred to as <em>providers</em>, <em>sinks</em>, or <em>targets</em>.</p><p>Files are the easiest choice but not the best:</p><ul><li>Plain text is hard to query making later analysis tricky</li><li>Aggregating files from different servers/application/deployments is also
+tricky</li><li>No native UI for files to browse them</li></ul><p>Cloud-hosting services offer solutions, such as Azure's Application Insights or
+App Service Diagnostics, integrated into ASP with
+<code>Microsoft.Extensions.Logging.AzureAppServices</code>.</p><p>Packages like Serilog can connect to
+<a href="https://github.com/serilog/serilog/wiki/Provided-Sinks#list-of-available-sinks">many external services</a>
+to store logs.</p></main></body></html>
