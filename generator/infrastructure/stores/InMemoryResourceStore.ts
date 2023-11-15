@@ -1,5 +1,5 @@
-import { Collection, Resource, ResourceFor, ResourceName } from "@models";
-import { IResourceStore } from "@application/stores/interfaces";
+import { Collection, Resource, ResourceFor, ResourceName } from "@core/models";
+import { IResourceStore } from "@core/stores/interfaces";
 
 const readOut = (values: { [K: string]: unknown }) =>
   Object.entries(values)

@@ -1,4 +1,4 @@
-import { Config, D } from "@models";
+import { Config, D } from "@core/models";
 import { DependencyContainer } from "tsyringe";
 
 class EntryDependencies {

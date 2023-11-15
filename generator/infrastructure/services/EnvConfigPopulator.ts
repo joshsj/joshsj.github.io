@@ -1,5 +1,5 @@
-import { IConfigPopulator, ILogger } from "@application/services/interfaces";
-import { Config, Key } from "@models/config";
+import { IConfigPopulator, ILogger } from "@core/services/interfaces";
+import { Config, Key } from "@core/models/config";
 
 type Env = { [K in `${Uppercase<Key>}_DIR`]?: string };
 

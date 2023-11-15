@@ -1,4 +1,4 @@
-import { File } from "@models/io";
+import { File } from "@core/models/io";
 import csso from "csso";
 import terser from "terser";
 

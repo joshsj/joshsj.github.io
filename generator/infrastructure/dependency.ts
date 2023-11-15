@@ -1,6 +1,6 @@
-import { IConfigPopulator, IIO, ILogger } from "@application/services/interfaces";
-import { IResourceStore } from "@application/stores/interfaces";
-import { D } from "@models";
+import { IConfigPopulator, IIO, ILogger } from "@core/services/interfaces";
+import { IResourceStore } from "@core/stores/interfaces";
+import { D } from "@core/models";
 import { DependencyContainer } from "tsyringe";
 import { ArgvConfigProvider } from "./services/ArgvConfigPopulator";
 import { ConsoleLogger } from "./services/ConsoleLogger";

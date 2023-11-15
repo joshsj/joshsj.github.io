@@ -33,8 +33,7 @@
   },
   "_moduleAliases": {
     "@infrastructure": "build/generator/infrastructure",
-    "@application": "build/generator/application",
-    "@models": "build/generator/models",
+    "@core": "build/generator/core",
     "@kernel": "build/generator/kernel"
   }
 }

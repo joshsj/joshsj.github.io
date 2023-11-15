@@ -1,16 +1,16 @@
 import "reflect-metadata";
 
-import { Config, D } from "@models";
+import { Config, D } from "@core/models";
 import { container } from "tsyringe";
 import { watch } from "chokidar";
-import { ApplicationDependencies } from "@application/dependency";
+import { CoreDependencies } from "@core/dependency";
 import { InfrastructureDependencies } from "@infrastructure/dependency";
 import { EntryDependencies } from "./dependency";
-import { UpdateConfigPipelineFactory } from "@application/pipeline/factories/IUpdateConfigPipeline";
-import { GeneratePipelineFactory } from "@application/pipeline/factories/IGeneratePipeline";
+import { UpdateConfigPipelineFactory } from "@core/pipeline/factories/IUpdateConfigPipeline";
+import { GeneratePipelineFactory } from "@core/pipeline/factories/IGeneratePipeline";
 
 const main = async () => {
-  ApplicationDependencies.create(container).registerBehaviours().registerPipelines().registerServices();
+  CoreDependencies.create(container).registerBehaviours().registerPipelines().registerServices();
   InfrastructureDependencies.create(container).registerServices().registerStores();
   EntryDependencies.create(container).register();
 

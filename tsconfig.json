@@ -12,10 +12,8 @@
       "@kernel/*": ["./generator/kernel/*"],
       "@infrastructure": ["./generator/infrastructure"],
       "@infrastructure/*": ["./generator/infrastructure/*"],
-      "@application": ["./generator/application"],
-      "@application/*": ["./generator/application/*"],
-      "@models": ["./generator/models"],
-      "@models/*": ["./generator/models/*"]
+      "@core": ["./generator/core"],
+      "@core/*": ["./generator/core/*"]
     }
   },
 

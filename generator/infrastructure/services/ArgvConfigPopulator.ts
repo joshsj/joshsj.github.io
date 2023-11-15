@@ -1,5 +1,5 @@
-import { IConfigPopulator } from "@application/services/interfaces";
-import { Config } from "@models";
+import { IConfigPopulator } from "@core/services/interfaces";
+import { Config } from "@core/models";
 
 class ArgvConfigProvider implements IConfigPopulator {
   populate(): Partial<Config> {

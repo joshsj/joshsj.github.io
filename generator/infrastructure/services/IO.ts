@@ -1,5 +1,5 @@
-import { IIO } from "@application/services/interfaces";
-import { File } from "@models/io";
+import { IIO } from "@core/services/interfaces";
+import { File } from "@core/models/io";
 import { mkdir, readFile, readdir, writeFile } from "fs/promises";
 import path from "path";
 
