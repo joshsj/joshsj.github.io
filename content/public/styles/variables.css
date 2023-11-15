@@ -11,10 +11,10 @@
   --border: 0.1rem solid var(--dark-grey);
 
   --fs-small: calc(var(--fs-normal) * 0.85);
-  --fs-normal: 1.2rem;
-  --fs-h3: 1.5rem;
-  --fs-h2: 2.1rem;
-  --fs-h1: 3rem;
+  --fs-normal: 1rem;
+  --fs-h3: 1.3rem;
+  --fs-h2: 1.9rem;
+  --fs-h1: 2.8rem;
 
   --ff-normal: Karla, sans-serif;
   --ff-heading: var(--ff-normal);
