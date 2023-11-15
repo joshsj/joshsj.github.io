@@ -8,8 +8,7 @@ type InitialState = { sourcePaths?: string[] };
 type ReadSourceState = Copy<InitialState>;
 type ReadSourceResult = { sourceFiles: File[] };
 
-type Identified = Pick<Resource, "file" | "name">;
-type IdentifiedFor<T extends ResourceName> = Identified & { name: T };
+type Identified<T extends Resource = Resource> = Pick<T, "file" | "name">;
 
 type IdentifyFilesResult = { files: Identified[] };
 
@@ -26,7 +25,6 @@ export {
   ReadSourceState,
   ReadSourceResult,
   Identified,
-  IdentifiedFor,
   IdentifyFilesResult,
   ExtractDataResult,
   UpdateStoreResult,

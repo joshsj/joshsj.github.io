@@ -1,11 +1,11 @@
 import { Asset } from "@models";
-import { IdentifiedFor } from "@models/steps";
+import { Identified } from "@models/steps";
 import { IExtractor } from "../interfaces";
 
-class AssetExtractor implements IExtractor<"asset"> {
+class AssetExtractor implements IExtractor<Asset> {
   readonly for = "asset";
 
-  async extract(i: IdentifiedFor<"asset">): Promise<Asset> {
+  async extract(i: Identified<Asset>): Promise<Asset> {
     return i;
   }
 }

@@ -3,7 +3,7 @@ import { Post } from "@models";
 import { File } from "@models/io";
 import { Filename } from "@models/io/filename";
 
-class PostLocator implements ILocator<"post"> {
+class PostLocator implements ILocator<Post> {
   readonly for = "post";
 
   locate({ file }: Post): File {

@@ -3,7 +3,7 @@ import { IRenderer } from "@application/services/interfaces";
 import { PugRenderer } from "@application/services/renderer/PugRenderer";
 import { Post } from "@models";
 
-class PostBuilder implements IBuilder<"post"> {
+class PostBuilder implements IBuilder<Post> {
   readonly for = "post";
 
   constructor(private readonly pug: PugRenderer) {}

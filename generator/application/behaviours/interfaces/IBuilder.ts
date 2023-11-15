@@ -1,9 +1,9 @@
-import { ResourceFor, ResourceName } from "@models";
+import { Resource } from "@models";
 
-interface IBuilder<T extends ResourceName = ResourceName> {
-  // readonly for: T;
+interface IBuilder<T extends Resource = Resource> {
+  readonly for: T["name"];
 
-  build(resource: ResourceFor<T>): Promise<string>;
+  build(resource: T): Promise<string>;
 }
 
 export { IBuilder };

@@ -1,8 +1,9 @@
 import { IIdentifier } from "@application/behaviours/interfaces";
+import { Asset } from "@models";
 import { Config } from "@models/config";
 import { File } from "@models/io";
 
-class AssetIdentifier implements IIdentifier<"asset"> {
+class AssetIdentifier implements IIdentifier<Asset> {
   readonly for = "asset";
 
   constructor(private readonly config: Config) {}

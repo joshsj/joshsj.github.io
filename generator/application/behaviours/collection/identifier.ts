@@ -1,8 +1,9 @@
 import { IIdentifier } from "@application/behaviours/interfaces";
+import { Collection } from "@models";
 import { Config } from "@models/config";
 import { File } from "@models/io";
 
-class CollectionIdentifier implements IIdentifier<"collection"> {
+class CollectionIdentifier implements IIdentifier<Collection> {
   readonly for = "collection";
 
   constructor(private readonly config: Config) {}

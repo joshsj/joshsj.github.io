@@ -2,7 +2,7 @@ import { ILocator } from "@application/behaviours/interfaces";
 import { Page } from "@models";
 import { File } from "@models/io";
 
-class PageLocator implements ILocator<"page"> {
+class PageLocator implements ILocator<Page> {
   readonly for = "page";
 
   locate({ file }: Page): File {

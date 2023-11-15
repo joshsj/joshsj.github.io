@@ -1,10 +1,10 @@
-import { ResourceFor, ResourceName } from "@models";
-import { IdentifiedFor } from "@models/steps";
+import { Resource } from "@models";
+import { Identified } from "@models/steps";
 
-interface IExtractor<T extends ResourceName = ResourceName> {
-  readonly for: T;
+interface IExtractor<T extends Resource = Resource> {
+  readonly for: T["name"];
 
-  extract(file: IdentifiedFor<T>): Promise<ResourceFor<T>>;
+  extract(file: Identified<T>): Promise<T>;
 }
 
 export { IExtractor };

@@ -3,7 +3,7 @@ import { ILocator } from "@application/behaviours/interfaces";
 import { Asset } from "@models";
 import { File } from "@models/io";
 
-class AssetLocator implements ILocator<"asset"> {
+class AssetLocator implements ILocator<Asset> {
   readonly for = "asset";
 
   constructor(private readonly config: Config) {}
