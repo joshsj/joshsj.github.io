@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head> <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"><link rel="manifest" href="/icons/site.webmanifest"><link rel="shortcut icon" href="/icons/favicon.ico"><meta name="msapplication-TileColor" content="#603cba"><meta name="msapplication-config" content="/icons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU"><title>Real Time Communication • joshsj</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous"><link rel="stylesheet" href="/styles/variables.css"><link rel="stylesheet" href="/styles/utilities.css"><link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/layout.css"><link rel="stylesheet" href="/styles/components.css"><link rel="stylesheet" href="/styles/lib.css"><script src="/scripts/theme.js" defer></script><script src="/scripts/myEmail.js" defer></script><script src="/scripts/id-jumper.js" defer></script><script src="/scripts/konami.js" defer></script></head><body>   <nav><a href="/">Home</a><a href="/blog/">Blog</a><a href="/collections/">Collections</a><a href="/portfolio/">Portfolio</a><button class="link" id="theme-toggle" aria-hidden="" aria-role="Toggle for light/dark theme"></button></nav><main class="content"><h1>Real Time Communication</h1><p>Posted on August 21st, 2022</p><p class="squish">Part of <a href="/collections/"> Notes on .NET</a></p><p class="squish sep sep-pop"><span class="skip">Talks about</span><span>C#</span><span>.NET</span></p><p>The vast majority of the web uses HTTP, which doesn't lend itself to real-time
+updates.<!-- excerpt-->Request-response isn't designed for clients to send data
+frequently and the server can't send a response without a request, so how can it
+update the client on its terms?<!-- excerpt--></p><h2>A History Lesson</h2><p>We haven't always had a convenient way to update web applications in real-time.
+We had some jank, then some less jank, then we got there properly.</p><h3>AJAX Polling</h3><p>Using standard asynchronous requests, AJAX polling sends requests at a specific
+interval to create a two-way communication channel in which both the client and
+server can (optionally) send the latest data.</p><p>As above, HTTP isn't designed for this, so it's intensive to process so many
+HTTP requests given their relative size and complexity.</p><h3>Long Polling</h3><p>Long polling solves the intensity issue by delegating it to the server. When the
+client sends a request, the server waits for an update (polling) before
+responding to the client's request. Naturally, client requests can last
+indefinitely.</p><figure><div class="inner"><pre><code class="prism"><span class="token class-name">OrderUpdate<span class="token punctuation">?</span></span> result<span class="token punctuation">;</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  result <span class="token operator">=</span> <span class="token keyword">await</span> orderChecker<span class="token punctuation">.</span><span class="token function">GetUpdate</span><span class="token punctuation">(</span>orderId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>HasValue<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> result<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+  <span class="token keyword">await</span> Task<span class="token punctuation">.</span><span class="token function">Delay</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// polling interval</span>
+<span class="token punctuation">}</span></code></pre></div><figcaption>Long Polling example</figcaption></figure><h3>Server Sent Events (SSE)</h3><p>SSEs allow servers to send data to the client without an initial request.</p><p><span role="heading">The Good</span></p><ul><li>No repetitious additional requests reduces overhead</li><li>Web standards</li><li>Easy to polyfill for older browsers</li><li>Auto-reconnection</li></ul><p><span role="heading">The Bad</span></p><ul><li>Most browsers have ~6 connection max<ul><li>7 tabs and you're screwed</li><li>Includes Chrome and Firefox</li></ul></li><li>Only server-to-client</li></ul><h2>Web Sockets</h2><p>Web sockets are a modern, standardised approach to implement real-time
+communication on the web, utilising a single TCP socket for two-way
+communication.</p><p>The web socket handshake first sends a request to 'upgrade' the connection. If
+the server supports web sockets, it responds with a <code>101</code> status code with
+a key to be included in the <code>Accept</code> header in subsequent communications:</p><figure><div class="inner"><pre>// Request
+Upgrade: websocket
+Connection: Upgrade
+
+Sec-WebSocket-Key: something-unique
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Extensions: deflate-stream
+
+// Response
+HTTP/1.1 101 Switching Protocols
+
+Upgrade: websocket
+Connection: Upgrade
+
+Sec-WebSocket-Accept: something-unique
+Sec-WebSocket-Protocol: chat
+Sec-WebSocket-Key: Extensions: deflate-stream
+</code></pre>
+</pre></div><figcaption>Web Socket Handshake</figcaption></figure><h2>SignalR</h2><p>SignalR is the big daddy of real-time communication on the web. It supports
+polling, SSEs and web sockets, managed internally to automatically select the
+best technology available. It also provides an API for Remote Procedure Call
+(RPC) and scales to handle increasing traffic.</p><p><em>Hubs</em> are a component of SignalR; server-side classes that exchange messages
+with the client. This includes a (de)serialisation protocol for parameters, JSON
+by default. It also supports 'MessagePack', a binary format more compact than
+JSON, and inherently faster to process.</p></main></body></html>

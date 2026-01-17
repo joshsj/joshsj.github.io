@@ -1,0 +1,1 @@
+(()=>{const e=document.querySelectorAll(":where(h1,h2,h3)[id]");let n;const o={ArrowUp:()=>n>0?n-1:e.length-1,ArrowDown:()=>n<e.length-1?n+1:0};e.length&&window.addEventListener("keydown",(({code:t,ctrlKey:r})=>{if(!r)return;const d=o[t];d&&(n=void 0!==n?d():0,location.hash=e[n].id)}))})();

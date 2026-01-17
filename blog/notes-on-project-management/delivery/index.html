@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head> <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"><link rel="manifest" href="/icons/site.webmanifest"><link rel="shortcut icon" href="/icons/favicon.ico"><meta name="msapplication-TileColor" content="#603cba"><meta name="msapplication-config" content="/icons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU"><title>Project Delivery • joshsj</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous"><link rel="stylesheet" href="/styles/variables.css"><link rel="stylesheet" href="/styles/utilities.css"><link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/layout.css"><link rel="stylesheet" href="/styles/components.css"><link rel="stylesheet" href="/styles/lib.css"><script src="/scripts/theme.js" defer></script><script src="/scripts/myEmail.js" defer></script><script src="/scripts/id-jumper.js" defer></script><script src="/scripts/konami.js" defer></script></head><body>   <nav><a href="/">Home</a><a href="/blog/">Blog</a><a href="/collections/">Collections</a><a href="/portfolio/">Portfolio</a><button class="link" id="theme-toggle" aria-hidden="" aria-role="Toggle for light/dark theme"></button></nav><main class="content"><h1>Project Delivery</h1><p>Posted on December 1st, 2021</p><p class="squish">Part of <a href="/collections/"> Notes on Project Management</a></p><p>The widespread view throughout the 1980s and early 1990s was that the best way
+to achieve better software was through careful project planning: formalized
+quality assurance; use of analysis and design methods, supported by software
+tools; and rigorous, controlled software development processes.</p><p>This view spawned from the development of large-scale, long-lived software
+systems in industries like government and aerospace.</p><h2>Traditional Approaches</h2><p>The <em>Waterfall method</em> was derived from a 1970 paper published by Winston Royce. The process is broken down
+into a number of sequential stages, with each stage reaching completion before work starts on the following one:
+</p><blockquote><p>Requirements → Analysis → Design → Coding → Testing → Operations</p></blockquote><p>Although Royce proposed the model, he warned of the dangers of a single-pass
+approach and advocated for iterative methods 🤦‍♂️</p><figure><div class="inner"><img src="waterfall.png"></div><figcaption>Waterfall model</figcaption></figure><p>A failing of the Waterfall model is the treatment of maintenance as a start-finish stage, as opposed to an ongoing,
+open-ended process. The <em>B-model</em> addressed enhanced the Waterfall model to address this.</p><p><em>V-model</em> further enhanced waterfall by declaring equatable stages before and after the Coding stage.
+For example, a 'Module design' phase has a corresponding 'Debugged modules' phase.</p><p>With the <em>Incremental model</em>, the project was no longer delivered a whole in the final phase. Instead, after
+defining requirements and producing high-level designs, subsequent increments produce aspects of the project. By
+introducing the system to the customer over time, the can familiarise themselves more easily.</p><p>There was also the spiral model; it looks dumb and uninspired so I can't be
+fucked with notes.</p><h2>Changes</h2><p>Towards the late 90s, a dissatisfaction with heavyweight methodologies lead to
+the development of agile. These methods primarily enable the development team to
+focus on the software itself, rather than on its design and documentation. By
+nature, they suit applications where the requirements change frequently.</p><h2>Looking at Agile</h2><p>Reading from <a href="agilism%20versus%20traditional%20approaches.pdf">Agilism versus Traditional Approaches</a>, 
+the appropriate methodologies for a project can be determined by the clarity and understanding of the its goal
+and solution.</p><p>One major consideration when working with agile is the availability of the
+client; almost all agile approaches include a feedback loop with the client,
+meaning there has to be reliable communication to keep the project on schedule.</p><h3>eXtreme Programming (XP)</h3><p>XP is based on incremental development, supported through small, frequent
+releases of the system. The client(s) are continually engaged with the
+development team, so they are an important aspect of the project's progress.</p><p>The focus lies less-so with the development process and more-so with the
+people,embracing pair programming and collective ownership of the system code.</p><p>Change is embraced through regular system releases to customers, using
+test-first development and consistent refactoring to avoid code degeneration.</p><p>Lastly, maintainability is key; alongside refactoring, this is also ensures by
+using simple designs that do not unnecessarily anticipate future changes to the
+system.</p><p>In practise, this doesn't work too well, as it doesn't integrate with most
+existing business management structures. The primary issue was the inability
+track the progress of a project, since teams worked in very short cycles which
+deterred proper documentation and organisation practises.</p><h3>Scrum</h3><p>In response to XP's failings, Scrum was developed. It uses a concept of
+'sprints', which are short periods of work.</p><p>Before each sprint, the project team reviews the work to-do, sourced from new
+feature work or the backlog. With the selected items, the team can plan the
+sprint, i.e., assign work and estimate.</p><p>After each sprint, the sprint is assessed to determine what was done, what went
+well, and what needs changing. This may also include the conclusion of a
+shippable piece of work.</p><h2>Being Pragmatic</h2><figure><blockquote class="inner"><p>There is no one-size-fits-all software development approach, teams and
+organisations use different approaches to address the challenges of software
+development projects.</p><p>They rarely follow a pure approach by
+implementing a process by the book.</p></blockquote><figcaption><cite>Kuhrmann et. al, 2019</cite></figcaption></figure><p>Pretty much that: no two Kanban boards looks identical.</p></main></body></html>

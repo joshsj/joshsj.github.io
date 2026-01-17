@@ -1,0 +1,236 @@
+<!DOCTYPE html><html><head> <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"><link rel="manifest" href="/icons/site.webmanifest"><link rel="shortcut icon" href="/icons/favicon.ico"><meta name="msapplication-TileColor" content="#603cba"><meta name="msapplication-config" content="/icons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="--WV6qAuzU9GnL3462uvvFCGbyR8jm9J0YzYWMWQ1IU"><title>Making an SSG • joshsj</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous"><link rel="stylesheet" href="/styles/variables.css"><link rel="stylesheet" href="/styles/utilities.css"><link rel="stylesheet" href="/styles/base.css"><link rel="stylesheet" href="/styles/layout.css"><link rel="stylesheet" href="/styles/components.css"><link rel="stylesheet" href="/styles/lib.css"><script src="/scripts/theme.js" defer></script><script src="/scripts/myEmail.js" defer></script><script src="/scripts/id-jumper.js" defer></script><script src="/scripts/konami.js" defer></script></head><body>   <nav><a href="/">Home</a><a href="/blog/">Blog</a><a href="/collections/">Collections</a><a href="/portfolio/">Portfolio</a><button class="link" id="theme-toggle" aria-hidden="" aria-role="Toggle for light/dark theme"></button></nav><main class="content"><h1>Making an SSG</h1><p>Posted on January 6th, 2023</p><p class="squish">Updated on April 23rd, 2023</p><p class="squish sep sep-pop"><span class="skip">Talks about</span><span>Software Development</span><span>Projects</span></p><p>Despite the <a href="https://jamstack.org/generators/">abundance</a> of great site generators, I want to make
+my own. It <em>should</em> be a fun and achievable project, plus I'll have full creative control over any kind of 
+content I want to post in the future. 
+</p><h2>Current Situation</h2><p>The blog is currently hosted on Github Pages and deployed automatically with Github Actions. I have little to no
+interest in DevOps and this works just fine &mdash; no changes here.
+</p><p>Building the blog is handled by <a href="https://github.com/hexojs/hexo">Hexo</a> which I initially chose it for 
+three main reasons:</p><ol><li>It uses Node, which I always have installed</li><li>It has a simple API to get things going, while offering a reasonable amount of configuration and extensibility</li><li>It sticks to templating languages and Markdown (at least by default), instead of delving into React/Vue etc.</li></ol><p>It nails a lot of the functionality expected in a blogging framework and I anticipate to draw heavily from its 
+features. I do however have some complaints...
+</p><h3>Markdown just isn't cutting it</h3><p>Not having complete control over the HTML has proven annoying while I'm trying to up my blogging game.</p><p>Look at tables; although Markdown syntax is much cleaner, it's completely inextensible. Want a <code>th</code> at the
+start of each row? Not possible. Want to include something other than plain text in a cell? Not happening.
+</p><p>I've also found issue with Markdown converters as all seem to lack in one area or another, be it sanitization,
+Markdown flavours, line lengths/breaks, or modes like
+<a href="https://github//.com/xoofx/markdig/blob/master/src/Markdig.Tests/Specs/SmartyPantsSpecs.md">smartypants</a>.
+</p><p>Falling back to HTML inside Markdown is always an option but then why use Markdown in the first place?</p><p>I could configure/create another file processor in Hexo to use different markup but I'd rather spend my time on 
+this project.
+</p><h3>Template languages aren't cutting it either</h3><p>Out of the box, Hexo offers EJS and Nunjucks which are bad and worse respectively. I don't care to elaborate; they 
+just aren't satisfying to use.
+</p><p>Creating reusable components to get around the shortcomings of Markdown has worked fine. Nevertheless I've ended up 
+with lots of .html and .ejs in my .md files so the goal is to standardise my markup.
+</p><h3>Folder structure is overkill</h3><p>This blog doesn't necessitate the themes or scaffold features of Hexo and these create the most additional folders.</p><h3>Dates are wrong</h3><p>To my discontent, I'm based in the UK so my post dates should reflect that.</p><p>Although Hexo offers date/time localisation, all of my efforts to use it have failed so (as far as I can tell) posts
+are currently dated in the time zone of the build server.
+</p><h2>System Architecture and Feature Decomposition</h2><p>Just kidding.</p><p>I'm making whatever seems best and refactoring as I go.</p><h2>Getting something to build</h2><p>The goal is a HTML file, compiled from a template language, based on file paths sourced from a config file.</p><h3>Choosing a templating language</h3><p>I need one template language to rule them all, solving the current mishmash.</p><p>Drawing from EJS, I need first-hand support for Javascript and a mechanism for reuse (like components).</p><p>Any templating language designed for HTML will work.</p><p>Nothing will beat Markdown but the deciding factor will be its syntax: clean and concise.</p><p>Of all the languages that fit the bill, <a href="https://pugjs.org/">pug</a> looks capable and easy to write. It's
+also a classic, so any issues I have should already have solutions; and it can be used as the template language in 
+Javascript frameworks, so I could easily migrate to React/Vue/whatever down the line.
+</p><h3>Adding configuration</h3><p>This project has practically no additional scope but hardcoding paths is for the weak.</p><p>dotenv should be more than adequate, and I like the <a href="https://github.com/motdotla/dotenv#preload">preload</a>
+option so that goes in the npm scripts too.
+</p><p>We need only two values for now:</p><ul><li><code>SOURCE_DIR</code> &mdash; where the content is</li><li><code>BUILD_DIR</code> &mdash; where to put the content once compiled</li></ul><h3>A blog is born</h3><p>Producing an MVP is now a simple process away:</p><ol><li>Scan the source directory</li><li>Read in each file and compile it</li><li>Write it to build directory while preserving the relative path</li></ol><figure><div class="inner"><img src="wow.gif"></div><figcaption>An MVP</figcaption></figure><p>The only hiccup was with fs module in Node. It doesn't offer a method to recursively scan directories, but with some
+inspiration from the nice folks on Stack Overflow, async generators make this looks easy:
+</p><pre><code class="prism"><span class="token keyword">async</span> <span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">walk</span><span class="token punctuation">(</span>root<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> options<span class="token operator">:</span> Options<span class="token punctuation">,</span> walked <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token operator">:</span> AsyncGenerator<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> entries <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">readdir</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> entry <span class="token keyword">of</span> entries<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> entryPath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>walked<span class="token punctuation">,</span> entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>entry<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">yield</span><span class="token operator">*</span> <span class="token function">walk</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span> options<span class="token punctuation">,</span> entryPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">yield</span> entryPath<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h2>Static Assets</h2><p>Times New Roman has a certain charm but I want my hard-earned CSS back.</p><p>Unlike the .pug files, static assets need not be compiled, only copied to the build folder; they also keep their
+file extension. I can copy the pug processing logic in to a new method, make these changes, and add a check to
+determine the right method for the file.
+</p><p>With that, the site looks like mine again:</p><figure><div class="inner"><img src="with css.png"></div><figcaption>Looking good</figcaption></figure><h2>Introducing transformers</h2><p>Before the system grows, we need a refactor. Adding an <code>elif</code> for every file type is completely inextensible
+and would become a mess &mdash; we invented design patterns for a reason.
+
+Typescript allows us to take an object-oriented or functional approach. Of course, both will be used eventually but
+I want to lean on FP because I've never developed a useful application with it.
+</p><p>With that in mind, I only know software design from an OOP perspective so expect no rules of FP to be followed.
+</p><p>The essential information of a file is its location and content:</p><pre><code class="prism"><span class="token keyword">type</span> <span class="token class-name">File</span> <span class="token operator">=</span> <span class="token punctuation">{</span> path<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> content<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><p>To transform a file from source to build, we return its new location and content which can continue to be stored
+inside the <code>File</code> type:
+</p><pre><code class="prism"><span class="token keyword">type</span> <span class="token class-name">Transformer</span> <span class="token operator">=</span> <span class="token punctuation">(</span>file<span class="token operator">:</span> File<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>File<span class="token operator">></span><span class="token punctuation">;</span>
+</code></pre><p>The object-oriented designer in me is screaming
+<a href="https://refactoring.guru/design-patterns/factory-method">factory</a> to allow a <code>Transformer</code>
+implementation to be provided based on the file's location.
+</p><p>Defining a class would be shameful but I agree with the intention: the function which handles the transformations
+shouldn't also determine which transformer to use.
+</p><pre><code class="prism"><span class="token keyword">type</span> <span class="token class-name">GetTransformer</span> <span class="token operator">=</span> <span class="token punctuation">(</span>file<span class="token operator">:</span> File<span class="token punctuation">)</span> <span class="token operator">=></span> Transformer<span class="token punctuation">;</span>
+</code></pre><p>To allow the system to identify where a file came from, we can add more config values:</p><ul><li><code>ASSET_DIR</code> &mdash; folder name for static assets</li><li><code>PAGE_DIR</code> &mdash; folder name for pages</li></ul><p>And now the application can map the files from source to build:</p><pre><code class="prism"><span class="token punctuation">(</span>getTransformer<span class="token operator">:</span> GetTransformer<span class="token punctuation">)</span> <span class="token operator">=></span> 
+<span class="token keyword">async</span> <span class="token punctuation">(</span>sourceFiles<span class="token operator">:</span> File<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> transformations <span class="token operator">=</span> sourceFiles<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">getTransformer</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> transformResults <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token builtin">Promise</span><span class="token punctuation">.</span><span class="token function">allSettled</span><span class="token punctuation">(</span>transformations<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> buildFiles<span class="token operator">:</span> File<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> transformResults
+    <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">isFulfilled</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token operator">!</span>r<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">=></span> r<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><p>Adding new kinds of files (like posts) is now much simpler, requiring only a transformer implementation and a new
+configuration value if necessary. The concept of 'transformation' is also formalized and domain is richer 👌
+</p><h2>Creating a pipeline</h2><p>Even with limited development, it's easy to imagine how the codebase will grow to add the upcoming features: reading
+in preamble, building the dataset of posts, generating TOCs, etc. A few bits of architecture will go a long way to
+ensure the application scales with complexity.
+</p><h3>Spitballing</h3><p>The behaviour to generate a site is a sequence of predetermined procedures where the output of one feeds into the
+next. I would call this a pipeline.
+</p><p>Mathematicians and functional programmers can meet this demand with function composition, which composes a single
+function of many. However, it seems that FP nerds still haven't quite achieved this in Typescript, as shown by this
+thread on <a href="https://news.ycombinator.com/item?id=32377646">Hacker News</a>.
+</p><p>Looking at object-oriented design, the most common patterns (see
+<a href="https://martinfowler.com/bliki/GangOfFour.html" target="_blank" rel="noopener noreferrer">GoF</a>
+and
+<a href="https://martinfowler.com/bliki/DomainDrivenDesign.html">DDD</a>) don't seem to work either:
+</p><ul><li>Mediator could construct a pipeline but:<ul><li>abstracting the communication between functions is the opposite of composition and</li><li>sending requests/notifications is a wasted mechanism for this system: the only request is 'build'.</li></ul></li><li>Chain of Responsibility exists to allow multiple handler to try and complete a single request. It could be 
+modified to create a pipeline, whereby the <code>next()</code> handler accepts the result of the current handler;
+however:<ul><li>handlers invoking the next handler only makes sense with the pattern's original intention, so it doesn't fit
+ either.
+</li></ul></li></ul><p>The bottom line is that, in Typescript world, there's no predefined solution that I know of.</p><h3>Meeting in the middle</h3><p>Inspired by some creations the Hacker News thread from above, I'm using the Builder pattern to add some fluid
+semantics to function composition:
+</p><pre><code class="prism"><span class="token comment">// Take in a value, return a value wrapped in a Promise</span>
+<span class="token keyword">type</span> <span class="token class-name">Step<span class="token operator">&lt;</span>Current<span class="token punctuation">,</span> Next<span class="token operator">></span></span> <span class="token operator">=</span> <span class="token punctuation">(</span>state<span class="token operator">:</span> Current<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>Next<span class="token operator">></span><span class="token punctuation">;</span>
+
+<span class="token comment">// Store an initial state to kick things off</span>
+<span class="token keyword">type</span> <span class="token class-name">PipelineBuilder<span class="token operator">&lt;</span>Initial<span class="token punctuation">,</span> Current<span class="token operator">></span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Store a handler for the current state and move onto the next state</span>
+  add<span class="token operator">:</span> <span class="token operator">&lt;</span>Next<span class="token operator">></span><span class="token punctuation">(</span>f<span class="token operator">:</span> Step<span class="token operator">&lt;</span>Current<span class="token punctuation">,</span> Next<span class="token operator">></span><span class="token punctuation">)</span> <span class="token operator">=></span> PipelineBuilder<span class="token operator">&lt;</span>Initial<span class="token punctuation">,</span> Next<span class="token operator">></span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// Compose the added functions</span>
+  <span class="token function-variable function">build</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> Step<span class="token operator">&lt;</span>Initial<span class="token punctuation">,</span> Current<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name">Pipeline</span> <span class="token operator">=</span> <span class="token operator">&lt;</span>Initial<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> PipelineBuilder<span class="token operator">&lt;</span>Initial<span class="token punctuation">,</span> Initial<span class="token operator">></span><span class="token punctuation">;</span></code></pre><p>The implementation is simple: <code>add</code> stores the step <code>f</code> in an array; <code>build</code> reduces the array and
+composes the result. This requires some type assertions and <code>any</code> so you can't see the ugliness.
+</p><p>We can now decompose the current process into a <code>Step</code> and separate some behaviours into their own functions:</p><pre><code class="prism"><span class="token keyword">const</span> generate <span class="token operator">=</span> <span class="token function">pipeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>setDefaultConfig<span class="token punctuation">)</span> <span class="token comment">// In case .env is missing</span>
+  <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>loadConfig<span class="token punctuation">)</span>       <span class="token comment">// Load from .env</span>
+  <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>readSource<span class="token punctuation">)</span>       <span class="token comment">// Read in the source files</span>
+  <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>categoriseFiles<span class="token punctuation">)</span>  <span class="token comment">// Asset or page?</span>
+  <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>transformFiles<span class="token punctuation">)</span>   <span class="token comment">// See above</span>
+  <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>writeBuild<span class="token punctuation">)</span>       <span class="token comment">// Write the build files</span>
+  <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>              <span class="token comment">// Compose the functions</span>
+
+<span class="token keyword">await</span> <span class="token function">generate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h2>Forming a context</h2><p>Some pages inform the site about themselves like the title/created date/tags of a post, whereas some pages are
+informed by the site to render a list of posts, for example.
+</p><h3>Adding posts</h3><p>Before we can start pulling data out of posts to create the context, we need to define them as well as the other
+categories:
+</p><pre><code class="prism"><span class="token keyword">type</span> <span class="token class-name">PostData</span> <span class="token operator">=</span> <span class="token punctuation">{</span> title<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> created<span class="token operator">:</span> Date<span class="token punctuation">;</span> updated<span class="token operator">?</span><span class="token operator">:</span> Date<span class="token punctuation">;</span> tags<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name">PageData</span> <span class="token operator">=</span> <span class="token punctuation">{</span> title<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name">Post</span> <span class="token operator">=</span> <span class="token punctuation">{</span> category<span class="token operator">:</span> <span class="token string">"post"</span><span class="token punctuation">;</span> file<span class="token operator">:</span> File <span class="token punctuation">}</span> <span class="token operator">&amp;</span> PostData<span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name">Page</span> <span class="token operator">=</span> <span class="token punctuation">{</span> category<span class="token operator">:</span> <span class="token string">"page"</span><span class="token punctuation">;</span> file<span class="token operator">:</span> File <span class="token punctuation">}</span> <span class="token operator">&amp;</span> PageData<span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name">Asset</span> <span class="token operator">=</span> <span class="token punctuation">{</span> category<span class="token operator">:</span> <span class="token string">"asset"</span><span class="token punctuation">;</span> file<span class="token operator">:</span> File <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>The combination of mapped types and template literal types really shine here. With a type to represent the file
+categories, we can derive new types with a mapping with keys also derived from the type. Thus we can, for example,
+ensure a 'categoriser' implementation exists for all categories:
+</p><pre><code class="prism"><span class="token comment">// "asset" | "page" | "post";</span>
+<span class="token keyword">type</span> <span class="token class-name">Category</span> <span class="token operator">=</span> <span class="token punctuation">(</span>Post <span class="token operator">|</span> Asset <span class="token operator">|</span> Page<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">"category"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Produces "assetDir" | "pageDir" | "postDir"</span>
+<span class="token keyword">type</span> <span class="token class-name">Key</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Category<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">Categoriser</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name">Categorisers</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token constant">K</span> <span class="token keyword">in</span> Key<span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span>file<span class="token operator">:</span> File<span class="token punctuation">)</span> <span class="token operator">=></span> Category <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>This moves a typical runtime error (like missing dependencies) to compile time, which is awesome and makes me hope
+languages like C# embrace some type theory in the future.
+</p><p>Preach over, we need a <code>POST_DIR</code> config value and to implement a categoriser and transformer for posts. I'm
+opting out of the <code>/year/month/day</code> format for post URLs as another quick search shows that there isn't much
+point and I don't like it.
+</p><p>Like assets, their relative path will be preserved but they live inside a <code>/blog</code> folder.</p><h3>Front matter</h3><p>A feature I first used with Hexo, front matter stores stateful data at the start (or front) of a file, which works
+really well to unify a post's data and content.
+</p><p>A quick search of NPM shows its most popular package for parsing front matter
+(<a href="https://www.npmjs.com/package/gray-matter">gray-matter</a>)
+is also the most configurable and has the cleanest interface &mdash; who could have guessed?
+</p><p>With the package installed, a new step to <code>extractData</code> goes in the pipeline in which gray-matter splits the
+front matter from the rest of the file and parses it as YAML (by default):
+</p><pre><code class="prism"><span class="token keyword">const</span> <span class="token punctuation">{</span> data<span class="token punctuation">,</span> content <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">matter</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span>contents<span class="token punctuation">,</span> <span class="token punctuation">{</span> excerpt<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">return</span> <span class="token punctuation">{</span>
+  file<span class="token operator">:</span> file<span class="token punctuation">.</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token punctuation">{</span> contents<span class="token operator">:</span> content <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// Exclude front matter from contents</span>
+  data<span class="token operator">:</span> data <span class="token keyword">as</span> PostData<span class="token punctuation">,</span>                 <span class="token comment">// Putting trust in myself</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>When rendering pug, the context is used for the 'locals' object and now pages & posts can render site-wide data 🎉
+</p><h2>Watching for changes</h2><p>Out of the features I use in Hexo, the only major one missing from this generator is a 'watch' mode (where
+added/changed files automatically build). This is a big help when writing posts, but it will help immensely when the
+time comes to migrate the existing content.
+</p><h3>It just works?</h3><p>Turns out this is pretty straight forward. <a href="https://www.npmjs.com/package/chokidar">chokidar</a> and 
+<a href="https://www.npmjs.com/package/node-watch">node-watch</a> outline their advantages <code>watch</code> and
+<code>watchfile</code> in the fs module and people on the internet don't lie. I'm using chokiar for the same reasons as
+grey-matter: configurable and clean.
+</p><p>The pipeline needs a small change: we need to specify which files to build in watch mode without affecting the
+process for normal builds. For the time being, I'm separating the config pipeline from the build pipeline as it doesn't need to be watched and
+it opens up an entry point to specify these files. As for any steps that need the config, it can be provided like a
+dependency instead.
+</p><p>With a small change to the <code>readSource</code> step and a little chokidar configuration, we can send the path of the
+changed file into the pipeline and it builds:
+</p><pre><code class="prism"><span class="token keyword">await</span> <span class="token function">generate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Initial build</span>
+
+<span class="token comment">// Watch for changes and send them into the pipeline</span>
+<span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">"**/*"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> cwd<span class="token operator">:</span> config<span class="token punctuation">.</span>sourceDir<span class="token punctuation">,</span> ignoreInitial<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"add"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">generate</span><span class="token punctuation">(</span><span class="token punctuation">{</span> sourcePaths<span class="token operator">:</span> <span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"change"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">generate</span><span class="token punctuation">(</span><span class="token punctuation">{</span> sourcePaths<span class="token operator">:</span> <span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h3>It doesn't just work</h3><figure><div class="inner"><img src="idiot.jpg"></div><figcaption>What an idiotic boob I was about 10 or 11 seconds ago</figcaption></figure><p>Although the logic is currently correct for posts, it doesn't work for any files that display information about the
+rest of the system, like a list of all posts; nor does it work for changes to layouts or components.
+</p><p>In the spirit of 'doing what works for now', I'm just gonna rebuild everything when a file changes. The build is
+almost instant so the additional logic to determine which files need rebuilding isn't worth it.
+</p><h3>It can work better</h3><p>Changed my mind; rebuilding everything is a bad solution.</p><p>A quick win is to process only the changed files, reducing compute and file reads. We can move the
+<a href="#Forming-a-context">context</a> from the pipeline to an external dependency (keeping it for the next cycle)
+and upsert changed files when needed using a new step <code>updateContext</code>:
+</p><pre><code class="prism"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> changed <span class="token keyword">of</span> files<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> index <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span> <span class="token operator">=></span> f<span class="token punctuation">.</span>full <span class="token operator">===</span> changed<span class="token punctuation">.</span>full<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">></span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    context<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> something<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    context<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>something<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Now the site builds much quicker in watch mode and
+<a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live Server</a>
+can refresh the page automatically.
+</p><figure><div class="inner"><img src="watching.gif"></div><figcaption>Building source files on file change</figcaption></figure><p>Very cool.</p><h2>Migrating</h2><p>The time has come! The generator seems capable and extensible enough to get the
+majority of the site up and running; not to mention, every time I update this
+post, the goalposts get slightly wider.
+</p><p>Overall, the aim to minimise the amount of manual intervention in the process by
+(first) reconfiguring the current setup to generate files more suited to this
+SSG and (second) creating another pipeline to migrate the existing content
+automatically.
+</p><h3>Record Scratch</h3><p>It's been some time since I updated this work log and the migration process turned out to be, 
+for the most part, boring and tedious. What follows is just the highlights...  
+</p><h3>Abusing Hexo's filters</h3><p>In Hexo, filters are points of extensibility throughout the build process, normally used to 
+modify state beyond the default mechanisms offered by Hexo. However, they serve as an excellent
+place to migrate content.
+</p><p>In the <code>after_post_render</code> filter, you have access to the entire site context, such as the post
+database and configuration; the current build file, including its source code, rendered HTML, and
+frontmatter; and the file system, because it's just a Node application.
+</p><p>Ultimately, the process looked like this:
+</p><ol><li>Construct the post's frontmatter<ul><li>Plain JS object</li><li>Correct schema for the new site</li></ul></li><li>Convert the rendered HTML to Pug with <a href="https://www.npmjs.com/package/xhtml2pug">xhtml2pug</a></li><li>Replace as much undesired syntax as possible with regex<ul><li>Fix mixins rendered as whitespace (see below)</li><li>Add indentation for the default layout <a href="https://pugjs.org/language/inheritance.html">block</a></li><li>Replace tokens normally changes with smartypants</li></ul></li><li>Compose the file contents<ul><li>Frontmatter wrapped with '---'</li><li>Layout block</li><li>Pug content</li></ul></li><li>Write the migrated file & delete the Hexo build file</li></ol><p>Obviously this didn't work first try but it resulted in a folder that dropped into the new site with
+minimal changes, saving chunks of time & effort doing this manually. 
+</p><h3>Transpiling EJS</h3><p>The challenge here was to keep existing usages of components as components, as opposed to rendering them with EJS
+and leaving the resulting HTML to the history books.
+</p><p>After some playing around, the best method was to change the component implementations to render an equivalent call
+to a Pug mixin. From EJS, the Pug syntax was rendered to plain text nodes and, once xhtml2pug was done, a little Regex
+removed the tokens that denote plain text and the remainder was valid Pug syntax!
+</p><figure><div class="inner"><pre><code class="prism"><span class="token comment">// Rendering to a mixin</span>
+hexo<span class="token punctuation">.</span>extend<span class="token punctuation">.</span>tag<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">"spotify"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>link<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">\n+spotify("</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>link<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">")</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Rendering to Pug filter</span>
+hexo<span class="token punctuation">.</span>extend<span class="token punctuation">.</span>tag<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">"tex"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">#[:tex(inline) </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>args<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">]</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div><figcaption>Rendering Pug inside EJS components</figcaption></figure><h3>Build dependencies</h3><p>Above, where I concluded, <q>the site builds much quicker in watch mode</q>, I lied.</p><p>Once the migrated files were added to the site, performance took an immediate hit because re-rendering everything is,
+shall we say, <em>sub-optimal</em> (we could also say <em>lazy</em> or <em>shit</em>).
+</p><p>To solve this, I added an <code>addDependencies</code> step that resolves additional files to render based on the
+changed file. For example, when a post is changed then all pages are re-rendered as they may reference the post; or,
+when collection data is changed, all pages and all posts in the collection must re-render.
+</p><p>At this point, I'm stepping on the toes of hot reloading and I don't wish to reinvent the wheel so this mechanism won't
+get more complex.
+</p><h2>Thoughts and feelings</h2><p>Compared to the old Hexo implementation, I have all of the features I need without the constraints (and ease) of a framework.
+From a content perspective, I can create whatever I can think of and update the tooling directly if it falls short.
+</p><p>The development experience is also great; with a clone, install, and build, I can share my <s>bullshit</s>perspectives
+quickly and easily from anywhere. Github Actions continues to work flawlessly so I can continue to ignore devops entirely.
+</p><p>Pug is, on the whole, serving me better than Markdown and EJS. One language is more cohesive and intelligible even
+though it's not designed for content writing like Markdown. I'm also certain that, for writing long passages of text,
+a whitespace-based language was the right choice over a bracket-based language. 
+</p><p>However, I did not respect the power of tokenization leaving me with <em>different</em> issues with my markup. With Markdown,
+you can extend its syntax by adding custom handlers for tokens; e.g., adding an <code>id</code> attribute to all <code>h</code> tags 
+to create links for TOCs. Pug does not offer kind of this extensibility so I need an alternate solution for this use-case and
+possibly others.
+</p><p>So I have some issues still to solve but I'm happy with the result. It's the first personal application I've deployed
+so I finally have a real-world playground to experiment with new ideas for software. Working with the file system was a
+nice change from pure web development and the knowledge is absolutely valuable. With some refactoring, some
+creative solutions, and possibly some unit tests, this platform should last me a while 🤞
+</p></main></body></html>
